@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECON 2006 · Principles of Macroeconomics · Summer 2026</title>
+<style>
+  :root {
+    --maroon: #861F41;
+    --maroon-light: #a82850;
+    --orange: #E5751F;
+    --orange-light: #f08c3a;
+    --bg: #0d0d0d;
+    --bg2: #111111;
+    --bg3: #161616;
+    --surface: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #f0ece8;
+    --muted: #888;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 52px;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: opacity .3s;
+  }
+  .nav-brand {
+    font-size: .75rem; font-weight: 700; letter-spacing: .15em;
+    color: var(--maroon); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: .75rem; letter-spacing: .08em; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(134,31,65,.18) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 80%, rgba(229,117,31,.07) 0%, transparent 70%);
+  }
+
+  .grid-lines {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black 0%, transparent 100%);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--orange); border: 1px solid rgba(229,117,31,.4);
+    padding: .3rem .8rem; border-radius: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeUp .8s ease both;
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 900; line-height: 1;
+    letter-spacing: -.03em;
+    background: linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,.55));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeUp .8s .15s ease both;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(.9rem, 2vw, 1.05rem);
+    color: var(--muted); margin-top: 1.2rem;
+    max-width: 520px; margin-left: auto; margin-right: auto;
+    animation: fadeUp .8s .3s ease both;
+  }
+
+  .hero-question {
+    margin-top: 2.5rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 300; color: var(--text);
+    min-height: 2.2rem;
+    animation: fadeUp .8s .45s ease both;
+  }
+
+  .hero-question .typed-cursor {
+    display: inline-block; width: 2px; height: 1.2em;
+    background: var(--orange); margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp .8s .6s ease both;
+  }
+
+  .btn {
+    display: inline-block; padding: .75rem 1.75rem;
+    font-size: .85rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    text-decoration: none; border-radius: .25rem;
+    transition: transform .15s, box-shadow .15s;
+    cursor: pointer;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+  .btn-primary { background: var(--maroon); color: #fff; }
+  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { border-color: var(--muted); }
+
+  .hero-pills {
+    margin-top: 3.5rem; display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp .8s .75s ease both;
+  }
+  .pill {
+    background: rgba(255,255,255,.05); border: 1px solid var(--border);
+    border-radius: 2rem; padding: .35rem .9rem;
+    font-size: .75rem; color: var(--muted);
+  }
+  .pill span { color: var(--text); font-weight: 600; }
+
+  /* ── STATS STRIP ── */
+  #stats {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 2.5rem 2rem;
+  }
+  .stats-grid {
+    max-width: 860px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 2rem; text-align: center;
+  }
+  .stat-num {
+    font-size: 2.8rem; font-weight: 900; letter-spacing: -.03em;
+    background: linear-gradient(135deg, var(--maroon), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .stat-label { font-size: .75rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-top: .2rem; }
+
+  /* ── SECTIONS ── */
+  section { padding: 5rem 2rem; }
+
+  .section-inner { max-width: 860px; margin: 0 auto; }
+
+  .section-tag {
+    font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--maroon); margin-bottom: .75rem;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -.02em;
+    margin-bottom: 2rem; line-height: 1.15;
+  }
+
+  /* ── COURSE INFO ── */
+  #info { background: var(--bg2); }
+  .info-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: .5rem; overflow: hidden;
+  }
+  .info-cell {
+    background: var(--surface); padding: 1.25rem 1.5rem;
+  }
+  .info-cell-label {
+    font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: .3rem;
+  }
+  .info-cell-value {
+    font-size: .95rem; font-weight: 600; color: var(--text);
+  }
+  .info-cell-value a { color: var(--orange); text-decoration: none; }
+  .info-cell-value a:hover { text-decoration: underline; }
+
+  /* ── MODULES ── */
+  #modules { background: var(--bg); }
+
+  .modules-intro {
+    font-size: 1rem; color: var(--muted); max-width: 540px; margin-bottom: 3rem;
+  }
+
+  .module-cards {
+    display: flex; flex-direction: column; gap: 1px;
+    border: 1px solid var(--border); border-radius: .75rem; overflow: hidden;
+  }
+
+  .module-card {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    transition: background .2s;
+    cursor: pointer;
+  }
+  .module-card:last-child { border-bottom: none; }
+  .module-card:hover { background: #1f1f1f; }
+
+  .module-header {
+    display: flex; align-items: center; gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .module-num {
+    width: 36px; height: 36px; border-radius: .35rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 800; letter-spacing: .05em;
+    flex-shrink: 0;
+  }
+
+  .module-card:nth-child(1) .module-num { background: rgba(134,31,65,.25); color: #d4607c; }
+  .module-card:nth-child(2) .module-num { background: rgba(229,117,31,.2); color: #f09a50; }
+  .module-card:nth-child(3) .module-num { background: rgba(37,99,235,.2); color: #6b9ff0; }
+  .module-card:nth-child(4) .module-num { background: rgba(14,165,233,.15); color: #5bc4e8; }
+  .module-card:nth-child(5) .module-num { background: rgba(124,58,237,.2); color: #a78bf6; }
+
+  .module-card:nth-child(1) .module-accent { background: #861F41; }
+  .module-card:nth-child(2) .module-accent { background: #E5751F; }
+  .module-card:nth-child(3) .module-accent { background: #2563EB; }
+  .module-card:nth-child(4) .module-accent { background: #0EA5E9; }
+  .module-card:nth-child(5) .module-accent { background: #7C3AED; }
+
+  .module-meta { flex: 1; }
+  .module-name { font-size: 1rem; font-weight: 700; color: var(--text); }
+  .module-hook { font-size: .82rem; color: var(--muted); margin-top: .15rem; }
+
+  .module-toggle {
+    color: var(--muted); font-size: 1.1rem; transition: transform .3s;
+    user-select: none;
+  }
+  .module-card.open .module-toggle { transform: rotate(180deg); }
+
+  .module-topics {
+    max-height: 0; overflow: hidden;
+    transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .3s;
+    padding: 0 1.5rem;
+  }
+  .module-card.open .module-topics {
+    max-height: 600px;
+    padding-bottom: 1.25rem;
+  }
+
+  .topic-list { display: flex; flex-direction: column; gap: .5rem; }
+  .topic-item {
+    display: flex; align-items: flex-start; gap: .75rem;
+    font-size: .85rem; color: var(--muted); padding: .4rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .topic-item:first-child { border-top: none; }
+  .topic-num {
+    font-size: .7rem; font-weight: 700; color: var(--muted);
+    background: var(--bg3); border-radius: .2rem;
+    padding: .1rem .4rem; flex-shrink: 0; margin-top: .1rem;
+  }
+  .topic-text { color: var(--text); }
+
+  /* ── GRADING ── */
+  #grading { background: var(--bg2); }
+
+  .grading-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+  }
+  @media (max-width: 600px) { .grading-layout { grid-template-columns: 1fr; } }
+
+  .grade-bars { display: flex; flex-direction: column; gap: 1rem; }
+  .grade-bar-item {}
+  .grade-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: .82rem; margin-bottom: .4rem;
+  }
+  .grade-bar-name { color: var(--text); font-weight: 500; }
+  .grade-bar-pct { color: var(--muted); }
+  .grade-bar-track {
+    height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+  }
+  .grade-bar-fill {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--maroon), var(--orange));
+    width: 0; transition: width 1s cubic-bezier(.4,0,.2,1);
+  }
+
+  .grade-scale { }
+  .grade-scale-title { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .grade-scale-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: .4rem; overflow: hidden;
+    font-size: .82rem;
+  }
+  .gs-cell {
+    background: var(--surface); padding: .45rem .75rem;
+    display: flex; justify-content: space-between;
+  }
+  .gs-cell:nth-child(4n+1), .gs-cell:nth-child(4n+2) { background: var(--bg3); }
+  .gs-grade { font-weight: 700; color: var(--text); }
+  .gs-range { color: var(--muted); }
+
+  /* ── TEXTBOOK ── */
+  #textbook { background: var(--bg); }
+  .book-card {
+    display: flex; gap: 2rem; align-items: flex-start;
+    background: var(--surface); border: 1px solid var(--border); border-radius: .75rem;
+    padding: 2rem;
+  }
+  .book-icon {
+    font-size: 3rem; flex-shrink: 0;
+  }
+  .book-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem; }
+  .book-authors { font-size: .85rem; color: var(--muted); margin-bottom: .75rem; }
+  .book-isbns { display: flex; flex-direction: column; gap: .25rem; }
+  .isbn-row { font-size: .8rem; }
+  .isbn-label { color: var(--muted); }
+  .isbn-val { color: var(--text); font-family: monospace; }
+  .book-note { margin-top: .75rem; font-size: .8rem; color: var(--muted); font-style: italic; }
+
+  /* ── IMPORTANT ── */
+  #important { background: var(--bg2); }
+  .notice-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .notice-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: .5rem;
+    padding: 1.25rem;
+  }
+  .notice-icon { font-size: 1.5rem; margin-bottom: .6rem; }
+  .notice-title { font-size: .85rem; font-weight: 700; margin-bottom: .3rem; color: var(--text); }
+  .notice-text { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── POLICIES ── */
+  #policies { background: var(--bg); }
+  .policy-block { margin-bottom: 3rem; }
+  .policy-block:last-child { margin-bottom: 0; }
+  .policy-heading {
+    font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--maroon); margin-bottom: .75rem;
+    padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+  }
+  .policy-text { font-size: .88rem; color: #aaa; line-height: 1.75; }
+  .policy-quote {
+    margin: 1.25rem 0; padding: 1rem 1.5rem;
+    border-left: 3px solid var(--maroon);
+    background: var(--surface); border-radius: 0 .4rem .4rem 0;
+    font-style: italic; color: var(--text); font-size: .9rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg2); border-top: 1px solid var(--border);
+    padding: 2rem; text-align: center;
+    font-size: .78rem; color: var(--muted);
+  }
+  footer a { color: var(--muted); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* delay variants */
+  .d1 { transition-delay: .1s; }
+  .d2 { transition-delay: .2s; }
+  .d3 { transition-delay: .3s; }
+  .d4 { transition-delay: .4s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">ECON 2006 · Summer 2026</div>
+  <div class="nav-links">
+    <a href="#modules">Modules</a>
+    <a href="#grading">Grading</a>
+    <a href="#textbook">Textbook</a>
+    <a href="#policies">Policies</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Virginia Tech · Principles of Macroeconomics</div>
+    <h1 class="hero-title">ECON 2006</h1>
+    <p class="hero-subtitle">A six-week deep dive into how economies actually work — and why they sometimes don't.</p>
+    <div class="hero-question">
+      <span id="typed-text"></span><span class="typed-cursor"></span>
+    </div>
+    <div class="hero-cta">
+      <a href="#modules" class="btn btn-primary">Explore the Course</a>
+      <a href="https://canvas.vt.edu/courses/230772" target="_blank" class="btn btn-secondary">Open Canvas →</a>
+    </div>
+    <div class="hero-pills">
+      <div class="pill">Jul 7 – Aug 14, 2026</div>
+      <div class="pill">MTWRF <span>9:30 – 10:45 AM</span></div>
+      <div class="pill"><span>Online</span> · Synchronous</div>
+      <div class="pill">Prereq: <span>ECON 2005</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="reveal">
+      <div class="stat-num" data-target="6">0</div>
+      <div class="stat-label">Weeks</div>
+    </div>
+    <div class="reveal d1">
+      <div class="stat-num" data-target="5">0</div>
+      <div class="stat-label">Modules</div>
+    </div>
+    <div class="reveal d2">
+      <div class="stat-num" data-target="16">0</div>
+      <div class="stat-label">Topics</div>
+    </div>
+    <div class="reveal d3">
+      <div class="stat-num" data-target="2">0</div>
+      <div class="stat-label">Midterms</div>
+    </div>
+    <div class="reveal d4">
+      <div class="stat-num" data-target="1">0</div>
+      <div class="stat-label">Final Exam</div>
+    </div>
+  </div>
+</div>
+
+<!-- COURSE INFO -->
+<section id="info">
+  <div class="section-inner">
+    <div class="section-tag reveal">Course Info</div>
+    <h2 class="section-title reveal d1">Everything you need, up front.</h2>
+    <div class="info-grid reveal d2">
+      <div class="info-cell">
+        <div class="info-cell-label">Instructor</div>
+        <div class="info-cell-value">Koustuv Lahiri</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Email</div>
+        <div class="info-cell-value"><a href="mailto:lkoustuv@vt.edu">lkoustuv@vt.edu</a></div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Class Time</div>
+        <div class="info-cell-value">MTWRF · 9:30 – 10:45 AM</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Dates</div>
+        <div class="info-cell-value">July 7 – August 14, 2026</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Zoom</div>
+        <div class="info-cell-value"><a href="https://virginiatech.zoom.us/my/lkoustuv" target="_blank">Join Class Meeting →</a></div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Canvas</div>
+        <div class="info-cell-value"><a href="https://canvas.vt.edu/courses/230772" target="_blank">canvas.vt.edu/courses/230772 →</a></div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Office Hours</div>
+        <div class="info-cell-value">After class · by appointment</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Prerequisite</div>
+        <div class="info-cell-value">ECON 2005</div>
+      </div>
+    </div>
+    <p style="margin-top:1rem; font-size:.82rem; color:var(--muted);" class="reveal d3">
+      To book office hours, email ahead or request during class. All course materials are posted on Canvas.
+    </p>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section id="modules">
+  <div class="section-inner">
+    <div class="section-tag reveal">The Journey</div>
+    <h2 class="section-title reveal d1">5 Modules. 16 Topics.<br>One big picture.</h2>
+    <p class="modules-intro reveal d2">Click any module to see what's inside. We go roughly in order — each one builds on the last.</p>
+
+    <div class="module-cards reveal d3">
+
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">M1</div>
+          <div class="module-meta">
+            <div class="module-name">Introduction to Economics: The Economic Setting</div>
+            <div class="module-hook">Why does scarcity force every choice you'll ever make?</div>
+          </div>
+          <div class="module-toggle">▾</div>
+        </div>
+        <div class="module-topics">
+          <div class="topic-list">
+            <div class="topic-item"><span class="topic-num">01</span><span class="topic-text">What Economics Is and Why It Matters</span></div>
+            <div class="topic-item"><span class="topic-num">02</span><span class="topic-text">Choice in a World of Scarcity</span></div>
+            <div class="topic-item"><span class="topic-num">03</span><span class="topic-text">The Basics of Markets: Demand, Supply and Market Equilibrium</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">M2</div>
+          <div class="module-meta">
+            <div class="module-name">Measuring the Economy</div>
+            <div class="module-hook">GDP, unemployment, inflation — how do we even measure an economy?</div>
+          </div>
+          <div class="module-toggle">▾</div>
+        </div>
+        <div class="module-topics">
+          <div class="topic-list">
+            <div class="topic-item"><span class="topic-num">04</span><span class="topic-text">Why Study Macroeconomics</span></div>
+            <div class="topic-item"><span class="topic-num">05</span><span class="topic-text">Measuring National Output</span></div>
+            <div class="topic-item"><span class="topic-num">06</span><span class="topic-text">Measuring Unemployment and Inflation</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">M3</div>
+          <div class="module-meta">
+            <div class="module-name">Understanding Aggregate Behavior: The Basics of Popular Macro Models</div>
+            <div class="module-hook">Fiscal policy, monetary policy, the Fed — this is where things get real.</div>
+          </div>
+          <div class="module-toggle">▾</div>
+        </div>
+        <div class="module-topics">
+          <div class="topic-list">
+            <div class="topic-item"><span class="topic-num">07</span><span class="topic-text">Aggregate Expenditure and Equilibrium Output</span></div>
+            <div class="topic-item"><span class="topic-num">08</span><span class="topic-text">Fiscal Policy: Government's Role in the Economy</span></div>
+            <div class="topic-item"><span class="topic-num">09</span><span class="topic-text">How Money Moves: An Introduction to the Money Market & Monetary Policy</span></div>
+            <div class="topic-item"><span class="topic-num">10</span><span class="topic-text">Aggregate Demand, Aggregate Supply, and Price Level</span></div>
+            <div class="topic-item"><span class="topic-num">11</span><span class="topic-text">Policy Effects and Cost Shocks in the AS/AD Model</span></div>
+            <div class="topic-item"><span class="topic-num">12</span><span class="topic-text">The Labor Market</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">M4</div>
+          <div class="module-meta">
+            <div class="module-name">Macroeconomics Beyond Borders: International Trade</div>
+            <div class="module-hook">Why does your iPhone come from China? Why do exchange rates matter?</div>
+          </div>
+          <div class="module-toggle">▾</div>
+        </div>
+        <div class="module-topics">
+          <div class="topic-list">
+            <div class="topic-item"><span class="topic-num">13</span><span class="topic-text">Comparative Advantage & International Trade</span></div>
+            <div class="topic-item"><span class="topic-num">14</span><span class="topic-text">Open Economy Macroeconomics: Balance of Payments & Exchange Rates</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" onclick="toggleModule(this)">
+        <div class="module-header">
+          <div class="module-num">M5</div>
+          <div class="module-meta">
+            <div class="module-name">Growth & Debate</div>
+            <div class="module-hook">Why do some countries grow rich while others stay poor — and who's arguing about it?</div>
+          </div>
+          <div class="module-toggle">▾</div>
+        </div>
+        <div class="module-topics">
+          <div class="topic-list">
+            <div class="topic-item"><span class="topic-num">15</span><span class="topic-text">Why Economies Expand: Understanding Economic Growth</span></div>
+            <div class="topic-item"><span class="topic-num">16</span><span class="topic-text">Alternative Views in Macroeconomics</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GRADING -->
+<section id="grading">
+  <div class="section-inner">
+    <div class="section-tag reveal">Assessments</div>
+    <h2 class="section-title reveal d1">How your grade is built.</h2>
+    <div class="grading-layout">
+      <div class="grade-bars reveal d2">
+        <div class="grade-bar-item">
+          <div class="grade-bar-label"><span class="grade-bar-name">Final Exam</span><span class="grade-bar-pct">35%</span></div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="35"></div></div>
+        </div>
+        <div class="grade-bar-item">
+          <div class="grade-bar-label"><span class="grade-bar-name">Midterm I</span><span class="grade-bar-pct">20%</span></div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="20"></div></div>
+        </div>
+        <div class="grade-bar-item">
+          <div class="grade-bar-label"><span class="grade-bar-name">Midterm II</span><span class="grade-bar-pct">20%</span></div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="20"></div></div>
+        </div>
+        <div class="grade-bar-item">
+          <div class="grade-bar-label"><span class="grade-bar-name">Quizzes</span><span class="grade-bar-pct">15%</span></div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="15"></div></div>
+        </div>
+        <div class="grade-bar-item">
+          <div class="grade-bar-label"><span class="grade-bar-name">In-Class Quizzes</span><span class="grade-bar-pct">10%</span></div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="10"></div></div>
+        </div>
+        <div style="margin-top:1.5rem; font-size:.82rem; color:var(--muted); line-height:1.6;">
+          <p>All exams and quizzes are on <strong style="color:var(--text)">Canvas with LockDown Browser</strong> — except in-class quizzes.</p>
+          <p style="margin-top:.5rem">Quizzes have a ~12-hour window; complete in one go once started (~75 min). In-class quizzes run ~20–30 min during class.</p>
+          <p style="margin-top:.5rem">Exact dates announced on Canvas. No automatic make-ups — contact me immediately if something comes up.</p>
+        </div>
+      </div>
+      <div class="reveal d3">
+        <div class="grade-scale">
+          <div class="grade-scale-title">Grading Scale</div>
+          <div class="grade-scale-grid">
+            <div class="gs-cell"><span class="gs-grade">A</span><span class="gs-range">93–100</span></div>
+            <div class="gs-cell"><span class="gs-grade">A−</span><span class="gs-range">90–92</span></div>
+            <div class="gs-cell"><span class="gs-grade">B+</span><span class="gs-range">87–89</span></div>
+            <div class="gs-cell"><span class="gs-grade">B</span><span class="gs-range">83–86</span></div>
+            <div class="gs-cell"><span class="gs-grade">B−</span><span class="gs-range">80–82</span></div>
+            <div class="gs-cell"><span class="gs-grade">C+</span><span class="gs-range">77–79</span></div>
+            <div class="gs-cell"><span class="gs-grade">C</span><span class="gs-range">73–76</span></div>
+            <div class="gs-cell"><span class="gs-grade">C−</span><span class="gs-range">70–72</span></div>
+            <div class="gs-cell"><span class="gs-grade">D+</span><span class="gs-range">67–69</span></div>
+            <div class="gs-cell"><span class="gs-grade">D</span><span class="gs-range">63–66</span></div>
+            <div class="gs-cell"><span class="gs-grade">D−</span><span class="gs-range">60–62</span></div>
+            <div class="gs-cell"><span class="gs-grade">F</span><span class="gs-range">0–59</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEXTBOOK -->
+<section id="textbook">
+  <div class="section-inner">
+    <div class="section-tag reveal">Required Text</div>
+    <h2 class="section-title reveal d1">The book.</h2>
+    <div class="book-card reveal d2">
+      <div class="book-icon">📘</div>
+      <div>
+        <div class="book-title">Principles of Macroeconomics, 14th Edition</div>
+        <div class="book-authors">Case, K. E., Fair, R. C., &amp; Oster, S. M. · Pearson</div>
+        <div class="book-isbns">
+          <div class="isbn-row"><span class="isbn-label">14th ed. ISBN: </span><span class="isbn-val">978-0135345412 / 978-0135374993</span></div>
+          <div class="isbn-row"><span class="isbn-label">13th ed. ISBN: </span><span class="isbn-val">978-0135662168</span></div>
+        </div>
+        <div class="book-note">Earlier editions are acceptable. Slides, notes, and supplemental materials are on Canvas — my lectures often go beyond the textbook, so showing up matters.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPORTANT -->
+<section id="important">
+  <div class="section-inner">
+    <div class="section-tag reveal">Good to Know</div>
+    <h2 class="section-title reveal d1">A few things.</h2>
+    <div class="notice-cards">
+      <div class="notice-card reveal">
+        <div class="notice-icon">📬</div>
+        <div class="notice-title">Check Canvas + Email</div>
+        <div class="notice-text">Announcements, exam dates, and schedule changes go there. Check regularly.</div>
+      </div>
+      <div class="notice-card reveal d1">
+        <div class="notice-icon">🔒</div>
+        <div class="notice-title">LockDown Browser</div>
+        <div class="notice-text">Required for all exams and graded quizzes. Not required for in-class quizzes.</div>
+      </div>
+      <div class="notice-card reveal d2">
+        <div class="notice-icon">🎥</div>
+        <div class="notice-title">Show Up</div>
+        <div class="notice-text">Class is online synchronous. In-class quizzes cannot be made up if you miss them.</div>
+      </div>
+      <div class="notice-card reveal d3">
+        <div class="notice-icon">📩</div>
+        <div class="notice-title">Office Hours</div>
+        <div class="notice-text">After class any day — just email ahead or ask during class to set it up.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICIES -->
+<section id="policies">
+  <div class="section-inner">
+    <div class="section-tag reveal">Policies</div>
+    <h2 class="section-title reveal d1">The fine print.<br><span style="font-weight:400; color:var(--muted)">But actually important.</span></h2>
+
+    <div class="policy-block reveal d2">
+      <div class="policy-heading">Academic Accommodations</div>
+      <p class="policy-text">Virginia Tech welcomes students with disabilities into the University's educational programs. The University promotes efforts to provide equal access and a culture of inclusion without altering the essential elements of coursework. If you anticipate or experience academic barriers that may be due to disability, including but not limited to ADHD, chronic or temporary medical conditions, deaf or hard of hearing, learning disability, mental health, or vision impairment, please contact the Services for Students with Disabilities (SSD) office at <strong style="color:var(--text)">540-231-3788</strong>, <a href="mailto:ssd@vt.edu" style="color:var(--orange)">ssd@vt.edu</a>, or visit <a href="https://ssd.vt.edu" target="_blank" style="color:var(--orange)">ssd.vt.edu</a>.</p>
+      <p class="policy-text" style="margin-top:.75rem;">If you have an SSD accommodation letter, please meet with me during office hours as early in the semester as possible to deliver your letter and discuss your accommodation. You must give me reasonable notice to implement your accommodation, which is at least a week before each exam. If there are aspects of this course that prevent you from learning or exclude you, please let me know as soon as possible. Together, we will develop strategies to meet both your needs and the requirements of the course.</p>
+    </div>
+
+    <div class="policy-block reveal d3">
+      <div class="policy-heading">Honor Code</div>
+      <div class="policy-quote">"As a Hokie, I will conduct myself with honor and integrity at all times. I will not lie, cheat, or steal, nor will I accept the actions of those who do."</div>
+      <p class="policy-text">Students enrolled in this course are responsible for abiding by the Honor Code. A student who has doubts about how the Honor Code applies to any assignment is responsible for obtaining specific guidance from the course instructor before submitting the assignment for evaluation. Students are strongly discouraged from misusing sites such as Chegg and CourseHero, as well as misusing ChatGPT and other Generative Artificial Intelligence. Students are strongly encouraged to consult their faculty members regarding the use of such outside materials, as the misuse of these sources may constitute a violation of the Honor Code. Ignorance of the rules does not exclude any member of the University community from the requirements and expectations of the Honor Code.</p>
+      <p class="policy-text" style="margin-top:.75rem;">For more information: <a href="https://www.honorsystem.vt.edu/" target="_blank" style="color:var(--orange)">honorsystem.vt.edu →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>ECON 2006 · Principles of Macroeconomics · Summer 2026 · Virginia Tech</p>
+  <p style="margin-top:.4rem;">Koustuv Lahiri · <a href="mailto:lkoustuv@vt.edu">lkoustuv@vt.edu</a></p>
+</footer>
+
+<script>
+  // ── Typewriter effect ─────────────────────────────────────────────────────
+  const questions = [
+    "Why does rent keep going up?",
+    "Who decides how much money exists?",
+    "What actually causes a recession?",
+    "Why can't we just print more money?",
+    "How does the Fed control inflation?",
+    "Why do some countries grow rich and others don't?",
+  ];
+  let qi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed-text');
+
+  function type() {
+    const q = questions[qi];
+    if (!deleting) {
+      el.textContent = q.slice(0, ++ci);
+      if (ci === q.length) { deleting = true; setTimeout(type, 2000); return; }
+    } else {
+      el.textContent = q.slice(0, --ci);
+      if (ci === 0) { deleting = false; qi = (qi + 1) % questions.length; }
+    }
+    setTimeout(type, deleting ? 35 : 60);
+  }
+  setTimeout(type, 1200);
+
+  // ── Scroll reveal ─────────────────────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealObs.observe(el));
+
+  // ── Stat counters ─────────────────────────────────────────────────────────
+  const statEls = document.querySelectorAll('.stat-num[data-target]');
+  const statObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const target = +e.target.dataset.target;
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 20));
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        e.target.textContent = current;
+        if (current >= target) clearInterval(timer);
+      }, 40);
+      statObs.unobserve(e.target);
+    });
+  }, { threshold: 0.5 });
+  statEls.forEach(el => statObs.observe(el));
+
+  // ── Grade bar animations ───────────────────────────────────────────────────
+  const barEls = document.querySelectorAll('.grade-bar-fill');
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const w = e.target.dataset.width;
+      setTimeout(() => { e.target.style.width = w + '%'; }, 200);
+      barObs.unobserve(e.target);
+    });
+  }, { threshold: 0.3 });
+  barEls.forEach(el => barObs.observe(el));
+
+  // ── Module toggle ─────────────────────────────────────────────────────────
+  function toggleModule(card) {
+    card.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
