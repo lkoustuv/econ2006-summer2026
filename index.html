@@ -3,25 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ECON 2006 · Principles of Macroeconomics · Summer 2026</title>
+<title>ECON 2006 · Principles of Economics (Macro) · Summer II 2026</title>
 <style>
   :root {
-    --maroon: #861F41;
-    --maroon-light: #a82850;
-    --orange: #E5751F;
-    --orange-light: #f08c3a;
-    --bg: #0d0d0d;
-    --bg2: #111111;
-    --bg3: #161616;
-    --surface: #1a1a1a;
-    --border: #2a2a2a;
-    --text: #f0ece8;
-    --muted: #888;
+    --primary: #B5211D;
+    --primary-light: #C8352F;
+    --accent: #D4894A;
+    --accent-light: #E09B5E;
+    --bg: #FBF7F0;
+    --bg2: #F5EDE0;
+    --bg3: #EDE0CC;
+    --surface: #F0E8D8;
+    --border: #D8CABC;
+    --text: #2C1E14;
+    --muted: #8A7260;
     --white: #ffffff;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -36,16 +35,14 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem;
-    height: 52px;
-    background: rgba(13,13,13,0.92);
+    padding: 0 2rem; height: 52px;
+    background: rgba(251,247,240,0.94);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    transition: opacity .3s;
   }
   .nav-brand {
     font-size: .75rem; font-weight: 700; letter-spacing: .15em;
-    color: var(--maroon); text-transform: uppercase;
+    color: var(--primary); text-transform: uppercase;
   }
   .nav-links { display: flex; gap: 1.5rem; }
   .nav-links a {
@@ -59,45 +56,38 @@
   #hero {
     min-height: 100vh;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center;
-    padding: 6rem 2rem 4rem;
-    position: relative;
-    overflow: hidden;
+    text-align: center; padding: 6rem 2rem 4rem;
+    position: relative; overflow: hidden;
   }
-
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(134,31,65,.18) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 80% 80%, rgba(229,117,31,.07) 0%, transparent 70%);
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(181,33,29,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(212,137,74,.05) 0%, transparent 70%);
   }
-
   .grid-lines {
     position: absolute; inset: 0; z-index: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      linear-gradient(rgba(44,30,20,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(44,30,20,.04) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 90% 70% at 50% 50%, black 0%, transparent 100%);
   }
-
   .hero-content { position: relative; z-index: 1; max-width: 780px; }
 
   .hero-tag {
     display: inline-block;
     font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--orange); border: 1px solid rgba(229,117,31,.4);
-    padding: .3rem .8rem; border-radius: 2rem;
-    margin-bottom: 2rem;
+    color: var(--primary); border: 1px solid rgba(181,33,29,.3);
+    padding: .3rem .8rem; border-radius: 2rem; margin-bottom: 2rem;
     animation: fadeUp .8s ease both;
   }
 
   .hero-title {
     font-size: clamp(3.5rem, 10vw, 7rem);
-    font-weight: 900; line-height: 1;
-    letter-spacing: -.03em;
-    background: linear-gradient(135deg, #ffffff 30%, rgba(255,255,255,.55));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-weight: 900; line-height: 1; letter-spacing: -.03em;
+    background: linear-gradient(135deg, var(--text) 40%, var(--primary));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     animation: fadeUp .8s .15s ease both;
   }
 
@@ -115,10 +105,9 @@
     min-height: 2.2rem;
     animation: fadeUp .8s .45s ease both;
   }
-
   .hero-question .typed-cursor {
     display: inline-block; width: 2px; height: 1.2em;
-    background: var(--orange); margin-left: 2px;
+    background: var(--accent); margin-left: 2px;
     vertical-align: text-bottom;
     animation: blink 1s step-end infinite;
   }
@@ -132,11 +121,11 @@
     display: inline-block; padding: .75rem 1.75rem;
     font-size: .85rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
     text-decoration: none; border-radius: .25rem;
-    transition: transform .15s, box-shadow .15s;
-    cursor: pointer;
+    transition: transform .15s, box-shadow .15s; cursor: pointer;
   }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.4); }
-  .btn-primary { background: var(--maroon); color: #fff; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,30,20,.12); }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-zoom { background: var(--accent); color: #fff; }
   .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
   .btn-secondary:hover { border-color: var(--muted); }
 
@@ -145,39 +134,18 @@
     animation: fadeUp .8s .75s ease both;
   }
   .pill {
-    background: rgba(255,255,255,.05); border: 1px solid var(--border);
+    background: rgba(44,30,20,.05); border: 1px solid var(--border);
     border-radius: 2rem; padding: .35rem .9rem;
     font-size: .75rem; color: var(--muted);
   }
   .pill span { color: var(--text); font-weight: 600; }
 
-  /* ── STATS STRIP ── */
-  #stats {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background: var(--bg2);
-    padding: 2.5rem 2rem;
-  }
-  .stats-grid {
-    max-width: 860px; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 2rem; text-align: center;
-  }
-  .stat-num {
-    font-size: 2.8rem; font-weight: 900; letter-spacing: -.03em;
-    background: linear-gradient(135deg, var(--maroon), var(--orange));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .stat-label { font-size: .75rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-top: .2rem; }
-
   /* ── SECTIONS ── */
   section { padding: 5rem 2rem; }
-
   .section-inner { max-width: 860px; margin: 0 auto; }
-
   .section-tag {
     font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--maroon); margin-bottom: .75rem;
+    color: var(--primary); margin-bottom: .75rem;
   }
   .section-title {
     font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -.02em;
@@ -191,84 +159,58 @@
     gap: 1px; background: var(--border);
     border: 1px solid var(--border); border-radius: .5rem; overflow: hidden;
   }
-  .info-cell {
-    background: var(--surface); padding: 1.25rem 1.5rem;
-  }
+  .info-cell { background: var(--surface); padding: 1.25rem 1.5rem; }
   .info-cell-label {
     font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
     color: var(--muted); margin-bottom: .3rem;
   }
-  .info-cell-value {
-    font-size: .95rem; font-weight: 600; color: var(--text);
-  }
-  .info-cell-value a { color: var(--orange); text-decoration: none; }
+  .info-cell-value { font-size: .95rem; font-weight: 600; color: var(--text); }
+  .info-cell-value a { color: var(--primary); text-decoration: none; }
   .info-cell-value a:hover { text-decoration: underline; }
 
   /* ── MODULES ── */
   #modules { background: var(--bg); }
-
-  .modules-intro {
-    font-size: 1rem; color: var(--muted); max-width: 540px; margin-bottom: 3rem;
-  }
-
+  .modules-intro { font-size: 1rem; color: var(--muted); max-width: 600px; margin-bottom: 3rem; }
   .module-cards {
     display: flex; flex-direction: column; gap: 1px;
     border: 1px solid var(--border); border-radius: .75rem; overflow: hidden;
   }
-
   .module-card {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    transition: background .2s;
-    cursor: pointer;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    transition: background .2s; cursor: pointer;
   }
   .module-card:last-child { border-bottom: none; }
-  .module-card:hover { background: #1f1f1f; }
-
+  .module-card:hover { background: var(--bg3); }
   .module-header {
-    display: flex; align-items: center; gap: 1.25rem;
-    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem;
   }
-
   .module-num {
     width: 36px; height: 36px; border-radius: .35rem;
     display: flex; align-items: center; justify-content: center;
-    font-size: .8rem; font-weight: 800; letter-spacing: .05em;
-    flex-shrink: 0;
+    font-size: .8rem; font-weight: 800; letter-spacing: .05em; flex-shrink: 0;
   }
-
-  .module-card:nth-child(1) .module-num { background: rgba(134,31,65,.25); color: #d4607c; }
-  .module-card:nth-child(2) .module-num { background: rgba(229,117,31,.2); color: #f09a50; }
-  .module-card:nth-child(3) .module-num { background: rgba(37,99,235,.2); color: #6b9ff0; }
-  .module-card:nth-child(4) .module-num { background: rgba(14,165,233,.15); color: #5bc4e8; }
-  .module-card:nth-child(5) .module-num { background: rgba(124,58,237,.2); color: #a78bf6; }
-
-  .module-card:nth-child(1) .module-accent { background: #861F41; }
-  .module-card:nth-child(2) .module-accent { background: #E5751F; }
-  .module-card:nth-child(3) .module-accent { background: #2563EB; }
-  .module-card:nth-child(4) .module-accent { background: #0EA5E9; }
-  .module-card:nth-child(5) .module-accent { background: #7C3AED; }
-
+  .module-card:nth-child(1) .module-num { background: rgba(181,33,29,.15); color: #B5211D; }
+  .module-card:nth-child(2) .module-num { background: rgba(212,137,74,.18); color: #A06020; }
+  .module-card:nth-child(3) .module-num { background: rgba(94,138,106,.18); color: #3E7A50; }
+  .module-card:nth-child(4) .module-num { background: rgba(79,127,160,.15); color: #2E6A90; }
+  .module-card:nth-child(5) .module-num { background: rgba(139,109,172,.15); color: #6B4A9C; }
   .module-meta { flex: 1; }
   .module-name { font-size: 1rem; font-weight: 700; color: var(--text); }
   .module-hook { font-size: .82rem; color: var(--muted); margin-top: .15rem; }
-
-  .module-toggle {
-    color: var(--muted); font-size: 1.1rem; transition: transform .3s;
-    user-select: none;
+  .module-badge {
+    display: inline-block;
+    font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    background: rgba(212,137,74,.18); color: #A06020;
+    padding: .15rem .45rem; border-radius: .2rem; margin-left: .5rem;
+    vertical-align: middle;
   }
+  .module-toggle { color: var(--muted); font-size: 1.1rem; transition: transform .3s; user-select: none; }
   .module-card.open .module-toggle { transform: rotate(180deg); }
-
   .module-topics {
     max-height: 0; overflow: hidden;
-    transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .3s;
-    padding: 0 1.5rem;
+    transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .3s; padding: 0 1.5rem;
   }
-  .module-card.open .module-topics {
-    max-height: 600px;
-    padding-bottom: 1.25rem;
-  }
-
+  .module-card.open .module-topics { max-height: 600px; padding-bottom: 1.25rem; }
   .topic-list { display: flex; flex-direction: column; gap: .5rem; }
   .topic-item {
     display: flex; align-items: flex-start; gap: .75rem;
@@ -283,33 +225,60 @@
   }
   .topic-text { color: var(--text); }
 
-  /* ── GRADING ── */
-  #grading { background: var(--bg2); }
+  /* ── ASSESSMENTS ── */
+  #assessments { background: var(--bg2); }
+  .assessment-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .assessment-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: .6rem;
+    padding: 1.5rem;
+  }
+  .assessment-card-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 1rem; gap: .75rem;
+  }
+  .assessment-card-left { display: flex; align-items: center; gap: .75rem; }
+  .assessment-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .assessment-title { font-size: .95rem; font-weight: 800; color: var(--text); }
+  .assessment-weight {
+    font-size: .75rem; font-weight: 700; color: var(--primary);
+    background: rgba(181,33,29,.1); padding: .2rem .55rem; border-radius: 2rem;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .assessment-body { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+  .assessment-body strong { color: var(--text); font-weight: 600; }
+  .assessment-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .85rem; }
+  .a-tag {
+    font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .18rem .5rem; border-radius: .2rem;
+  }
+  .a-tag-lock { background: rgba(181,33,29,.1); color: var(--primary); }
+  .a-tag-nlock { background: rgba(94,138,106,.15); color: #3E7A50; }
+  .a-tag-canvas { background: rgba(212,137,74,.15); color: #A06020; }
+  .a-tag-live { background: rgba(79,127,160,.15); color: #2E6A90; }
 
+  /* ── GRADING ── */
+  #grading { background: var(--bg); }
   .grading-layout {
     display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
   }
   @media (max-width: 600px) { .grading-layout { grid-template-columns: 1fr; } }
-
   .grade-bars { display: flex; flex-direction: column; gap: 1rem; }
-  .grade-bar-item {}
-  .grade-bar-label {
-    display: flex; justify-content: space-between;
-    font-size: .82rem; margin-bottom: .4rem;
-  }
+  .grade-bar-label { display: flex; justify-content: space-between; font-size: .82rem; margin-bottom: .4rem; }
   .grade-bar-name { color: var(--text); font-weight: 500; }
   .grade-bar-pct { color: var(--muted); }
-  .grade-bar-track {
-    height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
-  }
+  .grade-bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .grade-bar-fill {
     height: 100%; border-radius: 3px;
-    background: linear-gradient(90deg, var(--maroon), var(--orange));
+    background: linear-gradient(90deg, var(--primary), var(--accent));
     width: 0; transition: width 1s cubic-bezier(.4,0,.2,1);
   }
-
-  .grade-scale { }
-  .grade-scale-title { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .grade-scale-title {
+    font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1rem;
+  }
   .grade-scale-grid {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 1px; background: var(--border);
@@ -325,15 +294,13 @@
   .gs-range { color: var(--muted); }
 
   /* ── TEXTBOOK ── */
-  #textbook { background: var(--bg); }
+  #textbook { background: var(--bg2); }
   .book-card {
     display: flex; gap: 2rem; align-items: flex-start;
     background: var(--surface); border: 1px solid var(--border); border-radius: .75rem;
     padding: 2rem;
   }
-  .book-icon {
-    font-size: 3rem; flex-shrink: 0;
-  }
+  .book-icon { font-size: 3rem; flex-shrink: 0; }
   .book-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem; }
   .book-authors { font-size: .85rem; color: var(--muted); margin-bottom: .75rem; }
   .book-isbns { display: flex; flex-direction: column; gap: .25rem; }
@@ -343,10 +310,10 @@
   .book-note { margin-top: .75rem; font-size: .8rem; color: var(--muted); font-style: italic; }
 
   /* ── IMPORTANT ── */
-  #important { background: var(--bg2); }
+  #important { background: var(--bg); }
   .notice-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
   .notice-card {
-    background: var(--bg3); border: 1px solid var(--border); border-radius: .5rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: .5rem;
     padding: 1.25rem;
   }
   .notice-icon { font-size: 1.5rem; margin-bottom: .6rem; }
@@ -354,29 +321,43 @@
   .notice-text { font-size: .8rem; color: var(--muted); line-height: 1.5; }
 
   /* ── POLICIES ── */
-  #policies { background: var(--bg); }
+  #policies { background: var(--bg2); }
   .policy-block { margin-bottom: 3rem; }
   .policy-block:last-child { margin-bottom: 0; }
   .policy-heading {
     font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--maroon); margin-bottom: .75rem;
+    color: var(--primary); margin-bottom: .75rem;
     padding-bottom: .5rem; border-bottom: 1px solid var(--border);
   }
-  .policy-text { font-size: .88rem; color: #aaa; line-height: 1.75; }
+  .policy-text { font-size: .88rem; color: var(--muted); line-height: 1.75; }
   .policy-quote {
     margin: 1.25rem 0; padding: 1rem 1.5rem;
-    border-left: 3px solid var(--maroon);
-    background: var(--surface); border-radius: 0 .4rem .4rem 0;
+    border-left: 3px solid var(--primary);
+    background: var(--bg3); border-radius: 0 .4rem .4rem 0;
     font-style: italic; color: var(--text); font-size: .9rem;
   }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--bg2); border-top: 1px solid var(--border);
+    background: var(--bg3); border-top: 1px solid var(--border);
     padding: 2rem; text-align: center;
     font-size: .78rem; color: var(--muted);
   }
   footer a { color: var(--muted); }
+
+  /* ── PRINT BUTTON ── */
+  .print-fab {
+    position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 200;
+    background: var(--primary); color: #fff;
+    border: none; border-radius: 2rem;
+    padding: .6rem 1.25rem;
+    font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    cursor: pointer; display: flex; align-items: center; gap: .45rem;
+    box-shadow: 0 4px 20px rgba(181,33,29,.28);
+    transition: transform .15s, box-shadow .15s;
+    font-family: inherit;
+  }
+  .print-fab:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(181,33,29,.38); }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -387,27 +368,41 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
   }
-
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity .7s ease, transform .7s ease;
-  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
-
-  /* delay variants */
   .d1 { transition-delay: .1s; }
   .d2 { transition-delay: .2s; }
   .d3 { transition-delay: .3s; }
   .d4 { transition-delay: .4s; }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    nav, .print-fab, .hero-cta, .hero-pills, .hero-question, .grid-lines, .hero-bg { display: none !important; }
+    body { background: #fff !important; color: #000 !important; font-size: 11pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    #hero { min-height: auto; padding: 2rem 1rem 1.5rem; }
+    .hero-title { -webkit-text-fill-color: #2C1E14 !important; background: none !important; color: #2C1E14 !important; font-size: 3rem !important; }
+    section { padding: 1.5rem 1rem; }
+    .section-inner { max-width: 100%; }
+    .module-topics { max-height: none !important; padding-bottom: 1rem !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    * { box-shadow: none !important; animation: none !important; transition: none !important; }
+    a { color: inherit !important; }
+    .info-grid, .module-cards, .grade-scale-grid, .assessment-grid, .notice-cards { break-inside: avoid; }
+    footer { margin-top: 1rem; }
+  }
 </style>
 </head>
 <body>
 
+<!-- PRINT BUTTON -->
+<button class="print-fab" onclick="window.print()">🖨 Print / Save PDF</button>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-brand">ECON 2006 · Summer 2026</div>
+  <div class="nav-brand">ECON 2006 · Summer II 2026</div>
   <div class="nav-links">
     <a href="#modules">Modules</a>
+    <a href="#assessments">Assessments</a>
     <a href="#grading">Grading</a>
     <a href="#textbook">Textbook</a>
     <a href="#policies">Policies</a>
@@ -419,14 +414,15 @@
   <div class="hero-bg"></div>
   <div class="grid-lines"></div>
   <div class="hero-content">
-    <div class="hero-tag">Virginia Tech · Principles of Macroeconomics</div>
+    <div class="hero-tag">Virginia Tech · Principles of Economics (Macro)</div>
     <h1 class="hero-title">ECON 2006</h1>
-    <p class="hero-subtitle">A six-week deep dive into how economies actually work — and why they sometimes don't.</p>
+    <p class="hero-subtitle">A deep dive into how economies actually work — and why they sometimes don't.</p>
     <div class="hero-question">
       <span id="typed-text"></span><span class="typed-cursor"></span>
     </div>
     <div class="hero-cta">
       <a href="#modules" class="btn btn-primary">Explore the Course</a>
+      <a href="https://virginiatech.zoom.us/my/lkoustuv" target="_blank" class="btn btn-zoom">Join Class Meeting →</a>
       <a href="https://canvas.vt.edu/courses/230772" target="_blank" class="btn btn-secondary">Open Canvas →</a>
     </div>
     <div class="hero-pills">
@@ -437,32 +433,6 @@
     </div>
   </div>
 </section>
-
-<!-- STATS -->
-<div id="stats">
-  <div class="stats-grid">
-    <div class="reveal">
-      <div class="stat-num" data-target="6">0</div>
-      <div class="stat-label">Weeks</div>
-    </div>
-    <div class="reveal d1">
-      <div class="stat-num" data-target="5">0</div>
-      <div class="stat-label">Modules</div>
-    </div>
-    <div class="reveal d2">
-      <div class="stat-num" data-target="16">0</div>
-      <div class="stat-label">Topics</div>
-    </div>
-    <div class="reveal d3">
-      <div class="stat-num" data-target="2">0</div>
-      <div class="stat-label">Midterms</div>
-    </div>
-    <div class="reveal d4">
-      <div class="stat-num" data-target="1">0</div>
-      <div class="stat-label">Final Exam</div>
-    </div>
-  </div>
-</div>
 
 <!-- COURSE INFO -->
 <section id="info">
@@ -483,16 +453,20 @@
         <div class="info-cell-value">MTWRF · 9:30 – 10:45 AM</div>
       </div>
       <div class="info-cell">
-        <div class="info-cell-label">Dates</div>
+        <div class="info-cell-label">Session Dates</div>
         <div class="info-cell-value">July 7 – August 14, 2026</div>
       </div>
       <div class="info-cell">
         <div class="info-cell-label">Zoom</div>
-        <div class="info-cell-value"><a href="https://virginiatech.zoom.us/my/lkoustuv" target="_blank">Join Class Meeting →</a></div>
+        <div class="info-cell-value"><a href="https://virginiatech.zoom.us/my/lkoustuv" target="_blank">virginiatech.zoom.us/my/lkoustuv →</a></div>
       </div>
       <div class="info-cell">
         <div class="info-cell-label">Canvas</div>
         <div class="info-cell-value"><a href="https://canvas.vt.edu/courses/230772" target="_blank">canvas.vt.edu/courses/230772 →</a></div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Final Exam</div>
+        <div class="info-cell-value">August 14, 2026</div>
       </div>
       <div class="info-cell">
         <div class="info-cell-label">Office Hours</div>
@@ -504,7 +478,7 @@
       </div>
     </div>
     <p style="margin-top:1rem; font-size:.82rem; color:var(--muted);" class="reveal d3">
-      To book office hours, email ahead or request during class. All course materials are posted on Canvas.
+      All course materials — lectures, handouts, and announcements — are posted on Canvas. Check Canvas regularly.
     </p>
   </div>
 </section>
@@ -513,8 +487,8 @@
 <section id="modules">
   <div class="section-inner">
     <div class="section-tag reveal">The Journey</div>
-    <h2 class="section-title reveal d1">5 Modules. 16 Topics.<br>One big picture.</h2>
-    <p class="modules-intro reveal d2">Click any module to see what's inside. We go roughly in order — each one builds on the last.</p>
+    <h2 class="section-title reveal d1">New ideas around every corner.</h2>
+    <p class="modules-intro reveal d2">Each module opens a new lens for seeing the economy — from scarcity and markets to growth, trade, and the debates economists still argue about. Click any module to see what's inside.</p>
 
     <div class="module-cards reveal d3">
 
@@ -567,7 +541,7 @@
           <div class="topic-list">
             <div class="topic-item"><span class="topic-num">07</span><span class="topic-text">Aggregate Expenditure and Equilibrium Output</span></div>
             <div class="topic-item"><span class="topic-num">08</span><span class="topic-text">Fiscal Policy: Government's Role in the Economy</span></div>
-            <div class="topic-item"><span class="topic-num">09</span><span class="topic-text">How Money Moves: An Introduction to the Money Market & Monetary Policy</span></div>
+            <div class="topic-item"><span class="topic-num">09</span><span class="topic-text">How Money Moves: An Introduction to the Money Market &amp; Monetary Policy</span></div>
             <div class="topic-item"><span class="topic-num">10</span><span class="topic-text">Aggregate Demand, Aggregate Supply, and Price Level</span></div>
             <div class="topic-item"><span class="topic-num">11</span><span class="topic-text">Policy Effects and Cost Shocks in the AS/AD Model</span></div>
             <div class="topic-item"><span class="topic-num">12</span><span class="topic-text">The Labor Market</span></div>
@@ -586,8 +560,8 @@
         </div>
         <div class="module-topics">
           <div class="topic-list">
-            <div class="topic-item"><span class="topic-num">13</span><span class="topic-text">Comparative Advantage & International Trade</span></div>
-            <div class="topic-item"><span class="topic-num">14</span><span class="topic-text">Open Economy Macroeconomics: Balance of Payments & Exchange Rates</span></div>
+            <div class="topic-item"><span class="topic-num">13</span><span class="topic-text">Comparative Advantage &amp; International Trade</span></div>
+            <div class="topic-item"><span class="topic-num">14</span><span class="topic-text">Open Economy Macroeconomics: Balance of Payments &amp; Exchange Rates</span></div>
           </div>
         </div>
       </div>
@@ -596,7 +570,7 @@
         <div class="module-header">
           <div class="module-num">M5</div>
           <div class="module-meta">
-            <div class="module-name">Growth & Debate</div>
+            <div class="module-name">Growth &amp; Debate <span class="module-badge">Time Permitting</span></div>
             <div class="module-hook">Why do some countries grow rich while others stay poor — and who's arguing about it?</div>
           </div>
           <div class="module-toggle">▾</div>
@@ -613,10 +587,89 @@
   </div>
 </section>
 
+<!-- ASSESSMENTS -->
+<section id="assessments">
+  <div class="section-inner">
+    <div class="section-tag reveal">Assessments</div>
+    <h2 class="section-title reveal d1">How you'll be evaluated.</h2>
+    <div class="assessment-grid reveal d2">
+
+      <div class="assessment-card">
+        <div class="assessment-card-header">
+          <div class="assessment-card-left">
+            <div class="assessment-icon">📋</div>
+            <div class="assessment-title">Final Exam</div>
+          </div>
+          <div class="assessment-weight">35%</div>
+        </div>
+        <div class="assessment-body">
+          Covers all course material. Held on <strong>August 14, 2026</strong> — the last day of the session. Once you open the exam, you'll have the full exam duration plus a <strong>15-minute buffer</strong> to submit. No make-ups without prior notice and valid documentation.
+        </div>
+        <div class="assessment-tags">
+          <span class="a-tag a-tag-lock">LockDown Browser</span>
+          <span class="a-tag a-tag-canvas">Canvas</span>
+        </div>
+      </div>
+
+      <div class="assessment-card">
+        <div class="assessment-card-header">
+          <div class="assessment-card-left">
+            <div class="assessment-icon">📝</div>
+            <div class="assessment-title">Midterm Exams</div>
+          </div>
+          <div class="assessment-weight">15% each</div>
+        </div>
+        <div class="assessment-body">
+          Two midterms held during the session. Exact dates announced on Canvas at least <strong>one week in advance</strong>. Same window policy as the Final — exam duration plus a <strong>15-minute buffer</strong> from when you open it. No automatic make-ups.
+        </div>
+        <div class="assessment-tags">
+          <span class="a-tag a-tag-lock">LockDown Browser</span>
+          <span class="a-tag a-tag-canvas">Canvas</span>
+        </div>
+      </div>
+
+      <div class="assessment-card">
+        <div class="assessment-card-header">
+          <div class="assessment-card-left">
+            <div class="assessment-icon">💻</div>
+            <div class="assessment-title">Quizzes</div>
+          </div>
+          <div class="assessment-weight">25%</div>
+        </div>
+        <div class="assessment-body">
+          Each quiz opens <strong>approximately 7 days before its due date</strong>. Use that window to work through the material — then take the quiz before the deadline. Completed on Canvas with LockDown Browser. Don't wait until the last minute.
+        </div>
+        <div class="assessment-tags">
+          <span class="a-tag a-tag-lock">LockDown Browser</span>
+          <span class="a-tag a-tag-canvas">Canvas</span>
+        </div>
+      </div>
+
+      <div class="assessment-card">
+        <div class="assessment-card-header">
+          <div class="assessment-card-left">
+            <div class="assessment-icon">🎥</div>
+            <div class="assessment-title">In-Class Quizzes</div>
+          </div>
+          <div class="assessment-weight">10%</div>
+        </div>
+        <div class="assessment-body">
+          Taken live during the Zoom session — <strong>you must be present to take them</strong>. Short format (~20–30 minutes). No LockDown Browser required. Cannot be made up if you miss class; reach out immediately if you have a valid reason.
+        </div>
+        <div class="assessment-tags">
+          <span class="a-tag a-tag-nlock">No LockDown Browser</span>
+          <span class="a-tag a-tag-live">Live · Zoom</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- GRADING -->
 <section id="grading">
   <div class="section-inner">
-    <div class="section-tag reveal">Assessments</div>
+    <div class="section-tag reveal">Grading</div>
     <h2 class="section-title reveal d1">How your grade is built.</h2>
     <div class="grading-layout">
       <div class="grade-bars reveal d2">
@@ -625,44 +678,38 @@
           <div class="grade-bar-track"><div class="grade-bar-fill" data-width="35"></div></div>
         </div>
         <div class="grade-bar-item">
-          <div class="grade-bar-label"><span class="grade-bar-name">Midterm I</span><span class="grade-bar-pct">20%</span></div>
-          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="20"></div></div>
-        </div>
-        <div class="grade-bar-item">
-          <div class="grade-bar-label"><span class="grade-bar-name">Midterm II</span><span class="grade-bar-pct">20%</span></div>
-          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="20"></div></div>
-        </div>
-        <div class="grade-bar-item">
-          <div class="grade-bar-label"><span class="grade-bar-name">Quizzes</span><span class="grade-bar-pct">15%</span></div>
+          <div class="grade-bar-label"><span class="grade-bar-name">Midterm I</span><span class="grade-bar-pct">15%</span></div>
           <div class="grade-bar-track"><div class="grade-bar-fill" data-width="15"></div></div>
+        </div>
+        <div class="grade-bar-item">
+          <div class="grade-bar-label"><span class="grade-bar-name">Midterm II</span><span class="grade-bar-pct">15%</span></div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="15"></div></div>
+        </div>
+        <div class="grade-bar-item">
+          <div class="grade-bar-label"><span class="grade-bar-name">Quizzes</span><span class="grade-bar-pct">25%</span></div>
+          <div class="grade-bar-track"><div class="grade-bar-fill" data-width="25"></div></div>
         </div>
         <div class="grade-bar-item">
           <div class="grade-bar-label"><span class="grade-bar-name">In-Class Quizzes</span><span class="grade-bar-pct">10%</span></div>
           <div class="grade-bar-track"><div class="grade-bar-fill" data-width="10"></div></div>
         </div>
-        <div style="margin-top:1.5rem; font-size:.82rem; color:var(--muted); line-height:1.6;">
-          <p>All exams and quizzes are on <strong style="color:var(--text)">Canvas with LockDown Browser</strong> — except in-class quizzes.</p>
-          <p style="margin-top:.5rem">Quizzes have a ~12-hour window; complete in one go once started (~75 min). In-class quizzes run ~20–30 min during class.</p>
-          <p style="margin-top:.5rem">Exact dates announced on Canvas. No automatic make-ups — contact me immediately if something comes up.</p>
-        </div>
+        <p style="margin-top:1rem; font-size:.8rem; color:var(--muted);">Total: 100%. See the Assessments section above for details on each component.</p>
       </div>
       <div class="reveal d3">
-        <div class="grade-scale">
-          <div class="grade-scale-title">Grading Scale</div>
-          <div class="grade-scale-grid">
-            <div class="gs-cell"><span class="gs-grade">A</span><span class="gs-range">93–100</span></div>
-            <div class="gs-cell"><span class="gs-grade">A−</span><span class="gs-range">90–92</span></div>
-            <div class="gs-cell"><span class="gs-grade">B+</span><span class="gs-range">87–89</span></div>
-            <div class="gs-cell"><span class="gs-grade">B</span><span class="gs-range">83–86</span></div>
-            <div class="gs-cell"><span class="gs-grade">B−</span><span class="gs-range">80–82</span></div>
-            <div class="gs-cell"><span class="gs-grade">C+</span><span class="gs-range">77–79</span></div>
-            <div class="gs-cell"><span class="gs-grade">C</span><span class="gs-range">73–76</span></div>
-            <div class="gs-cell"><span class="gs-grade">C−</span><span class="gs-range">70–72</span></div>
-            <div class="gs-cell"><span class="gs-grade">D+</span><span class="gs-range">67–69</span></div>
-            <div class="gs-cell"><span class="gs-grade">D</span><span class="gs-range">63–66</span></div>
-            <div class="gs-cell"><span class="gs-grade">D−</span><span class="gs-range">60–62</span></div>
-            <div class="gs-cell"><span class="gs-grade">F</span><span class="gs-range">0–59</span></div>
-          </div>
+        <div class="grade-scale-title">Grading Scale</div>
+        <div class="grade-scale-grid">
+          <div class="gs-cell"><span class="gs-grade">A</span><span class="gs-range">95–100</span></div>
+          <div class="gs-cell"><span class="gs-grade">A−</span><span class="gs-range">90–94.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">B+</span><span class="gs-range">85–89.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">B</span><span class="gs-range">80–84.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">B−</span><span class="gs-range">75–79.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">C+</span><span class="gs-range">70–74.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">C</span><span class="gs-range">65–69.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">C−</span><span class="gs-range">60–64.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">D+</span><span class="gs-range">55–59.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">D</span><span class="gs-range">50–54.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">D−</span><span class="gs-range">45–49.9</span></div>
+          <div class="gs-cell"><span class="gs-grade">F</span><span class="gs-range">&lt; 45</span></div>
         </div>
       </div>
     </div>
@@ -683,7 +730,7 @@
           <div class="isbn-row"><span class="isbn-label">14th ed. ISBN: </span><span class="isbn-val">978-0135345412 / 978-0135374993</span></div>
           <div class="isbn-row"><span class="isbn-label">13th ed. ISBN: </span><span class="isbn-val">978-0135662168</span></div>
         </div>
-        <div class="book-note">Earlier editions are acceptable. Slides, notes, and supplemental materials are on Canvas — my lectures often go beyond the textbook, so showing up matters.</div>
+        <div class="book-note">Earlier editions are acceptable. Lectures, handouts, and supplemental materials are posted on Canvas — my lectures often go beyond the textbook, so showing up matters.</div>
       </div>
     </div>
   </div>
@@ -698,17 +745,17 @@
       <div class="notice-card reveal">
         <div class="notice-icon">📬</div>
         <div class="notice-title">Check Canvas + Email</div>
-        <div class="notice-text">Announcements, exam dates, and schedule changes go there. Check regularly.</div>
+        <div class="notice-text">Announcements, exam dates, lecture handouts, and schedule changes are all on Canvas. Check regularly.</div>
       </div>
       <div class="notice-card reveal d1">
         <div class="notice-icon">🔒</div>
         <div class="notice-title">LockDown Browser</div>
-        <div class="notice-text">Required for all exams and graded quizzes. Not required for in-class quizzes.</div>
+        <div class="notice-text">Required for all exams and online quizzes. Not required for in-class quizzes.</div>
       </div>
       <div class="notice-card reveal d2">
         <div class="notice-icon">🎥</div>
         <div class="notice-title">Show Up</div>
-        <div class="notice-text">Class is online synchronous. In-class quizzes cannot be made up if you miss them.</div>
+        <div class="notice-text">Class is online synchronous via Zoom. In-class quizzes cannot be made up if you miss them.</div>
       </div>
       <div class="notice-card reveal d3">
         <div class="notice-icon">📩</div>
@@ -727,7 +774,7 @@
 
     <div class="policy-block reveal d2">
       <div class="policy-heading">Academic Accommodations</div>
-      <p class="policy-text">Virginia Tech welcomes students with disabilities into the University's educational programs. The University promotes efforts to provide equal access and a culture of inclusion without altering the essential elements of coursework. If you anticipate or experience academic barriers that may be due to disability, including but not limited to ADHD, chronic or temporary medical conditions, deaf or hard of hearing, learning disability, mental health, or vision impairment, please contact the Services for Students with Disabilities (SSD) office at <strong style="color:var(--text)">540-231-3788</strong>, <a href="mailto:ssd@vt.edu" style="color:var(--orange)">ssd@vt.edu</a>, or visit <a href="https://ssd.vt.edu" target="_blank" style="color:var(--orange)">ssd.vt.edu</a>.</p>
+      <p class="policy-text">Virginia Tech welcomes students with disabilities into the University's educational programs. The University promotes efforts to provide equal access and a culture of inclusion without altering the essential elements of coursework. If you anticipate or experience academic barriers that may be due to disability, including but not limited to ADHD, chronic or temporary medical conditions, deaf or hard of hearing, learning disability, mental health, or vision impairment, please contact the Services for Students with Disabilities (SSD) office at <strong style="color:var(--text)">540-231-3788</strong>, <a href="mailto:ssd@vt.edu" style="color:var(--primary)">ssd@vt.edu</a>, or visit <a href="https://ssd.vt.edu" target="_blank" style="color:var(--primary)">ssd.vt.edu</a>.</p>
       <p class="policy-text" style="margin-top:.75rem;">If you have an SSD accommodation letter, please meet with me during office hours as early in the semester as possible to deliver your letter and discuss your accommodation. You must give me reasonable notice to implement your accommodation, which is at least a week before each exam. If there are aspects of this course that prevent you from learning or exclude you, please let me know as soon as possible. Together, we will develop strategies to meet both your needs and the requirements of the course.</p>
     </div>
 
@@ -735,14 +782,14 @@
       <div class="policy-heading">Honor Code</div>
       <div class="policy-quote">"As a Hokie, I will conduct myself with honor and integrity at all times. I will not lie, cheat, or steal, nor will I accept the actions of those who do."</div>
       <p class="policy-text">Students enrolled in this course are responsible for abiding by the Honor Code. A student who has doubts about how the Honor Code applies to any assignment is responsible for obtaining specific guidance from the course instructor before submitting the assignment for evaluation. Students are strongly discouraged from misusing sites such as Chegg and CourseHero, as well as misusing ChatGPT and other Generative Artificial Intelligence. Students are strongly encouraged to consult their faculty members regarding the use of such outside materials, as the misuse of these sources may constitute a violation of the Honor Code. Ignorance of the rules does not exclude any member of the University community from the requirements and expectations of the Honor Code.</p>
-      <p class="policy-text" style="margin-top:.75rem;">For more information: <a href="https://www.honorsystem.vt.edu/" target="_blank" style="color:var(--orange)">honorsystem.vt.edu →</a></p>
+      <p class="policy-text" style="margin-top:.75rem;">For more information: <a href="https://www.honorsystem.vt.edu/" target="_blank" style="color:var(--primary)">honorsystem.vt.edu →</a></p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>ECON 2006 · Principles of Macroeconomics · Summer 2026 · Virginia Tech</p>
+  <p>ECON 2006 · Principles of Economics (Macro) · Summer II 2026 · Virginia Tech</p>
   <p style="margin-top:.4rem;">Koustuv Lahiri · <a href="mailto:lkoustuv@vt.edu">lkoustuv@vt.edu</a></p>
 </footer>
 
@@ -775,29 +822,11 @@
   // ── Scroll reveal ─────────────────────────────────────────────────────────
   const revealEls = document.querySelectorAll('.reveal');
   const revealObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
   revealEls.forEach(el => revealObs.observe(el));
 
-  // ── Stat counters ─────────────────────────────────────────────────────────
-  const statEls = document.querySelectorAll('.stat-num[data-target]');
-  const statObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const target = +e.target.dataset.target;
-      let current = 0;
-      const step = Math.max(1, Math.floor(target / 20));
-      const timer = setInterval(() => {
-        current = Math.min(current + step, target);
-        e.target.textContent = current;
-        if (current >= target) clearInterval(timer);
-      }, 40);
-      statObs.unobserve(e.target);
-    });
-  }, { threshold: 0.5 });
-  statEls.forEach(el => statObs.observe(el));
-
-  // ── Grade bar animations ───────────────────────────────────────────────────
+  // ── Grade bar animations ──────────────────────────────────────────────────
   const barEls = document.querySelectorAll('.grade-bar-fill');
   const barObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
