@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demand, Supply &amp; Market Equilibrium</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#3A86FF; --blue-d:#1a5ce8; --blue-bg:#EBF5FF;
+  --pink:#FF006E; --pink-bg:#FFE5F1;
+  --purple:#8338EC; --purple-d:#6920d4; --purple-bg:#F0E8FD;
+  --orange:#FB5607; --orange-d:#d93e00; --orange-bg:#FFF0EA;
+  --yellow:#FFD60A;
+  --supply:#10B981; --supply-d:#047857; --supply-bg:#D1FAE5;
+  --ink:#1C1C2E; --muted:#64748B; --rule:#E2E8F0; --bg:#FFFFFF;
+  --slide-w:1280px; --slide-h:720px;
+}
+html,body{width:100%;height:100%;background:#090d14;overflow:hidden;color:var(--ink);}
+body{font-family:'DM Sans',sans-serif;}
+h1,h2,h3,.eyebrow,.q-num,.s-num,.col-label{font-family:'Poppins',sans-serif;}
+
+/* ── Stage & scaling ── */
+#stage{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+.slide-wrap{position:relative;width:var(--slide-w);height:var(--slide-h);transform-origin:top left;}
+
+/* ── Base slide ── */
+.slide{
+  position:absolute;inset:0;background:var(--bg);
+  display:none;flex-direction:column;
+  padding:48px 68px 44px;overflow:hidden;
+}
+.slide.active{display:flex;}
+/* rainbow top bar */
+.slide:not(.cover):not(.sb)::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--purple) 40%,var(--pink) 70%,var(--orange) 100%);
+}
+/* faint decorative circle */
+.slide:not(.cover):not(.sb)::after{
+  content:'';position:absolute;bottom:-90px;right:-90px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(58,134,255,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+/* ── Cover ── */
+.slide.cover{
+  background:#090d14;color:#fff;
+  align-items:flex-start;justify-content:flex-end;
+  padding:60px 68px;overflow:hidden;
+}
+.cover-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.cover-bg::before{
+  content:'';position:absolute;top:-120px;right:-80px;
+  width:550px;height:550px;border-radius:50%;
+  background:radial-gradient(circle,rgba(58,134,255,.28) 0%,transparent 65%);
+}
+.cover-bg::after{
+  content:'';position:absolute;bottom:30px;right:220px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(131,56,236,.3) 0%,transparent 65%);
+}
+.cover-blob3{
+  position:absolute;bottom:-50px;left:320px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(16,185,129,.25) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cover-grid{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none;
+}
+
+/* ── Section breaks ── */
+.slide.sb{align-items:flex-start;justify-content:center;padding:60px 68px;overflow:hidden;}
+.sb-blue  {background:linear-gradient(135deg,#1a5ce8 0%,#3A86FF 60%,#00c8ff 100%);color:#fff;}
+.sb-green {background:linear-gradient(135deg,#047857 0%,#10B981 55%,#34d399 100%);color:#fff;}
+.sb-purple{background:linear-gradient(135deg,#5c1ac7 0%,#8338EC 55%,#c776f8 100%);color:#fff;}
+.sb::before{display:none;}
+.sb-deco{position:absolute;right:-70px;top:-70px;width:350px;height:350px;border-radius:50%;background:rgba(255,255,255,.08);pointer-events:none;}
+.sb-deco2{position:absolute;right:60px;bottom:-100px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none;}
+
+/* ── Eyebrow pill ── */
+.eyebrow{
+  display:inline-flex;align-items:center;
+  font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:4px 13px;border-radius:99px;margin-bottom:14px;width:fit-content;
+  background:var(--blue-bg);color:var(--blue-d);
+}
+.eyebrow.supply{background:var(--supply-bg);color:var(--supply-d);}
+.eyebrow.purple{background:var(--purple-bg);color:var(--purple-d);}
+.cover .eyebrow{background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);}
+.sb .eyebrow{background:rgba(255,255,255,.2);color:#fff;}
+
+/* ── Headings ── */
+h1{font-size:48px;font-weight:800;line-height:1.08;margin-bottom:14px;}
+.cover h1{font-size:54px;color:#fff;line-height:1.07;}
+.sb h1{font-size:52px;font-weight:900;line-height:1.06;color:#fff;}
+h2{font-size:32px;font-weight:800;line-height:1.15;margin-bottom:18px;color:var(--ink);}
+.subtitle{font-size:18px;color:rgba(255,255,255,.6);margin-bottom:4px;}
+.meta{font-size:13px;color:rgba(255,255,255,.3);margin-top:26px;}
+
+/* ── Layout ── */
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+.big-def{font-size:24px;line-height:1.65;color:var(--ink);max-width:860px;}
+.big-def strong{color:var(--blue);font-weight:700;}
+
+/* bullets */
+ul.clean{list-style:none;}
+ul.clean>li{
+  font-size:20px;line-height:1.4;padding:8px 0 8px 28px;
+  position:relative;color:var(--ink);border-bottom:1px solid var(--rule);
+}
+ul.clean>li:last-child{border-bottom:none;}
+ul.clean>li::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:10px;height:10px;border-radius:50%;background:var(--blue);
+}
+ul.clean.supply>li::before{background:var(--supply);}
+
+/* two-col */
+.two-col{display:flex;gap:44px;flex:1;align-items:center;}
+.col{flex:1;}
+.col-label{
+  font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--blue);
+}
+.col p{font-size:18px;line-height:1.6;color:var(--ink);}
+
+/* callout */
+.callout{background:var(--blue-bg);border-left:4px solid var(--blue);padding:14px 20px;border-radius:0 8px 8px 0;margin-top:14px;}
+.callout.purple{background:var(--purple-bg);border-color:var(--purple);}
+.callout.orange{background:var(--orange-bg);border-color:var(--orange);}
+.callout.supply{background:var(--supply-bg);border-color:var(--supply);}
+.callout .label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:5px;font-family:'Poppins',sans-serif;}
+.callout.purple .label{color:var(--purple);}
+.callout.supply .label{color:var(--supply-d);}
+.callout.orange .label{color:var(--orange);}
+.callout p{font-size:17px;line-height:1.5;color:var(--ink);}
+
+/* highlight strip */
+.hstrip{border-radius:10px;padding:16px 26px;margin-bottom:18px;color:#fff;background:var(--blue);}
+.hstrip.supply{background:linear-gradient(90deg,var(--supply-d),var(--supply));}
+.hstrip.purple{background:var(--purple);}
+.hstrip.orange{background:linear-gradient(90deg,var(--orange),#ffb347);}
+.hstrip.pink{background:linear-gradient(90deg,#be123c,var(--pink));}
+.hstrip p{font-size:22px;font-weight:600;line-height:1.35;font-family:'Poppins',sans-serif;}
+
+/* diagram */
+.diagram-wrap{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.caption{font-size:13px;color:var(--muted);text-align:center;margin-top:8px;font-style:italic;}
+
+/* 6-card demand shifters */
+.shifter-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1;align-items:stretch;}
+.shifter-card{border-radius:12px;padding:16px 18px;border:1.5px solid var(--rule);background:#f8fbff;display:flex;flex-direction:column;gap:6px;}
+.shifter-card .sh-icon{font-size:26px;line-height:1;}
+.shifter-card h4{font-size:15px;font-weight:700;color:var(--ink);font-family:'Poppins',sans-serif;}
+.shifter-card p{font-size:13px;color:var(--muted);line-height:1.45;}
+
+/* 4-card supply shifters */
+.supply-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;align-items:stretch;}
+.supply-card{border-radius:12px;padding:18px 20px;border:1.5px solid var(--rule);background:#f0fdf8;display:flex;align-items:flex-start;gap:14px;}
+.supply-card .sc-icon{font-size:28px;line-height:1;flex-shrink:0;}
+.supply-card h4{font-size:16px;font-weight:700;color:var(--supply-d);font-family:'Poppins',sans-serif;margin-bottom:4px;}
+.supply-card p{font-size:14px;color:var(--muted);line-height:1.45;}
+
+/* normal vs inferior goods */
+.good-cards{display:flex;gap:22px;flex:1;align-items:stretch;}
+.good-card{flex:1;border-radius:14px;padding:22px 20px;display:flex;flex-direction:column;}
+.good-card.normal{background:var(--blue-bg);border:2px solid #93c5fd;}
+.good-card.inferior{background:var(--orange-bg);border:2px solid #fdba74;}
+.good-card h3{font-size:20px;font-weight:800;margin-bottom:10px;font-family:'Poppins',sans-serif;}
+.good-card.normal h3{color:var(--blue-d);}
+.good-card.inferior h3{color:var(--orange-d);}
+.good-card p{font-size:16px;line-height:1.6;color:var(--ink);}
+.good-card .eg{font-size:13px;color:var(--muted);margin-top:10px;font-style:italic;}
+
+/* self-correcting cards */
+.correct-cards{display:flex;gap:24px;flex:1;align-items:center;}
+.correct-card{flex:1;border-radius:14px;padding:22px 20px;}
+
+/* summary */
+.summary-list{display:flex;flex-direction:column;gap:11px;flex:1;justify-content:center;}
+.s-item{display:flex;align-items:flex-start;gap:14px;background:#f9faff;border-radius:10px;padding:13px 18px;}
+.s-item:nth-child(1){border-left:4px solid var(--blue);}
+.s-item:nth-child(2){border-left:4px solid var(--supply);}
+.s-item:nth-child(3){border-left:4px solid var(--purple);}
+.s-num{font-size:22px;font-weight:800;min-width:28px;line-height:1;font-family:'Poppins',sans-serif;}
+.s-item:nth-child(1) .s-num{color:var(--blue);}
+.s-item:nth-child(2) .s-num{color:var(--supply);}
+.s-item:nth-child(3) .s-num{color:var(--purple);}
+.s-item p{font-size:17px;line-height:1.45;color:var(--ink);}
+
+/* slide number */
+.sn{position:absolute;bottom:14px;right:20px;font-size:11px;color:var(--rule);font-weight:600;font-family:'Poppins',sans-serif;}
+.cover .sn{color:rgba(255,255,255,.18);}
+.sb .sn{color:rgba(255,255,255,.25);}
+
+/* progress + nav */
+#progress-bar{position:fixed;bottom:0;left:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--supply),var(--purple));transition:width .3s;z-index:100;}
+#nav{position:fixed;bottom:14px;right:18px;display:flex;gap:8px;align-items:center;z-index:100;}
+.nb{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:15px;cursor:pointer;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.nb:hover{background:rgba(255,255,255,.22);}
+#sc{color:rgba(255,255,255,.4);font-size:11px;min-width:44px;text-align:center;font-family:'Poppins',sans-serif;}
+hr.thin{border:none;border-top:1px solid var(--rule);margin:12px 0;}
+
+/* arrow marker defs shared via CSS trick — actual defs are in SVGs */
+</style>
+</head>
+<body>
+<div id="stage"><div class="slide-wrap" id="wrap">
+
+<!-- ══════════════════════════════════════════════════
+     S1  COVER
+══════════════════════════════════════════════════ -->
+<div class="slide cover active">
+  <div class="cover-bg"></div>
+  <div class="cover-blob3"></div>
+  <div class="cover-grid"></div>
+  <!-- illustrative supply-demand chart -->
+  <svg style="position:absolute;right:68px;top:50%;transform:translateY(-50%);opacity:.18;"
+       width="360" height="310" viewBox="0 0 360 310">
+    <line x1="30" y1="290" x2="340" y2="290" stroke="white" stroke-width="2.5"/>
+    <line x1="30" y1="290" x2="30"  y2="20"  stroke="white" stroke-width="2.5"/>
+    <!-- demand -->
+    <line x1="40" y1="25"  x2="325" y2="285" stroke="#93c5fd" stroke-width="3" stroke-linecap="round"/>
+    <!-- supply -->
+    <line x1="40" y1="285" x2="325" y2="25"  stroke="#6ee7b7" stroke-width="3" stroke-linecap="round"/>
+    <!-- equilibrium -->
+    <circle cx="182" cy="155" r="8" fill="rgba(255,214,10,.9)"/>
+    <line x1="30"  y1="155" x2="182" y2="155" stroke="rgba(255,214,10,.5)" stroke-dasharray="5,4" stroke-width="1.5"/>
+    <line x1="182" y1="155" x2="182" y2="290" stroke="rgba(255,214,10,.5)" stroke-dasharray="5,4" stroke-width="1.5"/>
+    <text x="316" y="42"  fill="#93c5fd" font-size="15" font-family="DM Sans" font-weight="700">D</text>
+    <text x="316" y="270" fill="#6ee7b7" font-size="15" font-family="DM Sans" font-weight="700">S</text>
+    <text x="192" y="150" fill="rgba(255,214,10,.9)" font-size="13" font-family="DM Sans" font-weight="700">E*</text>
+  </svg>
+  <div class="eyebrow">ECON 2006 · Module 1 · Chapters 3 &amp; 4</div>
+  <h1>Demand, Supply &amp;<br>Market Equilibrium</h1>
+  <p class="subtitle">Virginia Tech — Summer 2026</p>
+  <p class="meta">Koustuv Lahiri · lkoustuv@vt.edu</p>
+  <span class="sn">1</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S2  SECTION BREAK — DEMAND
+══════════════════════════════════════════════════ -->
+<div class="slide sb sb-blue">
+  <div class="sb-deco"></div><div class="sb-deco2"></div>
+  <div class="eyebrow">Chapter 3</div>
+  <div style="font-size:64px;line-height:1;margin-bottom:18px;">📉</div>
+  <h1>Demand</h1>
+  <p style="font-size:20px;color:rgba(255,255,255,.75);margin-top:12px;max-width:600px;line-height:1.55;font-family:'DM Sans',sans-serif;">
+    How do consumers respond to price — and what makes them want more or less of a good?
+  </p>
+  <span class="sn">2</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S3  LAW OF DEMAND
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Demand</div>
+  <h2>The Law of Demand</h2>
+  <div class="body">
+    <div class="hstrip">
+      <p>When price rises, quantity demanded falls — <em>all else equal</em> (ceteris paribus).</p>
+    </div>
+    <div class="two-col" style="flex:0;gap:36px;margin-top:0;">
+      <div class="col">
+        <div class="callout" style="margin-top:0;">
+          <div class="label">💸 Income Effect</div>
+          <p>Higher price → lower real purchasing power → consumers buy less</p>
+        </div>
+        <div class="callout orange" style="margin-top:12px;">
+          <div class="label">🔄 Substitution Effect</div>
+          <p>Higher price → the good is relatively more expensive → switch to cheaper alternatives</p>
+        </div>
+      </div>
+      <div class="col">
+        <p style="font-size:18px;line-height:1.75;color:var(--muted);">
+          <strong style="color:var(--ink);">Demand</strong> is a <em>relationship</em> between
+          <strong style="color:var(--blue);">price</strong> and
+          <strong style="color:var(--blue);">quantity demanded</strong> — not a single number.<br><br>
+          A <strong style="color:var(--ink);">demand schedule</strong> lists Q<sub>d</sub> at each price.
+          A <strong style="color:var(--ink);">demand curve</strong> graphs it —
+          always <em>downward sloping</em>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">3</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S4  THE DEMAND CURVE
+     Demand line: (60,20)→(320,255), Δx=260, Δy=235
+     Points on curve:
+       x=120 → t=60/260=0.231 → y=20+235×0.231=74.3≈74
+       x=240 → t=180/260=0.692 → y=20+235×0.692=182.6≈183
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Demand</div>
+  <h2>The Demand Curve</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 360 285" width="330" height="260" xmlns="http://www.w3.org/2000/svg">
+          <!-- shading -->
+          <path d="M60,265 L60,20 L320,255 L320,265 Z" fill="rgba(58,134,255,.05)"/>
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="348" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="354,265 342,259 342,271" fill="#374151"/>
+          <!-- demand curve -->
+          <line x1="60" y1="20" x2="320" y2="255" stroke="var(--blue)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- upper point A: (120,74) — higher price, lower qty -->
+          <circle cx="120" cy="74" r="5.5" fill="var(--blue)" stroke="white" stroke-width="1.5"/>
+          <!-- lower point B: (240,183) — lower price, higher qty -->
+          <circle cx="240" cy="183" r="5.5" fill="var(--blue)" stroke="white" stroke-width="1.5"/>
+          <!-- dashed lines to point B -->
+          <line x1="60"  y1="183" x2="240" y2="183" stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5"/>
+          <line x1="240" y1="183" x2="240" y2="265" stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5"/>
+          <!-- dashed lines to point A -->
+          <line x1="60"  y1="74"  x2="120" y2="74"  stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5" opacity="0.5"/>
+          <line x1="120" y1="74"  x2="120" y2="265" stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5" opacity="0.5"/>
+          <!-- axis labels -->
+          <text x="52" y="78"  text-anchor="end" font-size="12" fill="var(--blue-d)" font-weight="700" font-family="Poppins">P₁</text>
+          <text x="52" y="187" text-anchor="end" font-size="12" fill="var(--blue-d)" font-weight="700" font-family="Poppins">P₂</text>
+          <text x="120" y="279" text-anchor="middle" font-size="11" fill="var(--muted)" font-weight="600" font-family="Poppins">Q₁</text>
+          <text x="240" y="279" text-anchor="middle" font-size="12" fill="var(--blue-d)" font-weight="700" font-family="Poppins">Q₂</text>
+          <!-- D label -->
+          <text x="309" y="249" font-size="17" fill="var(--blue)" font-weight="800" font-family="Poppins">D</text>
+          <!-- axis titles -->
+          <text x="200" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+          <!-- annotation -->
+          <text x="195" y="118" font-size="11" fill="var(--muted)" font-family="DM Sans" font-style="italic">P₁ → P₂ (falls)</text>
+          <text x="195" y="130" font-size="11" fill="var(--muted)" font-family="DM Sans" font-style="italic">Q₁ → Q₂ (rises)</text>
+        </svg>
+        <p class="caption">Lower price → more units demanded</p>
+      </div>
+      <div class="col">
+        <p style="font-size:17px;color:var(--muted);margin-bottom:16px;">
+          At any price on the y-axis, the demand curve tells you how many units consumers want to buy.
+        </p>
+        <ul class="clean">
+          <li>Always <strong>downward sloping</strong> — P and Q<sub>d</sub> move in opposite directions</li>
+          <li>A <strong>movement along</strong> the curve = change in price, ceteris paribus</li>
+          <li>A <strong>shift</strong> of the entire curve = change in something other than price</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <span class="sn">4</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S5  MOVEMENT ALONG vs. SHIFT
+     D1: (70,25)→(310,255)   slope = 230/240
+     D0 (left 50px):  (20,25)→(260,255), clip at x=60 → y=25+230/240×40=63.3≈63
+     D2 (right 50px): (120,25)→(360,255), clip viewBox → show to x=355, y=25+230/240×235=250
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Demand</div>
+  <h2>Movement Along vs. Shift of the Demand Curve</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 370 285" width="340" height="262" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowOr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--orange)"/>
+            </marker>
+            <marker id="arrowBl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--blue)"/>
+            </marker>
+            <marker id="arrowOrL" markerWidth="8" markerHeight="8" refX="2" refY="3" orient="auto">
+              <path d="M8,0 L8,6 L0,3 z" fill="var(--orange)"/>
+            </marker>
+          </defs>
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="358" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="364,265 352,259 352,271" fill="#374151"/>
+          <!-- D0 — decrease (left shift), dashed, clipped at y-axis -->
+          <line x1="60" y1="63" x2="260" y2="255" stroke="var(--blue)" stroke-width="2.2"
+                stroke-dasharray="7,4" opacity="0.45" stroke-linecap="round"/>
+          <!-- D1 — original -->
+          <line x1="70" y1="25" x2="310" y2="255" stroke="var(--blue)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- D2 — increase (right shift), dashed -->
+          <line x1="120" y1="25" x2="355" y2="250" stroke="var(--blue)" stroke-width="2.2"
+                stroke-dasharray="7,4" opacity="0.45" stroke-linecap="round"/>
+          <!-- curve labels -->
+          <text x="252" y="252" font-size="13" fill="var(--blue)" font-weight="700" font-family="Poppins" opacity="0.55">D₀</text>
+          <text x="299" y="252" font-size="14" fill="var(--blue)" font-weight="800" font-family="Poppins">D₁</text>
+          <text x="350" y="246" font-size="13" fill="var(--blue)" font-weight="700" font-family="Poppins" opacity="0.55">D₂</text>
+          <!-- decrease arrow (left) -->
+          <line x1="202" y1="110" x2="152" y2="110" stroke="var(--orange)" stroke-width="2"
+                marker-end="url(#arrowOrL)"/>
+          <!-- increase arrow (right) -->
+          <line x1="202" y1="90" x2="252" y2="90" stroke="var(--orange)" stroke-width="2"
+                marker-end="url(#arrowOr)"/>
+          <text x="177" y="107" text-anchor="middle" font-size="10" fill="var(--orange)" font-weight="700" font-family="DM Sans">Decrease</text>
+          <text x="227" y="85"  text-anchor="middle" font-size="10" fill="var(--orange)" font-weight="700" font-family="DM Sans">Increase</text>
+          <!-- movement-along arrow: point on D1 at x≈140→y≈73 to x≈190→y≈121 -->
+          <line x1="140" y1="73" x2="185" y2="118" stroke="var(--blue)" stroke-width="1.8"
+                marker-end="url(#arrowBl)" stroke-dasharray="4,2.5"/>
+          <text x="132" y="68" text-anchor="end" font-size="10" fill="var(--blue)" font-family="DM Sans" font-style="italic">move along</text>
+          <!-- axis titles -->
+          <text x="207" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+        </svg>
+        <p class="caption">Shift = whole curve moves · Movement = slide along D₁</p>
+      </div>
+      <div class="col">
+        <div class="callout" style="margin-top:0;">
+          <div class="label">📌 Movement along the curve</div>
+          <p>Caused <em>only</em> by a <strong>change in the good's own price</strong>. Everything else is held constant (ceteris paribus).</p>
+        </div>
+        <div class="callout orange" style="margin-top:14px;">
+          <div class="label">↔ Shift of the curve</div>
+          <p>Caused by a change in <strong>any determinant of demand other than price</strong> — income, tastes, other-good prices, etc.</p>
+        </div>
+        <p style="font-size:14px;color:var(--muted);margin-top:14px;padding:10px 14px;background:#f8f9fa;border-radius:8px;">
+          Demand <em>increases</em> → curve shifts <strong>right</strong> &nbsp;|&nbsp;
+          Demand <em>decreases</em> → curve shifts <strong>left</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">5</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S6  DEMAND SHIFTERS
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Demand</div>
+  <h2>What Shifts the Demand Curve?</h2>
+  <div class="body">
+    <div class="shifter-grid">
+      <div class="shifter-card">
+        <div class="sh-icon">💰</div>
+        <h4>Income</h4>
+        <p><strong>Normal goods:</strong> ↑ income → ↑ demand.<br><strong>Inferior goods:</strong> ↑ income → ↓ demand.</p>
+      </div>
+      <div class="shifter-card">
+        <div class="sh-icon">🏦</div>
+        <h4>Wealth</h4>
+        <p>Greater wealth → more spending power → demand increases for most goods.</p>
+      </div>
+      <div class="shifter-card">
+        <div class="sh-icon">🔄</div>
+        <h4>Prices of Related Goods</h4>
+        <p><strong>Substitutes:</strong> ↑ P<sub>Pepsi</sub> → ↑ demand for Coke.<br>
+           <strong>Complements:</strong> ↑ P<sub>gas</sub> → ↓ demand for SUVs.</p>
+      </div>
+      <div class="shifter-card">
+        <div class="sh-icon">❤️</div>
+        <h4>Tastes &amp; Preferences</h4>
+        <p>Trends, advertising, and cultural shifts change what consumers want — even without price changes.</p>
+      </div>
+      <div class="shifter-card">
+        <div class="sh-icon">🔮</div>
+        <h4>Expectations</h4>
+        <p>Expecting prices to rise soon → buy more today. Expected future income also matters.</p>
+      </div>
+      <div class="shifter-card">
+        <div class="sh-icon">👥</div>
+        <h4>Number of Buyers</h4>
+        <p>More consumers in the market → larger total demand at every price level.</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">6</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S7  NORMAL vs. INFERIOR GOODS
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Demand</div>
+  <h2>Normal vs. Inferior Goods</h2>
+  <div class="body">
+    <div class="good-cards">
+      <div class="good-card normal">
+        <h3>Normal Good</h3>
+        <p>Demand <strong>increases</strong> when income rises.</p>
+        <p class="eg">Restaurant meals, new cars, electronics, vacations, brand-name clothing</p>
+        <div style="margin-top:16px;padding:12px 14px;background:rgba(58,134,255,.12);border-radius:8px;font-size:15px;color:var(--blue-d);font-weight:600;font-family:'Poppins',sans-serif;">
+          ↑ Income &nbsp;→&nbsp; D shifts <strong>right</strong>
+        </div>
+      </div>
+      <div class="good-card inferior">
+        <h3>Inferior Good</h3>
+        <p>Demand <strong>decreases</strong> when income rises — consumers trade up to better alternatives.</p>
+        <p class="eg">Bus rides, instant ramen, store-brand goods, used clothing</p>
+        <div style="margin-top:16px;padding:12px 14px;background:rgba(251,86,7,.12);border-radius:8px;font-size:15px;color:var(--orange-d);font-weight:600;font-family:'Poppins',sans-serif;">
+          ↑ Income &nbsp;→&nbsp; D shifts <strong>left</strong>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--muted);margin-top:14px;text-align:center;">
+      Whether a good is normal or inferior depends on <em>individual preference</em> —
+      there is no physical property that determines it.
+    </p>
+  </div>
+  <span class="sn">7</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S8  SECTION BREAK — SUPPLY
+══════════════════════════════════════════════════ -->
+<div class="slide sb sb-green">
+  <div class="sb-deco"></div><div class="sb-deco2"></div>
+  <div class="eyebrow">Chapter 3</div>
+  <div style="font-size:64px;line-height:1;margin-bottom:18px;">📈</div>
+  <h1>Supply</h1>
+  <p style="font-size:20px;color:rgba(255,255,255,.75);margin-top:12px;max-width:600px;line-height:1.55;font-family:'DM Sans',sans-serif;">
+    How do producers respond to price — and what determines how much they're willing to sell?
+  </p>
+  <span class="sn">8</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S9  LAW OF SUPPLY
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Supply</div>
+  <h2>The Law of Supply</h2>
+  <div class="body">
+    <div class="hstrip supply">
+      <p>When price rises, quantity supplied rises — <em>ceteris paribus</em>.</p>
+    </div>
+    <div class="two-col" style="flex:0;gap:36px;margin-top:0;">
+      <div class="col">
+        <div class="callout supply" style="margin-top:0;">
+          <div class="label">💡 Why does supply slope upward?</div>
+          <p>Higher prices make production more <strong>profitable</strong>. Existing firms produce more; new firms enter the market.</p>
+        </div>
+        <div class="callout orange" style="margin-top:12px;">
+          <div class="label">🍕 Pizza Example</div>
+          <p>At $5/pizza the firm earns $0 profit. At $10/pizza it earns $5 each. Higher price → more worth producing.</p>
+        </div>
+      </div>
+      <div class="col">
+        <p style="font-size:18px;line-height:1.75;color:var(--muted);">
+          <strong style="color:var(--ink);">Supply</strong> is a <em>relationship</em> between
+          <strong style="color:var(--supply-d);">price</strong> and
+          <strong style="color:var(--supply-d);">quantity supplied</strong>.<br><br>
+          A <strong style="color:var(--ink);">supply schedule</strong> lists Q<sub>s</sub> at each price.
+          A <strong style="color:var(--ink);">supply curve</strong> graphs it —
+          always <em>upward sloping</em>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">9</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S10  THE SUPPLY CURVE
+     Supply line: (60,255)→(320,20), Δx=260, Δy=−235
+     Points on curve:
+       x=120 → t=60/260=0.231 → y=255−235×0.231=200.7≈201
+       x=240 → t=180/260=0.692 → y=255−235×0.692=92.4≈92
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Supply</div>
+  <h2>The Supply Curve</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 360 285" width="330" height="260" xmlns="http://www.w3.org/2000/svg">
+          <!-- shading -->
+          <path d="M60,265 L60,253 L320,20 L320,265 Z" fill="rgba(16,185,129,.05)"/>
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="348" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="354,265 342,259 342,271" fill="#374151"/>
+          <!-- supply curve -->
+          <line x1="60" y1="255" x2="320" y2="20" stroke="var(--supply)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- lower point A: (120,201) — lower price, lower qty -->
+          <circle cx="120" cy="201" r="5.5" fill="var(--supply)" stroke="white" stroke-width="1.5"/>
+          <!-- upper point B: (240,92) — higher price, higher qty -->
+          <circle cx="240" cy="92"  r="5.5" fill="var(--supply)" stroke="white" stroke-width="1.5"/>
+          <!-- dashed lines to point B -->
+          <line x1="60"  y1="92"  x2="240" y2="92"  stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5"/>
+          <line x1="240" y1="92"  x2="240" y2="265" stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5"/>
+          <!-- dashed lines to point A -->
+          <line x1="60"  y1="201" x2="120" y2="201" stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5" opacity="0.5"/>
+          <line x1="120" y1="201" x2="120" y2="265" stroke="var(--muted)" stroke-dasharray="4,3" stroke-width="1.5" opacity="0.5"/>
+          <!-- axis labels -->
+          <text x="52" y="205" text-anchor="end" font-size="12" fill="var(--supply-d)" font-weight="700" font-family="Poppins">P₁</text>
+          <text x="52" y="96"  text-anchor="end" font-size="12" fill="var(--supply-d)" font-weight="700" font-family="Poppins">P₂</text>
+          <text x="120" y="279" text-anchor="middle" font-size="11" fill="var(--muted)" font-weight="600" font-family="Poppins">Q₁</text>
+          <text x="240" y="279" text-anchor="middle" font-size="12" fill="var(--supply-d)" font-weight="700" font-family="Poppins">Q₂</text>
+          <!-- S label -->
+          <text x="310" y="34" font-size="17" fill="var(--supply)" font-weight="800" font-family="Poppins">S</text>
+          <!-- axis titles -->
+          <text x="200" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+          <!-- annotation -->
+          <text x="195" y="158" font-size="11" fill="var(--muted)" font-family="DM Sans" font-style="italic">P₁ → P₂ (rises)</text>
+          <text x="195" y="170" font-size="11" fill="var(--muted)" font-family="DM Sans" font-style="italic">Q₁ → Q₂ (rises)</text>
+        </svg>
+        <p class="caption">Higher price → more units supplied</p>
+      </div>
+      <div class="col">
+        <p style="font-size:17px;color:var(--muted);margin-bottom:16px;">
+          At any price, the supply curve tells you how much producers are willing and able to sell.
+        </p>
+        <ul class="clean supply">
+          <li>Always <strong>upward sloping</strong> — P and Q<sub>s</sub> move in the <em>same</em> direction</li>
+          <li>Movement <strong>along</strong> the curve = change in price</li>
+          <li><strong>Shift</strong> of curve = change in a non-price determinant of supply</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <span class="sn">10</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S11  SUPPLY SHIFTERS
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Supply</div>
+  <h2>What Shifts the Supply Curve?</h2>
+  <div class="body">
+    <div class="supply-grid">
+      <div class="supply-card">
+        <div class="sc-icon">🏭</div>
+        <div>
+          <h4>Cost of Inputs</h4>
+          <p>↑ wages, raw materials, or energy → production costs rise → supply decreases (shifts <strong>left</strong>)</p>
+        </div>
+      </div>
+      <div class="supply-card">
+        <div class="sc-icon">⚙️</div>
+        <div>
+          <h4>Technology</h4>
+          <p>Better technology → lower cost per unit → supply increases (shifts <strong>right</strong>)</p>
+        </div>
+      </div>
+      <div class="supply-card">
+        <div class="sc-icon">🔮</div>
+        <div>
+          <h4>Expectations</h4>
+          <p>If sellers expect higher future prices, they may withhold supply today to sell at higher prices later.</p>
+        </div>
+      </div>
+      <div class="supply-card">
+        <div class="sc-icon">🏢</div>
+        <div>
+          <h4>Number of Sellers</h4>
+          <p>More firms enter the market → total market supply increases at every price level.</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--muted);margin-top:16px;padding:10px 16px;background:#f0fdf8;border-radius:8px;border-left:3px solid var(--supply);">
+      Supply <em>increases</em> → curve shifts <strong style="color:var(--supply-d);">right</strong> &nbsp;|&nbsp;
+      Supply <em>decreases</em> → curve shifts <strong style="color:var(--supply-d);">left</strong>
+    </p>
+  </div>
+  <span class="sn">11</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S12  SECTION BREAK — EQUILIBRIUM
+══════════════════════════════════════════════════ -->
+<div class="slide sb sb-purple">
+  <div class="sb-deco"></div><div class="sb-deco2"></div>
+  <div class="eyebrow">Chapter 4</div>
+  <div style="font-size:64px;line-height:1;margin-bottom:18px;">⚖️</div>
+  <h1>Market Equilibrium</h1>
+  <p style="font-size:20px;color:rgba(255,255,255,.75);margin-top:12px;max-width:640px;line-height:1.55;font-family:'DM Sans',sans-serif;">
+    Where demand and supply meet — and what happens when they don't.
+  </p>
+  <span class="sn">12</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S13  MARKET EQUILIBRIUM DIAGRAM
+     D: (70,25)→(310,255)  slope = 230/240
+     S: (70,255)→(310,25)  slope = −230/240
+     Intersection E*: x=(70+310)/2=190, y=(25+255)/2=140  ✓
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Market Equilibrium</div>
+  <h2>Market-Clearing Equilibrium</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 360 285" width="340" height="268" xmlns="http://www.w3.org/2000/svg">
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="348" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="354,265 342,259 342,271" fill="#374151"/>
+          <!-- demand -->
+          <line x1="70" y1="25"  x2="310" y2="255" stroke="var(--blue)"   stroke-width="3" stroke-linecap="round"/>
+          <!-- supply -->
+          <line x1="70" y1="255" x2="310" y2="25"  stroke="var(--supply)" stroke-width="3" stroke-linecap="round"/>
+          <!-- dashed lines to equilibrium (190,140) -->
+          <line x1="60"  y1="140" x2="190" y2="140" stroke="var(--purple)" stroke-dasharray="5,3" stroke-width="1.8"/>
+          <line x1="190" y1="140" x2="190" y2="265" stroke="var(--purple)" stroke-dasharray="5,3" stroke-width="1.8"/>
+          <!-- equilibrium point -->
+          <circle cx="190" cy="140" r="8" fill="var(--purple)" stroke="white" stroke-width="2.5"/>
+          <!-- labels -->
+          <text x="52"  y="144" text-anchor="end" font-size="14" fill="var(--purple)" font-weight="800" font-family="Poppins">P*</text>
+          <text x="190" y="280" text-anchor="middle" font-size="14" fill="var(--purple)" font-weight="800" font-family="Poppins">Q*</text>
+          <text x="200" y="133" font-size="13" fill="var(--purple)" font-weight="800" font-family="Poppins">E*</text>
+          <!-- curve labels -->
+          <text x="298" y="252" font-size="15" fill="var(--blue)"   font-weight="800" font-family="Poppins">D</text>
+          <text x="298" y="38"  font-size="15" fill="var(--supply)" font-weight="800" font-family="Poppins">S</text>
+          <!-- axis titles -->
+          <text x="200" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+        </svg>
+        <p class="caption">At P*, quantity demanded = quantity supplied</p>
+      </div>
+      <div class="col">
+        <div class="callout purple" style="margin-top:0;">
+          <div class="label">⚖️ Equilibrium Defined</div>
+          <p>The price P* at which <strong>Q<sub>d</sub> = Q<sub>s</sub></strong>. The market <em>clears</em> — no unsold goods, no unmet demand.</p>
+        </div>
+        <ul class="clean" style="margin-top:16px;">
+          <li>No pressure on price to change at P*</li>
+          <li>Every buyer willing to pay P* can buy; every seller willing to sell at P* can sell</li>
+          <li>The market is <strong>"cleared"</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <span class="sn">13</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S14  SHORTAGE — PRICE TOO LOW
+     At y=200 (below P*=140):
+       On D: 25+230/240×(x−70)=200 → x−70=175×240/230=182.6 → x=252.6≈253
+       On S: 255−230/240×(x−70)=200 → x−70=55×240/230=57.4 → x=127.4≈127
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Market Equilibrium</div>
+  <h2>When Price Is Too Low: Shortage</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 360 285" width="340" height="268" xmlns="http://www.w3.org/2000/svg">
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="348" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="354,265 342,259 342,271" fill="#374151"/>
+          <!-- demand -->
+          <line x1="70" y1="25"  x2="310" y2="255" stroke="var(--blue)"   stroke-width="3" stroke-linecap="round"/>
+          <!-- supply -->
+          <line x1="70" y1="255" x2="310" y2="25"  stroke="var(--supply)" stroke-width="3" stroke-linecap="round"/>
+          <!-- equilibrium (faded) -->
+          <circle cx="190" cy="140" r="5" fill="var(--purple)" opacity="0.3"/>
+          <line x1="60"  y1="140" x2="190" y2="140" stroke="var(--purple)" stroke-dasharray="4,4" stroke-width="1.2" opacity="0.3"/>
+          <text x="52" y="144" text-anchor="end" font-size="11" fill="var(--purple)" font-weight="600" font-family="Poppins" opacity="0.5">P*</text>
+          <!-- below-equilibrium price line at y=200 -->
+          <line x1="60" y1="200" x2="345" y2="200" stroke="var(--orange)" stroke-width="1.8" stroke-dasharray="6,3"/>
+          <text x="52" y="204" text-anchor="end" font-size="12" fill="var(--orange)" font-weight="700" font-family="Poppins">P_low</text>
+          <!-- Qs at (127,200) and Qd at (253,200) -->
+          <circle cx="127" cy="200" r="5.5" fill="var(--supply)" stroke="white" stroke-width="1.5"/>
+          <circle cx="253" cy="200" r="5.5" fill="var(--blue)"   stroke="white" stroke-width="1.5"/>
+          <!-- shortage bracket -->
+          <line x1="127" y1="200" x2="253" y2="200" stroke="#be123c" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="127" y1="194" x2="127" y2="206" stroke="#be123c" stroke-width="2.5"/>
+          <line x1="253" y1="194" x2="253" y2="206" stroke="#be123c" stroke-width="2.5"/>
+          <text x="190" y="192" text-anchor="middle" font-size="11" fill="#be123c" font-weight="700" font-family="Poppins">SHORTAGE</text>
+          <!-- dashed to x-axis -->
+          <line x1="127" y1="200" x2="127" y2="265" stroke="var(--muted)" stroke-dasharray="3,3" stroke-width="1.3"/>
+          <line x1="253" y1="200" x2="253" y2="265" stroke="var(--muted)" stroke-dasharray="3,3" stroke-width="1.3"/>
+          <text x="127" y="279" text-anchor="middle" font-size="11" fill="var(--supply-d)" font-weight="700" font-family="Poppins">Q<tspan font-size="9">s</tspan></text>
+          <text x="253" y="279" text-anchor="middle" font-size="11" fill="var(--blue-d)"   font-weight="700" font-family="Poppins">Q<tspan font-size="9">d</tspan></text>
+          <!-- curve labels -->
+          <text x="298" y="252" font-size="14" fill="var(--blue)"   font-weight="800" font-family="Poppins">D</text>
+          <text x="298" y="38"  font-size="14" fill="var(--supply)" font-weight="800" font-family="Poppins">S</text>
+          <!-- axis titles -->
+          <text x="200" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+        </svg>
+        <p class="caption">At P_low: Q<sub>d</sub> &gt; Q<sub>s</sub> → shortage</p>
+      </div>
+      <div class="col">
+        <div class="hstrip pink" style="margin-bottom:14px;">
+          <p>Price below P* → <strong>Q<sub>d</sub> &gt; Q<sub>s</sub></strong></p>
+        </div>
+        <ul class="clean">
+          <li>Consumers want more than firms will supply at that price</li>
+          <li>Unsatisfied buyers <strong>bid the price up</strong></li>
+          <li>Price rises toward P* — shortage self-corrects</li>
+        </ul>
+        <div class="callout orange" style="margin-top:14px;">
+          <div class="label">🏠 Example</div>
+          <p>Rent control: price ceiling below market rent → chronic housing shortage</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="sn">14</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S15  SURPLUS — PRICE TOO HIGH
+     At y=80 (above P*=140):
+       On D: 25+230/240×(x−70)=80 → x−70=55×240/230=57.4 → x=127.4≈127
+       On S: 255−230/240×(x−70)=80 → x−70=175×240/230=182.6 → x=252.6≈253
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Market Equilibrium</div>
+  <h2>When Price Is Too High: Surplus</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 360 285" width="340" height="268" xmlns="http://www.w3.org/2000/svg">
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="348" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="354,265 342,259 342,271" fill="#374151"/>
+          <!-- demand -->
+          <line x1="70" y1="25"  x2="310" y2="255" stroke="var(--blue)"   stroke-width="3" stroke-linecap="round"/>
+          <!-- supply -->
+          <line x1="70" y1="255" x2="310" y2="25"  stroke="var(--supply)" stroke-width="3" stroke-linecap="round"/>
+          <!-- equilibrium (faded) -->
+          <circle cx="190" cy="140" r="5" fill="var(--purple)" opacity="0.3"/>
+          <line x1="60"  y1="140" x2="190" y2="140" stroke="var(--purple)" stroke-dasharray="4,4" stroke-width="1.2" opacity="0.3"/>
+          <text x="52" y="144" text-anchor="end" font-size="11" fill="var(--purple)" font-weight="600" font-family="Poppins" opacity="0.5">P*</text>
+          <!-- above-equilibrium price line at y=80 -->
+          <line x1="60" y1="80" x2="345" y2="80" stroke="var(--orange)" stroke-width="1.8" stroke-dasharray="6,3"/>
+          <text x="52" y="84" text-anchor="end" font-size="12" fill="var(--orange)" font-weight="700" font-family="Poppins">P_high</text>
+          <!-- Qd at (127,80) and Qs at (253,80) -->
+          <circle cx="127" cy="80" r="5.5" fill="var(--blue)"   stroke="white" stroke-width="1.5"/>
+          <circle cx="253" cy="80" r="5.5" fill="var(--supply)" stroke="white" stroke-width="1.5"/>
+          <!-- surplus bracket -->
+          <line x1="127" y1="80" x2="253" y2="80" stroke="var(--orange)" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="127" y1="74" x2="127" y2="86" stroke="var(--orange)" stroke-width="2.5"/>
+          <line x1="253" y1="74" x2="253" y2="86" stroke="var(--orange)" stroke-width="2.5"/>
+          <text x="190" y="72" text-anchor="middle" font-size="11" fill="var(--orange-d)" font-weight="700" font-family="Poppins">SURPLUS</text>
+          <!-- dashed to x-axis -->
+          <line x1="127" y1="80" x2="127" y2="265" stroke="var(--muted)" stroke-dasharray="3,3" stroke-width="1.3"/>
+          <line x1="253" y1="80" x2="253" y2="265" stroke="var(--muted)" stroke-dasharray="3,3" stroke-width="1.3"/>
+          <text x="127" y="279" text-anchor="middle" font-size="11" fill="var(--blue-d)"   font-weight="700" font-family="Poppins">Q<tspan font-size="9">d</tspan></text>
+          <text x="253" y="279" text-anchor="middle" font-size="11" fill="var(--supply-d)" font-weight="700" font-family="Poppins">Q<tspan font-size="9">s</tspan></text>
+          <!-- curve labels -->
+          <text x="298" y="252" font-size="14" fill="var(--blue)"   font-weight="800" font-family="Poppins">D</text>
+          <text x="298" y="38"  font-size="14" fill="var(--supply)" font-weight="800" font-family="Poppins">S</text>
+          <!-- axis titles -->
+          <text x="200" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+        </svg>
+        <p class="caption">At P_high: Q<sub>s</sub> &gt; Q<sub>d</sub> → surplus</p>
+      </div>
+      <div class="col">
+        <div class="hstrip orange" style="margin-bottom:14px;">
+          <p>Price above P* → <strong>Q<sub>s</sub> &gt; Q<sub>d</sub></strong></p>
+        </div>
+        <ul class="clean">
+          <li>Firms produce more than consumers want to buy</li>
+          <li>Unsold inventory → sellers <strong>cut the price</strong></li>
+          <li>Price falls toward P* — surplus self-corrects</li>
+        </ul>
+        <div class="callout orange" style="margin-top:14px;">
+          <div class="label">🌾 Example</div>
+          <p>Agricultural price floors: support prices above equilibrium → chronic crop surpluses and government stockpiles</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="sn">15</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S16  SELF-CORRECTING MARKETS
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Market Equilibrium</div>
+  <h2>Markets Are Self-Correcting</h2>
+  <div class="body">
+    <div class="hstrip purple">
+      <p>Price is a signal. It automatically pushes the market back toward equilibrium.</p>
+    </div>
+    <div class="correct-cards">
+      <div class="correct-card" style="background:var(--pink-bg);border:2px solid #fda4af;">
+        <div style="font-size:30px;margin-bottom:10px;">📉</div>
+        <h3 style="font-size:19px;font-weight:800;color:#be123c;margin-bottom:10px;font-family:'Poppins',sans-serif;">
+          Shortage → Price Rises
+        </h3>
+        <p style="font-size:15px;line-height:1.65;color:var(--ink);">
+          Unsatisfied demand bids price up<br>
+          → Q<sub>s</sub> rises, Q<sub>d</sub> falls<br>
+          → gap closes<br>
+          → <strong>equilibrium restored</strong>
+        </p>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <div style="font-size:40px;color:var(--purple);">⚖️</div>
+      </div>
+      <div class="correct-card" style="background:var(--orange-bg);border:2px solid #fdba74;">
+        <div style="font-size:30px;margin-bottom:10px;">📦</div>
+        <h3 style="font-size:19px;font-weight:800;color:var(--orange-d);margin-bottom:10px;font-family:'Poppins',sans-serif;">
+          Surplus → Price Falls
+        </h3>
+        <p style="font-size:15px;line-height:1.65;color:var(--ink);">
+          Unsold inventory pushes price down<br>
+          → Q<sub>d</sub> rises, Q<sub>s</sub> falls<br>
+          → gap closes<br>
+          → <strong>equilibrium restored</strong>
+        </p>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--muted);margin-top:16px;text-align:center;font-style:italic;">
+      In competitive markets, <strong style="color:var(--ink);">no central planner is needed</strong> —
+      the price mechanism coordinates buyers and sellers automatically.
+    </p>
+  </div>
+  <span class="sn">16</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S17  COMPARATIVE STATICS — SUPPLY SHIFT
+     D: (70,25)→(310,255)  S₁: (70,255)→(310,25)  E₁=(190,140)
+     S₂ shifted right 50px: (120,255)→(360,25) → draw to (355,28)
+     D∩S₂: 25+230/240(x−70) = 255−230/240(x−120)
+            → 2×230/240×x = 255−25+230/240×120+230/240×70
+            → solving: x=215, y=25+230/240×(215−70)=25+139=164
+     E₂=(215,164) ✓
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Comparative Statics</div>
+  <h2>Supply Increases → New Equilibrium</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 375 285" width="345" height="262" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowGr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--supply)"/>
+            </marker>
+          </defs>
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="360" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="366,265 354,259 354,271" fill="#374151"/>
+          <!-- demand -->
+          <line x1="70" y1="25"  x2="310" y2="255" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+          <!-- S₁ (original) -->
+          <line x1="70" y1="255" x2="310" y2="25"  stroke="var(--supply)" stroke-width="3" stroke-linecap="round"/>
+          <!-- S₂ (shifted right 50px) — dashed -->
+          <line x1="120" y1="255" x2="355" y2="28" stroke="var(--supply)" stroke-width="2.5"
+                stroke-dasharray="7,4" opacity="0.65" stroke-linecap="round"/>
+          <!-- shift arrow on S curve body -->
+          <line x1="234" y1="198" x2="280" y2="198" stroke="var(--supply)" stroke-width="2"
+                marker-end="url(#arrowGr)"/>
+          <!-- E₁ at (190,140) -->
+          <circle cx="190" cy="140" r="6" fill="var(--purple)" stroke="white" stroke-width="2"/>
+          <text x="176" y="133" font-size="11" fill="var(--purple)" font-weight="700" font-family="Poppins">E₁</text>
+          <!-- dashed lines E₁ -->
+          <line x1="60"  y1="140" x2="190" y2="140" stroke="var(--purple)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.4"/>
+          <line x1="190" y1="140" x2="190" y2="265" stroke="var(--purple)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.4"/>
+          <!-- E₂ at (215,164) -->
+          <circle cx="215" cy="164" r="6" fill="var(--purple-d)" stroke="white" stroke-width="2" opacity="0.75"/>
+          <text x="219" y="157" font-size="11" fill="var(--purple-d)" font-weight="700" font-family="Poppins">E₂</text>
+          <!-- dashed lines E₂ -->
+          <line x1="60"  y1="164" x2="215" y2="164" stroke="var(--purple-d)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.65"/>
+          <line x1="215" y1="164" x2="215" y2="265" stroke="var(--purple-d)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.65"/>
+          <!-- price/qty axis labels -->
+          <text x="52" y="143" text-anchor="end" font-size="11" fill="var(--purple)"   font-weight="700" font-family="Poppins" opacity="0.7">P₁</text>
+          <text x="52" y="167" text-anchor="end" font-size="11" fill="var(--purple-d)" font-weight="700" font-family="Poppins">P₂</text>
+          <text x="190" y="278" text-anchor="middle" font-size="11" fill="var(--purple)"   font-weight="700" font-family="Poppins" opacity="0.7">Q₁</text>
+          <text x="215" y="278" text-anchor="middle" font-size="11" fill="var(--purple-d)" font-weight="700" font-family="Poppins">Q₂</text>
+          <!-- curve labels -->
+          <text x="298" y="252" font-size="13" fill="var(--blue)"   font-weight="800" font-family="Poppins">D</text>
+          <text x="296" y="38"  font-size="13" fill="var(--supply)" font-weight="800" font-family="Poppins">S₁</text>
+          <text x="348" y="42"  font-size="13" fill="var(--supply)" font-weight="700" font-family="Poppins" opacity="0.65">S₂</text>
+          <!-- axis titles -->
+          <text x="207" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+        </svg>
+        <p class="caption">S shifts right → P falls · Q rises</p>
+      </div>
+      <div class="col">
+        <div class="callout supply" style="margin-top:0;">
+          <div class="label">🍓 Strawberry Harvest Example</div>
+          <p>A bumper harvest → supply increases → more berries available at every price</p>
+        </div>
+        <ul class="clean supply" style="margin-top:16px;">
+          <li>S shifts <strong>right</strong> → new E at <strong>lower P</strong>, <strong>higher Q</strong></li>
+          <li>Consumers benefit — price falls</li>
+          <li>More units traded in the market overall</li>
+        </ul>
+        <p style="font-size:13px;color:var(--muted);margin-top:14px;padding:10px 14px;background:#f0fdf8;border-radius:8px;">
+          Same result from: better technology · lower input costs · more sellers entering the market
+        </p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">17</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S18  COMPARATIVE STATICS — DEMAND SHIFT
+     S: (70,255)→(310,25)  D₁: (70,25)→(310,255)  E₁=(190,140)
+     D₂ shifted right 50px: (120,25)→(360,255) → draw to (355,250)
+     D₂∩S: solving same system → x=215, y=255−230/240×(215−70)=255−139=116
+     E₂=(215,116) ✓
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">Comparative Statics</div>
+  <h2>Demand Increases → New Equilibrium</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col diagram-wrap">
+        <svg viewBox="0 0 375 285" width="345" height="262" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowBl2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--blue)"/>
+            </marker>
+          </defs>
+          <!-- axes -->
+          <line x1="60" y1="8"   x2="60"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="60" y1="265" x2="360" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="60,2 54,14 66,14"     fill="#374151"/>
+          <polygon points="366,265 354,259 354,271" fill="#374151"/>
+          <!-- supply -->
+          <line x1="70" y1="255" x2="310" y2="25"  stroke="var(--supply)" stroke-width="3" stroke-linecap="round"/>
+          <!-- D₁ (original) -->
+          <line x1="70" y1="25"  x2="310" y2="255" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+          <!-- D₂ (shifted right 50px) — dashed -->
+          <line x1="120" y1="25" x2="355" y2="250" stroke="var(--blue)" stroke-width="2.5"
+                stroke-dasharray="7,4" opacity="0.65" stroke-linecap="round"/>
+          <!-- shift arrow on D curve body -->
+          <line x1="168" y1="78" x2="214" y2="78" stroke="var(--blue)" stroke-width="2"
+                marker-end="url(#arrowBl2)"/>
+          <!-- E₁ at (190,140) -->
+          <circle cx="190" cy="140" r="6" fill="var(--purple)" stroke="white" stroke-width="2"/>
+          <text x="176" y="150" font-size="11" fill="var(--purple)" font-weight="700" font-family="Poppins">E₁</text>
+          <!-- dashed lines E₁ -->
+          <line x1="60"  y1="140" x2="190" y2="140" stroke="var(--purple)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.4"/>
+          <line x1="190" y1="140" x2="190" y2="265" stroke="var(--purple)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.4"/>
+          <!-- E₂ at (215,116) -->
+          <circle cx="215" cy="116" r="6" fill="var(--purple-d)" stroke="white" stroke-width="2" opacity="0.75"/>
+          <text x="219" y="110" font-size="11" fill="var(--purple-d)" font-weight="700" font-family="Poppins">E₂</text>
+          <!-- dashed lines E₂ -->
+          <line x1="60"  y1="116" x2="215" y2="116" stroke="var(--purple-d)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.65"/>
+          <line x1="215" y1="116" x2="215" y2="265" stroke="var(--purple-d)" stroke-dasharray="4,3" stroke-width="1.4" opacity="0.65"/>
+          <!-- price/qty axis labels -->
+          <text x="52" y="143" text-anchor="end" font-size="11" fill="var(--purple)"   font-weight="700" font-family="Poppins" opacity="0.7">P₁</text>
+          <text x="52" y="119" text-anchor="end" font-size="11" fill="var(--purple-d)" font-weight="700" font-family="Poppins">P₂</text>
+          <text x="190" y="278" text-anchor="middle" font-size="11" fill="var(--purple)"   font-weight="700" font-family="Poppins" opacity="0.7">Q₁</text>
+          <text x="215" y="278" text-anchor="middle" font-size="11" fill="var(--purple-d)" font-weight="700" font-family="Poppins">Q₂</text>
+          <!-- curve labels -->
+          <text x="297" y="252" font-size="13" fill="var(--blue)"   font-weight="800" font-family="Poppins">D₁</text>
+          <text x="348" y="246" font-size="13" fill="var(--blue)"   font-weight="700" font-family="Poppins" opacity="0.65">D₂</text>
+          <text x="297" y="38"  font-size="13" fill="var(--supply)" font-weight="800" font-family="Poppins">S</text>
+          <!-- axis titles -->
+          <text x="207" y="283" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Quantity →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">Price →</text>
+        </svg>
+        <p class="caption">D shifts right → P rises · Q rises</p>
+      </div>
+      <div class="col">
+        <div class="callout" style="margin-top:0;">
+          <div class="label">✈️ Airline Tickets Example</div>
+          <p>Post-pandemic travel rebound → more people flying → demand for tickets surges</p>
+        </div>
+        <ul class="clean" style="margin-top:16px;">
+          <li>D shifts <strong>right</strong> → new E at <strong>higher P</strong>, <strong>higher Q</strong></li>
+          <li>Producers benefit — price rises</li>
+          <li>More units traded in the market overall</li>
+        </ul>
+        <p style="font-size:13px;color:var(--muted);margin-top:14px;padding:10px 14px;background:#EBF5FF;border-radius:8px;">
+          Same result from: ↑ income · ↑ population · shift in tastes · ↑ price of a substitute
+        </p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">18</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     S19  SUMMARY
+══════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="eyebrow">ECON 2006 · Topic 2 Summary</div>
+  <h2>Key Takeaways</h2>
+  <div class="body">
+    <div class="summary-list">
+      <div class="s-item">
+        <div class="s-num">D</div>
+        <p>
+          <strong>Law of Demand:</strong> P ↑ → Q<sub>d</sub> ↓ (downward-sloping curve).
+          Curve shifts right (increase) or left (decrease) when <em>non-price</em> determinants change:
+          income, wealth, related-good prices, tastes, expectations, or number of buyers.
+        </p>
+      </div>
+      <div class="s-item">
+        <div class="s-num">S</div>
+        <p>
+          <strong>Law of Supply:</strong> P ↑ → Q<sub>s</sub> ↑ (upward-sloping curve).
+          Curve shifts right (increase) when input costs fall, technology improves,
+          more sellers enter, or sellers expect lower future prices.
+        </p>
+      </div>
+      <div class="s-item">
+        <div class="s-num">E</div>
+        <p>
+          <strong>Equilibrium:</strong> Q<sub>d</sub> = Q<sub>s</sub> at price P*.
+          Shortages push price up; surpluses push price down.
+          Comparative statics: trace any shift to find the new P* and Q* —
+          always check direction of both.
+        </p>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--muted);margin-top:16px;text-align:center;font-style:italic;">
+      Markets self-correct through the price mechanism — no central coordination required.
+    </p>
+  </div>
+  <span class="sn">19</span>
+</div>
+
+</div></div><!-- end slide-wrap / stage -->
+
+<div id="progress-bar"></div>
+<div id="nav">
+  <button class="nb" id="prev" title="Previous (←)">&#8592;</button>
+  <span id="sc">1 / 19</span>
+  <button class="nb" id="next" title="Next (→)">&#8594;</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total  = slides.length;
+let cur = 0;
+const pb = document.getElementById('progress-bar');
+const sc = document.getElementById('sc');
+
+function go(n) {
+  slides[cur].classList.remove('active');
+  cur = (n + total) % total;
+  slides[cur].classList.add('active');
+  sc.textContent = (cur + 1) + ' / ' + total;
+  pb.style.width  = ((cur + 1) / total * 100) + '%';
+}
+
+document.getElementById('next').onclick = () => go(cur + 1);
+document.getElementById('prev').onclick = () => go(cur - 1);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') go(cur + 1);
+  if (e.key === 'ArrowLeft')                   go(cur - 1);
+});
+
+/* scale to fill viewport */
+function scale() {
+  const sw = 1280, sh = 720;
+  const s  = Math.min(window.innerWidth / sw, window.innerHeight / sh);
+  const el = document.getElementById('wrap');
+  el.style.transform = `scale(${s})`;
+  el.style.position  = 'absolute';
+  el.style.left      = ((window.innerWidth  - sw * s) / 2) + 'px';
+  el.style.top       = ((window.innerHeight - sh * s) / 2) + 'px';
+}
+window.addEventListener('resize', scale);
+scale();
+
+/* initialise progress bar */
+pb.style.width = (1 / total * 100) + '%';
+</script>
+</body>
+</html>

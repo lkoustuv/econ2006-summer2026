@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction · Scarcity & Choice · Opportunity Cost</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#3A86FF; --blue-d:#1a5ce8; --blue-bg:#EBF5FF;
+  --pink:#FF006E; --pink-bg:#FFE5F1;
+  --purple:#8338EC; --purple-d:#6920d4; --purple-bg:#F0E8FD;
+  --orange:#FB5607; --orange-d:#d93e00; --orange-bg:#FFF0EA;
+  --yellow:#FFD60A;
+  --green:#06D6A0; --green-bg:#E3FDF6;
+  --ink:#1C1C2E; --muted:#64748B; --rule:#E2E8F0; --bg:#FFFFFF;
+  --slide-w:1280px; --slide-h:720px;
+}
+html,body{width:100%;height:100%;background:#090d14;overflow:hidden;color:var(--ink);}
+body{font-family:'DM Sans',sans-serif;}
+h1,h2,h3,.eyebrow,.q-num,.s-num,.col-label{font-family:'Poppins',sans-serif;}
+
+/* ── Stage & scaling ── */
+#stage{width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;}
+.slide-wrap{position:relative;width:var(--slide-w);height:var(--slide-h);transform-origin:top left;}
+
+/* ── Base slide ── */
+.slide{
+  position:absolute;inset:0;background:var(--bg);
+  display:none;flex-direction:column;
+  padding:48px 68px 44px;overflow:hidden;
+}
+.slide.active{display:flex;}
+/* rainbow top bar */
+.slide:not(.cover):not(.sb)::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--purple) 40%,var(--pink) 70%,var(--orange) 100%);
+}
+/* faint decorative circle (bottom-right) */
+.slide:not(.cover):not(.sb)::after{
+  content:'';position:absolute;bottom:-90px;right:-90px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(58,134,255,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+/* ── Cover ── */
+.slide.cover{
+  background:#090d14;color:#fff;
+  align-items:flex-start;justify-content:flex-end;
+  padding:60px 68px;overflow:hidden;
+}
+.cover-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+/* blob 1 */
+.cover-bg::before{
+  content:'';position:absolute;top:-120px;right:-80px;
+  width:550px;height:550px;border-radius:50%;
+  background:radial-gradient(circle,rgba(58,134,255,.28) 0%,transparent 65%);
+}
+/* blob 2 */
+.cover-bg::after{
+  content:'';position:absolute;bottom:30px;right:220px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(131,56,236,.3) 0%,transparent 65%);
+}
+.cover-blob3{
+  position:absolute;bottom:-50px;left:320px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,0,110,.2) 0%,transparent 65%);
+  pointer-events:none;
+}
+/* subtle grid dots */
+.cover-grid{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+}
+
+/* ── Section breaks ── */
+.slide.sb{align-items:flex-start;justify-content:center;padding:60px 68px;overflow:hidden;}
+.sb-blue  {background:linear-gradient(135deg,#1a5ce8 0%,#3A86FF 60%,#00c8ff 100%);color:#fff;}
+.sb-purple{background:linear-gradient(135deg,#5c1ac7 0%,#8338EC 55%,#c776f8 100%);color:#fff;}
+.sb-orange{background:linear-gradient(135deg,#c73400 0%,#FB5607 55%,#FFD60A 100%);color:#fff;}
+.sb::before{display:none;}
+/* decorative large circle on section breaks */
+.sb-deco{
+  position:absolute;right:-70px;top:-70px;
+  width:350px;height:350px;border-radius:50%;
+  background:rgba(255,255,255,.08);pointer-events:none;
+}
+.sb-deco2{
+  position:absolute;right:60px;bottom:-100px;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,.05);pointer-events:none;
+}
+
+/* ── Eyebrow pill ── */
+.eyebrow{
+  display:inline-flex;align-items:center;
+  font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:4px 13px;border-radius:99px;margin-bottom:14px;width:fit-content;
+  background:var(--blue-bg);color:var(--blue-d);
+}
+.cover .eyebrow{background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);}
+.sb .eyebrow{background:rgba(255,255,255,.2);color:#fff;}
+
+/* ── Headings ── */
+h1{font-size:48px;font-weight:800;line-height:1.08;margin-bottom:14px;}
+.cover h1{font-size:54px;color:#fff;line-height:1.07;}
+.sb h1{font-size:52px;font-weight:900;line-height:1.06;color:#fff;}
+h2{font-size:32px;font-weight:800;line-height:1.15;margin-bottom:18px;color:var(--ink);}
+.subtitle{font-size:18px;color:rgba(255,255,255,.6);margin-bottom:4px;}
+.meta{font-size:13px;color:rgba(255,255,255,.3);margin-top:26px;}
+
+/* ── Layout ── */
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+
+.big-def{font-size:24px;line-height:1.65;color:var(--ink);max-width:860px;}
+.big-def strong{color:var(--blue);font-weight:700;}
+
+/* bullets */
+ul.clean{list-style:none;}
+ul.clean>li{
+  font-size:21px;line-height:1.4;padding:8px 0 8px 28px;
+  position:relative;color:var(--ink);border-bottom:1px solid var(--rule);
+}
+ul.clean>li:last-child{border-bottom:none;}
+ul.clean>li::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:10px;height:10px;border-radius:50%;background:var(--blue);
+}
+ul.clean li.sub{font-size:18px;padding-left:44px;color:var(--muted);border-bottom:none;padding-top:3px;padding-bottom:3px;}
+ul.clean li.sub::before{width:6px;height:6px;left:20px;background:var(--orange);}
+
+/* two-col */
+.two-col{display:flex;gap:44px;flex:1;align-items:center;}
+.col{flex:1;}
+.col-label{
+  font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--blue);
+}
+.col p{font-size:18px;line-height:1.6;color:var(--ink);}
+
+/* callout */
+.callout{
+  background:var(--blue-bg);border-left:4px solid var(--blue);
+  padding:14px 20px;border-radius:0 8px 8px 0;margin-top:14px;
+}
+.callout.purple{background:var(--purple-bg);border-color:var(--purple);}
+.callout.orange{background:var(--orange-bg);border-color:var(--orange);}
+.callout.green {background:var(--green-bg); border-color:var(--green);}
+.callout .label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:5px;font-family:'Poppins',sans-serif;}
+.callout.purple .label{color:var(--purple);}
+.callout.orange .label{color:var(--orange);}
+.callout.green  .label{color:var(--green);}
+.callout p{font-size:17px;line-height:1.5;color:var(--ink);}
+
+/* highlight strip */
+.hstrip{
+  border-radius:10px;padding:16px 26px;margin-bottom:18px;color:#fff;
+  background:var(--blue);
+}
+.hstrip.purple{background:var(--purple);}
+.hstrip.orange{background:linear-gradient(90deg,var(--orange),#ffb347);}
+.hstrip p{font-size:22px;font-weight:600;line-height:1.35;font-family:'Poppins',sans-serif;}
+
+/* 3-Q cards */
+.three-q{display:flex;gap:18px;flex:1;align-items:stretch;}
+.q-card{
+  flex:1;border-radius:14px;padding:20px 18px;
+  display:flex;flex-direction:column;align-items:flex-start;border:2px solid var(--rule);
+}
+.q-card:nth-child(1){border-top:4px solid var(--blue);   background:#f8fbff;}
+.q-card:nth-child(2){border-top:4px solid var(--purple); background:#faf7ff;}
+.q-card:nth-child(3){border-top:4px solid var(--orange); background:#fff8f5;}
+.q-num{font-size:34px;font-weight:800;line-height:1;margin-bottom:10px;}
+.q-card:nth-child(1) .q-num{color:var(--blue);}
+.q-card:nth-child(2) .q-num{color:var(--purple);}
+.q-card:nth-child(3) .q-num{color:var(--orange);}
+.q-card p{font-size:20px;font-weight:600;color:var(--ink);line-height:1.25;font-family:'Poppins',sans-serif;}
+.q-card .sub-note{font-size:14px;color:var(--muted);margin-top:7px;font-weight:400;font-family:'DM Sans',sans-serif;}
+
+/* icon-stat cards (slide 4) */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;align-items:center;}
+.stat-card{
+  border-radius:14px;padding:20px 22px;display:flex;align-items:flex-start;gap:16px;
+  border:1.5px solid var(--rule);background:#fafbff;
+}
+.stat-icon{font-size:32px;line-height:1;flex-shrink:0;}
+.stat-card h4{font-size:16px;font-weight:700;color:var(--blue-d);margin-bottom:4px;font-family:'Poppins',sans-serif;}
+.stat-card p{font-size:16px;color:var(--muted);line-height:1.5;}
+
+/* economy cards */
+.econ-cards{display:flex;gap:26px;flex:1;align-items:center;}
+.econ-card{flex:1;border-radius:16px;padding:26px 22px;display:flex;flex-direction:column;}
+.econ-card.command{background:#f5f0fd;border:2px solid #c4b5fd;}
+.econ-card.market {background:var(--blue-bg);border:2px solid #93c5fd;}
+.econ-card h3{font-size:22px;font-weight:800;margin-bottom:10px;font-family:'Poppins',sans-serif;}
+.econ-card.command h3{color:var(--purple);}
+.econ-card.market  h3{color:var(--blue-d);}
+.econ-card p{font-size:17px;line-height:1.6;color:var(--ink);}
+.econ-card .eg{font-size:13px;color:var(--muted);margin-top:10px;}
+
+/* summary */
+.summary-list{display:flex;flex-direction:column;gap:11px;flex:1;justify-content:center;}
+.s-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:#f9faff;border-radius:10px;padding:13px 18px;
+}
+.s-item:nth-child(1){border-left:4px solid var(--blue);}
+.s-item:nth-child(2){border-left:4px solid var(--purple);}
+.s-item:nth-child(3){border-left:4px solid var(--green);}
+.s-item:nth-child(4){border-left:4px solid var(--orange);}
+.s-num{font-size:22px;font-weight:800;min-width:26px;line-height:1;}
+.s-item:nth-child(1) .s-num{color:var(--blue);}
+.s-item:nth-child(2) .s-num{color:var(--purple);}
+.s-item:nth-child(3) .s-num{color:var(--green);}
+.s-item:nth-child(4) .s-num{color:var(--orange);}
+.s-item p{font-size:18px;line-height:1.45;color:var(--ink);}
+
+/* diagram */
+.diagram-wrap{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.caption{font-size:13px;color:var(--muted);text-align:center;margin-top:8px;font-style:italic;}
+
+/* slide number */
+.sn{position:absolute;bottom:14px;right:20px;font-size:11px;color:var(--rule);font-weight:600;font-family:'Poppins',sans-serif;}
+.cover .sn{color:rgba(255,255,255,.18);}
+.sb .sn{color:rgba(255,255,255,.25);}
+
+/* progress + nav */
+#progress-bar{position:fixed;bottom:0;left:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink));transition:width .3s;z-index:100;}
+#nav{position:fixed;bottom:14px;right:18px;display:flex;gap:8px;align-items:center;z-index:100;}
+.nb{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:15px;cursor:pointer;width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.nb:hover{background:rgba(255,255,255,.22);}
+#sc{color:rgba(255,255,255,.4);font-size:11px;min-width:44px;text-align:center;font-family:'Poppins',sans-serif;}
+
+hr.thin{border:none;border-top:1px solid var(--rule);margin:12px 0;}
+</style>
+</head>
+<body>
+<div id="stage"><div class="slide-wrap" id="wrap">
+
+<!-- ══ S1 COVER ══ -->
+<div class="slide cover active">
+  <div class="cover-bg"></div>
+  <div class="cover-blob3"></div>
+  <div class="cover-grid"></div>
+  <!-- mini chart illustration -->
+  <svg style="position:absolute;right:68px;top:50%;transform:translateY(-50%);opacity:.18;" width="360" height="300" viewBox="0 0 360 300">
+    <line x1="30" y1="270" x2="340" y2="270" stroke="white" stroke-width="2.5"/>
+    <line x1="30" y1="270" x2="30"  y2="20"  stroke="white" stroke-width="2.5"/>
+    <path d="M30,20 C170,20 330,150 330,270" fill="none" stroke="white" stroke-width="3"/>
+    <circle cx="30"  cy="20"  r="5" fill="white"/>
+    <circle cx="165" cy="105" r="5" fill="rgba(255,214,10,.9)"/>
+    <circle cx="330" cy="270" r="5" fill="white"/>
+    <line x1="165" y1="105" x2="165" y2="270" stroke="rgba(255,214,10,.5)" stroke-dasharray="5,4" stroke-width="1.5"/>
+    <line x1="30"  y1="105" x2="165" y2="105" stroke="rgba(255,214,10,.5)" stroke-dasharray="5,4" stroke-width="1.5"/>
+    <text x="340" y="275" fill="white" font-size="12" font-family="DM Sans">Roses</text>
+    <text x="10"  y="15"  fill="white" font-size="12" font-family="DM Sans">Guns</text>
+    <text x="168" y="102" fill="rgba(255,214,10,.9)" font-size="11" font-family="DM Sans">PPF</text>
+  </svg>
+  <div class="eyebrow">ECON 2006 · Module 1 · Chapters 1 &amp; 2</div>
+  <h1>Introduction to Economics<br>Scarcity, Choice &amp;<br>Opportunity Cost</h1>
+  <p class="subtitle">Virginia Tech — Summer 2026</p>
+  <p class="meta">Koustuv Lahiri · lkoustuv@vt.edu</p>
+  <span class="sn">1</span>
+</div>
+
+<!-- ══ S2 WHAT IS ECONOMICS ══ -->
+<div class="slide">
+  <div class="eyebrow">Introduction</div>
+  <h2>What is Economics?</h2>
+  <div class="body">
+    <p class="big-def">
+      The study of how individuals, businesses, and societies
+      <strong>allocate scarce resources</strong> — understanding decisions under
+      constraints, how markets function, and how incentives shape behavior.
+    </p>
+    <hr class="thin" style="margin-top:22px;">
+    <div class="two-col" style="flex:0;gap:36px;margin-top:0;">
+      <div class="col">
+        <div class="col-label">🔬 Microeconomics</div>
+        <p>Decisions of <strong>individuals, firms, and markets</strong> — prices, wages, trade-offs</p>
+      </div>
+      <div class="col">
+        <div class="col-label">🌐 Macroeconomics</div>
+        <p>Economy-wide phenomena — <strong>GDP, inflation, unemployment</strong>, growth</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">2</span>
+</div>
+
+<!-- ══ S3 WHY DOES IT MATTER ══ -->
+<div class="slide">
+  <div class="eyebrow">Introduction</div>
+  <h2>Why does it matter?</h2>
+  <div class="body">
+    <ul class="clean">
+      <li>Economics shapes <strong>every aspect of daily life</strong> — from government policy to personal finance.</li>
+      <li>It answers the questions that shape the world:
+        <ul class="clean" style="margin-top:3px;">
+          <li class="sub">💸 Why do recessions happen?</li>
+          <li class="sub">📈 What drives inflation or unemployment?</li>
+          <li class="sub">🌍 How do trade wars affect jobs?</li>
+        </ul>
+      </li>
+      <li>Making informed decisions — personal, professional, civic — requires <strong>economic reasoning</strong>.</li>
+    </ul>
+  </div>
+  <span class="sn">3</span>
+</div>
+
+<!-- ══ S4 ECONOMICS FOR BUSINESS ══ -->
+<div class="slide">
+  <div class="eyebrow">Introduction</div>
+  <h2>Economics for Business</h2>
+  <div class="body">
+    <p style="font-size:17px;color:var(--muted);margin-bottom:18px;">No business operates in a vacuum — every company is shaped by the macro environment.</p>
+    <div class="stat-grid">
+      <div class="stat-card"><span class="stat-icon">🏦</span><div><h4>Interest Rates</h4><p>Affect borrowing costs, investment, and expansion decisions</p></div></div>
+      <div class="stat-card"><span class="stat-icon">📊</span><div><h4>Inflation &amp; GDP</h4><p>Guide pricing strategy and business planning cycles</p></div></div>
+      <div class="stat-card"><span class="stat-icon">🌐</span><div><h4>Exchange Rates</h4><p>Drive supply chain and international trade choices</p></div></div>
+      <div class="stat-card"><span class="stat-icon">🛒</span><div><h4>Consumer Demand</h4><p>Shifts with the economic cycle — booms and recessions</p></div></div>
+    </div>
+  </div>
+  <span class="sn">4</span>
+</div>
+
+<!-- ══ S5 SECTION BREAK: SCARCITY ══ -->
+<div class="slide sb sb-blue">
+  <div class="sb-deco"></div><div class="sb-deco2"></div>
+  <div class="eyebrow">Chapter 2</div>
+  <div style="font-size:64px;line-height:1;margin-bottom:18px;">🌍</div>
+  <h1>Scarcity &amp; Choice</h1>
+  <p style="font-size:20px;color:rgba(255,255,255,.75);margin-top:12px;max-width:560px;line-height:1.55;font-family:'DM Sans',sans-serif;">
+    Why do we need economics at all? Because resources are limited — and choices must be made.
+  </p>
+  <span class="sn">5</span>
+</div>
+
+<!-- ══ S6 THE CENTRAL PROBLEM ══ -->
+<div class="slide">
+  <div class="eyebrow">Scarcity &amp; Choice</div>
+  <h2>The Central Problem</h2>
+  <div class="body">
+    <div class="hstrip">
+      <p>Resources are <strong>scarce</strong> — so every society must make choices.</p>
+    </div>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:14px;">All of economics tries to answer three fundamental questions:</p>
+    <div class="three-q">
+      <div class="q-card">
+        <div class="q-num">01</div>
+        <p>What to produce?</p>
+        <p class="sub-note">Which goods and services to make?</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">02</div>
+        <p>How to produce it?</p>
+        <p class="sub-note">Which inputs and methods to use?</p>
+      </div>
+      <div class="q-card">
+        <div class="q-num">03</div>
+        <p>For whom?</p>
+        <p class="sub-note">How is output distributed?</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">6</span>
+</div>
+
+<!-- ══ S7 COST OF A CHOICE ══ -->
+<div class="slide">
+  <div class="eyebrow">Scarcity &amp; Choice</div>
+  <h2>Every Choice Has a Cost</h2>
+  <div class="body">
+    <p class="big-def" style="font-size:23px;margin-bottom:22px;">
+      Scarcity means you always <strong>give something up</strong> when you make a choice.
+      Every decision involves a trade-off between costs and benefits.
+    </p>
+    <div style="display:flex;gap:18px;">
+      <div class="callout" style="flex:1;margin-top:0;">
+        <div class="label">🎓 Example — Night before an exam</div>
+        <p>Study vs. sleep vs. going out — you can't do all three. Each choice has a cost.</p>
+      </div>
+      <div class="callout orange" style="flex:1;margin-top:0;">
+        <div class="label">🌽 Example — A farmer's decision</div>
+        <p>Plant corn or soybeans? The same land can't grow both at once.</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">7</span>
+</div>
+
+<!-- ══ S8 SECTION BREAK: OPPORTUNITY COST ══ -->
+<div class="slide sb sb-purple">
+  <div class="sb-deco"></div><div class="sb-deco2"></div>
+  <div class="eyebrow">Chapter 2</div>
+  <div style="font-size:64px;line-height:1;margin-bottom:18px;">💡</div>
+  <h1>Opportunity Cost</h1>
+  <p style="font-size:20px;color:rgba(255,255,255,.75);margin-top:12px;max-width:580px;line-height:1.55;font-family:'DM Sans',sans-serif;">
+    A formal way to measure the true cost of any choice — the best thing you give up.
+  </p>
+  <span class="sn">8</span>
+</div>
+
+<!-- ══ S9 OPPORTUNITY COST DEFINITION ══ -->
+<div class="slide">
+  <div class="eyebrow">Opportunity Cost</div>
+  <h2>Definition</h2>
+  <div class="body">
+    <div class="hstrip purple">
+      <p>The value of the <strong>best alternative forgone</strong> when a choice is made.</p>
+    </div>
+    <div class="callout purple" style="margin-top:0;">
+      <div class="label">💰 Example — $10,000 Decision</div>
+      <p style="font-size:16px;line-height:1.6;">
+        You have $10,000. Options: <em>pay tuition · buy a car · invest in stocks · take a vacation.</em><br>
+        <strong style="color:var(--purple);">If you choose tuition,</strong> the opportunity cost is the value of your
+        <em>single best remaining option</em> — whichever of the others you valued most.
+      </p>
+    </div>
+    <p style="font-size:15px;color:var(--muted);margin-top:16px;background:#f9fafb;padding:12px 16px;border-radius:8px;">
+      ⚠ Opportunity cost is <strong>not</strong> the sum of all forgone options — only the <strong>best one</strong>.
+    </p>
+  </div>
+  <span class="sn">9</span>
+</div>
+
+<!-- ══ S10 SECTION BREAK: PPF ══ -->
+<div class="slide sb sb-orange">
+  <div class="sb-deco"></div><div class="sb-deco2"></div>
+  <div class="eyebrow">Chapter 2</div>
+  <div style="font-size:64px;line-height:1;margin-bottom:18px;">📉</div>
+  <h1>Production Possibility<br>Frontier</h1>
+  <p style="font-size:20px;color:rgba(255,255,255,.75);margin-top:12px;max-width:620px;line-height:1.55;font-family:'DM Sans',sans-serif;">
+    Visualizing scarcity, trade-offs, and opportunity cost for an entire economy.
+  </p>
+  <span class="sn">10</span>
+</div>
+
+<!-- ══ S11 PPF SETUP ══ -->
+<div class="slide">
+  <div class="eyebrow">Production Possibility Frontier</div>
+  <h2>Setting Up the Model</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col">
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin-bottom:14px;">A simple economy — <strong style="color:var(--ink);">100 acres of land</strong>, two goods:</p>
+        <ul class="clean">
+          <li>🔫 <strong>Guns</strong> — 1 acre each → max <strong>100</strong></li>
+          <li>🌹 <strong>Roses</strong> — ½ acre each → max <strong>200</strong></li>
+        </ul>
+        <div class="callout" style="margin-top:14px;">
+          <div class="label">📊 PPF — Definition</div>
+          <p style="font-size:16px;">All combinations of goods producible when <strong>all resources are used efficiently.</strong></p>
+        </div>
+        <p style="font-size:14px;color:var(--muted);margin-top:12px;">In this example, constant opportunity cost → straight line</p>
+      </div>
+      <div class="col diagram-wrap">
+        <!-- Straight-line PPF, axes origin at (50,255), y-axis top (50,15), x-axis end (310,255) -->
+        <svg viewBox="0 0 360 285" width="330" height="265" xmlns="http://www.w3.org/2000/svg">
+          <!-- subtle grid -->
+          <line x1="50" y1="255" x2="310" y2="15"  stroke="var(--rule)" stroke-width="1" stroke-dasharray="4,4"/>
+          <!-- axes -->
+          <line x1="50" y1="15"  x2="50"  y2="255" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="255" x2="318" y2="255" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- arrowheads -->
+          <polygon points="50,9 44,21 56,21"   fill="#374151"/>
+          <polygon points="324,255 312,249 312,261" fill="#374151"/>
+          <!-- PPF line -->
+          <line x1="50" y1="15" x2="310" y2="255" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+          <!-- midpoint dot -->
+          <circle cx="180" cy="135" r="5" fill="var(--orange)"/>
+          <text x="188" y="130" font-size="12" fill="var(--orange)" font-weight="600" font-family="DM Sans">(100, 50)</text>
+          <!-- axis labels -->
+          <text x="190" y="278" text-anchor="middle" font-size="13" font-weight="600" fill="#64748B" font-family="DM Sans">Roses →</text>
+          <text x="18"  y="138" text-anchor="middle" font-size="13" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,18,138)">← Guns</text>
+          <!-- tick marks + labels -->
+          <line x1="44" y1="15"  x2="50" y2="15"  stroke="var(--blue)" stroke-width="2"/>
+          <text x="40" y="19"  text-anchor="end" font-size="13" fill="var(--blue)" font-weight="700" font-family="Poppins">100</text>
+          <line x1="310" y1="255" x2="310" y2="261" stroke="var(--blue)" stroke-width="2"/>
+          <text x="310" y="274" text-anchor="middle" font-size="13" fill="var(--blue)" font-weight="700" font-family="Poppins">200</text>
+          <!-- PPF label -->
+          <text x="228" y="148" font-size="13" fill="var(--blue)" font-style="italic" font-weight="700" font-family="Poppins">PPF</text>
+        </svg>
+        <p class="caption">Constant opportunity cost — straight line PPF</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">11</span>
+</div>
+
+<!-- ══ S12 CONCAVE PPF & INCREASING OC ══ -->
+<div class="slide">
+  <div class="eyebrow">Production Possibility Frontier</div>
+  <h2>Is the PPF Always a Straight Line?</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col" style="flex:1.05;">
+        <p style="font-size:18px;line-height:1.6;color:var(--ink);margin-bottom:14px;">
+          In practice: <strong>No.</strong> Resources are not perfectly interchangeable — shifting more land to roses makes each additional rose progressively costlier.
+        </p>
+        <ul class="clean">
+          <li><strong>Law of Increasing Opportunity Costs</strong> — each extra unit costs <em>more</em> of the other good</li>
+          <li>PPF bows <strong>outward</strong> from the origin</li>
+          <li>Slope of PPF = <strong>Marginal Rate of Transformation (MRT)</strong></li>
+        </ul>
+      </div>
+      <div class="col diagram-wrap" style="flex:0.95;">
+        <!--
+          Curve: M 50,10 C 215,10 335,155 335,265  (viewBox 0 0 385 295)
+          Origin of axes: (50,265).  Axis ends: y-top=(50,10), x-right=(345,265)
+          Key points (computed exactly):
+            0 roses:   (50,   10)
+            50 roses:  (121.2, 19.3)
+            100 roses: (192.5, 48.9)
+            150 roses: (263.8, 105.9)
+            200 roses: (335,  265)
+          MRT triangles (equal Δroses=50 each, Δx≈71):
+            Tri1: (50,10)→(121,10)→(121,19)  Δguns≈3.6
+            Tri2: (121,19)→(193,19)→(193,49) Δguns≈11.6
+            Tri3: (193,49)→(264,49)→(264,106) Δguns≈22.4
+        -->
+        <svg viewBox="0 0 385 295" width="335" height="268" xmlns="http://www.w3.org/2000/svg">
+          <!-- feasible region shading -->
+          <path d="M50,265 L50,10 C215,10 335,155 335,265 Z" fill="rgba(58,134,255,.06)"/>
+          <!-- axes -->
+          <line x1="50" y1="8"   x2="50"  y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="265" x2="350" y2="265" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="50,2 44,14 56,14"     fill="#374151"/>
+          <polygon points="356,265 344,259 344,271" fill="#374151"/>
+          <!-- the concave PPF -->
+          <path d="M 50,10 C 215,10 335,155 335,265" fill="none" stroke="var(--blue)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- ── MRT Triangle 1 (small cost, near y-axis) ── -->
+          <line x1="50"  y1="10" x2="121" y2="10" stroke="var(--green)"  stroke-width="1.8" stroke-dasharray="5,3"/>
+          <line x1="121" y1="10" x2="121" y2="19" stroke="var(--green)"  stroke-width="1.8" stroke-dasharray="5,3"/>
+          <!-- dots on curve -->
+          <circle cx="50"  cy="10"  r="5" fill="var(--blue)" stroke="white" stroke-width="1.5"/>
+          <circle cx="121" cy="19"  r="5" fill="var(--blue)" stroke="white" stroke-width="1.5"/>
+          <!-- labels -->
+          <text x="82"  y="8"  text-anchor="middle" font-size="10" fill="var(--green)" font-weight="700" font-family="DM Sans">50 roses</text>
+          <text x="128" y="15" font-size="10" fill="var(--green)" font-weight="700" font-family="DM Sans">~4 guns</text>
+          <!-- ── MRT Triangle 2 (medium cost) ── -->
+          <line x1="121" y1="19" x2="193" y2="19" stroke="var(--orange)" stroke-width="1.8" stroke-dasharray="5,3"/>
+          <line x1="193" y1="19" x2="193" y2="49" stroke="var(--orange)" stroke-width="1.8" stroke-dasharray="5,3"/>
+          <circle cx="193" cy="49"  r="5" fill="var(--blue)" stroke="white" stroke-width="1.5"/>
+          <text x="154" y="16"  text-anchor="middle" font-size="10" fill="var(--orange)" font-weight="700" font-family="DM Sans">50 roses</text>
+          <text x="200" y="37"  font-size="10" fill="var(--orange)" font-weight="700" font-family="DM Sans">~12 guns</text>
+          <!-- ── MRT Triangle 3 (large cost, near x-axis) ── -->
+          <line x1="193" y1="49"  x2="264" y2="49"  stroke="var(--pink)"   stroke-width="1.8" stroke-dasharray="5,3"/>
+          <line x1="264" y1="49"  x2="264" y2="106" stroke="var(--pink)"   stroke-width="1.8" stroke-dasharray="5,3"/>
+          <circle cx="264" cy="106" r="5" fill="var(--blue)" stroke="white" stroke-width="1.5"/>
+          <text x="226" y="46"  text-anchor="middle" font-size="10" fill="var(--pink)" font-weight="700" font-family="DM Sans">50 roses</text>
+          <text x="268" y="82"  font-size="10" fill="var(--pink)" font-weight="700" font-family="DM Sans">~22 guns</text>
+          <!-- axis tick marks + labels -->
+          <!-- y-axis: 100 at top -->
+          <line x1="44" y1="10"  x2="50" y2="10"  stroke="var(--blue)" stroke-width="2"/>
+          <text x="40" y="14"  text-anchor="end" font-size="12" fill="var(--blue)" font-weight="700" font-family="Poppins">100</text>
+          <!-- x-axis: 50,100,150,200 -->
+          <line x1="121" y1="265" x2="121" y2="271" stroke="#64748B" stroke-width="1.5"/>
+          <text x="121" y="281" text-anchor="middle" font-size="11" fill="#64748B" font-family="DM Sans">50</text>
+          <line x1="193" y1="265" x2="193" y2="271" stroke="#64748B" stroke-width="1.5"/>
+          <text x="193" y="281" text-anchor="middle" font-size="11" fill="#64748B" font-family="DM Sans">100</text>
+          <line x1="264" y1="265" x2="264" y2="271" stroke="#64748B" stroke-width="1.5"/>
+          <text x="264" y="281" text-anchor="middle" font-size="11" fill="#64748B" font-family="DM Sans">150</text>
+          <line x1="335" y1="265" x2="335" y2="271" stroke="var(--blue)" stroke-width="2"/>
+          <text x="335" y="281" text-anchor="middle" font-size="12" fill="var(--blue)" font-weight="700" font-family="Poppins">200</text>
+          <!-- axis labels -->
+          <text x="195" y="293" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Roses →</text>
+          <text x="17"  y="138" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,17,138)">← Guns</text>
+          <!-- PPF label -->
+          <text x="296" y="185" font-size="13" fill="var(--blue)" font-style="italic" font-weight="700" font-family="Poppins">PPF</text>
+          <!-- feasible label -->
+          <text x="74" y="200" font-size="11" fill="rgba(58,134,255,.55)" font-style="italic" font-family="DM Sans">Feasible</text>
+        </svg>
+        <p class="caption">Same Δ roses → increasing Δ guns as you move down the PPF</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">12</span>
+</div>
+
+<!-- ══ S13 INSIDE/ON PPF & GROWTH ══ -->
+<div class="slide">
+  <div class="eyebrow">Production Possibility Frontier</div>
+  <h2>Where Can We Operate?</h2>
+  <div class="body">
+    <div class="two-col">
+      <div class="col" style="flex:1.05;">
+        <ul class="clean" style="margin-bottom:14px;">
+          <li><strong style="color:var(--green);">On the PPF</strong> — all resources used efficiently ✓</li>
+          <li><strong style="color:var(--orange);">Inside the PPF</strong> — inefficient: resources are idle or technology underused</li>
+        </ul>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:8px;">Why might we be <em>inside</em>?</p>
+        <ul class="clean" style="margin-bottom:14px;">
+          <li class="sub">Resources not fully employed (e.g., unemployment)</li>
+          <li class="sub">Technology not used to its full potential</li>
+        </ul>
+        <div class="callout green" style="margin-top:0;">
+          <div class="label">🚀 Shifting Outward = Economic Growth</div>
+          <p style="font-size:16px;">More resources <em>or</em> better technology expands the PPF — the economy can produce more of everything.</p>
+        </div>
+      </div>
+      <div class="col diagram-wrap" style="flex:0.95;">
+        <!--
+          Original: M 50,18 C 200,18 312,148 312,258
+          Shifted:  M 50,5  C 215,5  330,140 330,268
+          "On PPF" green: t=0.40 on original = (207, 71) ← exactly on curve
+          "Inside" orange: (140, 155) ← verified inside (curve at x=140 is y≈34)
+          Growth arrow: (207,71) → approx (220,61) on shifted curve
+          Axes origin: (50, 258); y-top: (50,18); x-right: (320,258)
+        -->
+        <svg viewBox="0 0 375 285" width="335" height="263" xmlns="http://www.w3.org/2000/svg">
+          <!-- feasible region (original PPF) -->
+          <path d="M50,258 L50,18 C200,18 312,148 312,258 Z" fill="rgba(58,134,255,.055)"/>
+          <!-- axes -->
+          <line x1="50" y1="12"  x2="50"  y2="258" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="258" x2="326" y2="258" stroke="#374151" stroke-width="2.5" stroke-linecap="round"/>
+          <polygon points="50,6 44,18 56,18"      fill="#374151"/>
+          <polygon points="332,258 320,252 320,264" fill="#374151"/>
+          <!-- shifted PPF (dashed, lighter) -->
+          <path d="M 50,5 C 215,5 330,140 330,268" fill="none" stroke="#93c5fd" stroke-width="2.5" stroke-dasharray="8,5"/>
+          <!-- original concave PPF -->
+          <path d="M 50,18 C 200,18 312,148 312,258" fill="none" stroke="var(--blue)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- "On PPF" point at (207, 71) — exactly on the curve -->
+          <circle cx="207" cy="71" r="8" fill="var(--green)" stroke="white" stroke-width="2"/>
+          <text x="218" y="68" font-size="13" fill="var(--green)" font-weight="700" font-family="Poppins">On PPF ✓</text>
+          <!-- "Inside PPF" point at (140, 155) — verified inside -->
+          <circle cx="140" cy="155" r="8" fill="var(--orange)" stroke="white" stroke-width="2"/>
+          <text x="151" y="152" font-size="13" fill="var(--orange)" font-weight="700" font-family="Poppins">Inside PPF</text>
+          <!-- dashed vertical from Inside point up to the curve (shows waste) -->
+          <line x1="140" y1="155" x2="140" y2="38" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
+          <text x="143" y="100" font-size="10" fill="var(--orange)" font-family="DM Sans" opacity=".9">wasted</text>
+          <!-- growth arrow from "On PPF" toward shifted curve -->
+          <line x1="207" y1="71" x2="222" y2="57" stroke="#3A86FF" stroke-width="2" stroke-dasharray="3,2"/>
+          <polygon points="225,53 215,56 220,65" fill="#3A86FF"/>
+          <text x="228" y="52" font-size="11" fill="var(--blue-d)" font-weight="600" font-family="Poppins">Growth</text>
+          <!-- "Shifted PPF" label -->
+          <text x="256" y="30" font-size="11" fill="#93c5fd" font-style="italic" font-family="Poppins">Shifted PPF</text>
+          <!-- axis tick labels -->
+          <line x1="44" y1="18"  x2="50" y2="18"  stroke="var(--blue)" stroke-width="2"/>
+          <text x="40" y="22"  text-anchor="end" font-size="12" fill="var(--blue)" font-weight="700" font-family="Poppins">100</text>
+          <line x1="312" y1="258" x2="312" y2="264" stroke="var(--blue)" stroke-width="2"/>
+          <text x="312" y="276" text-anchor="middle" font-size="12" fill="var(--blue)" font-weight="700" font-family="Poppins">200</text>
+          <!-- axis labels -->
+          <text x="185" y="284" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans">Roses →</text>
+          <text x="17"  y="135" text-anchor="middle" font-size="12" font-weight="600" fill="#64748B" font-family="DM Sans" transform="rotate(-90,17,135)">← Guns</text>
+        </svg>
+        <p class="caption">Points on, inside, and beyond the PPF</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">13</span>
+</div>
+
+<!-- ══ S14 HOW RESOURCES ARE ALLOCATED ══ -->
+<div class="slide">
+  <div class="eyebrow">Scarcity &amp; Choice</div>
+  <h2>How Are Resources Allocated?</h2>
+  <div class="body">
+    <p style="font-size:17px;color:var(--muted);margin-bottom:20px;">Given scarcity, which mechanism decides <em>what gets produced and who gets it?</em></p>
+    <div class="econ-cards">
+      <div class="econ-card command">
+        <div style="font-size:42px;line-height:1;margin-bottom:12px;">🏛️</div>
+        <h3>Command Economy</h3>
+        <p>Government decides what, how, and for whom to produce. Central planning replaces the market.</p>
+        <p class="eg">Examples: Former USSR · Cuba · North Korea</p>
+      </div>
+      <div class="econ-card market">
+        <div style="font-size:42px;line-height:1;margin-bottom:12px;">📈</div>
+        <h3>Market Economy</h3>
+        <p><strong>Price</strong> is the key signal — it directs resources to their highest-valued uses through supply &amp; demand.</p>
+        <p class="eg">Examples: Farmer's crop choice · Your choice of college major</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:16px;">
+      <div class="label">Coming up next</div>
+      <p style="font-size:15px;">Since price is central to the market mechanism, we need to understand how it's determined. That's where Demand &amp; Supply comes in.</p>
+    </div>
+  </div>
+  <span class="sn">14</span>
+</div>
+
+<!-- ══ S15 SUMMARY ══ -->
+<div class="slide">
+  <div class="eyebrow">Wrap-Up</div>
+  <h2>What We Covered</h2>
+  <div class="body">
+    <div class="summary-list">
+      <div class="s-item">
+        <span class="s-num">1</span>
+        <p>Economics studies how <strong>scarce resources</strong> are allocated — micro (individual markets) and macro (economy-wide).</p>
+      </div>
+      <div class="s-item">
+        <span class="s-num">2</span>
+        <p>Scarcity forces choices. Every choice has a <strong>trade-off</strong> — a cost and a benefit that must be weighed.</p>
+      </div>
+      <div class="s-item">
+        <span class="s-num">3</span>
+        <p><strong>Opportunity cost</strong> = value of the best alternative forgone — the formal price of any decision.</p>
+      </div>
+      <div class="s-item">
+        <span class="s-num">4</span>
+        <p>The <strong>PPF</strong> maps all efficient combinations; its concave shape reflects the Law of Increasing Opportunity Costs.</p>
+      </div>
+    </div>
+  </div>
+  <span class="sn">15</span>
+</div>
+
+<!-- ══ S16 WHAT'S NEXT ══ -->
+<div class="slide">
+  <div class="eyebrow">Looking Ahead</div>
+  <h2>Up Next: Demand &amp; Supply</h2>
+  <div class="body">
+    <p class="big-def" style="font-size:22px;margin-bottom:22px;">
+      We've seen <em>why</em> choices must be made. Now: <strong>how does a market economy make them?</strong>
+    </p>
+    <div style="display:flex;align-items:center;gap:22px;background:linear-gradient(135deg,var(--blue-bg),var(--purple-bg));border-radius:14px;padding:22px 26px;border:1.5px solid #c4c9f8;">
+      <div style="font-size:52px;line-height:1;">📊</div>
+      <div>
+        <p style="font-size:21px;font-weight:700;color:var(--ink);margin-bottom:6px;font-family:'Poppins',sans-serif;">Price is the answer</p>
+        <p style="font-size:16px;color:var(--muted);line-height:1.6;">
+          Price signals guide what gets produced, how much, and who gets it.<br>
+          Topic 2 explores how prices emerge through Demand and Supply.
+        </p>
+      </div>
+    </div>
+    <div style="margin-top:16px;padding:12px 20px;background:var(--blue-bg);border-radius:10px;display:flex;align-items:center;gap:12px;">
+      <span style="font-size:20px;">📖</span>
+      <p style="font-size:14px;color:var(--blue-d);font-weight:500;">Read ahead: Chapters 3 &amp; 4 — Demand, Supply, and Market Equilibrium</p>
+    </div>
+  </div>
+  <span class="sn">16</span>
+</div>
+
+</div></div><!-- /slide-wrap /stage -->
+
+<div id="progress-bar"></div>
+<div id="nav">
+  <button class="nb" id="pp">&#8592;</button>
+  <span id="sc">1 / 16</span>
+  <button class="nb" id="np">&#8594;</button>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide'),total=slides.length;
+let cur=0;
+const sc=document.getElementById('sc'),pb=document.getElementById('progress-bar'),wrap=document.getElementById('wrap');
+function scale(){
+  const s=Math.min(window.innerWidth/1280,window.innerHeight/720);
+  const ox=(window.innerWidth-1280*s)/2,oy=(window.innerHeight-720*s)/2;
+  wrap.style.transform=`translate(${ox}px,${oy}px) scale(${s})`;
+}
+function go(n){
+  slides[cur].classList.remove('active');
+  cur=Math.max(0,Math.min(total-1,n));
+  slides[cur].classList.add('active');
+  sc.textContent=`${cur+1} / ${total}`;
+  pb.style.width=`${(cur+1)/total*100}%`;
+}
+document.getElementById('pp').onclick=()=>go(cur-1);
+document.getElementById('np').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+  if(e.key==='Home')go(0);if(e.key==='End')go(total-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?cur+1:cur-1);});
+window.addEventListener('resize',scale);scale();go(0);
+</script>
+</body>
+</html>
