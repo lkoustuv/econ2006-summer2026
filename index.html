@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ECON 2006 · Principles of Economics (Macro) · Summer II 2026</title>
+<script>
+  /* Detect iframe (Canvas embed) as early as possible */
+  if (window !== window.top) {
+    document.documentElement.classList.add('in-iframe');
+  }
+</script>
 <style>
   :root {
     --primary: #B5211D;
@@ -152,6 +158,38 @@
     margin-bottom: 2rem; line-height: 1.15;
   }
 
+  /* ── CANVAS LINK STYLES ── */
+  /* Used on module names, assessment titles, and grades CTA */
+  .canvas-link {
+    color: inherit; text-decoration: none;
+    border-bottom: 1.5px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  .canvas-link:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+  .canvas-link::after {
+    content: ' ↗';
+    font-size: .7em; opacity: .5;
+    transition: opacity .15s;
+  }
+  .canvas-link:hover::after { opacity: 1; }
+
+  .grades-canvas-btn {
+    display: inline-flex; align-items: center; gap: .4rem;
+    margin-top: 1.5rem;
+    padding: .55rem 1.25rem;
+    font-size: .78rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--primary); background: rgba(181,33,29,.08);
+    border: 1px solid rgba(181,33,29,.25); border-radius: .25rem;
+    text-decoration: none; font-family: inherit;
+    transition: background .15s, transform .15s;
+  }
+  .grades-canvas-btn:hover {
+    background: rgba(181,33,29,.14); transform: translateY(-1px);
+  }
+
   /* ── COURSE INFO ── */
   #info { background: var(--bg2); }
   .info-grid {
@@ -254,10 +292,10 @@
     font-size: .65rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
     padding: .18rem .5rem; border-radius: .2rem;
   }
-  .a-tag-lock { background: rgba(181,33,29,.1); color: var(--primary); }
+  .a-tag-lock  { background: rgba(181,33,29,.1);  color: var(--primary); }
   .a-tag-nlock { background: rgba(94,138,106,.15); color: #3E7A50; }
-  .a-tag-canvas { background: rgba(212,137,74,.15); color: #A06020; }
-  .a-tag-live { background: rgba(79,127,160,.15); color: #2E6A90; }
+  .a-tag-canvas{ background: rgba(212,137,74,.15); color: #A06020; }
+  .a-tag-live  { background: rgba(79,127,160,.15); color: #2E6A90; }
 
   /* ── GRADING ── */
   #grading { background: var(--bg); }
@@ -268,7 +306,7 @@
   .grade-bars { display: flex; flex-direction: column; gap: 1rem; }
   .grade-bar-label { display: flex; justify-content: space-between; font-size: .82rem; margin-bottom: .4rem; }
   .grade-bar-name { color: var(--text); font-weight: 500; }
-  .grade-bar-pct { color: var(--muted); }
+  .grade-bar-pct  { color: var(--muted); }
   .grade-bar-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
   .grade-bar-fill {
     height: 100%; border-radius: 3px;
@@ -291,7 +329,7 @@
   }
   .gs-cell:nth-child(4n+1), .gs-cell:nth-child(4n+2) { background: var(--bg3); }
   .gs-grade { font-weight: 700; color: var(--text); }
-  .gs-range { color: var(--muted); }
+  .gs-range  { color: var(--muted); }
 
   /* ── TEXTBOOK ── */
   #textbook { background: var(--bg2); }
@@ -300,14 +338,14 @@
     background: var(--surface); border: 1px solid var(--border); border-radius: .75rem;
     padding: 2rem;
   }
-  .book-icon { font-size: 3rem; flex-shrink: 0; }
-  .book-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem; }
+  .book-icon    { font-size: 3rem; flex-shrink: 0; }
+  .book-title   { font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem; }
   .book-authors { font-size: .85rem; color: var(--muted); margin-bottom: .75rem; }
-  .book-isbns { display: flex; flex-direction: column; gap: .25rem; }
-  .isbn-row { font-size: .8rem; }
-  .isbn-label { color: var(--muted); }
-  .isbn-val { color: var(--text); font-family: monospace; }
-  .book-note { margin-top: .75rem; font-size: .8rem; color: var(--muted); font-style: italic; }
+  .book-isbns   { display: flex; flex-direction: column; gap: .25rem; }
+  .isbn-row     { font-size: .8rem; }
+  .isbn-label   { color: var(--muted); }
+  .isbn-val     { color: var(--text); font-family: monospace; }
+  .book-note    { margin-top: .75rem; font-size: .8rem; color: var(--muted); font-style: italic; }
 
   /* ── IMPORTANT ── */
   #important { background: var(--bg); }
@@ -316,9 +354,9 @@
     background: var(--surface); border: 1px solid var(--border); border-radius: .5rem;
     padding: 1.25rem;
   }
-  .notice-icon { font-size: 1.5rem; margin-bottom: .6rem; }
+  .notice-icon  { font-size: 1.5rem; margin-bottom: .6rem; }
   .notice-title { font-size: .85rem; font-weight: 700; margin-bottom: .3rem; color: var(--text); }
-  .notice-text { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .notice-text  { font-size: .8rem; color: var(--muted); line-height: 1.5; }
 
   /* ── POLICIES ── */
   #policies { background: var(--bg2); }
@@ -366,7 +404,7 @@
   }
   @keyframes blink {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    50%       { opacity: 0; }
   }
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
@@ -374,6 +412,25 @@
   .d2 { transition-delay: .2s; }
   .d3 { transition-delay: .3s; }
   .d4 { transition-delay: .4s; }
+
+  /* ─────────────────────────────────────────────────────────────
+     IFRAME / CANVAS EMBED MODE
+     When the page is loaded inside a Canvas iframe, the <html>
+     element gets the class "in-iframe" (set by the script above).
+     These rules strip out elements that clash with Canvas's own
+     chrome and tighten up the hero so content is visible
+     immediately without scrolling.
+  ───────────────────────────────────────────────────────────── */
+  .in-iframe nav           { display: none !important; }
+  .in-iframe .print-fab    { display: none !important; }
+  .in-iframe .hero-bg      { display: none; }
+  .in-iframe .grid-lines   { display: none; }
+  .in-iframe .hero-question{ display: none; }   /* hides typewriter — less distracting for repeat visits */
+  .in-iframe #hero {
+    min-height: auto;
+    padding: 2.5rem 2rem 2rem;
+  }
+  .in-iframe .hero-pills   { margin-top: 1.5rem; }
 
   /* ── PRINT STYLES ── */
   @media print {
@@ -387,6 +444,8 @@
     .reveal { opacity: 1 !important; transform: none !important; }
     * { box-shadow: none !important; animation: none !important; transition: none !important; }
     a { color: inherit !important; }
+    .canvas-link::after { display: none; }
+    .grades-canvas-btn { display: none; }
     .info-grid, .module-cards, .grade-scale-grid, .assessment-grid, .notice-cards { break-inside: avoid; }
     footer { margin-top: 1rem; }
   }
@@ -394,10 +453,10 @@
 </head>
 <body>
 
-<!-- PRINT BUTTON -->
+<!-- PRINT BUTTON (hidden automatically when in Canvas iframe) -->
 <button class="print-fab" onclick="window.print()">🖨 Print / Save PDF</button>
 
-<!-- NAV -->
+<!-- NAV (hidden automatically when in Canvas iframe) -->
 <nav>
   <div class="nav-brand">ECON 2006 · Summer II 2026</div>
   <div class="nav-links">
@@ -423,7 +482,6 @@
     <div class="hero-cta">
       <a href="#modules" class="btn btn-primary">Explore the Course</a>
       <a href="https://virginiatech.zoom.us/my/lkoustuv" target="_blank" class="btn btn-zoom">Join Class Meeting →</a>
-      <a href="https://canvas.vt.edu/courses/230772" target="_blank" class="btn btn-secondary">Open Canvas →</a>
     </div>
     <div class="hero-pills">
       <div class="pill">Jul 7 – Aug 14, 2026</div>
@@ -484,11 +542,16 @@
 </section>
 
 <!-- MODULES -->
+<!-- NOTE: Each module heading links to the generic Canvas Modules page.
+     Once you have created and published your Canvas modules, replace
+     the href on each .canvas-link below with the specific module URL:
+     https://canvas.vt.edu/courses/230772/modules/[MODULE_ID]
+     You can find each module's ID in its Canvas URL after you build it. -->
 <section id="modules">
   <div class="section-inner">
     <div class="section-tag reveal">The Journey</div>
     <h2 class="section-title reveal d1">New ideas around every corner.</h2>
-    <p class="modules-intro reveal d2">Each module opens a new lens for seeing the economy — from scarcity and markets to growth, trade, and the debates economists still argue about. Click any module to see what's inside.</p>
+    <p class="modules-intro reveal d2">Each module opens a new lens for seeing the economy. Click any module to see what's inside — click the title to go directly to that module in Canvas.</p>
 
     <div class="module-cards reveal d3">
 
@@ -496,7 +559,12 @@
         <div class="module-header">
           <div class="module-num">M1</div>
           <div class="module-meta">
-            <div class="module-name">Introduction to Economics: The Economic Setting</div>
+            <div class="module-name">
+              <a href="https://canvas.vt.edu/courses/230772/modules" target="_blank"
+                 class="canvas-link" onclick="event.stopPropagation()">
+                Introduction to Economics: The Economic Setting
+              </a>
+            </div>
             <div class="module-hook">Why does scarcity force every choice you'll ever make?</div>
           </div>
           <div class="module-toggle">▾</div>
@@ -514,7 +582,12 @@
         <div class="module-header">
           <div class="module-num">M2</div>
           <div class="module-meta">
-            <div class="module-name">Measuring the Economy</div>
+            <div class="module-name">
+              <a href="https://canvas.vt.edu/courses/230772/modules" target="_blank"
+                 class="canvas-link" onclick="event.stopPropagation()">
+                Measuring the Economy
+              </a>
+            </div>
             <div class="module-hook">GDP, unemployment, inflation — how do we even measure an economy?</div>
           </div>
           <div class="module-toggle">▾</div>
@@ -532,7 +605,12 @@
         <div class="module-header">
           <div class="module-num">M3</div>
           <div class="module-meta">
-            <div class="module-name">Understanding Aggregate Behavior: The Basics of Popular Macro Models</div>
+            <div class="module-name">
+              <a href="https://canvas.vt.edu/courses/230772/modules" target="_blank"
+                 class="canvas-link" onclick="event.stopPropagation()">
+                Understanding Aggregate Behavior: The Basics of Popular Macro Models
+              </a>
+            </div>
             <div class="module-hook">Fiscal policy, monetary policy, the Fed — this is where things get real.</div>
           </div>
           <div class="module-toggle">▾</div>
@@ -553,7 +631,12 @@
         <div class="module-header">
           <div class="module-num">M4</div>
           <div class="module-meta">
-            <div class="module-name">Macroeconomics Beyond Borders: International Trade</div>
+            <div class="module-name">
+              <a href="https://canvas.vt.edu/courses/230772/modules" target="_blank"
+                 class="canvas-link" onclick="event.stopPropagation()">
+                Macroeconomics Beyond Borders: International Trade
+              </a>
+            </div>
             <div class="module-hook">Why does your iPhone come from China? Why do exchange rates matter?</div>
           </div>
           <div class="module-toggle">▾</div>
@@ -570,7 +653,12 @@
         <div class="module-header">
           <div class="module-num">M5</div>
           <div class="module-meta">
-            <div class="module-name">Growth &amp; Debate <span class="module-badge">Time Permitting</span></div>
+            <div class="module-name">
+              <a href="https://canvas.vt.edu/courses/230772/modules" target="_blank"
+                 class="canvas-link" onclick="event.stopPropagation()">
+                Growth &amp; Debate <span class="module-badge">Time Permitting</span>
+              </a>
+            </div>
             <div class="module-hook">Why do some countries grow rich while others stay poor — and who's arguing about it?</div>
           </div>
           <div class="module-toggle">▾</div>
@@ -588,6 +676,10 @@
 </section>
 
 <!-- ASSESSMENTS -->
+<!-- NOTE: All assessment titles link to /assignments for now.
+     Once specific exam/quiz items are created in Canvas, you can
+     update each href to the direct assignment URL:
+     https://canvas.vt.edu/courses/230772/assignments/[ASSIGNMENT_ID] -->
 <section id="assessments">
   <div class="section-inner">
     <div class="section-tag reveal">Assessments</div>
@@ -598,7 +690,11 @@
         <div class="assessment-card-header">
           <div class="assessment-card-left">
             <div class="assessment-icon">📋</div>
-            <div class="assessment-title">Final Exam</div>
+            <div class="assessment-title">
+              <a href="https://canvas.vt.edu/courses/230772/assignments" target="_blank" class="canvas-link">
+                Final Exam
+              </a>
+            </div>
           </div>
           <div class="assessment-weight">35%</div>
         </div>
@@ -615,7 +711,11 @@
         <div class="assessment-card-header">
           <div class="assessment-card-left">
             <div class="assessment-icon">📝</div>
-            <div class="assessment-title">Midterm Exams</div>
+            <div class="assessment-title">
+              <a href="https://canvas.vt.edu/courses/230772/assignments" target="_blank" class="canvas-link">
+                Midterm Exams
+              </a>
+            </div>
           </div>
           <div class="assessment-weight">15% each</div>
         </div>
@@ -632,7 +732,11 @@
         <div class="assessment-card-header">
           <div class="assessment-card-left">
             <div class="assessment-icon">💻</div>
-            <div class="assessment-title">Quizzes</div>
+            <div class="assessment-title">
+              <a href="https://canvas.vt.edu/courses/230772/assignments" target="_blank" class="canvas-link">
+                Quizzes
+              </a>
+            </div>
           </div>
           <div class="assessment-weight">25%</div>
         </div>
@@ -649,7 +753,11 @@
         <div class="assessment-card-header">
           <div class="assessment-card-left">
             <div class="assessment-icon">🎥</div>
-            <div class="assessment-title">In-Class Quizzes</div>
+            <div class="assessment-title">
+              <a href="https://canvas.vt.edu/courses/230772/assignments" target="_blank" class="canvas-link">
+                In-Class Quizzes
+              </a>
+            </div>
           </div>
           <div class="assessment-weight">10%</div>
         </div>
@@ -694,6 +802,10 @@
           <div class="grade-bar-track"><div class="grade-bar-fill" data-width="10"></div></div>
         </div>
         <p style="margin-top:1rem; font-size:.8rem; color:var(--muted);">Total: 100%. See the Assessments section above for details on each component.</p>
+        <!-- Canvas grades link — always useful whether in iframe or standalone -->
+        <a href="https://canvas.vt.edu/courses/230772/grades" target="_blank" class="grades-canvas-btn">
+          📊 View My Grades in Canvas →
+        </a>
       </div>
       <div class="reveal d3">
         <div class="grade-scale-title">Grading Scale</div>
@@ -795,6 +907,7 @@
 
 <script>
   // ── Typewriter effect ─────────────────────────────────────────────────────
+  // Skipped when in iframe (in-iframe class suppresses .hero-question via CSS)
   const questions = [
     "Why does rent keep going up?",
     "Who decides how much money exists?",
@@ -805,19 +918,20 @@
   ];
   let qi = 0, ci = 0, deleting = false;
   const el = document.getElementById('typed-text');
-
-  function type() {
-    const q = questions[qi];
-    if (!deleting) {
-      el.textContent = q.slice(0, ++ci);
-      if (ci === q.length) { deleting = true; setTimeout(type, 2000); return; }
-    } else {
-      el.textContent = q.slice(0, --ci);
-      if (ci === 0) { deleting = false; qi = (qi + 1) % questions.length; }
+  if (el) {
+    function type() {
+      const q = questions[qi];
+      if (!deleting) {
+        el.textContent = q.slice(0, ++ci);
+        if (ci === q.length) { deleting = true; setTimeout(type, 2000); return; }
+      } else {
+        el.textContent = q.slice(0, --ci);
+        if (ci === 0) { deleting = false; qi = (qi + 1) % questions.length; }
+      }
+      setTimeout(type, deleting ? 35 : 60);
     }
-    setTimeout(type, deleting ? 35 : 60);
+    setTimeout(type, 1200);
   }
-  setTimeout(type, 1200);
 
   // ── Scroll reveal ─────────────────────────────────────────────────────────
   const revealEls = document.querySelectorAll('.reveal');
