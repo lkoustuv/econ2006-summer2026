@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Handout — Topic 1: Introduction, Scarcity &amp; Opportunity Cost</title>
+<title>Handout — Topic 1: Scarcity, Opportunity Cost &amp; the PPF</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -74,7 +74,7 @@ ul.body-list li,ol.body-list li{margin-bottom:7px;line-height:1.72;}
 /* diagram */
 .diagram-container{margin:26px 0;text-align:center;}
 .diagram-container .diagram-title{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px;}
-.diagram-container .diagram-caption{font-size:14px;color:var(--muted);margin-top:8px;font-style:italic;max-width:560px;margin-left:auto;margin-right:auto;}
+.diagram-container .diagram-caption{font-size:14px;color:var(--muted);margin-top:8px;font-style:italic;max-width:580px;margin-left:auto;margin-right:auto;}
 
 /* table */
 .ppf-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px;}
@@ -90,15 +90,6 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 .gloss-item{background:var(--def-bg);border-radius:4px;padding:12px 16px;border:1px solid var(--rule);}
 .gloss-item dt{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px;}
 .gloss-item dd{font-size:14px;line-height:1.55;color:var(--mid);}
-
-/* practice */
-.pq-section{background:var(--q-bg);border:1.5px solid #e8c89a;border-top:4px solid var(--warm);padding:24px 28px;margin-top:40px;}
-.pq-section h2{font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;color:var(--accent);margin-bottom:4px;}
-.pq-note{font-size:13.5px;color:var(--warm);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #e8c89a;}
-.pq-group-title{font-family:'Poppins',sans-serif;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:20px 0 10px;}
-.pq-section ol{padding-left:22px;}
-.pq-section li{font-size:15px;line-height:1.72;color:var(--mid);margin-bottom:12px;}
-.pq-section li::marker{font-weight:700;color:var(--accent2);}
 
 /* footer */
 .doc-footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--rule);font-family:'Poppins',sans-serif;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;}
@@ -120,17 +111,14 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
   .example-box{border:1.5px solid #999;border-top:4px solid #000;background:#f0f0f0!important;}
   .rw-box{border-left:5px solid #000;border:1px solid #999;background:#efefef!important;}
   .keypoint{border-left:4px solid #000;background:#eeeeee!important;}
-  .pq-section{border:1.5px solid #999;border-top:4px solid #000;background:#f5f5f5!important;}
   .lo-box{border-left:4px solid #000;background:#f5f5f5!important;}
 
   .example-box,.rw-box,.def-box,.keypoint{page-break-inside:avoid;}
-  .pq-section{page-break-before:always;}
   a{text-decoration:none;color:inherit;}
 
   /* print uses black for colored text */
   .def-box .def-term,.rw-box .rw-header,.example-box .ex-header,.example-box .solution strong{color:#000!important;}
   .doc-header .course-tag,.keypoint strong{color:#000!important;}
-  .pq-section h2,.pq-group-title,.pq-section li::marker,.pq-note{color:#000!important;}
   .gloss-item dt{color:#000!important;}
 }
 </style>
@@ -145,10 +133,10 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 
 <div class="doc-header">
   <div class="course-tag">ECON 2006 &middot; Principles of Economics (Macro) &middot; Module 1 &middot; Topic 1</div>
-  <h1>Introduction to Economics, Scarcity &amp; Opportunity Cost</h1>
+  <h1>Scarcity, Opportunity Cost &amp; the Production Possibility Frontier</h1>
   <div class="doc-meta">
     <span>Based on Chapters 1 &amp; 2 &mdash; Case, Fair &amp; Oster (13th ed.)</span>
-    <span>Koustuv Lahiri &middot; Virginia Tech &middot; Summer 2026</span>
+    <span>Koustuv Lahiri &middot; Virginia Tech &middot; Summer II 2026</span>
   </div>
 </div>
 
@@ -156,54 +144,22 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
   <h3>Learning Objectives</h3>
   <p style="font-size:14px;color:var(--muted);margin-bottom:10px;">After working through this handout, you should be able to:</p>
   <ol class="body-list" style="margin-bottom:0;">
-    <li>Define <em>economics</em> and distinguish between microeconomics and macroeconomics.</li>
-    <li>Explain why scarcity is the central problem of economics and how it forces trade-offs.</li>
-    <li>Define <em>opportunity cost</em> and correctly identify it in real-world scenarios.</li>
-    <li>Construct and interpret a Production Possibility Frontier (PPF).</li>
-    <li>Explain why a real-world PPF is concave and what this reveals about opportunity costs.</li>
-    <li>Distinguish between points inside, on, and outside the PPF.</li>
-    <li>Describe how growth or new technology shifts the PPF outward.</li>
-    <li>Compare command and market economies as mechanisms for resource allocation.</li>
+    <li>Explain why scarcity forces trade-offs on individuals, firms, and entire societies.</li>
+    <li>Identify the three fundamental questions every economy must answer.</li>
+    <li>Define opportunity cost and correctly identify it in a scenario with multiple alternatives.</li>
+    <li>Construct a straight-line PPF and read the opportunity cost off it.</li>
+    <li>Explain why a real-world PPF is concave and what the Law of Increasing Opportunity Costs means.</li>
+    <li>Distinguish between points inside, on, and outside the PPF, and explain what shifts the frontier.</li>
+    <li>Compare command and market economies as mechanisms for allocating scarce resources.</li>
   </ol>
 </div>
 
-<!-- ══════════════════════════════════════════════════════ -->
-<h2 class="section-heading">1 &nbsp; Introduction to Economics</h2>
-
-<h3 class="subsection-heading">1.1 What Is Economics?</h3>
-<p>Look around you. Every physical object you see &mdash; the phone in your pocket, the food in the dining hall, the road outside &mdash; required someone to decide how to produce it, how much to make, and who should get it. The field of economics exists because these decisions are never trivial: they must be made under real constraints.</p>
-
-<div class="def-box">
-  <div class="def-label">Core Definition</div>
-  <div class="def-term">Economics</div>
-  <p>The social science that studies how individuals, businesses, and societies allocate <em>scarce</em> resources to satisfy <em>unlimited</em> wants. It explores how decisions are made under constraints, how markets function, and how incentives shape behavior.</p>
-</div>
-
-<p>Three ideas sit at the heart of every economics course: <strong>scarcity</strong> (there isn&rsquo;t enough of everything), <strong>choice</strong> (therefore we must choose), and <strong>trade-offs</strong> (every choice means giving something up). Everything else you learn this semester builds on these three ideas.</p>
-
-<h3 class="subsection-heading">1.2 Two Branches: Micro vs. Macro</h3>
-<p>Economics divides naturally into two broad fields based on the scale of analysis:</p>
-<ul class="body-list">
-  <li><strong>Microeconomics</strong> zooms in on individual actors &mdash; households choosing what to buy, firms deciding how much to produce, and markets determining prices. Think of it as examining the individual trees in the forest.</li>
-  <li><strong>Macroeconomics</strong> zooms out to study the economy as a whole &mdash; why national output rises and falls, what determines the average price level (inflation), and why millions of workers can be simultaneously unemployed. Think of it as studying the forest itself.</li>
-</ul>
-<p>This course focuses on <strong>macroeconomics</strong>. But the foundation &mdash; scarcity, choice, and opportunity cost &mdash; is shared by both branches. You cannot understand why a country&rsquo;s GDP collapsed in 2008 without first understanding why individual banks and households were making catastrophically bad choices.</p>
-
-<h3 class="subsection-heading">1.3 Why Study Economics?</h3>
-<p>What economics teaches you is a <em>way of thinking</em>: how to identify constraints, weigh costs against benefits, and reason about incentives. This is useful in almost every career and every major life decision.</p>
-<p>For anyone interested in business: macroeconomics shapes the environment in which every company operates. Interest rates set by the Federal Reserve affect the cost of borrowing; inflation erodes profit margins; exchange rates determine the competitiveness of exports. A manager who does not understand macroeconomics is navigating without a map.</p>
-
-<div class="rw-box">
-  <div class="rw-header">Real-World Connection</div>
-  <div class="rw-title">Economics Is Everywhere: The Global Chip Shortage (2021)</div>
-  <p>In 2021, a global shortage of semiconductor chips caused car manufacturers to idle factories, pushing used car prices up by over 30%. This is scarcity in action: limited chips, unlimited demand, and painful trade-offs for governments, firms, and consumers. Every layer of this story &mdash; the shortage, the price spikes, the policy response (the U.S. CHIPS Act of 2022) &mdash; is economics.</p>
-  <p class="rw-src">Source: McKinsey Global Institute, &ldquo;Securing the Semiconductor Supply Chain,&rdquo; 2021; U.S. Bureau of Labor Statistics (used vehicle CPI data, 2021).</p>
-</div>
+<p>Every individual, firm, and government faces the same inescapable constraint: resources are limited, but human wants are not. This gap &mdash; between what we have and what we want &mdash; is called <em>scarcity</em>, and it lies at the heart of all economics. Because scarcity forces us to choose, every choice carries a cost: the value of the best option we gave up. This handout develops these ideas step by step &mdash; from scarcity and the three fundamental questions that every economy must answer, through the concept of opportunity cost, to the Production Possibility Frontier and the question of how different societies allocate their scarce resources.</p>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<h2 class="section-heading">2 &nbsp; Scarcity and Choice</h2>
+<h2 class="section-heading">1 &nbsp; Scarcity and Choice</h2>
 
-<h3 class="subsection-heading">2.1 The Problem of Scarcity</h3>
+<h3 class="subsection-heading">1.1 The Problem of Scarcity</h3>
 <p>Imagine that tonight you want to finish a problem set, watch two movies, get eight hours of sleep, go to a party, and call your parents &mdash; all between 8 p.m. and 9 a.m. You can&rsquo;t. Time is scarce. The same principle applies to every resource on Earth: land, labor, capital, and raw materials are all finite, but human wants are effectively unlimited.</p>
 
 <div class="def-box">
@@ -214,16 +170,16 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 
 <p>Scarcity is not the same as <em>poverty</em>. Nor is it the same as a <em>shortage</em> &mdash; a shortage is a temporary market condition; scarcity is a permanent feature of the world.</p>
 
-<h3 class="subsection-heading">2.2 The Three Fundamental Questions</h3>
+<h3 class="subsection-heading">1.2 The Three Fundamental Questions</h3>
 <p>Because resources are scarce, every society &mdash; whether a small village or a modern nation &mdash; must answer the same three fundamental questions:</p>
 <ol class="body-list">
   <li><strong>What to produce?</strong> With limited resources, you cannot produce everything. Should the economy make more cars or more public transit? More military equipment or more hospitals?</li>
   <li><strong>How to produce it?</strong> Should wheat be harvested by hand (labor-intensive) or by machine (capital-intensive)? Should electricity come from coal, natural gas, or solar panels?</li>
   <li><strong>For whom to produce?</strong> Once goods and services are produced, who gets them &mdash; whoever can pay the most, or based on need?</li>
 </ol>
-<p>All of economics &mdash; micro and macro &mdash; can ultimately be understood as an attempt to answer these three questions.</p>
+<p>All of economics can ultimately be understood as an attempt to answer these three questions.</p>
 
-<h3 class="subsection-heading">2.3 Every Choice Has a Cost</h3>
+<h3 class="subsection-heading">1.3 Every Choice Has a Cost</h3>
 <p>Because resources are scarce, every choice comes at a cost. When you choose to do one thing, you give up the ability to do something else. This is not merely a monetary cost &mdash; it is the value of whatever you had to sacrifice.</p>
 <p>Think about being a student. Your parents might say college is &ldquo;free&rdquo; because they&rsquo;re paying tuition. But your time is not free &mdash; you are giving up years during which you could have been earning a salary, starting a business, or doing something else entirely. That foregone value is an economic cost, even if no money changes hands.</p>
 
@@ -231,14 +187,13 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
   <div class="rw-header">Real-World Connection</div>
   <div class="rw-title">The True Cost of a Football Stadium</div>
   <p>When a city considers building a new football stadium with $500 million in public funds, economists ask: what else could that money have been spent on? If it could instead have built 10 new schools or repaired 200 miles of highway, then the true cost of the stadium isn&rsquo;t just $500 million in money &mdash; it&rsquo;s the schools and roads that will never exist. Asking &ldquo;what did we give up?&rdquo; is at the core of economic thinking.</p>
-  <p class="rw-src">This is a widely used illustrative example in introductory economics; see Case, Fair &amp; Oster, Ch. 1 for similar formulations.</p>
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<h2 class="section-heading">3 &nbsp; Opportunity Cost</h2>
+<h2 class="section-heading">2 &nbsp; Opportunity Cost</h2>
 
-<h3 class="subsection-heading">3.1 Definition</h3>
-<p>In everyday language, &ldquo;cost&rdquo; means the price you pay in dollars. Economists think of cost more broadly. The true cost of any choice is what you <em>give up</em> by making it.</p>
+<h3 class="subsection-heading">2.1 What Is the True Cost of a Choice?</h3>
+<p>In everyday language, &ldquo;cost&rdquo; means the price you pay in dollars. Economists think of cost more broadly. Consider this: you have $10,000 and you choose to pay next year&rsquo;s tuition. What else could you have done with that money? You could have bought a used car, taken a trip abroad, or invested in stocks. Now make a mental ranking of those alternatives &mdash; list them from most desirable to least. Whichever option sits at the top of that ranking is what you truly gave up. If a trip abroad ranks first among the options you forgo, then the trip is your opportunity cost. This is the essence of <em>opportunity cost</em>: the cost of any choice is the value of the single best alternative you could have chosen instead.</p>
 
 <div class="def-box">
   <div class="def-label">Core Definition</div>
@@ -248,56 +203,17 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 
 <div class="keypoint"><strong>Key Insight:</strong> Opportunity cost is always a comparison between the choice made and the <em>single best</em> forgone alternative. Adding up all the alternatives you didn&rsquo;t choose would be double-counting.</div>
 
-<h3 class="subsection-heading">3.2 Worked Example: The $10,000 Decision</h3>
-<div class="example-box">
-  <div class="ex-header">Worked Example 3.1</div>
-  <div class="ex-title">What Is the Opportunity Cost of Choosing to Invest?</div>
-  <p><strong>Setup:</strong> You have $10,000 and must choose exactly one of the following uses:</p>
-  <ul>
-    <li><strong>A</strong> &mdash; Pay one year of tuition (you value this at $10,000)</li>
-    <li><strong>B</strong> &mdash; Buy a used car (you value this at $9,500)</li>
-    <li><strong>C</strong> &mdash; Invest in an index fund (expected value in one year: $10,800)</li>
-    <li><strong>D</strong> &mdash; Take a once-in-a-lifetime trip (you value this at $7,000)</li>
-  </ul>
-  <p>You choose option <strong>C &mdash; the investment</strong> (highest expected value).</p>
-  <div class="solution">
-    <p><strong>Question:</strong> What is the opportunity cost of choosing C?</p>
-    <p><strong>Answer:</strong> The opportunity cost is the value of the <em>next best</em> forgone alternative. You gave up A ($10,000), B ($9,500), and D ($7,000). The best of these is A at $10,000.</p>
-    <p><strong>Opportunity cost of the investment = $10,000</strong> (the foregone tuition option).</p>
-    <p><em>Note: The OC is NOT $10,000 + $9,500 + $7,000 = $26,500. That sums all alternatives, not just the best one.</em></p>
-  </div>
-</div>
-
-<h3 class="subsection-heading">3.3 Explicit and Implicit Costs</h3>
-<p>Economists distinguish between two components of the full cost of any activity:</p>
-<ul class="body-list">
-  <li><strong>Explicit costs</strong> &mdash; direct out-of-pocket payments (tuition fees, rent, wages paid to employees)</li>
-  <li><strong>Implicit costs</strong> &mdash; the opportunity cost of resources you own and use without paying for them directly (the salary you forego by attending college full-time; the rental income you forego by using your own building for your business)</li>
-</ul>
-<p>Total economic cost = explicit costs + implicit costs. This is typically larger than the accounting cost (which counts only explicit costs), which is why economists often paint a more sobering picture of profitability than accountants do.</p>
-
-<div class="example-box">
-  <div class="ex-header">Worked Example 3.2</div>
-  <div class="ex-title">The True Annual Cost of College</div>
-  <p><strong>Setup:</strong> Annual tuition and fees at a public university: $15,000. Books and supplies: $2,000. If you were not in college, you could work full-time earning $40,000 per year.</p>
-  <div class="solution">
-    <p><strong>Accounting cost (explicit only):</strong> $15,000 + $2,000 = <strong>$17,000</strong></p>
-    <p><strong>Economic cost (explicit + implicit):</strong> $17,000 + $40,000 = <strong>$57,000</strong></p>
-    <p>The implicit cost (foregone salary) is more than twice the explicit cost. &ldquo;Free tuition&rdquo; programs that waive tuition but not opportunity costs still leave a very large burden &mdash; especially for students from lower-income households with stronger incentives to work.</p>
-  </div>
-</div>
-
 <div class="rw-box">
   <div class="rw-header">Real-World Connection</div>
   <div class="rw-title">Why Some Students Drop Out Even When Tuition Is Covered</div>
-  <p>Research on community college completion consistently finds that many students who receive full tuition grants still withdraw &mdash; not because of money, but because they cannot afford to stop working. Missing shifts means losing income their families depend on. Their opportunity cost of attending class is simply too high. Policy interventions that only address explicit costs (tuition waivers) miss the larger implicit costs that actually drive behavior.</p>
+  <p>Research on community college completion consistently finds that many students who receive full tuition grants still withdraw &mdash; not because of money, but because they cannot afford to stop working. Missing shifts means losing income their families depend on. Their opportunity cost of attending class is simply too high. Policy interventions that only waive tuition miss the larger opportunity cost &mdash; the income students forgo &mdash; that actually drives these decisions.</p>
   <p class="rw-src">See: MDRC, <em>Expanding Access and Success in Community Colleges</em> (ongoing research series). For the general principle, see also Case, Fair &amp; Oster, Ch. 1.</p>
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<h2 class="section-heading">4 &nbsp; The Production Possibility Frontier</h2>
+<h2 class="section-heading">3 &nbsp; The Production Possibility Frontier</h2>
 
-<h3 class="subsection-heading">4.1 Why We Need a Diagram</h3>
+<h3 class="subsection-heading">3.1 Why We Need a Diagram</h3>
 <p>Opportunity cost and scarcity can be illustrated with a powerful diagram called the <strong>Production Possibility Frontier (PPF)</strong>. The PPF makes abstract trade-offs concrete by showing all the combinations of two goods that an economy can produce when its resources are fully and efficiently employed.</p>
 
 <div class="def-box">
@@ -306,7 +222,7 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
   <p>A graph showing all combinations of two goods or services that can be produced when all of society&rsquo;s resources are used <em>efficiently</em>. Points on the curve are efficient; points inside it are inefficient; points outside it are currently unattainable.</p>
 </div>
 
-<h3 class="subsection-heading">4.2 Setting Up the Model</h3>
+<h3 class="subsection-heading">3.2 Setting Up the Model</h3>
 <p>To keep things tractable, we use a simplified model: an economy with exactly <strong>one resource</strong> (100 acres of land) producing exactly <strong>two goods</strong>: guns and roses.</p>
 <ul class="body-list">
   <li>Guns: 1 acre each &rarr; maximum 100 guns</li>
@@ -326,10 +242,11 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 
 <p>Every extra 50 roses requires giving up exactly 25 guns &mdash; the opportunity cost of 1 rose is always &frac12; gun. This <em>constant</em> opportunity cost produces a <strong>straight-line PPF</strong>.</p>
 
-<h3 class="subsection-heading">4.3 Figure 4.1 &mdash; Straight-Line PPF</h3>
+<h3 class="subsection-heading">3.3 Figure 3.1 &mdash; Straight-Line PPF</h3>
 <div class="diagram-container">
-  <div class="diagram-title">Figure 4.1 &mdash; Constant Opportunity Cost (Straight-Line PPF)</div>
-  <svg viewBox="0 0 420 310" width="420" height="310" xmlns="http://www.w3.org/2000/svg">
+  <div class="diagram-title">Figure 3.1 &mdash; Constant Opportunity Cost (Straight-Line PPF)</div>
+  <svg viewBox="0 0 440 360" width="440" height="360" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0,40)">
     <path d="M60,270 L60,20 L340,270 Z" fill="#FEF9F4"/>
     <line x1="60" y1="14" x2="60" y2="270" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="60" y1="270" x2="348" y2="270" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
@@ -341,36 +258,37 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
     <circle cx="200" cy="144" r="5" fill="#5B1A18"/>
     <circle cx="270" cy="207" r="5" fill="#5B1A18"/>
     <circle cx="340" cy="270" r="5" fill="#5B1A18"/>
-    <text x="46" y="18"  text-anchor="end" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">A</text>
-    <text x="116" y="80" text-anchor="end" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">B</text>
-    <text x="186" y="142" text-anchor="end" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">C</text>
-    <text x="256" y="205" text-anchor="end" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">D</text>
-    <text x="344" y="283" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">E</text>
+    <text x="72" y="18"  text-anchor="start" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">A</text>
+    <text x="138" y="80" text-anchor="start" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">B</text>
+    <text x="208" y="142" text-anchor="start" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">C</text>
+    <text x="278" y="206" text-anchor="start" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">D</text>
+    <text x="324" y="262" text-anchor="start" font-size="13" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">E</text>
     <line x1="54" y1="20"  x2="60" y2="20"  stroke="#5B1A18" stroke-width="1.5"/>
-    <text x="50" y="24" text-anchor="end" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">100</text>
+    <text x="48" y="24" text-anchor="end" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">100</text>
     <line x1="54" y1="82"  x2="60" y2="82"  stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="50" y="86" text-anchor="end" font-size="12" fill="#6b7280" font-family="Lora,serif">75</text>
+    <text x="48" y="86" text-anchor="end" font-size="12" fill="#6b7280" font-family="Lora,serif">75</text>
     <line x1="54" y1="144" x2="60" y2="144" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="50" y="148" text-anchor="end" font-size="12" fill="#6b7280" font-family="Lora,serif">50</text>
+    <text x="48" y="148" text-anchor="end" font-size="12" fill="#6b7280" font-family="Lora,serif">50</text>
     <line x1="54" y1="207" x2="60" y2="207" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="50" y="211" text-anchor="end" font-size="12" fill="#6b7280" font-family="Lora,serif">25</text>
+    <text x="48" y="211" text-anchor="end" font-size="12" fill="#6b7280" font-family="Lora,serif">25</text>
     <line x1="130" y1="270" x2="130" y2="276" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="130" y="288" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">50</text>
+    <text x="130" y="290" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">50</text>
     <line x1="200" y1="270" x2="200" y2="276" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="200" y="288" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">100</text>
+    <text x="200" y="290" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">100</text>
     <line x1="270" y1="270" x2="270" y2="276" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="270" y="288" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">150</text>
+    <text x="270" y="290" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">150</text>
     <line x1="340" y1="270" x2="340" y2="276" stroke="#5B1A18" stroke-width="1.5"/>
-    <text x="340" y="288" text-anchor="middle" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">200</text>
-    <text x="200" y="306" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif">Roses</text>
+    <text x="340" y="290" text-anchor="middle" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">200</text>
+    <text x="200" y="308" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif">Roses</text>
     <text x="20" y="145" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif" transform="rotate(-90,20,145)">Guns</text>
     <text x="236" y="118" font-size="13" fill="#5B1A18" font-style="italic" font-weight="600" font-family="Poppins,sans-serif">PPF</text>
     <text x="96" y="198" font-size="12" fill="#94a3b8" font-style="italic" font-family="Lora,serif">Feasible</text>
+  </g>
   </svg>
   <div class="diagram-caption">Points A&ndash;E are all on the PPF (efficient). The straight line reflects constant opportunity costs: every 50 extra roses costs exactly 25 guns.</div>
 </div>
 
-<h3 class="subsection-heading">4.4 Reading Opportunity Cost Off the PPF</h3>
+<h3 class="subsection-heading">3.4 Reading Opportunity Cost Off the PPF</h3>
 <p>The <em>slope</em> of the PPF tells you the rate of trade-off. On this straight-line PPF, moving from A (100 guns, 0 roses) to B (75 guns, 50 roses):</p>
 <ul class="body-list">
   <li>We gain 50 roses and lose 25 guns.</li>
@@ -379,7 +297,23 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 </ul>
 <p>This rate is constant along the entire straight-line PPF &mdash; a special (and unrealistic) case.</p>
 
-<h3 class="subsection-heading">4.5 The Concave PPF: Increasing Opportunity Costs</h3>
+<div class="example-box">
+  <div class="ex-header">Worked Example 3.1</div>
+  <div class="ex-title">Reading Opportunity Cost from the PPF</div>
+  <p><strong>Setup:</strong> The economy is currently at combination C (50 guns, 100 roses). Society decides to produce 25 more guns.</p>
+  <p><strong>(a)</strong> Which combination does the economy move to?</p>
+  <p><strong>(b)</strong> What is the opportunity cost of those 25 additional guns?</p>
+  <p><strong>(c)</strong> What is the opportunity cost of one additional gun?</p>
+  <p><strong>(d)</strong> If the economy then moves further from B to A, does the opportunity cost per gun change?</p>
+  <div class="solution">
+    <p><strong>(a)</strong> Producing 25 more guns (from 50 to 75) moves the economy from C to combination <strong>B</strong> (75 guns, 50 roses).</p>
+    <p><strong>(b)</strong> To gain 25 guns, rose production must fall from 100 to 50 &mdash; a sacrifice of 50 roses. The opportunity cost of 25 additional guns is <strong>50 roses</strong>.</p>
+    <p><strong>(c)</strong> Opportunity cost of 1 gun = 50 roses &divide; 25 guns = <strong>2 roses per gun</strong>.</p>
+    <p><strong>(d)</strong> No &mdash; on a straight-line PPF, the opportunity cost is constant everywhere. Moving from B to A also sacrifices 50 roses to gain 25 guns: the same 2 roses per gun. This constancy is precisely what makes the PPF a straight line. A concave (bowed-out) PPF, by contrast, reflects <em>increasing</em> opportunity costs &mdash; each additional gun costs more and more roses as you move along it.</p>
+  </div>
+</div>
+
+<h3 class="subsection-heading">3.5 The Concave PPF: Increasing Opportunity Costs</h3>
 <p>In reality, resources are <em>not</em> perfectly interchangeable. Some land is excellent farmland; some is rocky hillside. Some workers are skilled in manufacturing; others in agriculture. As you shift more and more resources toward one use, the resources added become progressively <em>less suitable</em> for that use &mdash; so each additional unit of output costs more and more of the other good. This is the <strong>Law of Increasing Opportunity Costs</strong>.</p>
 
 <div class="def-box">
@@ -388,11 +322,12 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
   <p>As the production of one good increases (with fixed total resources), the opportunity cost of each additional unit of that good rises. This arises because the most suitable resources are deployed first, and progressively less suitable ones must follow.</p>
 </div>
 
-<p>This law gives the PPF its characteristic <strong>concave (bowed-out) shape</strong>. Figure 4.2 illustrates this, with three equal-sized increases in rose production showing progressively larger sacrifices of guns.</p>
+<p>This law gives the PPF its characteristic <strong>concave (bowed-out) shape</strong>. Figure 3.2 illustrates this, with three equal-sized increases in rose production showing progressively larger sacrifices of guns.</p>
 
 <div class="diagram-container">
-  <div class="diagram-title">Figure 4.2 &mdash; Increasing Opportunity Costs (Concave PPF)</div>
-  <svg viewBox="0 0 440 315" width="440" height="315" xmlns="http://www.w3.org/2000/svg">
+  <div class="diagram-title">Figure 3.2 &mdash; Increasing Opportunity Costs (Concave PPF)</div>
+  <svg viewBox="0 0 460 360" width="460" height="360" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0,40)">
     <path d="M60,275 L60,20 C230,20 350,165 350,275 Z" fill="#FEF9F4"/>
     <line x1="60" y1="14" x2="60" y2="275" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="60" y1="275" x2="362" y2="275" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
@@ -404,45 +339,46 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
     <line x1="133" y1="20" x2="133" y2="30" stroke="#374151" stroke-width="2" stroke-dasharray="6,4"/>
     <circle cx="60"  cy="20" r="5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
     <circle cx="133" cy="30" r="5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
-    <text x="97"  y="17" text-anchor="middle" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">+50 roses</text>
-    <text x="149" y="28" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">&#8211;4 guns</text>
+    <text x="97"  y="15" text-anchor="middle" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">+50 roses</text>
+    <text x="152" y="28" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">&#8211;4 guns</text>
     <!-- Segment 2 -->
     <line x1="133" y1="30" x2="205" y2="30" stroke="#374151" stroke-width="2" stroke-dasharray="4,4"/>
     <line x1="205" y1="30" x2="205" y2="60" stroke="#374151" stroke-width="2" stroke-dasharray="4,4"/>
     <circle cx="205" cy="60" r="5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
-    <text x="169" y="27" text-anchor="middle" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">+50 roses</text>
-    <text x="213" y="48" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">&#8211;12 guns</text>
+    <text x="169" y="25" text-anchor="middle" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">+50 roses</text>
+    <text x="218" y="50" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">&#8211;12 guns</text>
     <!-- Segment 3 -->
     <line x1="205" y1="60" x2="278" y2="60" stroke="#374151" stroke-width="2" stroke-dasharray="2,4"/>
     <line x1="278" y1="60" x2="278" y2="118" stroke="#374151" stroke-width="2" stroke-dasharray="2,4"/>
     <circle cx="278" cy="118" r="5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
-    <text x="242" y="56" text-anchor="middle" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">+50 roses</text>
-    <text x="284" y="93" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">&#8211;22 guns</text>
+    <text x="242" y="55" text-anchor="middle" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">+50 roses</text>
+    <text x="286" y="95" font-size="11" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">&#8211;22 guns</text>
     <!-- axis labels -->
     <line x1="54" y1="20" x2="60" y2="20" stroke="#5B1A18" stroke-width="2"/>
-    <text x="50" y="24" text-anchor="end" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">100</text>
+    <text x="48" y="24" text-anchor="end" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">100</text>
     <line x1="133" y1="275" x2="133" y2="281" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="133" y="293" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">50</text>
+    <text x="133" y="295" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">50</text>
     <line x1="205" y1="275" x2="205" y2="281" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="205" y="293" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">100</text>
+    <text x="205" y="295" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">100</text>
     <line x1="278" y1="275" x2="278" y2="281" stroke="#9ca3af" stroke-width="1.5"/>
-    <text x="278" y="293" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">150</text>
+    <text x="278" y="295" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Lora,serif">150</text>
     <line x1="350" y1="275" x2="350" y2="281" stroke="#5B1A18" stroke-width="2"/>
-    <text x="350" y="293" text-anchor="middle" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">200</text>
-    <text x="210" y="310" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif">Roses</text>
+    <text x="350" y="295" text-anchor="middle" font-size="13" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">200</text>
+    <text x="210" y="312" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif">Roses</text>
     <text x="20" y="148" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif" transform="rotate(-90,20,148)">Guns</text>
     <text x="306" y="180" font-size="13" fill="#5B1A18" font-style="italic" font-weight="700" font-family="Poppins,sans-serif">PPF</text>
     <rect x="48" y="130" width="188" height="58" rx="5" fill="white" stroke="#e2e8f0" stroke-width="1"/>
     <text x="142" y="149" text-anchor="middle" font-size="11" font-weight="700" fill="#111827" font-family="Poppins,sans-serif">Each step = +50 roses</text>
     <text x="142" y="164" text-anchor="middle" font-size="10.5" fill="#6b7280" font-family="Lora,serif">Guns lost: 4 &#8594; 12 &#8594; 22</text>
     <text x="142" y="179" text-anchor="middle" font-size="10.5" fill="#6b7280" font-family="Lora,serif">Opportunity cost rises</text>
+  </g>
   </svg>
-  <div class="diagram-caption">Each equal horizontal step represents 50 more roses. The vertical drops (guns sacrificed) grow larger as we move right. This is the Law of Increasing Opportunity Costs in graphical form. Note: the three segments use different dash patterns to remain distinguishable when printed in black and white.</div>
+  <div class="diagram-caption">Each equal horizontal step represents 50 more roses. The vertical drops (guns sacrificed) grow larger as we move right &mdash; 4, then 12, then 22 guns. This is the Law of Increasing Opportunity Costs in graphical form.</div>
 </div>
 
 <p>The slope of the PPF at any point is the <strong>Marginal Rate of Transformation (MRT)</strong> &mdash; the rate at which the economy must give up guns to produce one more rose. On a concave PPF, the MRT rises in absolute value as we move from left to right.</p>
 
-<h3 class="subsection-heading">4.6 Points On, Inside, and Outside the PPF</h3>
+<h3 class="subsection-heading">3.6 Points On, Inside, and Outside the PPF</h3>
 <ul class="body-list">
   <li><strong>On the PPF (efficient):</strong> All resources are employed and used in the best possible way. More of one good is only possible by sacrificing some of the other.</li>
   <li><strong>Inside the PPF (inefficient):</strong> Resources are idle or misallocated &mdash; the economy could produce more of both goods simultaneously. Causes include unemployment, idle factories, or outdated technology.</li>
@@ -450,8 +386,9 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 </ul>
 
 <div class="diagram-container">
-  <div class="diagram-title">Figure 4.3 &mdash; Efficiency, Inefficiency, and Growth</div>
-  <svg viewBox="0 0 420 310" width="420" height="310" xmlns="http://www.w3.org/2000/svg">
+  <div class="diagram-title">Figure 3.3 &mdash; Efficiency, Inefficiency, and Growth</div>
+  <svg viewBox="0 0 500 360" width="500" height="360" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0,40)">
     <path d="M60,270 L60,20 C210,20 325,158 325,270 Z" fill="#FEF9F4"/>
     <line x1="60" y1="14" x2="60" y2="270" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="60" y1="270" x2="362" y2="270" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
@@ -470,20 +407,21 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
     <line x1="155" y1="165" x2="155" y2="48" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,3"/>
     <text x="158" y="108" font-size="10.5" fill="#9ca3af" font-style="italic" font-family="Lora,serif">wasted capacity</text>
     <!-- Point C: outside -->
-    <circle cx="270" cy="28" r="8" fill="#374151" stroke="white" stroke-width="2" stroke-dasharray="3,2"/>
-    <text x="283" y="26" font-size="13" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">C &mdash; Outside (Unattainable)</text>
-    <text x="80" y="18" font-size="11" fill="#94a3b8" font-style="italic" font-family="Poppins,sans-serif">Future PPF (after growth) - - -</text>
+    <circle cx="270" cy="28" r="8" fill="#374151" stroke="white" stroke-width="2"/>
+    <text x="200" y="18" font-size="13" fill="#374151" font-weight="700" font-family="Poppins,sans-serif">C &mdash; Outside (Unattainable now)</text>
+    <text x="80" y="4" font-size="11" fill="#94a3b8" font-style="italic" font-family="Poppins,sans-serif">Future PPF (after growth) - - -</text>
     <line x1="54" y1="20"  x2="60" y2="20"  stroke="#5B1A18" stroke-width="2"/>
-    <text x="50" y="24" text-anchor="end" font-size="12" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">100</text>
+    <text x="48" y="24" text-anchor="end" font-size="12" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">100</text>
     <line x1="325" y1="270" x2="325" y2="276" stroke="#5B1A18" stroke-width="2"/>
-    <text x="325" y="290" text-anchor="middle" font-size="12" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">200</text>
-    <text x="200" y="306" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif">Roses</text>
+    <text x="325" y="292" text-anchor="middle" font-size="12" fill="#5B1A18" font-weight="700" font-family="Poppins,sans-serif">200</text>
+    <text x="200" y="308" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif">Roses</text>
     <text x="20" y="145" text-anchor="middle" font-size="13" font-weight="600" fill="#374151" font-family="Poppins,sans-serif" transform="rotate(-90,20,145)">Guns</text>
+  </g>
   </svg>
   <div class="diagram-caption">A is efficient (on the PPF). B is inefficient (inside) &mdash; resources are wasted. C is currently unattainable but may become achievable if the PPF shifts outward through growth.</div>
 </div>
 
-<h3 class="subsection-heading">4.7 Shifting the PPF: Economic Growth</h3>
+<h3 class="subsection-heading">3.7 Shifting the PPF: Economic Growth</h3>
 <p>The PPF is drawn for a given stock of resources and a given level of technology. Changes in either shift the frontier:</p>
 <ul class="body-list">
   <li><strong>More resources &rarr; outward shift</strong> (more land, larger workforce, more capital equipment)</li>
@@ -501,15 +439,15 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 </div>
 
 <!-- ══════════════════════════════════════════════════════ -->
-<h2 class="section-heading">5 &nbsp; Economic Systems: Who Decides?</h2>
+<h2 class="section-heading">4 &nbsp; Economic Systems: Who Decides?</h2>
 
 <p>We know that scarcity forces every society to answer the three fundamental questions. But different societies have developed very different mechanisms for answering them.</p>
 
-<h3 class="subsection-heading">5.1 The Command Economy</h3>
-<p>In a <strong>command economy</strong> (also called a centrally planned economy), the government makes all major resource allocation decisions. A central planning authority determines what goods to produce, in what quantities, by what methods, and how output is distributed. The Soviet Union (1917&ndash;1991), Cuba, and North Korea are the most studied examples.</p>
+<h3 class="subsection-heading">4.1 The Command Economy</h3>
+<p>In a <strong>command economy</strong> (also called a centrally planned economy), the government makes all major resource allocation decisions. A central planning authority determines what goods to produce, in what quantities, by what methods, and how output is distributed. The Soviet Union (1917&ndash;1991), Cuba, China, and North Korea are the most studied examples.</p>
 <p>The theoretical appeal is that planners can direct resources toward socially desirable goals. The practical failure is <em>informational</em>: no central authority can collect and process the vast dispersed, local knowledge needed to allocate resources well. The result is typically chronic shortages, poor quality, and low innovation in consumer goods &mdash; even when military or industrial targets are met.</p>
 
-<h3 class="subsection-heading">5.2 The Market Economy</h3>
+<h3 class="subsection-heading">4.2 The Market Economy</h3>
 <p>In a <strong>market economy</strong>, allocation is driven by <em>prices</em> &mdash; which emerge from the interactions of buyers and sellers. No central authority decides what should be produced; instead, millions of individual decisions, each responding to price signals, collectively determine the answers to the three fundamental questions.</p>
 
 <div class="def-box">
@@ -518,7 +456,9 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
   <p>An economic system in which resource allocation is determined primarily through the price mechanism. High prices signal to producers that a good is valued and profitable to supply; low prices signal the opposite. The pursuit of self-interest, mediated by prices, coordinates economic activity without central direction &mdash; Adam Smith&rsquo;s &ldquo;invisible hand.&rdquo;</p>
 </div>
 
-<h3 class="subsection-heading">5.3 Mixed Economies and What Comes Next</h3>
+<p>A market economy is sometimes described as a <strong>laissez-faire</strong> system &mdash; a French phrase meaning &ldquo;let do&rdquo; or &ldquo;leave it be.&rdquo; The idea is that the economy functions best when the government steps back and allows individuals and firms to make their own decisions, guided only by prices and self-interest. In practice, no economy is purely laissez-faire, but the concept captures the philosophical core of the market approach.</p>
+
+<h3 class="subsection-heading">4.3 Mixed Economies and What Comes Next</h3>
 <p>In practice, all modern economies are <strong>mixed economies</strong> &mdash; they combine market mechanisms with government intervention. The U.S. has largely market-determined prices, but the government provides public goods, regulates markets, and redistributes income through taxes and transfers.</p>
 <p>The interesting economic debates are not about whether markets or governments should do everything, but about the appropriate <em>boundary</em> between them. Where do markets fail? Where do government interventions help or hurt? These questions will recur throughout the semester. The tool we will use to explore them is the supply-and-demand model &mdash; which we turn to next.</p>
 
@@ -526,61 +466,21 @@ hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
 <hr>
 <h2 class="section-heading">Key Terms</h2>
 <div class="glossary-grid">
-  <dl class="gloss-item"><dt>Economics</dt><dd>The study of how individuals, businesses, and societies allocate scarce resources to satisfy unlimited wants.</dd></dl>
   <dl class="gloss-item"><dt>Scarcity</dt><dd>The fundamental condition that resources are finite while human wants are unlimited.</dd></dl>
-  <dl class="gloss-item"><dt>Microeconomics</dt><dd>The branch of economics studying individual actors &mdash; households, firms, and markets.</dd></dl>
-  <dl class="gloss-item"><dt>Macroeconomics</dt><dd>The branch studying economy-wide outcomes: GDP, inflation, unemployment, and growth.</dd></dl>
-  <dl class="gloss-item"><dt>Trade-off</dt><dd>The situation in which having more of one thing requires giving up something else.</dd></dl>
   <dl class="gloss-item"><dt>Opportunity Cost</dt><dd>The value of the best alternative forgone when a choice is made.</dd></dl>
-  <dl class="gloss-item"><dt>Explicit Cost</dt><dd>A direct, out-of-pocket monetary payment made to produce a good or service.</dd></dl>
-  <dl class="gloss-item"><dt>Implicit Cost</dt><dd>The opportunity cost of using a resource already owned, rather than renting or selling it.</dd></dl>
+  <dl class="gloss-item"><dt>Trade-off</dt><dd>The situation in which having more of one thing requires giving up something else.</dd></dl>
   <dl class="gloss-item"><dt>Production Possibility Frontier (PPF)</dt><dd>A curve showing all efficient combinations of two goods an economy can produce with fixed resources.</dd></dl>
   <dl class="gloss-item"><dt>Marginal Rate of Transformation (MRT)</dt><dd>The slope of the PPF; the rate at which one good must be sacrificed to produce one more unit of the other.</dd></dl>
   <dl class="gloss-item"><dt>Law of Increasing Opportunity Costs</dt><dd>As production of one good rises, the OC of each additional unit increases, causing a concave PPF.</dd></dl>
   <dl class="gloss-item"><dt>Economic Efficiency</dt><dd>Producing the maximum possible output from available resources &mdash; operating on the PPF.</dd></dl>
   <dl class="gloss-item"><dt>Command Economy</dt><dd>An economic system in which a central authority makes the major resource allocation decisions.</dd></dl>
   <dl class="gloss-item"><dt>Market Economy</dt><dd>A system in which prices, determined by supply and demand, coordinate resource allocation.</dd></dl>
-</div>
-
-<!-- ══════════════════════════════════════════════════════ -->
-<div class="pq-section">
-  <h2>Practice Questions</h2>
-  <p class="pq-note">Work through these on your own. Answers are not provided &mdash; use the content above to reason through each one. No calculators required beyond simple arithmetic.</p>
-
-  <div class="pq-group-title">Section A &mdash; Concept Checks</div>
-  <ol>
-    <li>In your own words, explain why scarcity is the fundamental economic problem. Would scarcity disappear if everyone became much wealthier? Why or why not?</li>
-    <li>A politician argues the government should provide free healthcare because &ldquo;health is priceless.&rdquo; As an economist, how would you respond? What concept is being ignored?</li>
-    <li>Explain the difference between an <em>explicit</em> cost and an <em>implicit</em> cost. Why do economists insist on including implicit costs when calculating the &ldquo;true&rdquo; cost of a decision?</li>
-    <li>Is scarcity the same as a shortage? Is scarcity the same as poverty? Explain both distinctions.</li>
-  </ol>
-
-  <div class="pq-group-title">Section B &mdash; Opportunity Cost</div>
-  <ol start="5">
-    <li>Sarah can spend her Saturday either (A) working at a caf&eacute; for $12/hour &times; 8 hours = $96, (B) studying for an exam she estimates is worth $200 in future career value, or (C) attending a concert she values at $80. She chooses to study. What is the opportunity cost of studying?</li>
-    <li>After graduating, you are offered a job paying $55,000/year. Instead, you open a small business. In your first year: revenue = $90,000; rent = $18,000; employee wages = $30,000; supplies = $5,000. What is your accounting profit? What is your economic profit? (Assume no other implicit costs.)</li>
-    <li>A country has a $1 billion budget and can spend it on (A) a new highway (valued at $900M), (B) university scholarships (valued at $1.1B), or (C) healthcare subsidies (valued at $800M). It chooses scholarships. What is the opportunity cost of this decision?</li>
-  </ol>
-
-  <div class="pq-group-title">Section C &mdash; Production Possibility Frontier</div>
-  <ol start="8">
-    <li>An economy has 120 acres of land and produces only corn and cotton. Corn requires 2 acres per bushel; cotton requires 3 acres per bale.<br>(a) What is the maximum output of corn? Of cotton?<br>(b) If the economy produces 30 bales of cotton, how many bushels of corn can it also produce?<br>(c) What is the opportunity cost of one additional bale of cotton? Is this constant?</li>
-    <li>Using a clearly labeled diagram, show what happens to the PPF when: (a) the economy experiences a severe drought destroying 20% of its agricultural land; (b) a new irrigation technology doubles the productivity of all land.</li>
-    <li>Why is the real-world PPF concave rather than straight? What assumption would make it a straight line?</li>
-    <li>COVID-19 caused mass unemployment in spring 2020. Using the PPF framework, illustrate and explain what happened. Did the PPF itself shift, or did something else change?</li>
-    <li>Point X: (80 guns, 60 roses). Point Y: (60 guns, 60 roses). Both are inside the PPF. Is X necessarily better than Y? Explain using the concept of efficiency.</li>
-  </ol>
-
-  <div class="pq-group-title">Section D &mdash; Economic Systems</div>
-  <ol start="13">
-    <li>Compare command and market economies in terms of how they answer the three fundamental questions (what, how, for whom). What are the key advantages and disadvantages of each?</li>
-    <li>In a market economy, a sudden surge in demand for electric vehicles causes EV prices to rise. Walk through the mechanism by which this price signal leads to more EVs being produced over time. Which of the three fundamental questions is being answered here, and how?</li>
-  </ol>
+  <dl class="gloss-item"><dt>Laissez-Faire</dt><dd>French for &ldquo;let do&rdquo; &mdash; the principle that the economy works best with minimal government interference, leaving decisions to individuals and firms guided by prices.</dd></dl>
 </div>
 
 <div class="doc-footer">
-  <span>ECON 2006 &middot; Principles of Economics (Macro) &middot; Virginia Tech &middot; Summer 2026</span>
-  <span>Topic 1 &middot; Chapters 1&ndash;2</span>
+  <span>ECON 2006 &middot; Principles of Economics (Macro) &middot; Virginia Tech &middot; Summer II 2026</span>
+  <span>Topic 1 &middot; Chapter 2</span>
 </div>
 
 </div><!-- .page -->
