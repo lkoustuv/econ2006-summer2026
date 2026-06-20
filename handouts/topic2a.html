@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Handout — Topic 2 (Part A): Demand</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --accent:#5B1A18;
+  --accent2:#FD6467;
+  --warm:#D67236;
+  --sandy:#F1BB7B;
+  --steel:#4682B4;
+  --ink:#111827; --mid:#374151; --muted:#6b7280;
+  --rule:#e8d5c4;
+  --def-bg:#fef9f4;
+  --ex-bg:#fff3f2;
+  --rw-bg:#fef8ed;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.78;color:var(--ink);background:#fff;padding:0;}
+.page{max-width:800px;margin:0 auto;padding:44px 40px 80px;}
+
+.doc-header{border-bottom:2.5px solid var(--ink);padding-bottom:18px;margin-bottom:32px;}
+.doc-header .course-tag{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.doc-header h1{font-family:'Poppins',sans-serif;font-size:27px;font-weight:800;line-height:1.2;color:var(--ink);margin-bottom:10px;}
+.doc-meta{font-family:'Poppins',sans-serif;font-size:13px;color:var(--muted);display:flex;gap:20px;flex-wrap:wrap;}
+
+.lo-box{background:var(--def-bg);border:1px solid var(--rule);border-left:4px solid var(--accent2);border-radius:0 8px 8px 0;padding:20px 24px;margin-bottom:40px;}
+.lo-box h3{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.lo-box ol{padding-left:22px;color:var(--mid);}
+.lo-box li{font-size:15px;line-height:1.65;margin-bottom:5px;}
+
+.section-heading{font-family:'Poppins',sans-serif;font-size:21px;font-weight:800;color:var(--ink);margin-top:52px;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid var(--ink);}
+.subsection-heading{font-family:'Poppins',sans-serif;font-size:16.5px;font-weight:700;color:var(--ink);margin-top:28px;margin-bottom:10px;}
+.sub2-heading{font-family:'Poppins',sans-serif;font-size:14.5px;font-weight:700;color:var(--accent);margin-top:20px;margin-bottom:8px;}
+p{margin-bottom:14px;}p:last-child{margin-bottom:0;}
+ul.body-list,ol.body-list{padding-left:24px;margin-bottom:14px;}
+ul.body-list li,ol.body-list li{margin-bottom:7px;line-height:1.72;}
+
+.def-box{background:var(--def-bg);border-left:5px solid var(--ink);padding:16px 22px;margin:20px 0;}
+.def-box.demand{border-left-color:var(--accent2);background:#fff5f5;}
+.def-box .def-label{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.def-box .def-term{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--accent);margin-bottom:6px;}
+.def-box.demand .def-term{color:var(--accent2);}
+.def-box p{font-size:15.5px;line-height:1.62;color:var(--mid);margin-bottom:0;}
+
+.example-box{border:1.5px solid #f0c4b0;border-top:4px solid var(--accent2);background:var(--ex-bg);padding:20px 24px;margin:22px 0;}
+.example-box .ex-header{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px;}
+.example-box .ex-title{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:10px;}
+.example-box p,.example-box li{font-size:15.5px;line-height:1.72;color:var(--mid);}
+.example-box ul,.example-box ol{padding-left:22px;margin:8px 0;}
+.example-box .solution{margin-top:14px;padding-top:14px;border-top:1px dashed #f0c4b0;}
+.example-box .solution strong{color:var(--accent);}
+
+.rw-box{background:var(--rw-bg);border:1px solid #e8c89a;border-left:5px solid var(--warm);padding:18px 22px;margin:24px 0;}
+.rw-box .rw-header{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);margin-bottom:7px;}
+.rw-box .rw-title{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.rw-box p{font-size:15px;line-height:1.72;color:#3a1f0a;margin-bottom:8px;}
+.rw-box p:last-child{margin-bottom:0;}
+.rw-box .rw-src{font-size:12.5px;color:var(--warm);font-style:italic;margin-top:8px;}
+
+.keypoint{border-left:4px solid var(--warm);padding:12px 18px;background:#fef6e4;font-size:15.5px;color:var(--mid);font-style:italic;margin:18px 0;}
+.keypoint strong{color:var(--accent);font-style:normal;}
+
+.diagram-container{margin:26px 0;text-align:center;}
+.diagram-container .diagram-title{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:10px;}
+.diagram-container .diagram-caption{font-size:14px;color:var(--muted);margin-top:8px;font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;}
+
+.two-panel{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0;}
+.two-panel .panel-label{font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;text-align:center;}
+
+.three-panel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0;}
+.three-panel .panel-label{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:5px;text-align:center;}
+.three-panel .panel-caption{font-size:12px;color:var(--muted);margin-top:6px;text-align:center;font-style:italic;line-height:1.5;}
+
+.shift-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;}
+.shift-table th{font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:9px 14px;border-bottom:2px solid var(--rule);text-align:left;}
+.shift-table td{padding:8px 14px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--mid);}
+.shift-table td:first-child{font-style:italic;}
+.shift-table tr:nth-child(even) td{background:var(--def-bg);}
+.arr-r{color:#059669;font-weight:700;}
+.arr-l{color:#dc2626;font-weight:700;}
+
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px;}
+.data-table th{background:var(--ink);color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;padding:10px 14px;text-align:center;}
+.data-table td{padding:9px 14px;text-align:center;border-bottom:1px solid var(--rule);color:var(--mid);}
+.data-table tr:nth-child(even) td{background:var(--def-bg);}
+.data-table td strong{color:var(--ink);}
+
+.glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}
+.gloss-item{background:var(--def-bg);border-radius:4px;padding:12px 16px;border:1px solid var(--rule);}
+.gloss-item dt{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+.gloss-item dd{font-size:14px;line-height:1.55;color:var(--mid);}
+
+hr{border:none;border-top:1.5px solid var(--rule);margin:40px 0;}
+
+.doc-footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--rule);font-family:'Poppins',sans-serif;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;}
+
+.print-fab{position:fixed;bottom:32px;right:32px;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:13px 22px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 18px rgba(91,26,24,.35);transition:transform .15s,box-shadow .15s;z-index:999;display:flex;align-items:center;gap:8px;}
+.print-fab:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,26,24,.45);}
+.print-fab svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
+
+@media print{
+  .print-fab{display:none!important;}
+  .page{padding:16px 24px 32px;max-width:100%;}
+  body{font-size:11pt;line-height:1.65;}
+  .def-box{border-left:5px solid #000;background:#f5f5f5!important;}
+  .example-box{border:1.5px solid #999;border-top:4px solid #000;background:#f0f0f0!important;}
+  .rw-box{border-left:5px solid #000;border:1px solid #999;background:#efefef!important;}
+  .keypoint{border-left:4px solid #000;background:#eeeeee!important;}
+  .lo-box{border-left:4px solid #000;background:#f5f5f5!important;}
+  .example-box,.rw-box,.def-box,.keypoint{page-break-inside:avoid;}
+  a{text-decoration:none;color:inherit;}
+  .def-box .def-term,.rw-box .rw-header,.example-box .ex-header,.example-box .solution strong{color:#000!important;}
+  .doc-header .course-tag,.keypoint strong{color:#000!important;}
+  .gloss-item dt{color:#000!important;}
+}
+</style>
+</head>
+<body>
+<button class="print-fab" onclick="window.print()">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+  Print / Save PDF
+</button>
+
+<div class="page">
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="course-tag">ECON 2006 &middot; Principles of Economics (Macro) &middot; Module 1 &middot; Topic 2 (Part A)</div>
+  <h1>Demand</h1>
+  <div class="doc-meta">
+    <span>Based on Chapters 3 &amp; 4 &mdash; Case, Fair &amp; Oster (13th ed.)</span>
+    <span>Koustuv Lahiri &middot; Virginia Tech &middot; Summer II 2026</span>
+  </div>
+</div>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="lo-box">
+  <h3>Learning Objectives</h3>
+  <p style="font-size:14px;color:var(--muted);margin-bottom:10px;">After working through this handout, you should be able to:</p>
+  <ol class="body-list" style="margin-bottom:0;">
+    <li>Define <em>quantity demanded</em> and explain the three conditions embedded in that definition.</li>
+    <li>State the Law of Demand and sketch a downward-sloping demand curve from a schedule.</li>
+    <li>Explain why some goods show exceptions to the usual downward-sloping demand, including perfectly inelastic (vertical) demand, Giffen goods, and Veblen/luxury goods.</li>
+    <li>Identify the key determinants of demand and predict which way the curve shifts when each changes.</li>
+    <li>Classify a good as normal or inferior based on how demand responds to income changes.</li>
+    <li>Identify whether two goods are substitutes or complements and trace the price-chain effect.</li>
+    <li>Distinguish precisely between a <em>change in quantity demanded</em> (movement along) and a <em>change in demand</em> (shift of the curve).</li>
+    <li>Explain how market demand is derived from individual demand curves by horizontal summation.</li>
+  </ol>
+</div>
+
+<p>Every market has two sides: buyers and sellers. This handout focuses entirely on the buyers&rsquo; side &mdash; what determines how much of a good consumers want to purchase and how that desire responds to price and other conditions.</p>
+
+<!-- SECTION 1 -->
+<h2 class="section-heading">1 &nbsp; What Is Demand?</h2>
+
+<h3 class="subsection-heading">1.1 Quantity Demanded &mdash; A Precise Definition</h3>
+<p>In everyday speech, &ldquo;demand&rdquo; just means wanting something. Economists use the word far more carefully.</p>
+
+<div class="def-box demand">
+  <div class="def-label">Core Definition</div>
+  <div class="def-term">Quantity Demanded</div>
+  <p>The amount (number of units) of a product that a household <strong>would buy</strong> in a given time period if it could buy all it wanted at the <strong>current market price</strong>.</p>
+</div>
+
+<p>Three phrases in that definition carry precise meaning:</p>
+<ul class="body-list">
+  <li><strong>At the market price.</strong> Individual buyers are <em>price-takers</em> &mdash; the market sets the price and the buyer then decides how much to buy.</li>
+  <li><strong>In a given time period.</strong> Quantity demanded is meaningless without a time window. &ldquo;Five burgers&rdquo; tells us nothing; &ldquo;five burgers per week&rdquo; is meaningful.</li>
+  <li><strong>If it could buy all it wanted.</strong> Both <em>willingness</em> and <em>ability</em> to pay must be present. Wanting a Ferrari does not constitute demand unless you can also afford it.</li>
+</ul>
+
+<p>The full <strong>demand</strong> for a good is the entire relationship between every possible price and the corresponding quantity demanded. We represent this with a <em>demand schedule</em> (table) and a <em>demand curve</em> (graph).</p>
+
+<!-- SECTION 2 -->
+<h2 class="section-heading">2 &nbsp; The Law of Demand</h2>
+
+<div class="def-box demand">
+  <div class="def-label">Law of Economics</div>
+  <div class="def-term">The Law of Demand</div>
+  <p>There is a <strong>negative (inverse) relationship</strong> between the price of a good and the quantity demanded, <em>ceteris paribus</em> (all else equal). As price rises, quantity demanded falls; as price falls, quantity demanded rises. This produces a <strong>downward-sloping</strong> demand curve.</p>
+</div>
+
+<p>The Latin phrase <em>ceteris paribus</em> is crucial: when we say &ldquo;as price rises, quantity demanded falls,&rdquo; we mean <em>holding everything else constant</em> &mdash; income, prices of other goods, preferences, and so on.</p>
+
+<h3 class="subsection-heading">2.1 The Demand Schedule and Demand Curve</h3>
+<p>Consider the market for sneakers. The <strong>demand schedule</strong> below shows how many pairs consumers want to buy per month at different prices:</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Price per Pair ($)</th><th>Quantity Demanded (pairs/month)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>100</td><td>2,000</td></tr>
+    <tr><td>80</td><td>4,000</td></tr>
+    <tr><td><strong>60</strong></td><td><strong>6,000</strong></td></tr>
+    <tr><td>40</td><td>8,000</td></tr>
+    <tr><td>20</td><td>10,000</td></tr>
+  </tbody>
+</table>
+
+<div class="diagram-container">
+  <div class="diagram-title">Figure 1 &mdash; The Demand Curve: Sneaker Market</div>
+  <svg viewBox="0 0 460 330" width="460" height="330" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+    <line x1="70" y1="12" x2="70" y2="285" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="70" y1="285" x2="420" y2="285" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
+    <polygon points="70,6 64,18 76,18" fill="#111827"/>
+    <polygon points="426,285 414,279 414,291" fill="#111827"/>
+    <text x="18" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#374151" transform="rotate(-90,18,152)">Price ($ per pair)</text>
+    <text x="245" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#374151">Quantity Demanded (000s pairs/month)</text>
+    <line x1="64" y1="20"  x2="70" y2="20"  stroke="#FD6467" stroke-width="2"/>
+    <text x="60" y="25"  text-anchor="end" font-size="12" fill="#FD6467" font-weight="700">100</text>
+    <line x1="64" y1="73"  x2="70" y2="73"  stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="60" y="78"  text-anchor="end" font-size="12" fill="#6b7280">80</text>
+    <line x1="64" y1="126" x2="70" y2="126" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="60" y="131" text-anchor="end" font-size="12" fill="#6b7280">60</text>
+    <line x1="64" y1="179" x2="70" y2="179" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="60" y="184" text-anchor="end" font-size="12" fill="#6b7280">40</text>
+    <line x1="64" y1="232" x2="70" y2="232" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="60" y="237" text-anchor="end" font-size="12" fill="#6b7280">20</text>
+    <line x1="90"  y1="285" x2="90"  y2="291" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="90"  y="304" text-anchor="middle" font-size="12" fill="#6b7280">2</text>
+    <line x1="172" y1="285" x2="172" y2="291" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="172" y="304" text-anchor="middle" font-size="12" fill="#6b7280">4</text>
+    <line x1="254" y1="285" x2="254" y2="291" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="254" y="304" text-anchor="middle" font-size="12" fill="#6b7280">6</text>
+    <line x1="336" y1="285" x2="336" y2="291" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="336" y="304" text-anchor="middle" font-size="12" fill="#6b7280">8</text>
+    <line x1="418" y1="285" x2="418" y2="291" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="418" y="304" text-anchor="middle" font-size="12" fill="#6b7280">10</text>
+    <!-- Demand line passes through (90,20), (172,73), (254,126), (336,179), (418,232) -->
+    <line x1="90" y1="20" x2="418" y2="232" stroke="#FD6467" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="90"  cy="20"  r="5.5" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+    <circle cx="172" cy="73"  r="5.5" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+    <circle cx="254" cy="126" r="5.5" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+    <circle cx="336" cy="179" r="5.5" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+    <circle cx="418" cy="232" r="5.5" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+    <text x="424" y="236" font-size="16" font-weight="800" fill="#FD6467" font-style="italic">D</text>
+    <!-- Dashed gridlines at ($60, 6000): intersection at (254, 126) — line passes through this point -->
+    <line x1="70"  y1="126" x2="254" y2="126" stroke="#f9a8a8" stroke-width="1.2" stroke-dasharray="5,4"/>
+    <line x1="254" y1="126" x2="254" y2="285" stroke="#f9a8a8" stroke-width="1.2" stroke-dasharray="5,4"/>
+    <text x="260" y="122" font-size="11" fill="#FD6467" font-weight="700">($60, 6,000)</text>
+  </svg>
+  <div class="diagram-caption">Each point corresponds to one row in the demand schedule. The demand line passes exactly through each schedule point. The curve slopes downward, confirming the Law of Demand.</div>
+</div>
+
+<!-- SECTION 2.2 -->
+<h3 class="subsection-heading">2.2 Exceptions to the Law of Demand</h3>
+
+<p>The Law of Demand holds for the vast majority of goods. However, there are some notable exceptions worth knowing about.</p>
+
+<h4 class="sub2-heading">(a) Perfectly Inelastic Demand &mdash; Essential Goods with No Substitutes</h4>
+<p>For some goods &mdash; especially life-saving medicines like insulin &mdash; consumers must purchase the good regardless of price. There is no substitute, and going without is not an option. The demand curve is <strong>vertical</strong>: quantity demanded stays the same no matter what happens to price.</p>
+
+<div class="two-panel" style="margin-top:22px;">
+  <!-- Panel A: Vertical demand -->
+  <div>
+    <div class="panel-label">(a) Vertical Demand (e.g., Insulin)</div>
+    <svg viewBox="0 0 240 220" width="240" height="220" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+      <line x1="50" y1="10" x2="50" y2="195" stroke="#111827" stroke-width="2"/>
+      <line x1="50" y1="195" x2="225" y2="195" stroke="#111827" stroke-width="2"/>
+      <polygon points="50,4 44,16 56,16" fill="#111827"/>
+      <polygon points="231,195 219,189 219,201" fill="#111827"/>
+      <text x="20" y="108" text-anchor="middle" font-size="11" fill="#374151" transform="rotate(-90,20,108)">Price (P)</text>
+      <text x="137" y="214" text-anchor="middle" font-size="11" fill="#374151">Quantity (Q)</text>
+      <!-- Perfectly vertical demand line -->
+      <line x1="140" y1="18" x2="140" y2="188" stroke="#5B1A18" stroke-width="3" stroke-linecap="round"/>
+      <text x="150" y="186" font-size="14" font-weight="800" fill="#5B1A18" font-style="italic">D</text>
+      <!-- Price labels and dashed guides -->
+      <line x1="44" y1="50" x2="50" y2="50" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="40" y="54" text-anchor="end" font-size="11" fill="#6b7280">P&#x2082;</text>
+      <line x1="50" y1="50" x2="140" y2="50" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="44" y1="145" x2="50" y2="145" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="40" y="149" text-anchor="end" font-size="11" fill="#6b7280">P&#x2081;</text>
+      <line x1="50" y1="145" x2="140" y2="145" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- Dots at intersections -->
+      <circle cx="140" cy="50" r="4.5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
+      <circle cx="140" cy="145" r="4.5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
+      <!-- Q label -->
+      <line x1="140" y1="195" x2="140" y2="201" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="140" y="213" text-anchor="middle" font-size="11" fill="#5B1A18" font-weight="600">Q&#x2080;</text>
+      <!-- Annotation -->
+      <text x="174" y="98" font-size="10" fill="#5B1A18" font-weight="600">Same Q at</text>
+      <text x="174" y="112" font-size="10" fill="#5B1A18" font-weight="600">every price</text>
+    </svg>
+    <p style="font-size:13px;color:var(--mid);text-align:center;margin-top:4px;">Price changes, quantity stays fixed.</p>
+  </div>
+
+  <!-- Panel B: Backward-bending demand (Giffen / Veblen) -->
+  <div>
+    <div class="panel-label">(b) Backward-Bending Demand</div>
+    <svg viewBox="0 0 240 220" width="240" height="220" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+      <line x1="50" y1="10" x2="50" y2="195" stroke="#111827" stroke-width="2"/>
+      <line x1="50" y1="195" x2="225" y2="195" stroke="#111827" stroke-width="2"/>
+      <polygon points="50,4 44,16 56,16" fill="#111827"/>
+      <polygon points="231,195 219,189 219,201" fill="#111827"/>
+      <text x="20" y="108" text-anchor="middle" font-size="11" fill="#374151" transform="rotate(-90,20,108)">Price (P)</text>
+      <text x="137" y="214" text-anchor="middle" font-size="11" fill="#374151">Quantity (Q)</text>
+      <!-- Backward-bending curve: like a U rotated 90° CCW, opening to the right -->
+      <!-- Starts at top (high P, moderate Q), curves right (normal), then bends back left (backward) -->
+      <path d="M 100,20 C 110,45 185,65 195,105 C 205,145 130,170 100,188" fill="none" stroke="#D67236" stroke-width="3" stroke-linecap="round"/>
+      <text x="106" y="192" font-size="14" font-weight="800" fill="#D67236" font-style="italic">D</text>
+      <!-- Normal range label (right side, middle) -->
+      <text x="204" y="82" font-size="10" fill="#374151" font-weight="600">Normal</text>
+      <text x="204" y="94" font-size="10" fill="#374151" font-weight="600">range</text>
+      <!-- Backward-bending label (left side, bottom) -->
+      <text x="58" y="160" font-size="10" fill="#D67236" font-weight="700">Backward-</text>
+      <text x="58" y="172" font-size="10" fill="#D67236" font-weight="700">bending</text>
+    </svg>
+    <p style="font-size:13px;color:var(--mid);text-align:center;margin-top:4px;">Demand first follows the law, then bends back.</p>
+  </div>
+</div>
+
+<h4 class="sub2-heading">(b) Giffen Goods &mdash; The Subsistence Paradox</h4>
+<p>Named after 19th-century economist Robert Giffen, these are <em>highly inferior goods</em> that make up a large share of a poor household&rsquo;s budget &mdash; think of a basic staple like bread or rice in a subsistence economy. When the price of bread rises, the household&rsquo;s real purchasing power falls so sharply that it can no longer afford meat or better food. The only affordable way to maintain caloric intake is to buy <em>more</em> bread, even at the higher price. This produces a backward-bending demand curve: for a range of prices, quantity demanded <em>rises</em> as price rises. However, beyond a certain price, even this mechanism breaks down &mdash; the staple becomes so expensive that the household simply cannot afford enough of it, and quantity demanded begins to fall again. The demand curve bends back to the usual downward slope.</p>
+
+<h4 class="sub2-heading">(c) Veblen / Luxury Goods &mdash; The Prestige Effect</h4>
+<p>Named after economist Thorstein Veblen, these are status goods &mdash; designer handbags, premium watches, exclusive club memberships &mdash; where a <em>higher price signals prestige</em>. A luxury bag priced at $200 may attract few buyers; the same bag at $2,000 may attract more, because the high price itself signals exclusivity. This also produces a backward-bending demand curve: for a range of prices, quantity demanded <em>rises</em> as price rises. But at some point, the price becomes so extreme that even wealthy consumers pull back &mdash; the prestige effect is outweighed by the sheer cost, and the demand curve returns to its normal downward slope.</p>
+
+<div class="keypoint">
+<strong>Key takeaway:</strong> The Law of Demand holds for most goods. Exceptions arise with essential goods (vertical demand &mdash; quantity does not respond to price at all) and with Giffen goods (inferior staples) and Veblen goods (prestige luxuries), both of which can show a backward-bending demand curve where quantity demanded rises as price rises, for opposite reasons &mdash; necessity vs. status.
+</div>
+
+<!-- SECTION 3 -->
+<h2 class="section-heading">3 &nbsp; What Shifts the Demand Curve?</h2>
+
+<p>The demand curve is drawn holding <em>everything constant except the good&rsquo;s own price</em>. When any other underlying factor changes, the entire curve shifts &mdash; meaning a different quantity is demanded at <em>every</em> price level. We will focus on several key determinants.</p>
+
+<h3 class="subsection-heading">3.1 Income</h3>
+<p>Income affects how much people can afford. The direction of the effect depends on the type of good:</p>
+
+<div class="two-panel">
+  <div>
+    <div class="panel-label" style="color:#059669;">Normal Good (e.g., Steak)</div>
+    <svg viewBox="0 0 225 195" width="225" height="195" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+      <line x1="30" y1="10" x2="30" y2="172" stroke="#111827" stroke-width="2"/>
+      <line x1="30" y1="172" x2="215" y2="172" stroke="#111827" stroke-width="2"/>
+      <polygon points="30,4 24,16 36,16" fill="#111827"/>
+      <polygon points="221,172 209,166 209,178" fill="#111827"/>
+      <text x="11" y="96" text-anchor="middle" font-size="10" fill="#374151" transform="rotate(-90,11,96)">Price</text>
+      <text x="122" y="188" text-anchor="middle" font-size="10" fill="#374151">Quantity</text>
+      <!-- D1: original (solid, green) -->
+      <line x1="45" y1="20" x2="192" y2="158" stroke="#059669" stroke-width="2.5"/>
+      <text x="195" y="161" font-size="12" font-weight="800" fill="#059669" font-style="italic">D&#x2081;</text>
+      <!-- D2: right shift (dashed, same green) -->
+      <line x1="88" y1="20" x2="210" y2="142" stroke="#059669" stroke-width="2" stroke-dasharray="7,4"/>
+      <text x="213" y="145" font-size="12" font-weight="800" fill="#059669" font-style="italic">D&#x2082;</text>
+      <!-- Right-pointing shift arrow -->
+      <line x1="112" y1="82" x2="144" y2="82" stroke="#059669" stroke-width="1.8"/>
+      <polygon points="151,82 143,78 143,86" fill="#059669"/>
+      <text x="114" y="76" font-size="10" fill="#059669" font-weight="700">Income &#x2191;</text>
+      <text x="122" y="11" text-anchor="middle" font-size="9" fill="#059669">&#x2192; more steak demanded</text>
+    </svg>
+    <p style="font-size:13.5px;color:var(--mid);text-align:center;margin-top:4px;">Income &uarr; &nbsp;&rarr;&nbsp; Demand shifts <strong style="color:#059669">right</strong></p>
+  </div>
+  <div>
+    <div class="panel-label" style="color:#dc2626;">Inferior Good (e.g., Instant Ramen)</div>
+    <svg viewBox="0 0 225 195" width="225" height="195" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+      <line x1="30" y1="10" x2="30" y2="172" stroke="#111827" stroke-width="2"/>
+      <line x1="30" y1="172" x2="215" y2="172" stroke="#111827" stroke-width="2"/>
+      <polygon points="30,4 24,16 36,16" fill="#111827"/>
+      <polygon points="221,172 209,166 209,178" fill="#111827"/>
+      <text x="11" y="96" text-anchor="middle" font-size="10" fill="#374151" transform="rotate(-90,11,96)">Price</text>
+      <text x="122" y="188" text-anchor="middle" font-size="10" fill="#374151">Quantity</text>
+      <!-- D1: original (solid) -->
+      <line x1="88" y1="20" x2="210" y2="142" stroke="#FD6467" stroke-width="2.5"/>
+      <text x="213" y="145" font-size="12" font-weight="800" fill="#FD6467" font-style="italic">D&#x2081;</text>
+      <!-- D0: left shift (dashed, same color) -->
+      <line x1="45" y1="20" x2="192" y2="158" stroke="#FD6467" stroke-width="2" stroke-dasharray="7,4"/>
+      <text x="195" y="161" font-size="12" font-weight="800" fill="#FD6467" font-style="italic">D&#x2080;</text>
+      <!-- Left-pointing shift arrow -->
+      <line x1="152" y1="82" x2="120" y2="82" stroke="#dc2626" stroke-width="1.8"/>
+      <polygon points="113,82 121,78 121,86" fill="#dc2626"/>
+      <text x="115" y="76" font-size="10" fill="#dc2626" font-weight="700">Income &#x2191;</text>
+      <text x="122" y="11" text-anchor="middle" font-size="9" fill="#dc2626">&#x2192; less ramen demanded</text>
+    </svg>
+    <p style="font-size:13.5px;color:var(--mid);text-align:center;margin-top:4px;">Income &uarr; &nbsp;&rarr;&nbsp; Demand shifts <strong style="color:#dc2626">left</strong></p>
+  </div>
+</div>
+
+<div class="def-box">
+  <div class="def-label">Key Distinction</div>
+  <div class="def-term">Normal Good vs. Inferior Good</div>
+  <p><strong>Normal good:</strong> demand and income move in the <em>same</em> direction. Income rises &rarr; demand rises (steak, vacations, new cars).</p>
+  <p style="margin-top:8px;"><strong>Inferior good:</strong> demand and income move in <em>opposite</em> directions. Income rises &rarr; demand falls, as consumers switch to better alternatives (instant ramen, generic-brand cereal, bus rides). &ldquo;Inferior&rdquo; is an economic classification, not a quality judgment.</p>
+</div>
+
+<h3 class="subsection-heading">3.2 Wealth</h3>
+<p><strong>Income</strong> is a flow &mdash; money received per period (your salary). <strong>Wealth</strong> is a stock &mdash; the accumulated value of assets (home equity, savings, portfolio). Higher wealth generally increases demand for normal goods, just as higher income does.</p>
+
+<div class="rw-box">
+  <div class="rw-header">Real-World Connection</div>
+  <div class="rw-title">The Wealth Effect: Housing Prices and Consumer Spending</div>
+  <p>The U.S. housing wealth boom of the early 2000s &mdash; and the resulting consumption surge &mdash; is a dramatic historical example of the wealth effect. When home prices rise, homeowners feel wealthier and spend more (demand shifts right). When home prices crash, homeowners cut back spending sharply (demand shifts left). The graph below plots annual percentage changes in the S&amp;P/Case-Shiller National Home Price Index alongside Personal Consumption Expenditure (PCE) from 1988 to 2023. The two series track each other closely, confirming the wealth effect in action.</p>
+  <div style="text-align:center;margin:14px 0 8px;">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAo4AAAGSCAYAAABt8kCdAAAEDmlDQ1BrQ0dDb2xvclNwYWNlR2VuZXJpY1JHQgAAOI2NVV1oHFUUPpu5syskzoPUpqaSDv41lLRsUtGE2uj+ZbNt3CyTbLRBkMns3Z1pJjPj/KRpKT4UQRDBqOCT4P9bwSchaqvtiy2itFCiBIMo+ND6R6HSFwnruTOzu5O4a73L3PnmnO9+595z7t4LkLgsW5beJQIsGq4t5dPis8fmxMQ6dMF90A190C0rjpUqlSYBG+PCv9rt7yDG3tf2t/f/Z+uuUEcBiN2F2Kw4yiLiZQD+FcWyXYAEQfvICddi+AnEO2ycIOISw7UAVxieD/Cyz5mRMohfRSwoqoz+xNuIB+cj9loEB3Pw2448NaitKSLLRck2q5pOI9O9g/t/tkXda8Tbg0+PszB9FN8DuPaXKnKW4YcQn1Xk3HSIry5ps8UQ/2W5aQnxIwBdu7yFcgrxPsRjVXu8HOh0qao30cArp9SZZxDfg3h1wTzKxu5E/LUxX5wKdX5SnAzmDx4A4OIqLbB69yMesE1pKojLjVdoNsfyiPi45hZmAn3uLWdpOtfQOaVmikEs7ovj8hFWpz7EV6mel0L9Xy23FMYlPYZenAx0yDB1/PX6dledmQjikjkXCxqMJS9WtfFCyH9XtSekEF+2dH+P4tzITduTygGfv58a5VCTH5PtXD7EFZiNyUDBhHnsFTBgE0SQIA9pfFtgo6cKGuhooeilaKH41eDs38Ip+f4At1Rq/sjr6NEwQqb/I/DQqsLvaFUjvAx+eWirddAJZnAj1DFJL0mSg/gcIpPkMBkhoyCSJ8lTZIxk0TpKDjXHliJzZPO50dR5ASNSnzeLvIvod0HG/mdkmOC0z8VKnzcQ2M/Yz2vKldduXjp9bleLu0ZWn7vWc+l0JGcaai10yNrUnXLP/8Jf59ewX+c3Wgz+B34Df+vbVrc16zTMVgp9um9bxEfzPU5kPqUtVWxhs6OiWTVW+gIfywB9uXi7CGcGW/zk98k/kmvJ95IfJn/j3uQ+4c5zn3Kfcd+AyF3gLnJfcl9xH3OfR2rUee80a+6vo7EK5mmXUdyfQlrYLTwoZIU9wsPCZEtP6BWGhAlhL3p2N6sTjRdduwbHsG9kq32sgBepc+xurLPW4T9URpYGJ3ym4+8zA05u44QjST8ZIoVtu3qE7fWmdn5LPdqvgcZz8Ww8BWJ8X3w0PhQ/wnCDGd+LvlHs8dRy6bLLDuKMaZ20tZrqisPJ5ONiCq8yKhYM5cCgKOu66Lsc0aYOtZdo5QCwezI4wm9J/v0X23mlZXOfBjj8Jzv3WrY5D+CsA9D7aMs2gGfjve8ArD6mePZSeCfEYt8CONWDw8FXTxrPqx/r9Vt4biXeANh8vV7/+/16ffMD1N8AuKD/A/8leAvFY9bLAAAAOGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAAAAAACoAIABAAAAAEAAAKOoAMABAAAAAEAAAGSAAAAAP7Koh8AAEAASURBVHgB7F0HYBTV8/72jt6LdOm9SC/SmzQFARVBmkhTUVAQCyJSRLH9UPmrFBFQehEBAWmCSJEO0nvvIFVqcrv/mRcuXJJLsrm6l8xouL3dt+/N+/Zub3bezDeaQQIRQUAQEAQEAUFAEBAEBAFBIB4EbPEcl8OCgCAgCAgCgoAgIAgIAoKAQkAMR/kgCAKCgCAgCAgCgoAgIAiYQkAMR1MwSSNBQBAQBAQBQUAQEAQEATEc5TMgCAgCgoAgIAgIAoKAIGAKATEcTcEkjQQBQUAQEAQEAUFAEBAExHCUz4AgIAgIAoKAICAICAKCgCkExHA0BVNoNLp16xbu3bsXGspaQEtd1wWvBFwHxuu///5DeHh4As5K2k3DwsIErwR8BBgv/owJS5x50O7evQv+boqYQ4B/I2/fvm2usbRyi4AYjm5hCc2dfMO9f/9+aCofBK0dDocYjgnAnX+cbt68KYZQAjATwzEBYFFTxos/Y2I4mseNDUfBK2F4sZNFxHMExHD0HDs5UxAQBAQBQUAQEAQEgSSFgBiOSepyy2QFAUFAEBAEBAFBQBDwHAExHD3HTs4UBAQBQUAQEAQEAUEgSSEghmOSutwyWUFAEBAEBAFBQBAQBDxHQAxHz7GTMwUBQUAQEAQEAUFAEEhSCIjhmKQut0xWEBAEBAFBQBAQBAQBzxEQw9Fz7ORMQUAQEAQEAUFAEBAEkhQCYjgmqcstkxUEBAFBQBAQBAQBQcBzBMRw9Bw7OVMQEAQEAUFAEBAEBIEkhYAYjknqcstkBQFBQBAQBAQBQUAQ8BwBMRw9x07OFAQEAUFAEBAEBAFBIEkhIIZjkrrcMllBQBAQBAQBQUAQ8AQB4/hxONp3hnH9uienJ5pzkiWamchEBAFBQBAQBAQBQUAQ8BMCxh+rYEyfBT1dOtjHfe+nUazfrXgcrX+NRENBQBAQBAQBQUAQCDICxpGjSgNj/ATof64OsjbBG148jsHDXkYWBAQBQUAQEAQEgVBB4OgxoEolpa3eoxe0nVugpU4dKtr7TE/xOPoMSulIEBAEBAFBQBAQBBIrAuxx1IoVhf3HscCJE9AHD0usU41zXmI4xgmPHBQEBAFBQBAQBAQBQYAQYI9j4ULQHisDbcA7MEZ+A2PrtiQHjRiOSe6Sy4QFAUFAEBAEBAFBICEIGNeuAVeuQitUUJ1mG/geULwYHN1ehhEenpCuQr6tGI4hfwllAoKAICAICAKCgCDgVwQeJMZo5HFk0VKkgH38GGDXbhiffenXoa3WuRiOVrsioo8gIAgIAoKAICAIWAoBg5epWR4YjrypVX8cWu9e0D/6BMb+A7wrSYgYjkniMsskBQFBQBAQBAQBQcBjBNjjmDoVkDNnlC5sHw8DcuWCo/srMAwjyrHE+kYMx8R6ZWVegoAgIAgIAoKAIOATBJTHkeIbNU2L0p+WNi1sY78F1v0N47vRUY4l1jdiOCbWKyvzEgQEAUFAEBAEBAHfIMBUPC7L1K6d2ho3gtalE/QBg2CcPOl6KFFui+GYKC+rTEoQEAQEAUFAEBAEfIWAqhrzIKPaXZ+2/30GkPdRf+V1d4cT1T4xHBPV5ZTJCAKCgCAgCAgCgoAvETDCwoDTp2P1OPJYWpYssH37NYzfl0GfMs2Xw1uuLzEcLXdJRCFBQBAQBAQBQUAQsAwCx08ADh0oVChOlWzPPQOtVQvob/aHcelSnG1D+aAYjqF89UR3QUAQEAQEAUFAEPArAsaRI6r/2GIcXQe3fT+KjEwH9N59XXcnqm0xHBPV5ZTJCAKCgCAgCAgCgoBPEWAORxtlUxfIH2+3GlHz2L4YAWPmHOi/LYq3fSg2EMMxFK+a6CwICAKCgCAgCAgCAUFAJcbkyQMtZUpT49m6d4XWoB70V3vDuHHD1Dmh1EgMx1C6WqKrICAICAKCgCAgCAQWAfI4mlmmdlXKNu474OpV6O+877o7UWyL4ZgoLqNMQhAQBAQBQUAQEAT8gYDyOMbC4RjbeFrhwrANGwxj3HgYq/+KrVlI7hfDMSQvmygtCAgCgoAgIAgIAgFBgD2OcXA4xqaD9mZvoHIlOHq8CuPu3diahdx+MRxD7pKJwoKAICAICAKCgCAQCASMCxeAW7eBBHocWTfNbof9x7EA0fnog4cFQt2AjJEsIKNYYJAwIvC8efOmBTTxnwq6ruPOnTvguYrEjwDjxX/h4eHxN5YWMAxDocDfo9u36UYqEi8CDqLlYBG84oVKNXDidZViw6LXBDbXQ9Jrxfd7xk3wMnftGS++l125csXUCfbtO5CWWt7ImhW6yXOidJwnN1K+8TpSfPk1bjZtDL1c2SiHrfgmderU4L/YRCMAI34NYmsh+0MGgQv0ZJQmTRqkT58+ZHQOpqJ8A2FDO0OGDMFUI2TGZgP7EpHaZs6cGalSpQoZvYOpKBuMNptN8DJ5ERiv69evI0eOHAo3k6cl6WbXrl1T93w7ebdE4keAP1/3799HtmzZ4m9MLfTJU6F37gb7v2dVdRhTJ0VrZNB4jvJVAMrKtm9eDy1ZaPvsZKk62gWWt4KAICAICAKCgCAgCCgEKL4RmTJ6bDRyH1qKFBFL1jt2wpgxK+SBFcMx5C+hTEAQEAQEAUFAEBAE/IGAyqj2IDEmui5a9ceBHNlh7Nsf/VDIvRfDMeQumSgsCAgCgoAgIAgIAoFAwCCPY0I5HGPVK38+4MTJWA+HygExHEPlSomegoAgIAgIAoKAIBBYBI4c9Sij2p2SWr68MMRwdAeN7BMEBAFBQBAQBAQBQSC0ETCYPeL8BY84HN3OXDyObmGRnYKAICAICAKCgCAgCIQ+ApwYw+IBh2PEiVH/1dhwPHsWxgOarqhHQ+edLFWHzrUSTQUBQSCEEGAKjmStn4dtwKAQ0lpUFQQEAScCKjGG3nhSNcbZR5TX/PkBhw6cOhVld6i9EcMx1K6Y6CsICAKWR4DpcfWuPWFbtgLab4ssr68oKAgIAm4Q4PjG5MS5mDevm4MJ36U8jnxaiMc5iuGY8GsvZwgCgoAgECcC+sAPYUydAb1hfYB+fIwbN+JsLwcFAUHAeghwRjUK5FelA32iHS9Vk4R6gowYjj75NEgngoAgIAhEIKCPGw9jxBewDfsQjqEfQqPdxrbtAo8gIAiEGgL00KcVKuQzrbVMmYB0VMBQPI4+w1Q6EgQEAUEgpBHQf18KvVcfaF1fhG3Q+zBKl4SRPDmwZVtIz0uUFwSSIgLGUVqq9lFiTCR+BQuIxzESDNkQBAQBQSAJI8BeRf359tAaNoBt7HcRSFCpMTxWGsZWMRyT8EdDph6CCBg6JbEcP+E78u8HGKg4R/E4huAnQlQWBAQBQcCHCBgnTsDRvLXyTtjmTIeWjALqH4hRoTwM8Tg64ZBXQSA0EODM5/thgA/KDUaZMGVW8/0ilEViHEP56onugoAgEHQEjGvX4HiyJUDGon3xfGjp00fRyahUgRJkjkiCTBRU5I0gYG0EVGIMqeizcoMPpqs8jqfPWHvy8WgnhmM8AMlhQUAQEARiQ4C5GnXiasSZsxFGY+7cMZqyxxEG/b9la4xjskMQEAQsigBT8bD43ONImdV37sI4fz6i/xD8VwzHELxoorIgIAgEHwHF1fhSDxjr1sP2ywxoZUq7V6p0KSAFJchslcxq9wDJXkHAeggo8u8c2aGlpSzoB3L65jW8tmwW7oTTEraHkhi4HMVw9PDiy2mCgCCQtBFQXI3TZsI2fgxslBATq3BWdbmy4nGMFSA5IAhYEAHmcIyWUX3z/l3M3L8Ns/d78RDo5HI8GbrVY8RwtODnVVQSBAQBayPgytVo69wxXmW1ypUos9qLH5t4R5AGgoAg4EsE2OMYvdRgyaw5US9fUUzctcHzoXLkiFiBCOHMajEcPb/8cqYgIAgkQQT0xUuicDWagUDjBBnihDOuXzfTXNoIAoJAsBFw43FklT6u3RxTmnf2WDtNo5IA5HUM5eoxYjh6fPnlREFAEEhqCCiuxrYdonI1mgBBq1RREmRM4CRNBAErIGBcvQpcvRYjo/rjv5di9oEdyJOeKsB4IVo+SpAJYUoeMRy9uPhyqiAgCCQdBBRX41Ot3HI1xosCJ8ikJDJwWa6OFyppIAgEHYEHGdXRl6rXnT6KY9cvK/U2nj2O87c8rEEvHsegX2JRQBAQBAQBvyIQydVIiS7uuBrjG1yTBJn4IJLjgoBlEHByOEZPjrlw6yZypMmAG/fu4rl5P2L8P397pLPKrJbkGI+wk5MEAUFAELA8Ama4Gs1MQhJkzKAkbQQBCyDAHsc0qaHlzBlFmRXtXkf/qg2QIWUqtClRAZP3bMK98PAobUy94czqa9dDNuZZlqpNXWVpJAgIAkkVAb1rz/i5Gk2AE5EgcwwqfspEe2kiCAgCwUFAcTi6If7OnCoNsqSO4HV8pXwt9KtSn7j9id0/ofKAkgchmlmdIMPxzp07mDFjBoYNG4azZ89iy5Yt0LkQuIggIAgIAokQAX3VnzCmzoDtu2/i5mo0MXeVIEPtjK3bTLSWJoKAIBA0BCijOnqpwfuOcFy/dydSpWJZsuNlMh5TJSOe1gSKkwQ8VDOrTRuO+/btQ8mSJdGlSxcMHz4cFy5cwKBBg1CrVi2cD+HSOQm83tJcEBAEkhACxsefASWLQ+ve1ftZc4JMqpSSIOM9ktKDIOBXBNx5HP8+cwyFxw7FwSsXo4ztIOfZ1bu3o+yL902ePICNaHlCNLPatOHYrVs3VK9eHRcvXkTevHkVLpMmTYLNZsP06dPjxUkaCAKCgCAQSggYmzbD+GMVbO+/C8W95qXyWrJkUkHGSwzldEHA3whwTDNOn47hcXRmUOdMmyGKCi1+GYv3/lwQZV98b7QUxLBAde0Ttcfx9u3b2LRpk1qizpDhIWg5iAH9jTfewOLFi+PDSY4LAoKAIBBSCOjDRwAFC0Br97zP9JYEGZ9BKR0JAv5B4PgJQKe4xWjlBlMnS4GqufKrxBjXgRsXKIH5h3eCM64TJBznmJhjHJPRkzJ7Fm/duhUDlz179qhjMQ7IDkFAEBAEQhQBY9duGAsXw/buW1CeQh/NQyXIHDsuCTI+wlO6EQR8jYBapqZOtUKFonT9dNHHsLjNq1H28ZtOZari8dwFcOVuTPsoRmOXHRznmKg9jinIrdq4cWP07dsXmzdvVlNnL+S0adMwevRoNG3a1AUO2RQEBAFBILQR0D+h2MZcuaB16ezTibDHkcXYstWn/UpngoAg4CMEqDSoij8skN9Uh1kpy3reMz3BdawTJInd48hgjBs3DmwsVq1aFceOHUP9+vXRoUMHNGjQAH369EkQXtJYEBAEBAGrImAcPgxj9i+w9e8LLSUls/hSSpYAUqcCtkhmtS9hlb4EAV8hoDyOjz4KFYfo0ukvVGpw01laxvaRqMxqyhkx7t3zUY+B64aitc1Jbgrk3LBhA9asWYP9+/eDvZDly5dXf+Z6kFaCgCAgCFgfAX3EF0CmTNB6dvO5smrZu3w5oeTxObLSoSDgIwSI/Ds6FQ/3PHz9UjxVuDSq5nbviRz/z3osO74fs1qaZGBgjyNTQHKcY7GiPlI+MN2Yzqreu3cvdu/ejcyZM6vs6kqVKsFut4NjHE9QSvm9ELSaAwOxjCIICAKhgoBx6hSMyVNh69sHWtoIol9f6858joZ4HH0Nq/QnCPgEAVVuMFpiDHd84fYN5EibPtYxmBh85YmD+OfimVjbuB7Q8kcYoMZJMhxDTEx7HGvUqIHr16/HOr3UqVNj8ODBePfdd2NtIwcEAUFAELAyAvoXX9FSMpUae+0Vv6mpVSbD8dvRMP79F1rWrH4bRzoWBAQBDxBg8u/27aKcyFyNw2u3oKxq8hLGIi0Kl0GudBmw+dwJlMtOPI3xSd5HI1qEYGa1aY/j0KFDUapUKYwdOxbHjx/H2rVrMXDgQGSlGx9vjxkzBl988QV+/fXX+OCS44KAICAIWA4Bg+ONxk9QRqNGS9X+Eqkg4y9kpV9BwDsEDC5mcpuqw0TzONqJVaZr2cdRJlvuWAdITiuwmzq/je7lasTaxvWAli4d8EjWkMysNuVx5LKC7E2cO3euSobhyecnN2vNmjXVUvWyZcvAhuWhQ4ewYsUKtG7d2hUf2RYEBAFBwPII6CO/UTryMrVfxTVBpnEjvw4lnQsCgkACEKD4RhZ3MY5mekmd0PKD+aiYSmL1ON69exdcpzpfvphuWk6aOXfunMKUj3NlGRFBQBAQBEIJAePaNRijx6mEGC1bNr+qrpFnAhXKS4KMX1GWzgWBhCPg5HBEoYJRTv796F48++t4cL3q+OTAvxfQf+Wv4OXt+CRUuRxNLVWnSZMGHOPYv39/HDhwIBKLbdu2gcsOcr1qjn+cOXMmGjZsGHlcNgQBQUAQCAUEjFHfAfSAzBQ8gRBJkAkEyjKGIJAwBFRiTGZiVKAkYFdhY5BjF1PY41+kvXn/Hibt3ojFR/e4duF+O0S5HE0ZjjzjH374QS1FlyhRAgUKFFDex8qVK+OFF15Ap06dMGDAAGVUPv300+4Bkr2CgCAgCFgQAYMqYulkOGqdO0Ij/rZACCfI4CRlcF++HIjhZAxBQBAwgwAvVUfzNvJp527dQPQa1bF1V5kSaMpTcszkPRHFUmJrx/tVZvWZMzBMeCfj6ifQx+I3nx9oVKRIEVU1Zv369di+fTtSpUqlPI0VKlRQLfr166eSY9L6icIi0MDIeIKAIJA0EDDG/ADQUjWXFwyURCbIUAUZrWmTQA0r4wgCgkAcCPBStbv4xqG1nkS/Kg3iODPqoe8bt0WutBmi7nT3jj2OYbT8TcYj8lK8Y4iIacOR58O8jcWKFVOJMc75cUJMOsoOYsNSRBAQBASBUEKAqzbo//saWts20AJ5DytRHEiTGti6HRDDMZQ+MqJrYkaAqHhQr06MGaaipBf+MyvFsmQ31VRVj+GWnCATQoaj6aXqX375BTlz5lRGIxuPrn9vvPGGKZCkkSAgCAgCVkLAmDAJIAoO24B3AqqWJMgEFG4ZTBCIFwEOWcGFi9DcLFVfuHUT4boj3j5cG3ByzMLDu3H9HtH7xCbscSQxQiyz2rTh2KtXL7Rq1QobN25UsY7saXT+jRo1KjZYZL8gIAgIApZEwAgPh/75SGgtW0ArUzrgOmqVKkgFmYCjLgMKArEgwN5Glmgcjryr/MRPMXbHOt40LWxsdvt9GqbEEeuoCgDwykOIGY6mlqpv3LihaHY+++wzZM9uzgVrGl1pKAgIAoJAEBAwpk4Hjp+AbdbUIIxOgfGVK8EY9T2MS5fgbwqgoExQBhUEQggBJxVP9BjHf+/cQhh5G80mxzinnDt9RjxZuBQm7NyAVyvUgk2LxU9XIH/i9DhmyJABBQsWxJYtW5yYyKsgIAgIAiGLAGcx6p9+Aa1RQ2hVKgdlHg8TZLYFZXwZVBAQBFwQ4IzqFBTHGI1Z4R6tTNTIUxAFMya8POiblevjgxpxJ7+pOMfE6HFkaIcPH46+ffvi9OnTyohMluyhs5K9kKVLB36px+WSy6YgIAgIAqYRMObOA/YfhG3Mt6bP8XlDTpBJm4YSZMhwbBb3j4vPx5YOBQFBIAoCisORvH8alRd0FfYcLnj2Zdddpre5ZnW8daupCp/x52rTfVqh4UPrLx5tOMaRSb5ffjkmgG3atMGsWbPi6SHm4f/++w///POPKl3oPHqPshzZs6lpGqpUqYLkySMyme7fv4/ly5dT4lFelC1b1tkcCxYsUKTjQgMUCYlsCAKCQDwI6J98BtSsDq1uzAzKeE712WH1A8UVZIiSR0QQEASCjABT8RQq5Bcl/iNS8HtUdSZr6rQx+lfVY06djrHfyjuimtZxaHrhwgVVdpBLD0b/mzo14TFCXMZwyJAhmD9/fuSo3G+XLl2watUqTJkyBe+88w4Mw1DHR4wYAYfDgWnTpmHnzp1q36lTp/D3339DjMZICGVDEBAE4kFAX7wE2P4PbAPfi6el/w8zEbjBlDwigoAgEFQEVIyjm8SYDWePY9Z+z8NJdENH7alf4/ONK9zPjzOrb91Wsc7uG1hvr2nDMWXKlIr0m4m/o/85vYJmp3f06FFlIN68eTPKKVyysFq1avjggw/w/fff4/bt2yqLmxvt3r0bzZs3V95FzuxmmTBhAl566SW1Lf8IAoKAIGAGAeVtrFAONgssD6s4x9NUOeLiRTOqSxtBQBDwAwIGOaVw4oRb8u9fD/6D/21a6fGonBTzdNEymLlvK7gcYXSJ5HKkSlKhIqaXqnlC7BH8999/EU7BoizsAeTl68tUNqtx48Zqn5l/2CAcOHCg6mvx4sWRpxw+fDhKPxUrVsTevXvx+OOPqxKHPPYZYljnRJ0jR46o8ZlP0oyEhYXh6tWrZpqGbBudAv5vERcVXycRcwgwZuz9FokfAaf3n7/zzLQQipJs/QZkWPc3bo4fjbAAGGtOzGLDy1awADIRkNdWrETYEw1CEVKf6szfR5ZLnGlO4Uoi8SPAmHEol4g5BBgv/l5edPn+28hoy0QVXK5nyRzjvnD830vIkiJVlPbmRnrYqmXuYjh48TyOnjlNFWXSPzxAWxpV2+PK2Nd27kJY3sCUPI2igJs3vIob10quacORl45feeUVZZhEH6dHjx5RDL7ox6O/L1OmjNr1559/Rjl0noh4OYPbKbzNyTgs7FkcOXKkogNq27atStbp3r27OsZxkewRjUv4JhRfm7jOD4VjbJBzdZ8UKVKEgrpB15FvIPwQJHiZuxSMFxvZvMLAn7NQlFTffAe9aBHYnmmFlNGC4P0xH/588b0nVrxKlYRBCTIp9+yF7alm/lAhpPpkvNgI4nu1GI7mLh3//vE9TPAyhxd/vtjp5WoP2M6eUyfbixWFLZot0b5ERUX+7dre3EgPWxVOmR1jGj73cIfrVr68MPh3+xwVIog2tmuzQG67Jj+7G9e04fj222/jueeeQ6dOndC6dWuVqLJp0yZw7CH/+UL45soX1Cl8E0mdmsgxSdjYdI7DXkjenzFjRvTv31/dlKtXr64Iyp3nRn9lILh9Yhb+UecwgvTpoz7RJOY5ezM39kKzd9b1YcWb/hL7ufx95M9YmjRp1Ocs1OZrbN4CB2Uv2n4aj4yZ+Rnf/8IPczYyUPl7GZuEV6yAlLv3IE0ivz/FNn/X/YwX/7Dzd5JxE4kfgWtUZ53v+bE+nMTfRZJqwSsm/BlztQd0yuFgX3f6cmWh0f3NVVpmrOj61utt9nZGN/LDyXhMRR5Qe4jcA0x9Mxlo9gYyJU/Dhg2RLVs2ZMqUCb1790a/fv3wySefeA0md/DII4/gypUrkX3xdu7cuSPfOzcmTpyoPJBr165VGdYff/wx5s0jeg0RQUAQEARiQUD/+FOA6Tbat4ulRXB2S4JMcHCXUQUBJwIqMSZnjhhGo/O4r14/Wr8EnRb+HKO7UONyNGU4soeBl6ecT80lSpTAunXr1OQ5mcWZrBIDjQTuqF27Nn7//Xfl1eC4yfXr16NChQpRetm+fbsyXPPkyaO8k+x55CctfoJwxhNFOUHeCAKCQJJHwCCPnrFgIWzvvgWNVh+sJCpB5sxZGPRwLhKaCOgr/oDj7eBn6YcmehbQmssNusmovkJVY5rN/h4bKbPaF5I3fWYsObYPh65eitodZVaHUr1qU4YjG43lypXD4MGDwZnQ5cuXx+zZs8FLfZzcwskqvpAnnnhCBWS+8MILii+Sl8aj9/3TTz/hxRdfVMPVqFEDK1aswFdffYU6derEcP/6QifpQxAQBEIfAZVJnTMntJci7h1WmhGXHmQRWh4rXZWE6WJMmgzjy69hrFmbsBOltSUQYI+jViimHXP2v+vYfO4kHESp4wt5vkQF5EmXCXsuRcRURvbJlDwhVD3G9KM30+O0aNEC9erVAyfDVKpUCenSpVNePybh9kS4L/5zCschfvTRR8o4ZU9i9ABNDgLu2rUrcuTIoU7hVzYamWMyuoHp7FNeBQFBIGkjYOz4B8asObB99gk0iwSfR7kilKyD9OkAJgJ/ShJkomATIm8Myohl0Yd+DPuK30NEa1EzEgE2HJ9uHvnWuXHhVgRlYI60D5N2ncc8eU2TPAW2dXkHdltUn50iAb9yFQYVRdHIrrK6mDYcuYrLyZMn1ZIwG4y8ZLxs2TI0atQI+alkji8ltuQOzmpyrRrDY/IyuhiNvkRf+hIEEg8CKiGm2dNA8WLQXulhyYlFVpDh0oMiIYeAQStvOHAQqFYFxh+rYKxbD61mjZCbR1JV2OC8iutEL1a4UAwIGuQvhn3dP0CWVFETZmI0TMCO6EajOpU9jizsdSxdKmLbwv9GNXvjUZRT/pmPbN++fYqWp2bNmoqkm7kVRQQBQUAQsBICxuq/4GjYVCXE2FevUHxpVtLPVRdJkHFFI8S22Wi8HwbbsA+BYkWU1zHEZpC01SVvI4u7pWrOfs6WJl0MD6G3gG07fwrdfp+qaH7U2A8Mx1CJczRtOC5atEhlUnNSSqlSpaL89e3b11sc5XxBQBAQBHyGgL7odziatgDKl4N95VJoxNhgZVEJMsQlJwkyVr5K7nUzdu1WBzT6rNkGvQ9j+R8w/t7gvrHstRwCBifGsLjxOF6+/R+4zrSvxYCB+Yd2YeHhPRFd581LlittUvWaUBDThuPLL7+MJk2aYM2aNTh27FiUv++++y4U5io6CgKCQBJAQJ85G3rrNtDq1YV96UJoLkUFrDr9yASZLbJcbdVrFJteKr4xezZo2bNDe6EtULSweB1jA8uK+9njSCT82oPcCVcV+62ci44Lf3Ld5ZPtSjnzoVLOvJh7cIfqT8VeU/JeqHgcTcU48vI0L0dz5Rb2OIoIAoKAIGBFBPTxE6C//Bo0qgxjm/oTtFCposQJMhnSw+AEmeZPWhFa0Sk2BMjjqD0WUQ1NI2o42wcDoL/YHcbGTdCqVY3tLNlvEQQUh6ObjGpW79ytGyicyT+rFROadUD2NC7FOkIos9qUx5FZ/AsUKKCSYyxyrUUNQUAQEASiIKD/72voPXpBe7ETbDOmhI7RSLPgWCqNKshAEmSiXNNQeGPsouXGshGGI+urCOZp2VMfOjwU1Bcdaalac7NMzcAUz5IDFXPQMrIfJE/6TEhODxpOUZnVIULJE6fHkUsK3rp1S82rQ4cOaNOmDQYOHIjChQsrQnDnhLOTi7506dLOt/IqCAgCiREBKjmY6uepEZQxZaz1fXd8OBTGRyOgvfk6bCO/CE1O10oVYEydkRg/OYl2TgZVVcPJU5EeR54oE8zbBr4LvevL4Kx+rUrlRDv/xDAxxeHY5hm3U/m2URu3+3218054GKbt3YInC5VCdvY4rokorOKr/v3VT5yGI3Mm7tlDT1Mu0qtXL5d3EZtsUM6aNSvGftkhCAgCiQgBWgJOT4ajMWAQHM+1hu29tyO8ZEGcIleL0t98C8ao76ENHgj7kEFB1Ma7oTnO0fjfNzDOnoXmptSqd73L2X5BwJkY82Cp2jmG1qkDMPxT5XW0L5RyuE5crPZqEDc0xeHF6nH0t773yHAcsnYxmGh8IBmOnBzH9E4aFV2xssS5VL1161bcuXMn3r+pU8kLISIICAKJFgG17EZG482PBkP//BMYGzbBUak6HE2aQ1/1Z1DmbTgc5NXpqYxG28jPQ9poZABVZjW9GpIgE5TPkyeDqoxqG6XDlioZ5XTldXz/HRiLllBFIEl4igKOld4cpyxm3XCbUX2OjLlxO9aByw76SzIRP2TbEhXx8+5NuJP30QhdTp3y13A+6zdOw5EJt7nc4Ndff42LFy+qWtVcr5r/nnnmGQwZMgS6rkdZtvaZZtKRICAIWAIB/afJ0IdQvNaAt3G3WxcYr78K+5F9sE0cB4NucnqDpgh/vDb0eQsCVi/eoNr0etsOMH6eAtv40bD17WMJrLxSokhhIGMGMTS8AjGwJxs7iYqHrptGhSiii9a5o+IQlVjH6MhY571KjCF1tEKFYii1+/I5vP/Xb7h+726MY77c0btSXUx8sgPSFCyoug2FzOo4DcfTp0+jevXqqgwgl/VzlcyZM+Pzzz9H/fr1cfeuf4F1HVe2BQFBIHAI6Cv+oISTV6F1fAEYNjhyYF5KsXXpDPueHbDNnUluMloybv08HKXLgw1NVU0jsrVvN4zbt6E//SyMBQthmz4Ztm4v+XaAIPUmCTJBAt6LYdnj6Myojt6N+o6w1/G3xTC2R9CuRG8j74OMwFGi4rGTGVQgZvW7h+UGXTKf/aBu/oxZUOtRemjM9yAJJwQSZOI0HAcNGqSWqXfv3g0uOegqvDy9YcMG7Nq1C6NHj3Y9lOS3L96OqG+Z5IEQAEIaAf5R1J9tB61WTdh+HOt2Lmzs2Fq3RLKNa2FbuQTao49C79IDjsIloY/6Dmzk+VI4GYGXx42/1sA2j+pPP/+cL7sPfl+cICNL1cG/DmY12LMXWtnHYm2t0cMVKHZNvI6xQhTUA8rjSOTb7mIKq+bKj8/rtQLXlw6EnCdr7HBhMh5D3XBcunQpevToEWst6KpVq6J58+bgdiIRCOiGjmfmjkfjmd9h3Wl6mhERBEIQAYMCxh1PtgQo7sb26yxT1Da2+vVgX7YI9i1Uq5fq9up9+8ORvyj0jygm8upVr1EwLl+Go0ETYOcu2Jf8BtuTVE4wkYkiAr9wEYy/iLURMLjKxzXKqo6WGOOqtfI6UogHe8eNf3a6HpJtKyBA5N/uSg2yasWyZEfXso8HTMt2Cybiw9Z1Q4IEPM6saqbieeyx2J+mGNG6deti8uTJAQPX6gPZNBsG12qGYeuWoP+qX7GuY1/wPhFBIFQQMIjwXxmNlHxiXzwfWsaMCVKdkzzss6fDOHiIEmn+B334CIBetZ7doNWpnaC+IhtzIszAD4FLl2H/gzyblIGcGEUjjyMLex01KbZg6Uus+BtJQ+2xuKmptJdeBD7+LCLDeq6wj1jponK5Qa1GdUuoxEbqW5fO4vDB/ShuCY1iVyJOw7FGjRpYtWqVimOMrYuNGzeiZs2asR1OkvsbFSiBhvmL4dx/NyKNxj+OH1BPMHkzZE6SmMikQwMBjk3Un6N4Rrqh2v/6A1q+fB4rrhUrCvv4MTCGDoI+kmhmxv0IY+Qoj/tD7lwROkXLYPW8QwueSRy5yJQxIkGmZQsLKigqRSLAVDxpUgNuEisi29AGVy+ykddRf+0NcHnCuJa2Xc+Tbf8iwFRefJ/TOrZ3O9ArS2egzCO58XqlOm6P+3pnm+IVcGDuHKQ6ccrXXfu8vzgNxwYNGqj4xc6dO6NIkSIxBl+9ejXmz5+PKVOmxDiW1Hewl5GZ4Vn4A8rZWaduXsVLjz2OYbWeonhc8UIm9c+IFefP5fqMVX/C9ttcaBXK+0RF9pzZ//c5EXQPAa5c8bzPLFncZq963qH1zoxMkOHSgyKWRkDVqCYifM3EvVzr2gX45HMVtsHeeBELIHDuHHCHEntjqRqzlkLNcqXNEDBFOZZyeNo80PcdUjYD3wusKnEajm+88QbWr1+PihUr4u2330aFChWQgwqBHzx4EFu2bMG3336Ljh07okmTJladnyX04g/AiravY9S21Th6jZbaTNxoLKG4KJGkEOAAfmPiz7D98D1sTd1/p4/euIKKmSIeiBIKjqIscUNbktB+En37yhVhTJLwH6tfZ5VR/Xg1U2pqRG1ne68/9N59YezeA81ilZdMTSKxNSJvI4u7coOcq3Dp9n/ImS5whqNShqvH3A/D9RPHkalAQbXLiv/E6fZKQS722bNngyvITJo0CS1atAAnxLAHcsmSJRg5ciQmTpwIbicSNwLpU6bCwOpN8CMVNnfK8PVLMXHXBoTrDucueRUEgoKAk6tR++A92Lp3davDV1tWoeXSyfjlkAT5uwXIRzsVEfjFSzCIDk3EmggouimK4U3IsrPG36tcuZTX0ZqzSlpaOTkcUSimgcYrhkdfGYKOpasGFBSuV/1V46qos+RnS9sFcRqOjFgyqrvJBOBHjhwBczlyTON1osTYt28fevfuHVBQE9NgvHx94vq/eHvVPNSf/n9wEJG6iCAQDARcuRrtHw2JooKTy4x3PlOsHIplfART9m2J0kbe+BYB1wQZ3/YsvfkMgX37gbBwyqiOOzHGdTyn19GYMxfG3n2uh2Q7CAhwYgyyZIYWywpKWlo65r+AChmOdQ6cxNn7d7DwcNRyzwHVI57B4jUcXc/Pnj278jimS5fOdbdse4AAL1//0Kw9lrV9DT3K1Yhcvr4Vdt+D3uQUQcAzBCK5GmvXisLVeP7WDby1ci7KTRyBHRcjPF/5M2TBNzWbY0ozqogh4jcENE6QyZxJKsj4DWHvO1bxjdRNQpectR7dQPFe4nX0/hJ43wNR8cQW33iTqsW4PjR7P5i5HjSysSpduIqnHClwz0EPJhaVBBmOFp2DpdQyyHPo6PAi9IWLTelVMUdedC7z0B3+AnE5vbhoMs7cvGbqfGkkCHiKQBSuRqr+wtmfTpmyZzN+OfgP3qn6BIplzu7cjUfTZkS6FCkj38uGfxDQKhItjxCB+wdcH/TKD1zImQNatmwJ6k2jcr22d/vDmDUHxv4DCTpXGvsWAV6qjo3D8VcKxyn948e4Ex7m20HN9EZexwmHrqFtyYpmWgeljRiOvoadyy8S2bHe6jnoo8cmuPd2JSthw9njaDl3HNVel+XrBAMoJ5hCIJKrkR507L8vwP20aTFt75bIWtOvVqiNbS++g35VG8SonMCfy/l0Y915UUiqTYHtSSNOkNm6zZMz5ZxAIMClBuOoGBOXCsxnCvIsMTG+SBAR4KXqWDKqecUlY8rUSJ0secAV1PLnp+oxJwI+bkIGFMMxIWiZaMuZo7YFRGXStQv0Xm/A8e77kT/GJk5H+1KVsbHTWxjbpF0kB+S1u7fNnCptBAFTCERyNR47Dvuiefj9/g1Um/wl3ljxC7acP6n64NieLKnTuu2PwnMVwf3nG1e4PS47vUdAJcgQ2blxMuJ6eN+j9OBLBIyd5HFMQHyj69ha6tSwvd0PxoxZMA4cdD0k24FC4L9bACWgxeZxzEk0PI2JjzkoQh5Hg8oO7iIy8NpTvyY+aKpOZDERw9EPF0SjhCL7OKI0+XgojC9GQn+hE4x790yPlClVGlTKSWn5JLcp5rHutFHo8fs0RShuuhNpKAjEgkAkV+PsadDKl1OxNCWy5MDq9m+gCtVnjU+YTuq1inWw5Ng+HLxyMb7mctwDBDTyOLIYW7d7cLac4k8EjGsURnTmLFWMKePxMNorPYBHHomoquRxL3KipwjYjz/w6MXiceTwsdFN2nravVfncWY1Tp5CXuKBPk4JtON3/u1Vf/44OUGG4507dzBjxgwMGzYMZ8+eVVyOumQDx3pdbO+/C9uUSTB+nQ/HE81geEB+nIqM0L5V6mPVyUN4bdnMWMeSA4KAGQQcb72DLSuX4aWvB+B2/brqlNaULT2j5Uso9UhOM12oNu1LVcIEopYqnOkR0+dIQ/MIaAULqoxPQ4jAzYMWqJZU/YXF06VqdS6vTLHXcfpMGIcOq/7kn8AhYHuwFOyOwzFwWsQyEhuON/9Dxjv3wKFrW85Zb9UhTgJw12kx/U6zZs1w/vx5sLHInI6DBg1S1Dxz585Fzpzmf3Rc+03s27b27ajmbG44WrWBo0ZdFU+mfhRMTpz5pLo8Vg0tipTBtXt3Is/iGAx2p4sIAmYQ4KQt9jR+dWIPPu3XDkUzpFYJWMWz5jBzeow2qSj25+micdexj3GS7EgQAipBRjyOCcIsEI1VRrWdfC4lvVvK1F7tqWq4cy13+08/BkJ1GeMBAjb2OKakZMBY6sGP3bEW1XIXQPnsjwYcM+Vx5FFpuXpY7aeCEmcZ36RNexy7deuG6tWr4+LFi8ibN6/ql0nBbbRsNX369PjGSdLHtbp1YF+/Grh7D47H68DYtDnBeGSleDOnd+c0ZVxX+ekL9Fo2S7HbJ7gzOSFJIXCTKiCocIkJk9DombYY2eAZrO3QF54aja7g3bx/D2tPH3HdJdu+QkASZHyFpE/7MXYRv17RIuAMaW9Eo4Q0W3+qJDN1OozD4nX0BsuEnmsnowwF8rstF8mcyoPWLMKms2RcBkPyRdhXHOcYjOQcM1M2ZTjevn0bmzZtUkvUGTI89HJx+UEuS7h4sTnqGTMKJdY2Gj2d2jf8BeR9FI76jaEvWOjxVLl+5oc1muL3o3sxYsMyj/uRExM3AtfJQz1s9W8oO3oojq1eqcImyr3ymqJ/8lXZy682r0SH336CJHD5/rOkaoVf/hdMmyRiHQRUqUEPM6qjz0J77RXi7MwM/ePPoh+S935EgD2OsS1TX7pDD9qUARi0FT32grJHm41bknvh4Rjx9zJLPaCbMhy5egx7Fm/dokykaLJnzx51LNpueesGAY2W8+2rV0Cj2DK9dRvo337vplX8u/hHv0f5mtjY+S1VxtB5xsn/hPvRiYW8Al+u/R1jt61Bx/W7kGXsGNhe8H2wd/eyNVRyzYSdGwRyHyPgJJc29uz1cc/SnacIcMUvcK1pLxJjXMdWXse33oQxZRrkOrsi499ttVRdqJDbQdImT4lvGj5LCaoRnj+3jfy4k5NreQndeBCHmZLe/3ZkN0ZtpVVLi4gpw5FrUTdu3Bh9+/bF5s0Ry6zshZw2bRpGjx6Npk2bWmQ61ldD3Sjm/wKtZ3cqeN8Pjv7vJoiux3WG2dOkBy9hszD345OLJmLmwR2uTWQ7CSHASyzLj+9XMzb+/RevD/4a60fOxNDeA5ClZUu/IJE7fUZ8XKcF6ucv5pf+Q6XTMIcDey6fw6Ije7Dm1MOl+//bsQYdFk/GX6c8WIqk5VAkpx+R3WI4WuZzcPy4SlyAjwxHnpfWuxdQsAAc7TsniH2DzxXxAAH6rtpOnY7V45ieChx0KF0FeSirOWjCCTIPPI6sQ89yNbHqxCHLFAYxZTiy4uPGjQMbi1WrVsWxY8dQv359dOjQAQ0aNECfPn24iYhJBDS7HfbR/wfbp8NhjPwG+vPtYTBxuBdSmZ6O6ucpjC+3/Rlwtvu/zxxDrSlfoeviqeqH04tpyKkeIrDyxEHUmfY1XlgwCf/s/QeOuk8g675DyPfLHNjqRWRPe9h1vKd1K1sdFXIEPog8XsX81GDBoV1q6eg1ijFWHiga5+i1y0Sb9Y2q+jSGAuudUomC688QD9szv45PcHaklpzIh4sXg0EeLhFrIKDiG0kVraznVDzRZ8LOBPvUnwCqX62/Pyj6YXnvYwQ0NhrJeEShgj7u2XfdcYIMxzg6havIrOvYN7jGrFMZeqXHWXOSO3dubNiwAWvWrMH+/fvBXsjy5curP3M9SKvoCHDpKdAHRO/SXdH12OfPgZY1a/Rmpt4ns9nxZtma2HD5DDRTZ/iuUb4MmVHz0ULYduGU+gF19vwJxWXwDypnpnUoXRmZiZ9SxD8IHLl6CRlSpsJvNZ5G6RbtiAD0dkRYRJnS/hnQTa+nblxF7nQZI+uuu2kScru2EiH6AIoT7UWVdFoVK6v0H01exENXLqFAxizg5CDGvWCmrPi1dQ+1Lw95YZ1SI3dBrGrzGjbR97JyrghuVmZEWEWG/nPFKyA5PUTGJbxcLYZjXAgF+BiXGkxL97ECBXw6sFalMmxDBkEfNAR6syawPdHQp/1LZw8R0NhrTBJbjOMPO9ZhNa0QTGnxomoXlH/Y47h0eeTQnCRTLEv2yPfB3jBtOO7duxcOstIzUyAvZ1c7hWMc06VLp+h4UqZM6dwtryYRsLV7PoKup+VzcFSn7Gsq/6YVLmzy7KjNCmfIisfI88hUKYEUdul/Vi/mUmga0oMJTHn57vmSVHuXhAN93/hjDspmy4PHie6gYpDiSAKJjz/GOvDvBYz7Zx0+rdtSGR/dylVH95RZ1QMIPdXBvnalx58jT/TlB4Tqk0diDJHmMi9kYhD2pHPpTyZHZ4PYKfNa9wTHHblKCnsy1M7r/nuraRrq5i0S2XwpEae/tfJXSmxbjv9r1CbKschGDzaU4bhwsfJscj8iwUVAUfHQMrU/roU24B1lLOgvdoe2c4vHToTgImT90Tm+kSJVY/U47v33PP1uXQnqRJTH8RJVjiLubK40ZDWJeveLQ7saNWoozsbYmqSmyQ0ePBjvvvtubE1kfywIaLVrKboex5MtyXgkrsdtG6A96vnSH8e6HSODrUjmbLGM6JvdvEz3z6UzsXJdvUnE5fzH8V9OzwpnrHG1kXlU6/iJ/MUjn+rmHNiB3w7vQiaqD9rlsccjlz75yY/H4bqh5bLnjizD6JsZhGYv/0dB0h+tX4IcadPj5fK11JOotm0HHE1bUDWKrLAvX+zV58cTVAoREXhlqnbEAdyJxXCsljs/Pq/XCh2oDKjz88vYRDcaE4rXi2Wqqe/MqK1/4lGXOKr/yHuZjuKrokjpUgCXR2MvSUHrLq1F0TkRv1EZ1XS/9odolPRonzwBjnJVoPfsBfsvUvDBHzjbDtJvCtUKj80gu3Drprq3+mNs032yx5GFl6tLFI/YttC/pmMchw4dilKlSmHs2LF0DzuOtWvXYuDAgchKS6u8PWbMGHzxxRf49ddfLTS90FFFow+Hfd0qCry+CWPCT14pPnDNQrQiTwl79/wpCynT64kZ32LHxdNxDuP6o8s/lCtf6IMTrwzDyIbPRJ4XrjuI0uUOtl84DaaRccp7f87Hc/N+RKOZ3yqKBN7PXsxCY4ag4qTP8C4dT8xyNzwMCw/vxvh/1kdOs1TWnBhcsxk2d35bGY3GX2vgaNBEUT3Z//oj4EajU7G3qjZAdVqaZZ1DUe47wvHx30vx3ba/lPpO8n3Xz6+v5lUuex786FJ555+LZ1D6x4/xwV8Lo9Sm1cqQ4UhiSIKMr6D3uB9VNvbgIcqo9l/4h5Y/P2zffQNj7nzoP070WFc50T0CnDSYjDLYwxrHHgowuXlnTHqyo/sOArSXPwcszszqAA1rehhTHkeuFMPeRK4Qw8kwLPlpYjVr1gQvVS9btgxsWB46dAgrVqxA69atTSsgDR8ioOXKBa3FU9CpDJXtw4EPDyRw60Wqs8mGxuQ9m9C9XI0Enm2uuW7o+JSW2ni52RN2ffbaZE+WPnIwLq3Ef9Fl4XOv4Mrd27h57y44jpMlHdEl9KpYWxmarl7Vszevg7N8E4uwp7bcxE/x751bhHGeyGvZsEBx8B+L/vtS6M8SzU7FCrAvmgctY/Dm34Ayq/kvFOUW1YRvNut77L9yAW9VibjHBXIeudJlAHsif9q9EVkoFrgfGeFKmDIkdSpFAQO6N4gEEQFKXoFD9xkVT2wzsXV4AcbiJdDf7A+tbm1oRR6GOcR2juw3h4D+0SdAWDjuvNMPaWM5henu0lPcclDlAQm4a2Z1UPWJNrgpw/EuZfxynep8+R64T1064aSZc+fOqT18nBNnRDxHQKMShUbr52Fs3QatUkWPOipJHqk3K9cHLx/6Sxy6gbZk6FXLFfFk5K9xmG7ISTnkHOORNOnQv2rUJ0ZOUmg44/9QJlsufErxls4qO85zrP7K3uGVJw+CM3afKV4OjQqUUMujw2s3VzWkSz+SK8YU9Nm/QO/wIrQG9WGbOxMa1b+1irDXMdCxtt7MPW3yFGhOZT2/zv9sUOJumVqLy4v1o9AO5wMSh2i8T6sHz9auggrC5ejN5fXJubxMrcSHVDyxKWb7fhQc6/6Go0MXWon6E4rbL7bGQdjPsXcGeUQNenBlY9ojoZJ/tm/+B83HiUax6WIcOQLj+7EIe7MPjFhKJLND5MT1q5S9nBEctxwsUcvo2bNFyawOli7uxrW52xl9Xxr6QeIYx/79++PAgQORh7dt2wYuO1irVi0V/zhz5kw0bBj1Bz2ysWyYQkB7kjgxM2eCPnW6qfaxNfqgRhO/en94+a5PpbqqnmdsOgRyP3Nvjaj7NPZR0oi/l6/ZyOOEH6fcISPpy01/KC/vH8cffj/YmL1E5f7Yc+hOnFQufGzR0T3otPBnbD5/Arfu349s3qZEBbg1GummrbfrCO3p5rAtIF5QCxmNPZdMx6vLrB+fxbyLIzetjMT6nWpPBMVojFSANjKRt9EZ53jq5lUsPrIXTZ+qhHfT+zfsxFUH2XaPgEqMyZMbWpYs7hv4cC+vHHC8I7ZshT50uA979q4r49o1qnLzKRz5i0Lv0w/GrdsRXKPMN5rAP2P9Bugvv+6dQgk4Wx9AVEd07cLeiH1Mjm+s8vMX4AS2oAvHObpQ8gRdHxcFTJvUP/zwA1q2bIkSJUqoZWpevj59+jS6du2KTp064bXXXlNG5dNPP+3SvWwmFAGNMmK1556BMWM2jC8/c1tLMyF9crwgp/L78umJYwzzps9sOdoVpkt5gpZwb9CytlMOEU1NUR8mCX1PlVi+2rIKV2n5fHX7N5RRx+X2eP+N+3dVhqxzGXnmvq14b/UCpcqnZNQ6wwaGrF2M/WTg7vn3HDZRnCJfnyYFS+KPdr0pASiPU/VYX/WxP0B/tTe0FzvBNn4MmBfUSlIxR15V65Uzrf3p9fZmzpxgxHRRTCXVg8I5gr405WYy+TJkwdYub2P2V58i8987YNADCF9r/kwXodUEf2T2ulFDdjkRoBrVvqoY4+wyrldOmtTeexvGiM9hNG0MraZ/wo7i0sF5zKBVRf2rUTDG/ADQCqRGy+lMJ8ex+Z6KPmcu9Dbtoc+YBWYX8acYGzbCmD0XttGjKNaJFqldHs5dxz1364Z6G7Rygy7KROdydDkU9E1THkfWsgjFWXDVmOXLlysj8e2338bWrVsxfvx4dQPr16+fWqbmpWsR7xDQ2lPM2rnzMFb96VVHHBtXYeJnmLZ3q1f9uJ7M3rPWc8f73avnOmZCttlb44xzPEGUCnWmfq1qKfO2J8IJE5wF7pS0ZNg/Q3Qzazq8GekJzEVULUdfGYKLvT8BB1Y7hY3Y8U3b48v6rRXPpXM/x9Dcp2SgZ4uVpwSmMLWbl0rNGI1ct1h/611onTrANmGc5YxGnkwnirEt9UhOMK+jVcVG1DZdyz6OP8n4t6LR6MSNl63bUlb3E/8cBg4dxm2KxXxy9mjUmDIS0/ducTaT1wAgoJaq/ZgY424KzO2ICuXh6PgSjBsRRo27dv7ax8u7jpdfg6NgcbXMq3WjpfMj+2Cf+INXRiPrayMHifZkE+h9yTi+ft1fU1D9Ot4eQNnJxaB17xrnOMnp+1Y/X1FiO8gcZ7uAHLSwx5GpTkwLVY4xTp06ZVDlGPV3+PBhg4xHY+nSpab7kIbxI0DeXCPs0UJG+Es94m/s0uL8+fN0b7nhsscwOv72k1Fuwgjjfnh4lP2evpm4c4OR9Zt3jR0XTnvaRUDPI6+fUfKHj4x3Vs2LMe79+/fpfnU9xn7eEe5wGEPWLDKKjRtmlP1xhOHQHW7bBXpneMcuRljmHIZ++XKghzbCwsKMs2fPUnjTnYCP7e2AfD2n7dkc8Ot469Ytr/HST540wpDScMyZq2BYc+qw8dyv44128yd6C4vlzme8+DNGnMGW0o2/b+oaTJ4acL30AweNsLSZDf7uu5OrV68a4T66vzv717fvMMLbdjDC7KmNsCw5jfAPh/rlnqMfPWqEpc5ohPfq4xza56+OufMirt3831Tf165dMy5evOjzcXzdoWPUtwp/ne67VhPTHscpU6YgW7ZsyJs3L9GJFVR/7IWsVKkS5syZExADPKkMwktQ2guUIDN3nte1SzmJhD1ZrhQ33uDIS3u9K9Yx5R3zZhxfnft8iYrY0Kk/PqjeJLLL2OiD2JvqXOZmr+BuioFrXrg0cU12tgR/pLFpMwyKfWUvhKcVhiJBSEIbZ25eQzPy0vVeMSdKHelQgUCjey7Sp4vIrCa/Am11AABAAElEQVSlaz1aGLNbdYtCGTKIkmg+37hChVCEyrxCSU8V30gKB3Kp2omPVqwobF99AWPKdLWs69zvj1dj9V9wNHsajgrVYFByju2LT2E/eRj2oR/65Z6jkS3BDCLGmHHg+5uvhSxq6O8NBOrUgo3iwUNKmJKHE49olclqYtpw5KXp5557TtHtpE+fXpUfHDVqFHIRhcyIESOsNq+Q18dG2dW4fgMGVY3wRtho/OmpTuBMZF8I060MrvWkL7oKWB9cEs65HLn29BHFPdll0RRVQ5iVuEwJLMPXLyXqmxGKYsipGP84/6/BM3gsmzXCLxxEz8G1i7VeLztVtPTr+jNHUX/6KEWlFExF+UGBg965JGBdWoYKSXFTetCViJwTtr6m2NtqP38Zsjyalr4uFN+IZBRL7EVMnzfzs/XoBq1VCxXbbJw86U1XMc4lbxb0BQsRXqMuHPUag5YTYftxjFqStvXtA66l7U/R3noTKFlCLYlzHK8vxaB4cA7xsH/5qaluFxE38byDO0219XcjjnFUYsEEGVOGIy3ngZZBMXz4cJU1zZ7HTJkyoXfv3uDYxk8+IW4kEZ8ioJUvB5QqoTxMvurYG2Jmzhz2ldfSV/PxpJ+aeQrhm4bPgo2aZcciqKPuURzj+J3rFQUOF5O3oujTZgB/b4Rt5BeWo+aIDS8me997+TwmETdhMOWpwmWwofNbsZYEDKZuZseOr2b15/VbYeuL7+IrItV30iDto9JpXI1GxHsEVHwjP7QFsayu7YfRxOmZGo5OXWFQcqq3wpQ6+sSf4HisInQqeYuwMNjmTId97z+wde0CTtQMhGjJk8M+5lvgn50wRn3nsyE5JlQf+jG0tm3AtcDNyOTdmzF1r+89n2bGjtHmAZejYUHD0VRWNdPxJKeLmypVBCkmZ1avW7cOxYsXR7Vq1TBgAAWeWlz4qYprbYeUtGsLY/gIhBPbPUwQO6snR7qhULxLjGmOpbrGk3Zvwhqq2uLkiYvRKI4d47avxXfb12BTx7ci6ULiaG7pQ22LV0CT/CWQmgKhwyi7Lke6dNjd5b3IH1x3+AV1QnSDx7u03NKkEfRGDaG7ub6B0M/5/eFXMxjlTpMBTxM34gaq+fxquZqBUDFyjK3nT2HOwR34hHgwOfQjOTRTOkd24KMNxoq/l2bwinNI8siAKkqF3yb6k1h+0LMRlQ9/rp1j9Vk+GwUzPoLvqR52qAizdbDwHGwULmIZIaMGpUtHYhsUvchZgx/HAlya9pPPgfdoBYLE+dvGr6aEOUF/mADQ0jfx6AEN6gP/+wxo2AAKfb4GPjBMTenibPR4NaBLZ+iDhkJv3RJ4NI/ziOevlI2Oa9dhDBsc5brxZyy27+S5/66jDHHmOr9Dng/ugzNpZRf026QfPR7wez5/9+L6/pkyHNloLFeunKoe8+mnn6J8+fKYPXu2ouFZvHixinf0AUx+7YJv4BR47dcxfN259vRTSPPhUNybNhPhnTvE2z1/GSjhw227spmyq/rVU3ZuRJui5M1MgHBVjW+pDFs9iq3SiHX/Fv2FuiSnCdynefANwvm5uHXPPXbBnmvyT79Acsqyv/PLDOJNC95n2Pmjfu/ePdM31o+qNlZ0Q06MA4HlunPH8fLKOShKlDUXicyXKw0FS5w/QM5XT/WwFS6E1HQPu72daHlo2dqMtC1SDu+tX4yq2fIk+Dtvpn9/tHHiRImY1qEbovtqmj37EEaUOGFB/P4pvGs8jhSv9kSyocNxt3YN6LQyRUlriBcvotCxz/8NySf+DPuGTTDICA0n9o6wlzrDoBhKJcGe24fvI82CRXC8/ibuTZ0UoZOH/2pnziL1198ivGc33CcibbrJR/bEnzG+l7m7J71RrhYypUzt9lhkBwHcSJ33UTiOHsV9F/0DMTw7CVPG5V0nY8OUbNq0yciRI4cxa9YslVGdJUsWI0WKFIbdbjcWLVpkqg9plHAEwmrUNcLrNzZ1orusatcTuyyabHy/7S/XXaa2qZSf0Xnhz8axa4HP5DWloIeN4sqq9rBLn5+mnz5thKXJZIT36evzvhPaYahkVU/Zvclo9cs4g8pUJnSKPm9PP05eZ1WzUjoxJqis3qnTE6Tjx+uXGvsun0/QOcFszHhZLataJ/YQhf1v1vid0+/eNcIeq2iEFStt6IRXXFnV+v4DRnjf/iozmucQVrOe4fh5iqEHmRlhP30mf9610bh+NypDg+OnyRFYL1jo1ccwvEv3CPaJK1di9BMqWdWsePhTLY3wRk/GmEOwd2isgFkLlr1Z/JeO3KcnKUCXa1Q3atRIEYKb7UPaJQwB/fsx0Hv3hf3UEWjxcGReuHABHFbAyUsi8SPAT+pcSjNDhgzxNw5SC0fHLqqsl/0QkQ8HoGJFXNPkJ/VLly4hc+bMkWErcbV3HuNs9U/+XooajxZScaTO/f585duaFQiy2RPESz7OMB9v5hz+CFUtIQ+K/ZOPvOnG0ucyXhxTT06KOJfKAjkJfd4CWj59HnaqCqVxpqsFhGMuHVVqqCIANz/7WN3zyYmjNDPoN1oxcowdD+PPvyjMKUME7+vL3cGxssEQZja4ToUZmN+VhejRMGHXBkVkP//Zl5Ej7cPfLEd9StA5eoxiLXd4lJhjUFiBo2I1lRFu6/dGjOny54vtGM7VsLo4XnsDxoo/kOzAbkupajqIhA1Ep9HIM+C61N27d8eqVavQvn17S00qMSmjPf8cMaXaYEyf5dNpmX1ecNLT+HRw6cwUAsZGWlKipBjbUKLfCbLRaErhWBpxecq1lIz0xcY/Ymnh/e4JOzeoHyNnT1YwGp26+OpVUcF4WLOaCfC/3vKnr1RJWv3s3BVBh0S/eVYR/izYPvsExrgfYV+8VKllHD4MxzsD4KAHNP0FWoKmh2LbhLGwnz0O+/99FRSjkVar8Dhl+peb+CkG/vVbJHxc3nN529dRJ28RZEsTNWvbNvr/QNm40Id49oCkv/M+GyjQXnslcjwzG7sunUXDGf+Hw1SZySqiMqtPnrKKOpF6xBnjuHHjRlUphluvXbsWHN/o+uTMcYPz5s1D0aIhSnERCYN1N7RHqLRY4yfAWbW2t4i2wEvhLMtn541H18eqI74M4itUeaYKfelH1G0B5kMUCRwCbNgr+h2i/9Be6Rm4gf000huV6uGlxVNxgEotFs+aw6ejfEMG0Ufrl6AzVazRDd0SnJs+naCzM6bkWbzE+S5Br3+eOkSUU0uQK22GeL/3Ceo4CTRWGdVlH7OEB9sVbq3Pa9Do85CKVqSMCZPgWLlKJVNoHdvDxt7FcmVdm/t9e+fFM/j96F7wZ+0HqpjFrAo506VXVbPeIj5hNhKdwvRw/Fchx6POXdhGCW38nssYau/2jyi1SBWyNMLerOhLl8FYtgK26T8nOAP+JFW6+ofm4GQlMDumX9sxJc/dezBoNVEjL7xVJE7DkQm+mW6Hg+F5WY9iGeF0h/MEOGmmQIECeP99svBF/IYA1wU1OtCS5X5aKvGSR4xL8nGywMjNK/Fc8fJx1pvmer5cEs/1C++3SUrHURBgTyMoiN32+/yQod+JMoFob54sXIrqcvdHwUxZ1RGm6SlMySuuXITRTjH9lmt9v06k9ENCjF/U9AQfNNRKl6Syb2NgcOIIhaQkRF4sUw2ricj5f5v+wLPFy3nErJCQ8RJTWzYctfr1LDcl9qrbJv2gyLq1q9dgG/sdFY5oC41CyQIh1+7extHr/4Jr07PM3L8NU/ZsRg2iPLv1gAbKptkUF258+hynfpikv1mhUviWWADSvv8uHLTK5njlddjX/WnKaGeKIuVtrFJJUfDEN2b045eIz5clR5qHy+bR2wT6fRQuRwsZjpyWbkpatGhh3Lx501RbaeRbBPT//osoOfXB4Dg7ji85xnny32eOqTKER6/Gnewy4u9lBgfXJ1ah0ItYSw4Gc84c8K5KTj75dDDViDG2r5JjuHxj6fEfG0XGDjU++Os3j8oAUlZkDP2suMNXyTE8N33NWpU4oG/a7NFUb1AiwsVb1r6He5McE+YIN9aeOmLcCbvvET7uTuIkEi675/hutLvDlth3lRJAKP44YLrwd28qle/kcqzNZ4+JHJcMSa9K2/5yYIfx6HcfGJ9tWK76dCxbHpEoM2Zc5BhxbTgmTIr4fvy5Oq5mRlzJMfwdsZLoVH5TJWbNmmMltYw4PY6u1vWCBQuU55GTYtgD6SqcLMMVZET8gwAz92stW0TEOX40xOtBHs9dAFtefDter8N7jzfyeizpIOEI6J//T8X42JZ7VzUo4SMH5gz2Qsxu1RWTdm3E0Wv/Ri4tswcjTfIUSGGP+7YUrjvwOnEU5qRl18TuZYxyRUqXUm8NinM0S2jsej5XT3L6Um4TxRZjnZik428/Y8WJAyrh4vfneyEz8Vp6LRxTSmXfVHyp153F7OAqfebnHvwH3cpWVwdP0XJp1tRpE3ZtyPMYSAknzx6vRvHvyCd1WkQOnZFobLyRZ4qVQ+msOSNXJWyNnoBBpXf1ARTjTdyOWvbssXavyMyJA5Ip7LS6dWJtF98BZ4Wx+NoF7HhOSiZKQeRxFiMBN50c88svvyAnTSI/ZZUVK1Ysyt8bb8TMXAoYsElkIF6uxpGjMDb4pgpHXCTgXL5MJDgIGKdPw/hipArs9jYsITgzMDdqSfqB+KxeS0xt8WLkCSM2LMdjE0Zg6NrFcC4bRR58sMExjBwryT+2JXwcKxl9LKu91yibHXlyw9i9xyvVzv13A9Unj8SvhGGoioOMF46nm753S+QU3qhcT9Xv5kpBPjEaqWcV38gjUDKKr4XDNTgZg1Z1wMTTLG9QPfXylEjyBdUdZ+PeKkLUVqCVKqUOJ7stff41Vco2D8Ux+lI4/tn54DjnwA6M7tmWGc6h93snzmGMkd8AFAfICUOeyskbVyxXHU0l+VGij9Wqx5g2HHv16oVWrVqBE2YOHToU5Y9rVov4FwFOkMEjWaFPpdg3HwnfeJ+b96NKKHDt8oM1C9F2/gTXXbIdIAR0rhBD5Ku2wR8EaETrDNOpdBU0L1waP1OcFHs1nMJ0Pk5hb2XlnPkwoVkHtCtZybk7ybxq7HXcTV4wLyRXugwomz03+q6ci2Pk8Q014YIEFSd9jk4Lf1ZxdU79q+cpiOZUqWhQzabOXfiOChdsv3A68n1CNwzOqCYSZo2rtvhY/jx5SCViLG/3OnKly6h659KRT9J3YCoZxHb6rFtBZu/fjmqTv0T336fhPpVnZclA3mt/yx7Kch6ycw16DXsd92bMgv7HSrdDGkQRpn/2JbTuXb3KAei0cDIGrVnkdoxg7lRxjidOBFOFGGPHvSb0oPkNqvl48eJFfPbZZ8geh7s4Ru+yw2cIaMmSgal5jFlzYHxNX5IHnF3eDJAhRSrwzWvBod1oVSwiA4+fuibv2YR+VRp407Wc6wEC7E02ps+Ejakz2LuUxKRMttwqkH5E3acjvQ7rTh9FjyXT0L5UFfQsXwPZKXCdPUtJVsqUgjFzjtfT/78nnsNrtNyvw/C6L393wF7mP04cRP4MWVAsS3akpSX2HuVqoGqu/KiaO3+sw9+lxL6Z+7Zh2LoldD+rj3c9Cb3ZRfypj/mO+5DnovF/tLzcq2JtdHmsWpRl6SKZs+Hrhs8qA83peZuxb6vy9vWuVBd8PNAy/9BOlM/+KLFrPPxeBkKHwZTsxtd7JV375JUrQX+1N7Rd22JkS+tDhiuvpG2Idw/b52/dQJO0JQMxtYSNQZnVxpatCTvHz61NPdIwQXLBggWxZcvDZQE/6yXdu0HA1qEdcPESjOUr3BxN+K6axPdVPXdBrDp5MPLkUzeuoXiWHHi1fK3IfbLhfwQo8jmCfqdkCWgv9/D/gBYewfmDySoyMXCjAiUwbsdaTCSuxqQuisCZyqlRVpdXUGSi+D8OE+DMdivL1vMnlXfxhQWTlBHo1PX1SnXiNBq5HdOqrCBvHrf1VJxUPJ6e73oec+J2oDjMz2kZ2imxxZm6fgfukZePV4c4vIApb/wtTNm26MhDwukfmrXHtKe7IH/GLP4eOkb/L5SqDB4/GWWMg0jBzxIloKsYBw4Sl+V42N55yyu6Gr7/8m9hOfLEW02syOVoyuPIQA4fPhx9+/bFaYrBYiMyGXnAnMJeyNJUAF7EvwhoNSiAumABIoWeCTRt4pPBptGPh2tAMBuTq9tLzKpPwE1AJ8bU6cDGzbAtWZAo6HcSMPU4m7KH5Rvyjg2v3Rx3HyyTxXlCIj8YWfmD4xxr1vDJbI9cu4zTlJRRN19Rn/TnbScbL55Cc6ovbKP/CmbMqn7QO5WpomheEto3G2CDajxcuubz2YP3bLHy4Fi9uISXQHHhok8SY3h5vfHMb8FerY4UkpEQYSqlNsUr4LfDuyjEII869TJRx+z997zPqdIWHt6NAX8twNU7t7H9pfeInDudqjWfEH390ZY5KTe98zqeS/8fhi2fj+6NWqph9PcotIfsD81LjmP2AE96qqM/VPe+T+ZyvHYdBq38ahapcvbQ+otnehzjyKV6Xn755Rgt27RpA6phHWO/7PA9AhplmRmjvlNVAbTU3mWxsXauRmOiJk/2/aXwWY/My6e/9wG0p5rC1qSxz/pNTB25ZgQnpnkleC7kkaaVTpUgo/nIcOTkDA5Z+bN9H+Sj5eBgyjwyjvqs/hWzKaawfv5iyEIZxqObUIKEj4Q9mL2Xz8GY7WvxXePnUfqR2NlAVHwjjeuLjGpeXu9MBmBDmpMnBPjsmWzrEtPLnImDKYmMCbMHVWqImj4qM7vtwim14vQpLUuz0WglqUTx323e6oH3ktmRKV9+PHvpFox5v8E2fnSCeU2tNK94dWHDkYUzq/2QpBXRecL+NbVUzV1yHWSu6+vub+rUqQkbVVp7jICNs6v/oy/M/N887iP6iRzw/MFfC9WSEGf6iQQWAQ7spiBi2P73eWAHltFCDgFF7lyAVh28TJBxnfgXlJDBhokVEgOWnyQ6nQxZUefRwq4q+my7EiVWLW7zCu5Q/GO89zqKb0Ry8q14WHSBlz+X0BKzUzim0ROj0Xm+62uvCrVVVrONPGVMgO+U4j98hHITPsXzLsmNB69cJCNzEb7evCoyM5rbc/1oLq/38+5NztPxfvXGmNOqW1BiKSOViGUjZcaM+KpFJ/z440K02Ei1uvu/B1DMr/bSQ2aGWE6Nd/eey+cwiiiGOC7WaqLliyBYt1JmtWmPY8qUKZXROH/+fBw8eFDVqT579iwqVqxomWL0Vrvg/tBHK0XBu+XLqhrGaPe8T4bg5Rx+0mR+vEIPKnv4pGPpJF4EjFOnHtLvFC8Wb3tpIAho9GMJD2tWu0OPeQOnUwxbngeZve7aBGpfy8KPoU72/KYqhXiqUxVKqvmr/ZuRVYvYiDxJtbyjG3XK48jl76hCWkKF4wRfWz6LYgX34Pc2r4LH9KXw0upTlH3Nf0RorbpmQ/WV8jVx9e6dKAk3Z4nq59eDOxXVTI9yNcHZ5yyf/L1MZaUns9mU5/IxSk6Li6ZNnRTkf2zEZ9x8wiQYPXsB9+7Dtpgqa5H+3gpTDQ1b97s1Y/vzkuFoo2UGC2VWmzYc9+3bh2bNmlHtcSo+TlQZVEkGgwYNUsvXc+fOVRyP3l48Od8cArb27aAP/BDGlSvQsvhmaWnikx3xX9g9a9XpNAdHSLdS9DtUPs72IcXqiAgCZhDgmtXjJ5ppaboNGw1OYQNE8cc5dwTwtXH+4uo3xd9Dupa6ZMoeLsH6brVGqnSl/YEhokoNerg0uJCSSzgb+IemL/jcaIwNG75mfd2wYdSj2NWdXQfEOO1NyjRvTaTbnCDlLAUao5EFdzDrxPmq1fFNu6Z4uXplRJjB3il64fZNPEIPUPHFvXo3imdnqwcXKrBiJY+jaVO9W7duqF69uqLlycsWMMmkSZOUt3H6dArsFwkYAhznCCLpZmoeXwlnr1o9w9JXc7VKP8bfG1Q1INuwD5Mk/Y5VrkOo6aG4HC9dhkHhDb6Wfyhrt+60b3D2pndZ277Wy5/98bIvxx9+tH6JSl7hsf6jDOiBhTJjXIUiYEqohApzjK7v2E8ZZgk9N1Dti1Li2RMFioeU0cjYaESInWbhPEwsnB1Lj+3zCVwtizwGDtmwrHCco4Wqx5gyHG9T8P6mTZswbNgwMDWPU3JQ0W2uGrN48WLnLnkNAALao0RIS2WVdM6uFglJBNir43izP1C6ZJKn3wnJCxhEpZ2Z1d5WkHE3BSYHv3znP+LOnE6V9nR3Tfy275lfx2PU9r/81n9sHXN8JyeDLG/7OpyVUC7v34cVxfNiSIrbGENUUE6ZQuT0T84ejV7LZmHb+VPO3WCqnW+3/oWP/14auS9vhqTHxRo5eT9vZKxcBdVyF8Cy4/t9MhJzyLYg49GqwpQ8IedxZOodG7nvqQB9DFz37NkjMY4xUPH/Do05Hdeug0G1w0VCDwFjyjRg0xbYRn7uEzL30ENANPYYAU7WsNMzvw/jHJ26MMH6mCbtFAH1FaqjHCjhOuVrTh2Bt/WOvdGXM5Sdku/wcWz8aBLOtHoF3zZq49yt6kjz6sx+osK5ef9u5P6ms7/HkHWLcev+/ch9suFfBJiQ/DuXa+Pf0YLceyh6HFOkSIHGjRsrHsfNmzcrBNkLOW3aNIwePRpNm0blyQoyxElieO3Z1pTxl1wtdSaJCSeSSRpUPk//gco89n0bWvNmsDVulEhmJtMIFAIaJSqiaBGfZla76l4nbxEsa/taQOlY9v17gRI6kqOun7KpXednZlsRf2fKiGRE++JqzDYrVAocD77yhT5ReC8HUjbyzKdfwid1W5jpXtr4AAGmUnKWavS2uyazvsM0l7rn3vbn6/MVCTgx2xj37vm6a4/6M7VUzT2PGzcObCxWrVoVx44dQ/369dGhQwc0aNAAffr08WhwOclzBLgknfZkU6pdLfGlnqMY2DP1ufPgKF0ees/XoNWpBdu47wOrgIyWaBDgOEd/LFU7AQp0cgxn+h7uORgFgswj6Zw/dlHllAQkxjxVuAwaUrygSGARYO7hE5QR740wHd1WCjvgCj2WlfyUlW+QdicfhkcEU1fThmPu3LmxYcMGrF69GmPGjFGG5Pbt28GJMfZ4GPiDOcHEPLbGnI7ENebPH5DEjF+g5mas/gvhj9eG/iyFF1BcsP3v1bDPnQWNMuVEBAGPEKDMauz1TWKAu/E5Brffyrmqyoq74/7YZ6WMVmPnbp8Qf/sDJ+nzIQJMgv7UnNEPd3iwdYmq8LDkoDANq4ryOJJyhkUoeUwbjgwoP4XWrl0bPXv2RJcuXVCsmPDOBfODpjV/EsiQPsl6Hbler6N1GzjadYRx6HAwL4XbsZkHzvFUSzjqNQa562Fb+CuSrV4B7fFqbtvLTkHALAIqQYbLkFEJWH8I3+uZHHrmvm3+6D5KnydvXMEvB3ZYhnyZKznh6FEyHKWMbpQLZcE3HFZx/tZNr2p4c0LUudc+RqMCVJXJquJaPcYCOpo2HM+dO4eXXnoJP/30k1KbE2UKUs3qr776iphhLOzitQDI/lJBS5UK2jOtVO1q9hAkJeGkIEfNejBW/glj9Ro4SpWD49XeMOhzGmzhp0JH565wVKgKY88+2H4aD/sOqkP9VLNgqybjJxIE/JlZ7YSIyaU3nTsBJrP2p8w7tAuvL58Nh1XuYZx0pBOXZVnrZtn683qEUt+1KCa2PvFUhlHxCm+Evd1W8nhHn4uWNi2QNYtlMqtNG459+/bF8ePHUaNGDTWn1FQn+euvv8aoUaOwYMGC6POU9wFCQGVXc9wDZVgnFTG274Dj8TrA9Ruwr1kJ++G9sA3+QFXTcRQpBccHg1VB+EDjYVy+DEe/t+Eo/hiMxUtg+/Iz2A/sgq1zR59UNwj0fGQ8CyNQpDCQgiqa+LD0YPTZti9ZGbu7vY90KVJGP+TT96uIKLs6UatwPWcriLNGNTgcQMTSCHC5xdlUIpFLSXoqF4n8+zSVX7S6aOXK0lq1NRxEpgzH+0QxsHTpUnBNaufyNNPzvPDCCxgwYIDKrrY66IlVP61+PSBnjiTD6agvWQpHnYZAtkdg3/CX8grw05jtgwGwH9kHrWc3GF9+BUehEtC/GhWQLDRe2tI//hSOwiVhjB0P7a03YT+6H7a+faAyYBPrh0/mFTQENKJI4xrK/oxvTp8yFTKnSuP3OfakMnm9K9X1+zhmB1AZ1bQ0qLlwFps9V9qFHgLjdqxHoxnfWl5x+x9LYP9oiCX0NGU4crxLWFgYzpw5E0PpGzdu4AqVvhMJDgIaudi1dm1gzP4FdJGCo0SARlU0Ni2egVb9ceVp1PLkiTKy9ggZk199qbx8KuO8/7vK+6dPngrDD2TGBoVo6GPGKYNRH/IRtBfaKu+n/eNh8qMT5crIG38gwMvVhh+4HF11DSP6KC6ddzvMf/yETHFTP7+F4uUp4VArW8YVBtm2MALhtEz99qp5WHKUQgw8kPO3biAnEd+LmEfAlOGYnPi1mHbnvffew6lTtCz6QLZs2aJiHIXH0YlIcF5tnF397xUkX7U6OAr4eVRVZYVqcysam04dIgrbx+EN0Ii6wP7zBNi3b4JGlVn0zt3gKF8FOi0feyPMwcg/1PrPU+Do0w+OEmWhv0pexVo1YN+zA/Yx30qmtDcAy7kJQkDFOVJmtT/jm49cu4zn509QxmOClDPZ2J+6m1QhRjO1VJ0AKp4YHciOgCKQzGbH+jNHMffgPx6NWzxLdlV60aOTk+hJpgxHxmbChAm4e/cu8lGdyIwZM4JjHKtUqYJ69eqhX79+SRQ+a0xbq1wJKFYEKYknMLGJQWESeqeXYHzyOWxDB8E+YRzUMp2JiXJwu33RfNj/XAakSQP9qVYIr9cIxoaN8Z7NHkpj336wt9Lx5lsIr1UfjozZ4ChTEfqL3WHM/w1a5Yqwb1wD++zp0IoVjbdPaSAI+BQB4nLE7TsqA9in/bp0ViJrDhTKmBWLjuxx2eu7zf9v7zzgnSi6Nn42l947SFXpSO+gYAGR/ukrRQQUbKhYEAXlFTsKNlBRRFTELtgABRRRUESKNOlVXgSk937hZr95BjfmhiQ3NzfJbpJnfoS72Z1y5r+T2bNnzsxc9vEoeXPZ3MhlmMWczF27RPbt51I8WeQY6+SYET37r41hvUTBTeLRZtfEWuS4Lk85yoQWWrZsKc8995xUrVpVli9frrcZrFWrltSooTovBtsJuG68QXI8/5KcOqbWpMrv3PWoMgPKPHRI3Nd1E3Peb3pmMiaZhBOwr3e2BXMFC3C7//uYpDW7XM1G/z+RJx8TUb5M2uqxQXU6i5eIuWSp+quWIFETcOTYP1tsllN7gzeoJ8aQwSL4qxR1DIszkICdBIya5/peU02QMSpWjJooAxtfJdmVVSfSAdbM9Qf2SOl8BSOdddj5af9GlZozqsNGaEvCu+q1kLvrt9BLBtoiQJIVGpLiePLkSdm8ebNGU716dcGHwVkEDKU4Gk8Ok5Sp00T63eYs4cKQRi9p014pdzv+FteMqeJqdVUYuaRP4lJLFxmdO4o5foK4n3pWpG5jyVmvrqRt2CBy9NwisFKm9DklcfCDIlAQoSiWKJE+I34jAScQUMuhSV41eQV+jv/XKWoS3VBdjWhEIfypFEdMvrlCLafimKAW/taz1TmC4JhbEoog2D88nIBdY0b+Plv+U6WOVFFD1gyhEQhJccSw9IgRI2Tw4MF6gkzlypX1ULVVRDFlfaEyadGw56+h9q4906SRZHtzXNwrjubSZWrh7Gv1Xtwpv84Wa826SJDFMLdxx21i9LpRzmLW9YJF4urU/l8lsVSpSBTDPEgg6gT0toA11Ez+VdEZRo52BTC8uP72oeIyQvaYirZIoi2O1auF7A4TdYFYQMgEMElmxd6/pX7JciGnwcSYlxb9KHVLlKHiGDI1kZAUR+T31FNPyWG1U8c999xzXvZdu3aVSZMmnXeeJ2JL4GT/O6WAmgji/mGWuK5uHdvCI1QaJrC4u90oohThlGmTxVBbXUYjGMrnUZRVMVVZ03MFmWgTjbKZJwlEioDes1q5V0Q7TFy7REYv+UXm9hwQ0eFAJymNYAjFkcPU0W5N0ckfuw/1VwvJr+g7RErnD839Ydexo1oYzqrO3D0J+VUPS/EcPXrU7+eDDz7IXKmMHRUCZ65uJW6s7fb8y1HJP9qZut96W9yd1XI7l10qKb/8GDWlMdr1YP4kECsC2hq/foNgaahohpJ5C8i6A7tl8a6/IlLM6n071XaGSwTL/TglYNUE7P9tcEa1U25JpuS4qkJVHf+HretCTndxoaIy9pobpGKh4iGnYUSRkBXHvGqR5Xz58vn95FJb3zE4gIBab/PsALXt3o+zBcO98RL0cjtDhor7znvF6HOT3tPZSJAJPvFyDyhnnBLABJlUtX5rlPdqv7TMxVIsd15Zu393REBhD+zH5k6TFJcRkfwikgkYnlLbK3KP6ojgjHUmxfPkk9vrNJcL8oZmbYR8xVSaLlXrSv4o744UaxbRLi9kxRGCYJLMZ599Jk8//bT8/fffgnUc3VFYWDnalU7k/NO6/kdEzQJ2j3gxLqqpZ0736C3miJfE9cwTkvLOWPoXxcWdo5BOIGD5/0bbzxH7+K64ZYjcVLNxRKr949b1ao/hKs7zb1S141B1RG6xLZkMv7yztLmomi1lJ1OhIfs4rl27Vtq1aye71DpXUBY7deokjz32mPZ7/Oqrr6QUJxU4o92oxdpdA+8Xt9o1xVQz4aO5TEdWK4yFtN2Dhqhlb46J68Px4lITVhhIgARCJ6B3TypU8NwEma7Xh54wjJg5UkJ+XGSY+2PN2wosRE4KemJMkcJ0kXHSTYmyLI/N/VYOnDwhb7TpFuWSEiv7kC2Ot956qzRr1kz27Nkj5cqdm7U0YcIEvZ7jp59+mlhU4rw2xu23iFqlXdwvjnJkTdBBn1X7TWMhbaNZE0lZo9YFpdLoyHtFoeKAABYCj9HM6jlqkeWZW0L3IQtEr63aZrBBqfKBLttzfsVKNUzNrQbtgR+5Up+Z9528rGZKhxLW7NslB0+dCCUq43gRCElxPHHihCxatEgPURfwmoFasmRJuf/++2X69OleWfLQbgKG8kc11Axr8/0PxdwdGZ+kSNTJVJOr0gYOkrT6Tc6tz6hmTadM/kKwRSADCZBAeAQwXB3tPastycavmC/DF8y0vob110kTYqwKwM/anL9Q7wZlnePf+CSw+8RR+VRNvAol7D95nPtUhwLKJ05IimM2tfady+WS48f/2UnDK5PVq1fra16neOgAAq5771bOOoa4X33dAdKIuD+bpPd2NtU6k8Z/H1Z7Oy8TV/u2jpCNQpBAPBPQO8hs2izmaTWxI8qhQ8VLZKVaK2/bkYNhlZSm3JxqjX9OPli1KKz0UUu0UMmzZ68YHdtHrQhmHBsCbdT6oFsPH5TtRw9lWOCcG++X4S07ZxiPEdITCElxzJEjh7Rp00YeeOAB+f3333UOsEJ+8skn8uabb0rbtlQA0mO1/5tRvLgYt/QRKGqw9NkVzHXrJa1VW3H3uEmMOmrv6FVLJeWpx8XgTHy7bgnLTTQCGKpOc4uovdWjHa65qLqMbt1FCqkdX8IJWM5nn7LyVCrsrC073VO/FVG+olgKjCG+CWByDBaWL5u/UEgVyakMYwyZIxCS4ogsx40bJ1AWGzduLFu2bJErr7xSevbsKVdddZXcd999mSuVsWNCwPXg/WorvaNivvVOTMrzLsRU1uk0tcROWu0GYipriOuriZIyfaqjJ+t4y89jEogXArGaWQ0eUBh71GgY9vIlO48dkfIFCkvjC5zlnmIqxdFQIyDYWYohvgnkypZdiqilozIKJ8+ekfVqeSlsO8iQOQIh/UrOnDkjGK5esGCBzJ07V9atWyewQtatW1d/MlckY8eKgKH2sjW6dRH3K6PFuK+/GOqexSK4v5os7gEPiSj/SuPBAeJ67L+id2qJReEsgwSSjABGF6RE8Zj5OQIv/BTdyi8ws9aaa6vUFnycFExlCJHVauFv1U8xJAYBtM/f/t4iDdUErLzZ/T/3VuzZIR2+GCs/3nCv1FFbDjKETiCoxREKY//+/QUTYjARplq1apKi1vO64447pE+fPlQaQ+dsW0yX2lZPdvwt5kefRF0Gc9MmSWvXWdzX3yBGlcqSsmKJpAwfRqUx6uRZQLIT0FbHGM2sPnr6lFR7Z5h8vn5ZQmA3p05Tm++miHHN1QlRH1ZCZMvh/XL91+/InL82BMSBfaoRSqldkRgyRyCo4vjWW2/pIeoHH3xQ+zLmzp1bbrjhBj1knbliGNsuAkbdOrpDdL84UjBzMBrBTE2VtCeelrSa9cVcsVJcn30oKbNmiFG1SjSKY54kQAK+BJSfo7lqje/ZqHzPnzOXYKu2aZtXZyr/+Tu2yIdqUky0+qFMCeMVWQ9TX95SjEKh+cR5JeWhQwlUKVJCyuUvHHTpqCK58ko7tSxU8TwZD2s7tJq2iRVUcZw6dar069dPhg0bJnfeead89NFHsn37dlmyJLSp7rbVigWnI2A8rKyO69R+tlO+SXc+Ul/ct9wh5nPP6yWAUtatEFf3rpHKmvmQAAmEQEDPrN66VUy1mH4swnWV60h2tdJGZgJmUo9ZNlct9uCcbQaxc5U591cxOnfMTFUYNw4IDGh0hbQsVymgpC3KVZQPO6otbo3MteOAGSbRhaDE9u3bJ1Wq/Gs1qlmzphRX/jRbVQcVrXBaLSkxb948+e233wRD5VZIVVatadOmyYoVK6xT+i+UW3/LBKWLlORfXFdeIdKogbhfeDniJLC1ofnxZ+IaN0ZSXn5BuMd0xBEzQxLIkIAeqsaAwpq1GcaNRIS767eQD9RDN9QAK+NsNWx4VYV/nyehpo1mPHPG98ph86xahqddNIth3jYQuLlmE7le7UPNEHkCQRVHKGuYBOMdihYtGrWhauyFDd/J2bNna+vm4MGDPcMaw4cPlzTl8IolgCzlcdu2bTJ//nzJqxa8ZghOwPWwmqyiFrg1f5kbPGImrrq/mSbuR9XSOmr2tqvvzZlIyagkQAIRJYAleVSI9p7V4cqslteWN67uJjdd0jjcLKKSzlR9mNSsIcbFF0clf2bqXAITVi6U6Zl0t3BubWIrWVDFMbaiiEycOFGaNGkiQ4cOlTFjxmgFdeHChVqMVatWSceOHaVVq1ZinRs/frz07ds31mLGZXnGdf8nUrmiuJ9/KSLy4wHl7nmz9p90vTA8InkyExIggfAIGGqLUSlbJqaK44YDe2TgT1+FtJwJhgNbXVhVqhYtGV4Fo5DKPHtWYHHkMHUU4Doky7eW/yq9vnnfrzS49uPW9X6v8WRwAhkuxzNlyhSBZc8Ke/fulcmTJ6cbrq5Vq5aeNGPFCffvJjUrFwuNW6F+/fqyZs0aadq0qZQvX172798vO3bskIvUMjObN2/WFkjvoXQrnb+/GCo5qzqKRA6oI6yy3kP86er7wP1i3n2fuJf9od+y013LzBflwiCd/iNSRj2oPhgvblWmKjgzOTgiLtqDW+1kEZCXI6R0jhBoWwhB25hzxHWEJGCF32VM2liN6mpy2ipxe7n4RBPC4ZMn9A4wbcpXlVYZDEGfOJMqeQIsi+Ito9XGwAu7lUU1zP5ZjEOHxa3Wb4wVs2jUB32Y1ZdFI/94ztNlGvK92lt915FDUvSftR3BC7/J3cePSvHc+WLz24wziFg9J9jvL6jiWLZsWVm/fr3+WPXG0jxYxxEfKxw+fDgiiuOuXbv00j9WvigLk3EQYFkcOXKklChRQrp3764n7Nx22236Gvwic+bMqY8D/YeOCIpnogcM9+PjN7RrI0WLF5PUYcPl6Ouj/EbJ8KTiWLB7b8mmnMoPqr2mdYcLRTKOQ0BecVynaIp+5Mi5ZSyiWQbzzjyBvBdfJDm/niIHYvR7LOvKKaXUg/frtUulTt4iAQU+dua0XD71bXm2cRtpWy40H8cDBw4EzC9SF/J+/qXkUq5X+y+sIBIjZpGS3TcfPAMZzidQP38xNflF5NfN6+TSUuo+e4VnGraWC9XMa8zlYEhPIH/+/JIvX770J72+BVUcv/vuO6+o0T+Elmu9caI0vEVhCSAETMyBnyMCrJA4X1ANzzz00EN6bclmzZrJtddeq6/7+w8LmBcpErhz85cm3s4dPHhQK9B58gTZDuz+eyTnE89I9hHDRMqXy3QVjf73i/H7YnF/85UUalA/0+mdlADtC368QXk5SWCbZcFvEy+J6FB8fZ9tFs2xxeOBjlnEseBlqN+ja+zbUgSzlgsXjgmTd9veKBcWLCKFcp7rp/0VuuDPNZLqTpPGFSpJkULB+2DwwmTHQmppnGAWD3/lZPac68fZYnZqL0WKFctsUkfFP6Zm0qMPizYvR1U6RGHwzF/TZ4jky/GvYQntC4akLrUahZhL8kWDLhYsBFUcgyWMxrVi6gfs/aaJ43Llzldu3nvvPRkwYID8+uuvUrt2bbnxxhsF1sdgiiN+VBlZJaNRp1jmiQcUFORg9TTvuUvS1OzqbK+rWdCvjsyUeO7Rb4j73QnieuMVyd7umkyldWJktAkoQ8F4OVFuu2SCoo2QPXt2MgvxJqB9xarvMevWFjgT5Ni4SYwWl4UoYdaiNSmX8aSSk2aa1C9ZTi4pmfHuHJbhAL/JaCpC5uo1krblf5LyykviymC0KmuEop8aIyZ4McnoYR99SZxZgm//furUKfb7WbxVUXYiyZx0LVq0kBkzZghuLMzHWJKnXr166TJZtmyZXhKojPKvQycDyyN+MLAcwW+BITgBONEbd94uplIAzUwM3btn/SjuBwbptK677wxeCK+SAAnEnoDyccS4XKxnVmOv300H9was741qb+uZ3fsHvG7HBSz6LblyitH6KjuKZ5kxJJCmfBp//N962Xzo3yHpn7Zvkks/GilH1C5IDJkn4CjFsXXr1nppnR49euiFx7t06aInwnhX6/3335ebbz639Evz5s1l1qxZMmrUKGnZUq3876CFZb1ldtqxa8C98AMQ8/U3QxLNVBYMd7ee2orhGh2mb2RIJTESCZBAuAT0fvBq4qCp9l2OZXjk56nSbcr4WBaZ5bLcSnGE0qiZZTk3ZuBkAlgK6rbvPpVP1iz2iLnt2GH1srNPDWGnX27QE4EHQQk4aqgaw6zPPPOMHD16VFsS8d07wP/llltu0ftm4zz2z4bSuHv37vMUTO90PE5PwLjgAjF69xS3UhyNQQODdp6m8mlL63Sd9plyffGpGD73JH3O/EYCJGAnAewgE2uL49UXVtOzq1ft/VtqFi+drvozlH/jvhPHpHdN56zfaO7ZI7LodzHGvp5OVn5JTALZXClq4fnK8oOaXf1Y87a6kodTT0mJvPm4a0yYt9xRFkerDpjR46s04hp8FeDT6B3gFIzleRgyR8ClFEblUKqGrN8LmNBUrgDu7r1E/t4pKWoyjKFmIDKQAAk4mAAWAldrrMYyXFm+snSoeImk+XEVenfFfPl8/bJYipNhWea309VK6aYYHdplGJcREoNA31pN5Y66l3oqc1/tS2XpzQ97vvMgcwTSm/R80i5fvjykXWIwqSXU9RR9iuBXmwgYVSqLcW1ncY98TYy7+vm1JLofeljMH2aJa6pSGuE/xUACJOBoAth60NyvXgjV0mZGqVIxkTVXtuzyfofe55V18uwZmb9jiwxq0vq8a3ae0P6NDRuIUTq9ddROmVh2dAlcVrai4OMdsmcwc9g7Lo/TEwiqOPbq1UtWr8747bVr164yadKk9Dnzm+MJYBvCtCYtxJz4uRg9e6ST1z1eTZ555XVxvfCcuPhmno4Nv5CAUwnoPauVcJg1HCvFMRCL7GrVgk8695FKhZyz3I2pJl6aP/woriGDA4nN80lAYL2azJUtf14pnCvI0nVJwCHcKgYdqsY+0IfUQs8ZfSZMmBBu+UxnIwGjcSMxrmgpbrU8j3cwf50n7rvuFeOmnqKHtL0v8pgESMC5BKqqBbazqTXYVq2JuYwDfvxSsP+vFeBbdnm5SlImfyHrlO1/TbV2o5w4KUanDrbLQgFiS+DbTaukzvgRclqtAtBz1mcCNwqG8AgEVRzha4hFtq0P1orCxBUsNI0PlszB1n9YT5EhPgkYDz8oskJtU6b2bEUwt26VtP90F6lfT1zjxsRnpSg1CSQpAQOzRCtXivkEGeDecfSQTFy3xEP+0KkTnmOnHOhharXxgVEnva+8U+SjHNEjgBeYHccOyZztm+X42VQplbdA9ApL8JyDKo7edf/oo4/0+olYkBuTUfCpVKmSNGjQQL744gvvqDyOIwKutmoh7zq1xP38S2KqHQjSOl+v1jfLJSmT1fB1nC+MG0e3gaKSQMQIaD/HGE+QgfAdKtaUFXv+1mvjbT18QCqPe0avnxeximUxI6zzi4kxRueOWcyJyeORQN0SZaRMvkKy/tBe6VChmlQvWjIeq+EImUNWHAcNGiRYVxHrJsISuWDBAnnttdfkArW0i7UVoCNqRCEyTcA1WFkdf54raVcpJXLTZkmZ8oUYaqkjBhIggfgjoP0c16yNueBdqtaVtbcNlQI5c8lPf23Q5dcrWTbmcgQscLGyhqoVIozOHKYOyCiBL2Cd5yV9Bsl9dS6Tl5p3kAalyidwbaNbtZAUR+xPu0vN0hs2bJi0atVKWx6xl+i9994rAwcOlOeeey66UjL3qBIwunURubCCiOpYXe+/K0a9ulEtj5mTAAlEkYCaWS1Hjor5119RLOT8rLEfMJRGBLey7rW7uLoUyZ33/Ig2nXF/M00kfz4xLm9pkwQs1m4C8LtlyDqBkBRHrJWI/WlzqSFMhGrVqsm8efP0cZMmTWThwn8dovVJ/hdXBLCot+vtMeIaP05cXf4TV7JTWBIggfQEDKzlqIJpwwQZbD84Uy203K1qPfmg403pBbP5G/wbjbZtRPuB2iwLi7ePwFebVsrY1QvsEyABSg5JcYTSWKdOHXniiSf05Ji6devK559/LmfOnJHp06dzAe5EaAitW4mrj7M6+gTAyiqQQOwJVFLr1al9mGO9EDgquuPoYbnxmwny/f/Wxb7eQUrU1tc/VtK/MQijZLn05eYVMnHTimSpblTqGXQdR+8Sx4wZI506dZIrrrhCbr/9dj0pJl++fJKmdheZOnWqd1QekwAJkAAJ2ETAwMLG1arqtRxjLcJFhYqqSQel5OsNfwh8Hp0S9GzqFJcY7ZQfN0NSE+ivdo3ZeGBPUjPIauVDVhwbNWokfymfmdTUVIHCuGzZMpk5c6ZcffXVUqGC8o9jIAESIAEScAQBu2ZWo/JDml4tu08cdQQHSwjzm+kilzbntqkWkCT+2/yCC6VhUe4alJUmELLiuHPnTrW9p6nLOnLkiN5Lun379vo71nQsXLhwVuRgWhIgARIggQgRgJ+j+eXXYrrdYqgdXGIZ2qt9q50UTLX2sDnnZ3E994yTxKIsJBC3BEJWHKtXry6YXe0vcMtBf1R4jgRIgARsIoCZ1SdPiWz+Uy8IbpMUjijW/G6mSOoZ7hbjiLtBIRKBQMiKI3aHgT+jFbCDzNKlS+WNN96Q559/3jrNvyRAAiRAAjYTMOrV0RKYS5aKoXaSSeag/RurVhajSuVkxsC6k0DECISsONasWfO8Qi+77DI5ceKEXsfx7bffPu86T5AACZAACcSegFGmjEjpC8RcuEjkhm6xF8AhJZrK2GFO/06MW/s4RCKKQQLxTyDLzi/YOWblypXxT4I1IAESIIEEImA0bawUx98TqEZhVGXebyIHDoqrU4cwEjMJCZCAPwIhWxwXLVokZ8+e9eSBY+wm8+yzz+olejwXeEACJEACJGA7AaOJUhyfeFpMtd6uodbiTcbgVot+S9EiIs2bJWP1WWcSiAqBkBXHNm3a+J0cg+HqZ57hbLWo3B1mSgIkQAJhEjCaNBI5dVpk+R8ijRqGmUt8JzPVNoNGh3ai17aM76pQehJwDIGQFUes4Wgtx2NJnzdvXr0sj/Wdf0mABEiABBxCoGEDEbXoNfwcjSRUHM31G0Q2bBLj2acdckMoBgkkBoGQfRwLFCig96rGkjx79uzRny1btsjGjRsFazwykAAJkAAJOIeAoV7sRS3LE1d+jgcPSc6JX4jp5RYVLlE9mzpHdjGuuTrcLJiOBEjAD4GQFccvv/xSSpUqpXeJqVKlinh/7r//fj9Z8xQJkAAJkICdBLSfI2ZWx0lwffKZFHhgkJiXtxa9v3QW5IZ/o3HlFWLkz5+FXJiUBEjAl0DIQ9V33323XHvttXLXXXdJkSLK2dgrYAtCBhIgARIgAWcRgJ+jOe5dMQ8cEMOn33aWpOekMX5fImllSkvK1m2SVrexuMaPE9e1nTMtqrlvn8j8BWK8NjLTaZmABEggOIGQLI7YYhDD01jou3HjxlKpUqV0H1giGUiABEiABJxFABZHhHgZrnYt+l1SW10pxvKFguWE3Nd1k7T7Bop5Wk3yyUTA2o2SprZb7HhuW9xMJGVUEiCBDAiEpDjCv/Giiy6SxYsXZ5AdL5MACZAACTiGQPVqIvnz6QkyjpEpgCDm3r1ibP1LztSvK0axYuKaNkVcLw4Xc+w4SWvWUsyNmwKkPP+09m+sW1uM8uXPv8gzJEACWSIQ8lD1sGHD5IEHHpDt27drJTJbtn+TlihRQi65RO2NykACJEACJOAYAobLJUZjtSxPHCwEbllFz9arp/kZhiHGQw+I0eJSSbuht6TVbyKusa+Lq2ePoHxhnTS//0GMgfS9DwqKF0kgTAL/an8ZZAAfR8yo7tev33kxu3btKpMmTTrvPE+QAAmQAAnYTAB+jmOdvyUslg0yCxaQtEoXpwOG4faU5YvEfWs/cffqK+ZPc8Q1epQYefKki2d9MWfPETl2nLvFWED4lwQiTCCkoWqUuXv3bjl58qTfz8cffxxhsZgdCZAACZBAJAhoP0e17Z65YWMksoteHsoqamLtSWVp9A1GwYKS8sVn4hrzqphq5nVaw2ZirlrtG01/N7+Zrvfplgb1/V7nSRIggawRCFlxzJkzp/o9G3qSzLZt28T7sw8z2BhIgARIgAQcR0DvIKOkgkXPqQGbS5i/LxazkVIcgwTXXf0kZcFcEbdb0hpfKu5x75wXW+8Wo/amxvOKgQRIIPIEQlYcuY5j5OEzRxIgARKINgGjZEmRCuWdPbN63XqRQ4fF3TDjrRGNOrUlZYlaaqfr9eLud4/yf+wlplr5A8Fctlxk23YxlOLIQAIkEB0CmfJx5DqO0bkJzJUESIAEokkAS9s42uL4jzXUbBja8DJ2xUl5/11xt7pS3HffJ2n1mkjKxI/EnDZDJE9uMdR5BhIggegQCElx9F7HETOoGUiABEiABOKHgN5B5qvJYp46JUauXI4TXM+ovvgikeLFRM3CDFk+1029BHVL695T0i69QqRQITHatHZkHUOuFCOSgMMJhDRUzXUcHX4XKR4JkAAJBCGg/RzPnBXBUK4DA6yhsIqGE4yqVbTfo3FrX5E9ai3IMHaaCadcpiGBZCUQksURcLiOY7I2EdabBEgg7gnUV2sjZs8m5gKloDVr6qjqmGq1Dlm5Sow+N4UtF6yoKWNeE/Peu0WUIslAAiQQPQIhK45cxzF6N4E5kwAJkEA0Cejh6dq1nOnnuHiJyNk0NeSsFirPYjCwUw4DCZBAVAmErDhiHUcsmeAvpKSk+DvNcyRAAiRAAg4hoP0csYezw4L2b8yRXaRuHbW/dJrDpKM4JEACvgRC8nFEIqzjmEsNB3h/sO3gtGnTZPTo0b758jsJkAAJkICDCGgfwv9tFXPPHgdJ9c/6kkppNNQzhoEESMD5BEJWHL2rgv2qH3/8cSmvdFgzCAAAMF9JREFUNpDv0qWLrFu3zvsyj0mABEiABBxGQO8go2Sy9oR2iniQJ9yJMU6pA+UggWQiELLiiGHq77//XrCW44UXXiijRo2S9u3by7x582TcuHHJxIx1JQESIIH4I1C5kkjhQmqCzELHyG7u3HluwW61pA4DCZBAfBDI0McR2wmOHz9e3nrrLdmyZYu0aNFCatSoId26dZOhQ4fGRy0pJQmQAAkkOQFswWc0VhNQlIXPKQGzvBEiMTHGKXWiHCSQ6ASCWhwHDBggZcuWlXfeeUd69eolmzZtkp9//llq166d6FxYPxIgARJIPAJq5rLeEzrARMdYV1jvZlO0iBgVK8a6aJZHAiQQJoGgiuOsWbOkovpBDxkyRPr37y8XX3xxmMUwGQmQAAmQgN0EjKZNRI4cFVnrEL90+DdGYBkeu7myfBJIJgJBFUfMmO7atas89dRTUqZMGenUqZN88cUXcvr06WRixLqSAAmQQEIQMBo31PVwwr7VptstplrDUSuzCUGXlSCB5CAQVHGsUKGCPPnkk9q3ccaMGZIvXz7p3bu3Vh5hjZw7d27AtR2TAx9rSQIkQALxQ8AoWlSkUkW9g4ztUq9eI3LsuAgtjrbfCgpAApkhEFRxtDKCU3Xr1q3l008/lb///ltef/11OXLkiLRs2VIPX2PyDAMJkAAJkIDzCWBo2BEWR8zuNtS/RuesoM4nRwlJgARAwFDL7PjfDiYEPsuXL9czrlNTU2Xs2LEhpLAvSprakeAk9kRN4HDs2DHJnj27Xqw9gasZsaqhTZw5c0Yvah+xTBM4I7caWjx+/Ljkzp1bsPg/Q8YE0DfixRu/S6eElLFvS7aHH5XTO/8nkiePbWJl63+/uOYvlNSlCzwy4Pd46tQpPboFbgwZEwCvHDlyiMsVkh0o4wwTPAZ4oe/Pmzdvgtc0/OqhPeETKGSp969bt6689tprgfJ21Hl0QsFAOErYLAiD7R+ToZ5ZQORJevbsWYEyRF4eJEEP0NkiQGkks6CoPBfRvhzX9zRvKgba/crVIi0u9cga6wNj8VIRtTyQd1uy7BhQtKkIhXZH8HIChuQVOi/2+8FZZbSNdJYUx+BFO+sqflTeHZSzpIuMNHhAUXEMnSV4QXlM9HYROpHgMcEKgYpjcE7eV8HMaX2P2bCBpOXMIdmWLhNXqyu9xY3ZsalGR9LUjmOu/v3E5WXZsNoYFaHQbwXaFxTtjB72oeeY2DHBCS/B7PfDv8+0bYfPjilJgARIIO4IGFDU6tW11c8Ra0mK2+SM6rhrPRSYBESoOLIVkAAJkECSEdATZP7ZtcWWqmP3mty5RGrVtKV4FkoCJBA+ASqO4bNjShIgARKISwIG9obe8beYO3bYIr/eL7t+PTEcNGnIFhAslATikAAVxzi8aRSZBEiABLJCwNqtxbRp32pz0WLuGJOVG8i0JGAjASqONsJn0SRAAiRgBwED28cWL2aLn6P5118iO3cpxVFZPRlIgATijgAVx7i7ZRSYBEiABLJO4NxC4MrXMMbBsnIaTak4xhg9iyOBiBCg4hgRjMyEBEiABOKLgLb4qb2izX/W54yV9HrXmlIlxShfPlZFshwSIIEIEqDiGEGYzIoESIAE4oYA9og+fkJklVoIPIbBVLO5LR/LGBbLokiABCJEgIpjhEAyGxIgARKIJwKG2rUFe0XHct9qE4vIq4XH6d8YTy2FspJAegJUHNPz4DcSIAESSAoCRsGCItWqKsUxhn6OK1aKnDwlAmsnAwmQQFwSoOIYl7eNQpMACZBA1gnA8hdTi+PCRWrbCUOMRg2zLjxzIAESsIUAFUdbsLNQEiABErCfgPY1XLtOzCNHYiKMtm7WqC5G/vwxKY+FkAAJRJ4AFcfIM2WOJEACJBAXBLSvodozWu8dHQOJsWMM/RtjAJpFkEAUCVBxjCJcZk0CJEACjiaAvaLz5BaJgZ+jeeiQyIaNnFHt6AZB4UggYwJUHDNmxBgkQAIkkJAEjGzZRBrUj4mfo7lITcIx1URu7hiTkG2JlUoeAlQck+des6YkQAIkcB6BmO0gA6tm3jwil9Q4TwaeIAESiB8CVBzj515RUhIgARKIOAFtAdy9R8ytWyOet3eGmL2N2dRGSor3aR6TAAnEGQEqjnF2wyguCZAACUSSgLWLC3Z0iWbQM6q5fmM0ETNvEogJASqOMcHMQkiABEjAmQSMcuVELigVVT9Hc/NmkX376d/ozCZAqUggUwSoOGYKFyOTAAmQQOIRiLafo7U7jWXdTDyCrBEJJA8BKo7Jc69ZUxIgARLwS8Bo2kTvIW2eOeP3elZP6t1pypYRo3TprGbF9CRAAjYToOJo8w1g8SRAAiRgOwH4Hp46LYK9pKMQYHE0mjaOQs7MkgRIINYEqDjGmjjLIwESIAGHETAaNtB7SGNnl0gHMzVVZPkf9G+MNFjmRwI2EaDiaBN4FksCJEACTiFg5Mun11e0fBEjKtey5SKnU7ljTEShMjMSsI8AFUf72LNkEiABEnAMAaznqH0RIyyRVkazqbUb1Q41DCRAAvFPgIpj/N9D1oAESIAEskxA+yBu3CTmwYNZzss7A62M1rxEjDxq1xgGEiCBuCdAxTHubyErQAIkQAJZJ6B3kFF7Ses9pbOenSeHcxNj1KxtBhIggYQgQMUxIW4jK0ECJEACWSRQo7pIfuXrGMEdZMx9+0Q2/0n/xizeGiYnAScRoOLopLtBWUiABEjAJgKGyyWYXR1JP0drso22ZtpULxZLAiQQWQJUHCPLk7mRAAmQQPwSUOs5mosWR0x+rYQWLCBSrWrE8mRGJEAC9hKg4mgvf5ZOAiRAAo4hoHeQ2X9AzE2bIiMTFv5u1FAMw4hMfsyFBEjAdgJUHG2/BRSABEiABJxBwNpL2hpizopUpmmem2iDXWkYSIAEEoYAFceEuZWsCAmQAAlkjYBRqpRI+XLKz/H3rGWE1Bs2ihw6rLYa5IzqrMNkDiTgHAJUHJ1zLygJCZAACdhOAFbHSGw9aE2yMRo3tL1OFIAESCByBKg4Ro4lcyIBEiCBuCegZ0D/sULM06ezVBcTy/pcdKEYJUpkKR8mJgEScBYBKo7Ouh+UhgRIgARsJaD9HFPPiGCP6SwEWBwtn8ksZMOkJEACDiNAxdFhN4TikAAJkICtBLCntNpb2j3qNTF37AhLFPPkSZEVK5Xi2Dis9ExEAiTgXAJUHJ17bygZCZAACcScgJE7t7iefEzM6d9J2sXVJO22O8XERJfMhKXLRM6mqYkxVBwzg41xSSAeCFBxjIe7RBlJgARIIIYEXI8+Iil/bRL8Nad8I2nVa0ta1x5iLlkakhR6VnaO7CL16oYUn5FIgATihwAVx/i5V5SUBEiABGJGwChcWFyPPyopWzeKa9RLeometIbNJa1NB3HPnhNUDj0ru05tMXLmDBqPF0mABOKPABXH+LtnlJgESIAEYkbAyJNHXPf1l5TNa8U14W0xt28X91Vt5WyTy8Q9eapgoW/fAIsj/Rt9qfA7CSQGASqOiXEfWQsSIAESiCoBI3t2cd3cW1JWLxfX15NE7SMo7uu6SdoldcU94QMxz6iZ2CqYu3aJ/LWNM6qjejeYOQnYR4CKo33sWTIJkAAJxB0B7DvturazZFswV1w/fSdGuXLi7nuHpFWsLu5XXxfzpzm6TpwYE3e3lgKTQEgEsoUUi5FIgARIgARIwIeA68orRNTHVLOo3SNeFPfAQcrkqIauixYRo1Iln9j8SgIkkAgEqDgmwl1kHUiABEjARgJG/XqSMukTMTduEveLI0VKcrcYG28HiyaBqBKwdaj62LFjMm/evHQVPK22ucK53377Tc784zODCKmpqTJt2jRZsWJFuvhTp06V48ePpzvHLyRAAiRAArEnYFSuJCnjxkjKM0/GvnCWSAIkEBMCtimOp06dkieffFKmTJniqehJtdtAnz59ZPbs2fLRRx/J4MGDPTP2hg8fLmlpafLJJ594lMdt27bJ/PnzJW/evJ48eEACJEACJEACJEACJBAdArYojn/++adWEI8ePZquVhMnTpQmTZrI0KFDZcyYMXLixAlZuHChjrNq1Srp2LGjtGrVynNu/Pjx0rdv33R58AsJkAAJkAAJkAAJkEB0CNji4wiF8NFHH5X9+/fL9OnTPTXbtGmTtGnTxvO9fv36smbNGmnatKmUL19ex9+h9k696KKLZPPmzdoCWaVKFU/8YAewVqLcRA5YTw1D/QyhEXC73dodwvcFJrTUyRcLvBAwMuDtRpJ8JEKvMThhFjJ5hcbM4gQ3JnBjyJgAmMFdi7wyZoUYcHuDPsB+PzCvnGrh/hw5cgSMYIviWLNmTS3QnDlz0gm2S63/VaBAAc85HG9Xi80iwLI4cuRIKVGihHTv3l2GDRsmt912m74GZQkVDRbQUBLdFxKKIzqRs2fPBkPBa14EwIy8vIAEObQWeoabCR9SQUB5XQIzsOILnReUIIdWG6MiFASSzyUww/ONITQC3m0stBTJFwt9lq2K45YtW+Tbb7/V5KEI3nzzzQHvQkpKSrofAB7ouXPn1vGhbMLPEQFWSJwvWLCgPPTQQ4J0zZo1k2uvvVZf9/cfIJQqVcrfpYQ5t3v3bsmjdnnInz9/wtQpmhWBkg3rmffLSjTLi/e88Xvcu3evFFZb0eXKlSveqxMT+THK4XK5yCtE2uB1+PBhKVmypOYWYrKkjnbo0CHd5+M5yJAxAbQvWB2LFy+ecWTG8Esg6j6O2dVuA1Dw8MlIoSlWrJgcOHDAIyiOS5cu7fluHbz33nvaAvnrr79K7dq15dlnn5XJkydbl/mXBEiABEiABEiABEggCgSiPlRdtmxZuemmm0ISvUWLFjJjxgzBX/i4YEmeESNGpEu7bNky/aZQpkwZWbRokbY84k0LbxDWsFC6BPxCAiRAAiRAAiRAAiQQEQJRVxwzI2Xr1q31Go49evTQwxQ33HCDngjjncf7778vQ4YM0aeaN28ujz/+uGBZnpYtW9LvyhsUj0mABEiABEiABEggwgQMZaVT+0M5K2C2E3wYs2VLr9fCwXz9+vV6eNqSGD4x8O3DTOtkD/RxzFwLoI9j5njRxzFzvBCbPo6ZY0Yfx8zxQmz6OGaOGX0cM8fLX+z0mpm/GDacC+QLiZnT8Gn0DpgMQqXRmwiPSYAESIAESIAESCA6BKI+OSY6YjNXEiABEiABEiABEiCBWBNwpMUx1hASpTxYXzGLnSE0AlgmJdhaVaHlkjyxwAttzNeFJHkIZL6mYMU1L0Pnhv4LbYzMQmeGkTjyCp0X+nwuXRQ6L38xHenj6E9QniMBEiABEiABEiABErCXAIeq7eXP0kmABEiABEiABEggbghQcYybW0VBSYAESIAESIAESMBeAlQc7eXP0kmABEiABEiABEggbghQcYybW0VBSYAESIAESIAESMBeAlQc7eXP0kmABEiABEiABEggbghQcYyTW/XDDz8Idu7wDn/++af88ssvencK7/NpaWl6n+9Vq1aJ2+32vqR33pk5c6bs27cv3Xl+SV4CBw8elFmzZsnOnTvPg4Cdmvy1F7Sf77//Xrcn30SB0vjG4/fkIbBp0yaZPXu2nDx5Ml2lsRvYvHnzdH+FnZx8w7Fjx/R17/MZpfGOy+PkIRCojQXrq8JJkzxEA9c05UkVAl/mFScQ+PLLL+X555+X3r17e9bQe+SRR+Snn37SyuSYMWOkRYsWki9fPtm+fbv069dP0LkuWbJEx7nqqqv0Ol+jRo2SyZMnS2pqqrzxxhty6aWXSsGCBZ1QRcpgE4EpU6bIyy+/rNvBp59+KuhImzZtqqUJ1F6WLVsmAwYMkEKFCslbb70luXLlkurVqwdNY1P1WKwDCAwcOFCWLl2qX2JfeeUVqVChgpQpU0YrkX379pXjx49r5RCK5TXXXONZk/DUqVPy+OOPy4YNG+Tqq6/WNYHiGSyNA6pLEWwgEKiNBeurwkljQ9WcWST2qmZwJgH1Bm4OGTLEvOOOO8zLLrvMVB2pFnTjxo1mly5dPEIrxdIcOnSo/j5u3DhTKYWea/379zeVgmlu2bLFvO6660xljdTXlJJgPvfcc554PEg+AsqCbV5//fWmslzryqsHuNmhQwfzwIEDQdvLTTfdZC5fvlyn2bVrl9mxY0dTvagETZN8dFljEFi5cqXZq1cvDwz0RQ888ID+/t5775nq5cRzDf3c/Pnz9ffNmzeb3bt3133foEGDPHGCpfFE4kFSEQjWxgL1VeGkSSqoGVSWQ9XO1Oe1VBhyhvUH1kHvsGLFinR7dlepUkUwbI3g75rqhPV17PON3T8Q6tevL2vWrNHH/C85CWD3hPfff9+z1zssPBgaRLtDe/LXXuAuAau2tWd8yZIl9U4fO3bsCJgmOemy1iBQo0YNUS+zHhiHDx8WtDMEWLfRD1nBu086ceKEPProo9KjRw/rsv4bLE26iPySNAQCtbFgfVU4aZIGaAgVpeIYAiS7omArqc6dO3uGpy05mjdvLosWLRL4psGHEf6Pln8ahp/hr4YfDZSA3377TV/Dde9h6QIFCsj+/futLPk3SQnkzZtX1xzt6NVXX5W2bdtKsWLFdJvx11727NkjSOO9xRniKStlwDRJipbVVgTwopo7d27NAm3nww8/FGUF0t+VtVrQD1nBu0+qWbOm1KpVy7rk+RssjScSD5KKQKA2FqyvCidNUkHNoLLcqzoDQE68XKpUKenWrZvccssteq/lli1bepRCPPhhScR17Ptar149/aCHdQmWJCtAsbQ6dOsc/yYnAfjDPv3006JGJ7SVBxQCtRff84iLtgQ/R99rbGOgwwACylVGHn74Ye2faPnQhtNewknDO5AcBHzb2O7du9M980DB6qssIuGksdIm818qjnF695XfkCgfIG1x3Lp1q6xdu1bXBBMWnnrqKW1txGQZTF4oUaKEViwxjG0FWIguuOAC6yv/JikBDAnigY7JCsqXTCt/QFG8eHHt9mBhsdpL0aJF9WQGKJuwiCPgWunSpQXWILYxixj/WgTQNylfbVG+jXL55Zdbp7VlG23HCjguV66c9dXvX1jDM5vGb0Y8mVAE/LWxYH0VKh9OmoSCloXKcKg6C/DsSgp/Mvj+wNwOS8/nn38uV1xxhRYHM2PhE5k/f345cuSIXq6nSZMm0qhRI8HyPNu2bdNvXd988400btzYriqwXIcQeOKJJ6Rq1aqCWfqw5lghUHvJli2boD1NnTpVR8VyUIULF9afQGmsPPk3+QhgKZTBgwcL2pm30ggSWAlixowZ2ucR8eBWgxGSYCGcNMHy47X4JxCojQXrq8JJE/+kIlcDA5NnIpcdc4oWAXSY8F20rDzvvPOOzJ07Vw9VV65cWVuL4HeGpS3++9//6rUd4bcGBbN169ZarG+//VZGjx4tRYoU0UtiDBs27Dz/yWjJz3ydRwBv3GomqxbM22fx9ddf15NfArUXWLihDEDRxMsLlkzBBC2EQGn0Rf6XdASwVBheZr3bF/ofLAuGYUOMjuCFFu3ohhtukK5du6ZjNGfOHJk+fbq88MIL+nwoadJlwC8JTyBYGwvUV4WTJuFBZqKCVBwzActpUbEeI/R+S5n0lg8TYzBU7RuwyC6GGf1d843L7yQQrL0cOnRIr+XoSylYGt+4/E4CR48e1f7WsBCFGsJJE2rejJd4BAL1VcFqGk6aYPkl0jUqjol0N1kXEiABEiABEiABEogiAfo4RhEusyYBEiABEiABEiCBRCJAxTGR7ibrQgIkQAIkQAIkQAJRJEDFMYpwmTUJkAAJkAAJkAAJJBIBKo6JdDdZFxIgARIgARIgARKIIgEqjlGEy6xJgAQSnwCWxho1apTfimJvZiw58/PPP/u9zpMkQAIkEG8EqDjG2x2jvCRAAo4igF1zBg4cKOPHjz9Proceekjv3oS9lxlIgARIIBEIcDmeRLiLrAMJkICtBLBv/Ndffy2rV6/W2y9CmB9++EGuueYamTZtmrRr185W+Vg4CZAACUSKABXHSJFkPiRAAklLAEPSl1xyiTRs2FDvioIdnPAdCuObb77p4YJtQLELyuLFi/V+4H369JFWrVp5rmNx/ldffVV+//13vWUotoN88MEH9U5PuHbPPffo3X5GjBghFStWFPzFrisMJEACJBArAlQcY0Wa5ZAACSQ0Aey73L59e72PN3wap0yZIsuXL5e8efPqekOZrFu3rhQoUEBuu+02WbRokd6O7+2335bevXvrONhzHsoltoI8deqUwH/y5MmTsnHjRr2NKPagr1Spkt57Hrs/jRs3LqGZsnIkQALOIxD6Hk/Ok50SkQAJkIBjCMC6iCHrO++8U/bv3y/YZ9lSGiHka6+9Jjt37tTWxoIFC8pdd92l9/geNGiQ9OrVSw4cOCAlSpTQFsrq1avresHiCGV07969nry6dOkiw4cPd0y9KQgJkEByEaDimFz3m7UlARKIIoGRI0fKxIkT5dZbb5WmTZumKwkWxlKlSqVT+nbs2CG7d++W7du3S7ly5WTSpEnaSjlhwgRZv369/PLLLzoPWB0tJbRJkybp8uUXEiABEoglATrHxJI2yyIBEkhoArAkQsErU6bMefU8ePCg5MmTR/skwi8RHyiLQ4YM0ccYmm7btq20bNlSPvvsMx23Z8+e5+VTtGjR887xBAmQAAnEigAtjrEizXJIgASSmgB8E2fOnCnDhg3zTGjZvHmzzJs3T0+U+eqrr+THH3+UP//8UyuUgDV58mTNzO12JzU7Vp4ESMA5BGhxdM69oCQkQAIJTKBfv356SBoLgsP6CH9HWBS//fZbyZEjhx7GTktL00PXwLB161Z59NFHNRFYIxlIgARIwAkEqDg64S5QBhIggYQn0KhRI/n4449l7NixcsEFF0i1atX0kPbo0aN13TGjGpNrsDwPrrdo0UIef/xxKVSokCxbtizh+bCCJEAC8UGAy/HEx32ilCRAAglEAJNiihcvri2NvtVKTU2Vffv2eRYS973O7yRAAiRgJwEqjnbSZ9kkQAIkQAIkQAIkEEcEOFQdRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSoONpJn2WTAAmQAAmQAAmQQBwRoOIYRzeLopIACZAACZAACZCAnQSy2Vk4y04+Aj///LP89NNP8r///U+qVKkiV111lTRr1ixLIFauXCkzZsyQwYMHZykfJiYBEiABEiABEghOIOVJFYJH4VUSiAwBNLXbb79djh49KhdccIF899138sILL0iuXLnksssu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" alt="Annual % change in Case-Shiller Home Price Index vs Personal Consumption Expenditure, 1988-2023" style="max-width:100%;height:auto;border:1px solid #e8c89a;border-radius:6px;"/>
+  </div>
+  <p class="rw-src">Data: S&amp;P CoreLogic Case-Shiller National Home Price Index; U.S. Bureau of Economic Analysis (BEA), Personal Consumption Expenditures, 1988&ndash;2023.</p>
+</div>
+
+<h3 class="subsection-heading">3.3 Prices of Related Goods</h3>
+<p>The demand for a good is affected by the prices of <em>other</em> goods in two distinct ways:</p>
+
+<h4 class="sub2-heading">(a) Substitutes &mdash; Goods That Replace Each Other</h4>
+<p>Substitutes serve similar needs and can replace one another: coffee and tea, Coke and Pepsi, butter and margarine. When the price of a substitute rises, consumers switch to the good in question &mdash; demand shifts right.</p>
+
+<div class="diagram-container">
+  <div class="diagram-title">Figure 2 &mdash; Effect of a Substitute&rsquo;s Price Rising: Coffee Market</div>
+  <svg viewBox="0 0 380 230" width="380" height="230" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+    <line x1="50" y1="14" x2="50" y2="200" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+    <line x1="50" y1="200" x2="360" y2="200" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="50,8 44,20 56,20" fill="#111827"/>
+    <polygon points="366,200 354,194 354,206" fill="#111827"/>
+    <text x="22" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="#374151" transform="rotate(-90,22,112)">Price of Coffee</text>
+    <text x="205" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#374151">Quantity of Coffee</text>
+    <!-- D1 original (solid, green for rightward shift) -->
+    <line x1="65" y1="22" x2="300" y2="188" stroke="#059669" stroke-width="2.5"/>
+    <text x="304" y="192" font-size="13" font-weight="800" fill="#059669" font-style="italic">D&#x2081;</text>
+    <!-- D2 right shift (dashed, same green) -->
+    <line x1="125" y1="22" x2="350" y2="175" stroke="#059669" stroke-width="2" stroke-dasharray="7,4"/>
+    <text x="353" y="179" font-size="13" font-weight="800" fill="#059669" font-style="italic">D&#x2082;</text>
+    <!-- Right-pointing arrow -->
+    <line x1="168" y1="100" x2="202" y2="100" stroke="#5B1A18" stroke-width="2"/>
+    <polygon points="210,100 202,96 202,104" fill="#5B1A18"/>
+    <text x="80" y="92" font-size="11" fill="#5B1A18" font-weight="700">Tea price &#x2191;</text>
+    <text x="80" y="106" font-size="11" fill="#5B1A18">&#x2192; switch to coffee</text>
+    <rect x="52" y="138" width="188" height="36" rx="4" fill="white" stroke="#e8d5c4" stroke-width="1"/>
+    <text x="146" y="153" text-anchor="middle" font-size="10" font-weight="700" fill="#5B1A18">Rule: Price of substitute &#x2191;</text>
+    <text x="146" y="167" text-anchor="middle" font-size="10" fill="#374151">&#x2192; Demand for good shifts RIGHT</text>
+  </svg>
+  <div class="diagram-caption">Tea&rsquo;s price rises &rarr; consumers switch to coffee &rarr; demand for coffee shifts rightward to D&#x2082;.</div>
+</div>
+
+<h4 class="sub2-heading">(b) Complements &mdash; Goods Consumed Together</h4>
+<p>Complements go hand-in-hand: hot dogs and charcoal for grilling, cars and gasoline, printers and ink. When the price of a complement rises, consumption of both goods falls &mdash; demand shifts left.</p>
+
+<div class="diagram-container">
+  <div class="diagram-title">Figure 3 &mdash; Effect of a Complement&rsquo;s Price Rising: Hot Dog Market</div>
+  <svg viewBox="0 0 380 230" width="380" height="230" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+    <line x1="50" y1="14" x2="50" y2="200" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+    <line x1="50" y1="200" x2="360" y2="200" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="50,8 44,20 56,20" fill="#111827"/>
+    <polygon points="366,200 354,194 354,206" fill="#111827"/>
+    <text x="22" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="#374151" transform="rotate(-90,22,112)">Price of Hot Dogs</text>
+    <text x="205" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#374151">Quantity of Hot Dogs</text>
+    <!-- D1 original (solid) -->
+    <line x1="125" y1="22" x2="350" y2="175" stroke="#FD6467" stroke-width="2.5"/>
+    <text x="353" y="179" font-size="13" font-weight="800" fill="#FD6467" font-style="italic">D&#x2081;</text>
+    <!-- D0 left shift (dashed, same color) -->
+    <line x1="65" y1="22" x2="300" y2="188" stroke="#FD6467" stroke-width="2" stroke-dasharray="7,4"/>
+    <text x="303" y="192" font-size="13" font-weight="800" fill="#FD6467" font-style="italic">D&#x2080;</text>
+    <!-- Left-pointing arrow -->
+    <line x1="214" y1="100" x2="180" y2="100" stroke="#dc2626" stroke-width="2"/>
+    <polygon points="172,100 180,96 180,104" fill="#dc2626"/>
+    <text x="172" y="92" font-size="11" fill="#dc2626" font-weight="700">Charcoal price &#x2191;</text>
+    <text x="172" y="106" font-size="11" fill="#dc2626">&#x2192; less grilling</text>
+    <rect x="52" y="138" width="196" height="36" rx="4" fill="white" stroke="#e8d5c4" stroke-width="1"/>
+    <text x="150" y="153" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Rule: Price of complement &#x2191;</text>
+    <text x="150" y="167" text-anchor="middle" font-size="10" fill="#374151">&#x2192; Demand for good shifts LEFT</text>
+  </svg>
+  <div class="diagram-caption">Charcoal&rsquo;s price rises &rarr; less grilling &rarr; demand for hot dogs shifts leftward to D&#x2080;.</div>
+</div>
+
+<h3 class="subsection-heading">3.4 Tastes and Preferences</h3>
+<p>Consumer preferences are shaped by culture, advertising, social trends, and health information. A positive shift in preferences toward a good increases demand (shifts right); a negative shift decreases it (shifts left).</p>
+<p>A classic example is the Hula Hoop craze. In 1958, over 25 million Hula Hoops were sold in the first few months, and over 100 million within the year &mdash; with no change in price or income. Pure enthusiasm drove demand dramatically rightward almost overnight. Advertisers try to recreate this: they aim to shift demand curves rightward by making goods seem more desirable. Public-health campaigns shift demand for cigarettes or sugary drinks leftward.</p>
+
+<h3 class="subsection-heading">3.5 Future Expectations</h3>
+<p>Consumers act not just on current conditions but on what they <em>expect</em> to happen. Two types of expectations matter:</p>
+<ul class="body-list">
+  <li><strong>Expected future price:</strong> If consumers expect a good&rsquo;s price to rise in the future, many will buy more <em>today</em> &mdash; shifting current demand right. Conversely, if they expect prices to fall, current demand shifts left. According to TrueCar data, many car buyers deliberately wait until August, when new model-year vehicles arrive and dealers offer incentives on remaining inventory &mdash; they are acting on expected future price declines.</li>
+  <li><strong>Expected future income:</strong> A law student in their final year, confident of a high salary upon graduation, may increase spending now &mdash; even before earning more. Expected higher future income shifts current demand right.</li>
+</ul>
+
+<h3 class="subsection-heading">3.6 Number of Buyers in the Market</h3>
+<p>More buyers in a market increases total market demand (shifts right); fewer buyers decreases it (shifts left). Population growth, new market entrants, or reduced trade barriers that admit foreign buyers all expand the pool of buyers.</p>
+
+<h3 class="subsection-heading">3.7 Quick Reference: What Shifts the Demand Curve?</h3>
+
+<table class="shift-table">
+  <thead>
+    <tr><th>Factor</th><th>Change</th><th>Direction of Shift</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Income &mdash; <em>normal good</em></td>
+      <td>Increases</td>
+      <td><span class="arr-r">&rarr; Right (increase in demand)</span></td>
+    </tr>
+    <tr>
+      <td>Income &mdash; <em>inferior good</em></td>
+      <td>Increases</td>
+      <td><span class="arr-l">&larr; Left (decrease in demand)</span></td>
+    </tr>
+    <tr>
+      <td>Wealth</td>
+      <td>Increases</td>
+      <td><span class="arr-r">&rarr; Right (like income for normal goods)</span></td>
+    </tr>
+    <tr>
+      <td>Price of a <em>substitute</em></td>
+      <td>Increases</td>
+      <td><span class="arr-r">&rarr; Right (switch to this good)</span></td>
+    </tr>
+    <tr>
+      <td>Price of a <em>complement</em></td>
+      <td>Increases</td>
+      <td><span class="arr-l">&larr; Left (both goods consumed less)</span></td>
+    </tr>
+    <tr>
+      <td>Tastes / preferences</td>
+      <td>More favorable</td>
+      <td><span class="arr-r">&rarr; Right</span></td>
+    </tr>
+    <tr>
+      <td>Expected future price</td>
+      <td>Expected to rise</td>
+      <td><span class="arr-r">&rarr; Right (buy now before it costs more)</span></td>
+    </tr>
+    <tr>
+      <td>Expected future income</td>
+      <td>Expected to rise</td>
+      <td><span class="arr-r">&rarr; Right (spend more today in anticipation)</span></td>
+    </tr>
+    <tr>
+      <td>Number of buyers</td>
+      <td>Increases</td>
+      <td><span class="arr-r">&rarr; Right</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- WE 1 in Section 3 -->
+<div class="example-box">
+  <div class="ex-header">Worked Example 1</div>
+  <div class="ex-title">Identifying Shift vs. Movement &mdash; Pizza Market</div>
+  <p>Each of the following events affects the market for pizza. For each, state: (a) does the demand curve <em>shift</em> or is there a <em>movement along</em> the existing curve? (b) which direction? (c) why?</p>
+  <ol class="body-list">
+    <li>Pizza restaurants lower their prices.</li>
+    <li>Consumer incomes increase (pizza is a normal good).</li>
+    <li>The price of soda (a complement to pizza) increases.</li>
+    <li>The price of submarine sandwiches (a substitute for pizza) increases.</li>
+    <li>A nutrition study reports that pizza consumption reduces cholesterol.</li>
+  </ol>
+  <div class="solution">
+    <p><strong>1.</strong> <strong>Movement along</strong> the demand curve. Lower pizza price &rarr; quantity demanded increases. This is a <em>change in quantity demanded</em>, not a change in demand. The curve does not shift.</p>
+    <p><strong>2.</strong> <strong>Shift rightward</strong> (increase in demand). Higher income + normal good &rarr; consumers want more pizza at every price. This is a <em>change in demand</em>.</p>
+    <p><strong>3.</strong> <strong>Shift leftward</strong> (decrease in demand). Soda is a complement to pizza. Soda prices up &rarr; people buy less soda &rarr; and eat less pizza alongside it. Demand for pizza falls at every price.</p>
+    <p><strong>4.</strong> <strong>Shift rightward</strong> (increase in demand). Sub sandwiches are a substitute for pizza. If subs become more expensive, consumers switch to pizza. Demand for pizza increases at every price.</p>
+    <p><strong>5.</strong> <strong>Shift rightward</strong> (increase in demand). The study improves consumer tastes for pizza. Consumers now want more pizza at every price &mdash; a change in demand.</p>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<h2 class="section-heading">4 &nbsp; Movement Along vs. Shift of the Demand Curve</h2>
+
+<p>This is one of the most important &mdash; and most commonly tested &mdash; distinctions in introductory economics.</p>
+
+<div class="def-box">
+  <div class="def-label">Critical Distinction</div>
+  <div class="def-term">Movement Along vs. Shift</div>
+  <p><strong>Change in the good&rsquo;s own price</strong> &rarr; movement <em>along</em> the existing demand curve. Call this a &ldquo;<strong>change in quantity demanded</strong>.&rdquo; The curve does not move.</p>
+  <p style="margin-top:8px;"><strong>Change in any non-price determinant</strong> (income, related prices, tastes, expectations, number of buyers) &rarr; the entire curve <em>shifts</em>. Call this a &ldquo;<strong>change in demand</strong>.&rdquo; A new demand curve is drawn.</p>
+</div>
+
+<div class="keypoint"><strong>Jargon Rule:</strong> Always say &ldquo;change in <em>quantity</em> demanded&rdquo; when the good&rsquo;s own price changes (movement along). Say &ldquo;change in <em>demand</em>&rdquo; when a non-price factor changes (shift). Writing &ldquo;demand increased&rdquo; to describe a price-induced change is a technical error.</div>
+
+<div class="diagram-container">
+  <div class="diagram-title">Figure 4 &mdash; Movement Along the Curve vs. Shift of the Curve</div>
+  <svg viewBox="0 0 460 315" width="460" height="315" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+    <line x1="60" y1="12" x2="60" y2="275" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="60" y1="275" x2="420" y2="275" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
+    <polygon points="60,6 54,18 66,18" fill="#111827"/>
+    <polygon points="426,275 414,269 414,281" fill="#111827"/>
+    <text x="18" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#374151" transform="rotate(-90,18,148)">Price</text>
+    <text x="240" y="308" text-anchor="middle" font-size="13" font-weight="700" fill="#374151">Quantity</text>
+    <!-- D1 (original demand) -->
+    <line x1="68" y1="18" x2="388" y2="218" stroke="#FD6467" stroke-width="2.8" stroke-linecap="round"/>
+    <text x="393" y="222" font-size="15" font-weight="800" fill="#FD6467" font-style="italic">D&#x2081;</text>
+    <!-- D2: right shift (green) -->
+    <line x1="148" y1="18" x2="405" y2="180" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="408" y="184" font-size="15" font-weight="800" fill="#059669" font-style="italic">D&#x2082;</text>
+    <!-- D0: left shift (dashed red) -->
+    <line x1="68" y1="70" x2="310" y2="218" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-dasharray="7,5"/>
+    <text x="313" y="222" font-size="15" font-weight="800" fill="#dc2626" font-style="italic">D&#x2080;</text>
+    <!-- RIGHT shift arrow (green, inline polygon) -->
+    <line x1="210" y1="100" x2="246" y2="100" stroke="#059669" stroke-width="2"/>
+    <polygon points="254,100 246,96 246,104" fill="#059669"/>
+    <text x="258" y="96" font-size="11" fill="#059669" font-weight="700">Demand increases</text>
+    <text x="258" y="108" font-size="11" fill="#059669">(non-price factor)</text>
+    <!-- LEFT shift arrow (red, inline polygon) -->
+    <line x1="258" y1="155" x2="222" y2="155" stroke="#dc2626" stroke-width="2"/>
+    <polygon points="214,155 222,151 222,159" fill="#dc2626"/>
+    <text x="262" y="151" font-size="11" fill="#dc2626" font-weight="700">Demand decreases</text>
+    <text x="262" y="163" font-size="11" fill="#dc2626">(non-price factor)</text>
+    <!-- Points A (high P) and B (low P) on D1 -->
+    <circle cx="148" cy="70"  r="5" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+    <circle cx="228" cy="118" r="5" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+    <text x="100" y="63" font-size="11" fill="#5B1A18" font-weight="700">A (P&#x2191; &#x2192; Qd&#x2193;)</text>
+    <text x="235" y="130" font-size="11" fill="#5B1A18" font-weight="700">B (P&#x2193; &#x2192; Qd&#x2191;)</text>
+    <!-- Movement arrow: A to B along D1 (inline polygon arrowhead) -->
+    <line x1="153" y1="76" x2="221" y2="113" stroke="#5B1A18" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <polygon points="228,118 220,112 224,108" fill="#5B1A18"/>
+    <text x="115" y="107" font-size="11" fill="#5B1A18" font-style="italic">movement along D&#x2081;</text>
+    <text x="115" y="119" font-size="11" fill="#5B1A18" font-style="italic">(price change only)</text>
+  </svg>
+  <div class="diagram-caption">Moving from A to B along D&#x2081; is a <em>change in quantity demanded</em> (caused by a price change). Shifting from D&#x2081; to D&#x2082; or D&#x2080; is a <em>change in demand</em> (caused by a non-price factor).</div>
+</div>
+
+<!-- WE 2 in Section 4 -->
+<div class="example-box">
+  <div class="ex-header">Worked Example 2</div>
+  <div class="ex-title">Reading a Demand Diagram: Movement or Shift?</div>
+  <p>The diagram below shows the market for electric vehicles (EVs). D&#x2081; is the original demand curve. D&#x2082; is the demand curve after the federal government announces a $7,500 tax credit for EV purchases. Points A, B, and C are marked.</p>
+
+  <div class="diagram-container" style="margin:16px 0;">
+    <svg viewBox="0 0 420 310" width="420" height="310" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+      <line x1="60" y1="15" x2="60" y2="278" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="60" y1="278" x2="400" y2="278" stroke="#111827" stroke-width="2.5" stroke-linecap="round"/>
+      <polygon points="60,9 54,21 66,21" fill="#111827"/>
+      <polygon points="406,278 394,272 394,284" fill="#111827"/>
+      <text x="22" y="152" text-anchor="middle" font-size="11" font-weight="700" fill="#374151" transform="rotate(-90,22,152)">Price ($)</text>
+      <text x="230" y="300" text-anchor="middle" font-size="11" font-weight="700" fill="#374151">Quantity of Electric Vehicles</text>
+      <!-- Price level ticks -->
+      <line x1="54" y1="120" x2="60" y2="120" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="50" y="124" text-anchor="end" font-size="12" fill="#374151" font-weight="600">P&#x2081;</text>
+      <line x1="54" y1="185" x2="60" y2="185" stroke="#9ca3af" stroke-width="1.5"/>
+      <text x="50" y="189" text-anchor="end" font-size="12" fill="#374151" font-weight="600">P&#x2082;</text>
+      <!-- Light horizontal guides -->
+      <line x1="60" y1="120" x2="395" y2="120" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="60" y1="185" x2="395" y2="185" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- D1 (coral, dashed) -->
+      <line x1="72" y1="25" x2="358" y2="258" stroke="#FD6467" stroke-width="2.8" stroke-linecap="round"/>
+      <text x="363" y="262" font-size="14" font-weight="800" fill="#FD6467" font-style="italic">D&#x2081;</text>
+      <!-- D2 (green, solid) shifted right by ~60 -->
+      <line x1="132" y1="25" x2="388" y2="242" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/>
+      <text x="392" y="246" font-size="14" font-weight="800" fill="#059669" font-style="italic">D&#x2082;</text>
+      <!-- Compute points on D1:
+           D1 line: from (72,25) to (358,258). Slope = (258-25)/(358-72) = 233/286.
+           At y=120: t=(120-25)/233=0.408, x=72+0.408*286=72+116.7=188.7≈189 -> Point A (189,120)
+           At y=185: t=(185-25)/233=0.687, x=72+0.687*286=72+196.5=268.5≈269 -> Point B (269,185)
+           D2 at y=120: x=189+60=249 -> Point C (249,120) -->
+      <!-- Points A, B on D1 -->
+      <circle cx="189" cy="120" r="5.5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
+      <text x="180" y="112" font-size="12" font-weight="700" fill="#5B1A18">A</text>
+      <circle cx="269" cy="185" r="5.5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
+      <text x="275" y="180" font-size="12" font-weight="700" fill="#5B1A18">B</text>
+      <!-- Point C on D2 at price P1 -->
+      <circle cx="249" cy="120" r="5.5" fill="#059669" stroke="white" stroke-width="1.5"/>
+      <text x="255" y="112" font-size="12" font-weight="700" fill="#059669">C</text>
+      <!-- Arrow A→B (movement along D1, downward-right) -->
+      <line x1="193" y1="126" x2="261" y2="178" stroke="#5B1A18" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <polygon points="269,185 260,178 264,173" fill="#5B1A18"/>
+      <text x="196" y="162" font-size="10" fill="#5B1A18" font-weight="700" font-style="italic">movement along D&#x2081;</text>
+      <!-- Arrow D1 to D2 shift (horizontal, at mid-height) -->
+      <line x1="225" y1="72" x2="264" y2="72" stroke="#059669" stroke-width="1.8"/>
+      <polygon points="272,72 264,68 264,76" fill="#059669"/>
+      <text x="235" y="64" font-size="10" fill="#059669" font-weight="700">shift: tax credit</text>
+    </svg>
+  </div>
+
+  <p><strong>(a)</strong> What does the movement from A to B represent? What caused it, and what is the precise economic term?</p>
+  <p><strong>(b)</strong> What does the horizontal distance between A and C represent? What caused it?</p>
+  <p><strong>(c)</strong> A classmate says &ldquo;EV demand increased when prices fell from P&#x2081; to P&#x2082;.&rdquo; Identify the error in this statement.</p>
+  <div class="solution">
+    <p><strong>(a)</strong> Moving from A to B is a <strong>change in quantity demanded</strong> &mdash; a movement <em>along</em> D&#x2081;. It was caused by a fall in the price of EVs from P&#x2081; to P&#x2082;. Because only the good&rsquo;s own price changed, the curve itself did not move. The correct term is &ldquo;quantity demanded increased,&rdquo; not &ldquo;demand increased.&rdquo;</p>
+    <p><strong>(b)</strong> The distance from A to C represents the <strong>increase in demand</strong> (a rightward shift to D&#x2082;). At the same price P&#x2081;, consumers now want to buy the quantity at C rather than A, because a non-price factor changed: the $7,500 tax credit raised the appeal of EVs at every price level. This is a <em>change in demand</em>, not a change in quantity demanded.</p>
+    <p><strong>(c)</strong> The error is terminology. A fall in the EV&rsquo;s own price causes a movement <em>along</em> the existing demand curve &mdash; a change in <em>quantity demanded</em>, not a change in <em>demand</em>. The demand curve itself did not shift; the classmate should say &ldquo;the quantity demanded of EVs increased.&rdquo;</p>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<h2 class="section-heading">5 &nbsp; From Individual to Market Demand</h2>
+
+<p>Everything above describes one household&rsquo;s demand. But markets have many buyers. <strong>Market demand</strong> is the total demand of all buyers in the market, and it is derived from individual demands through a process called <strong>horizontal summation</strong>.</p>
+
+<p>The idea is straightforward: at each possible price, ask every buyer how much they would purchase, then add those quantities together. The sum is the market quantity demanded at that price. Repeat for every price, and you have the market demand schedule. Plot it, and you get the market demand curve.</p>
+
+<p>For example, suppose a market has just two buyers. At a price of $10, Buyer A wants 3 units and Buyer B wants 5 units. The market quantity demanded at $10 is 3 + 5 = 8 units. At $5, if Buyer A wants 6 and Buyer B wants 9, market quantity demanded is 15. Do this at every price and connect the dots &mdash; the resulting market demand curve lies further to the right than any individual&rsquo;s curve, because it always represents a larger total quantity. Crucially, the market demand curve still slopes downward &mdash; the Law of Demand continues to hold.</p>
+
+<p>Why does &ldquo;horizontal&rdquo; summation matter? Because we are adding quantities (the horizontal axis), not prices. At a <em>given</em> price, we sum across buyers. We never add up prices.</p>
+
+<div class="diagram-container">
+  <div class="diagram-title">Figure 5 &mdash; Deriving Market Demand by Horizontal Summation</div>
+  <!-- All three panels use the same axis scale:
+       Y-axis: y=160 = $0, y=30 = $15 → 1 dollar = 8.67 px. $10→y=73, $5→y=117.
+       X-axis: x=40 = Q0, x=170 = Q16 → 1 unit = 8.125 px.
+       Q3→x=64, Q5→x=81, Q6→x=89, Q8→x=105, Q9→x=113, Q15→x=162. -->
+  <div class="three-panel">
+    <!-- Panel 1: Buyer A  |  Data: ($10,3)=(64,73) and ($5,6)=(89,117)
+         Line through both: slope dy/dx=44/25=1.76. At y=50→x=51; at y=145→x=105. -->
+    <div>
+      <div class="panel-label">Buyer A</div>
+      <svg viewBox="0 0 180 190" width="180" height="190" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+        <line x1="40" y1="10" x2="40" y2="160" stroke="#111827" stroke-width="2"/>
+        <line x1="40" y1="160" x2="170" y2="160" stroke="#111827" stroke-width="2"/>
+        <polygon points="40,4 34,16 46,16" fill="#111827"/>
+        <polygon points="176,160 164,154 164,166" fill="#111827"/>
+        <text x="16" y="90" text-anchor="middle" font-size="10" fill="#374151" transform="rotate(-90,16,90)">Price ($)</text>
+        <text x="105" y="178" text-anchor="middle" font-size="10" fill="#374151">Quantity</text>
+        <!-- Y ticks: $10 at y=73, $5 at y=117 -->
+        <line x1="34" y1="73" x2="40" y2="73" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="30" y="77" text-anchor="end" font-size="10" fill="#6b7280">10</text>
+        <line x1="34" y1="117" x2="40" y2="117" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="30" y="121" text-anchor="end" font-size="10" fill="#6b7280">5</text>
+        <!-- X ticks: 5 at x=81, 10 at x=121, 15 at x=162 -->
+        <line x1="81" y1="160" x2="81" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="81" y="176" text-anchor="middle" font-size="10" fill="#6b7280">5</text>
+        <line x1="121" y1="160" x2="121" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="121" y="176" text-anchor="middle" font-size="10" fill="#6b7280">10</text>
+        <line x1="162" y1="160" x2="162" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="162" y="176" text-anchor="middle" font-size="10" fill="#6b7280">15</text>
+        <!-- Demand line through (64,73) and (89,117) -->
+        <line x1="51" y1="50" x2="105" y2="145" stroke="#FD6467" stroke-width="2.5"/>
+        <text x="108" y="148" font-size="12" font-weight="800" fill="#FD6467" font-style="italic">D&#x2090;</text>
+        <!-- Points -->
+        <circle cx="64" cy="73" r="4" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+        <circle cx="89" cy="117" r="4" fill="#FD6467" stroke="white" stroke-width="1.5"/>
+        <!-- Dashed guides -->
+        <line x1="40" y1="73" x2="64" y2="73" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="64" y1="73" x2="64" y2="160" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="40" y1="117" x2="89" y2="117" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="89" y1="117" x2="89" y2="160" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- Q labels near axis -->
+        <text x="64" y="155" text-anchor="middle" font-size="9" fill="#FD6467" font-weight="600">3</text>
+        <text x="89" y="155" text-anchor="middle" font-size="9" fill="#FD6467" font-weight="600">6</text>
+      </svg>
+      <div class="panel-caption">At $10, A wants 3. At $5, A wants 6.</div>
+    </div>
+    <!-- Panel 2: Buyer B  |  Data: ($10,5)=(81,73) and ($5,9)=(113,117)
+         Line through both: slope dy/dx=44/32=1.375. At y=50→x=64; at y=145→x=133. -->
+    <div>
+      <div class="panel-label">Buyer B</div>
+      <svg viewBox="0 0 180 190" width="180" height="190" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+        <line x1="40" y1="10" x2="40" y2="160" stroke="#111827" stroke-width="2"/>
+        <line x1="40" y1="160" x2="170" y2="160" stroke="#111827" stroke-width="2"/>
+        <polygon points="40,4 34,16 46,16" fill="#111827"/>
+        <polygon points="176,160 164,154 164,166" fill="#111827"/>
+        <text x="16" y="90" text-anchor="middle" font-size="10" fill="#374151" transform="rotate(-90,16,90)">Price ($)</text>
+        <text x="105" y="178" text-anchor="middle" font-size="10" fill="#374151">Quantity</text>
+        <!-- Y ticks -->
+        <line x1="34" y1="73" x2="40" y2="73" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="30" y="77" text-anchor="end" font-size="10" fill="#6b7280">10</text>
+        <line x1="34" y1="117" x2="40" y2="117" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="30" y="121" text-anchor="end" font-size="10" fill="#6b7280">5</text>
+        <!-- X ticks -->
+        <line x1="81" y1="160" x2="81" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="81" y="176" text-anchor="middle" font-size="10" fill="#6b7280">5</text>
+        <line x1="121" y1="160" x2="121" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="121" y="176" text-anchor="middle" font-size="10" fill="#6b7280">10</text>
+        <line x1="162" y1="160" x2="162" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="162" y="176" text-anchor="middle" font-size="10" fill="#6b7280">15</text>
+        <!-- Demand line through (81,73) and (113,117) -->
+        <line x1="64" y1="50" x2="133" y2="145" stroke="#4682B4" stroke-width="2.5"/>
+        <text x="136" y="148" font-size="12" font-weight="800" fill="#4682B4" font-style="italic">D&#x2091;</text>
+        <!-- Points -->
+        <circle cx="81" cy="73" r="4" fill="#4682B4" stroke="white" stroke-width="1.5"/>
+        <circle cx="113" cy="117" r="4" fill="#4682B4" stroke="white" stroke-width="1.5"/>
+        <!-- Dashed guides -->
+        <line x1="40" y1="73" x2="81" y2="73" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="81" y1="73" x2="81" y2="160" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="40" y1="117" x2="113" y2="117" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="113" y1="117" x2="113" y2="160" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- Q labels near axis -->
+        <text x="81" y="155" text-anchor="middle" font-size="9" fill="#4682B4" font-weight="600">5</text>
+        <text x="113" y="155" text-anchor="middle" font-size="9" fill="#4682B4" font-weight="600">9</text>
+      </svg>
+      <div class="panel-caption">At $10, B wants 5. At $5, B wants 9.</div>
+    </div>
+    <!-- Panel 3: Market (A+B)  |  Data: ($10,8)=(105,73) and ($5,15)=(162,117)
+         Line through both: slope dy/dx=44/57=0.772. At y=50→x=75; at y=140→x=192→clip to (170,123). -->
+    <div>
+      <div class="panel-label">Market (A + B)</div>
+      <svg viewBox="0 0 180 190" width="180" height="190" xmlns="http://www.w3.org/2000/svg" font-family="Poppins,sans-serif">
+        <line x1="40" y1="10" x2="40" y2="160" stroke="#111827" stroke-width="2"/>
+        <line x1="40" y1="160" x2="170" y2="160" stroke="#111827" stroke-width="2"/>
+        <polygon points="40,4 34,16 46,16" fill="#111827"/>
+        <polygon points="176,160 164,154 164,166" fill="#111827"/>
+        <text x="16" y="90" text-anchor="middle" font-size="10" fill="#374151" transform="rotate(-90,16,90)">Price ($)</text>
+        <text x="105" y="178" text-anchor="middle" font-size="10" fill="#374151">Quantity</text>
+        <!-- Y ticks -->
+        <line x1="34" y1="73" x2="40" y2="73" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="30" y="77" text-anchor="end" font-size="10" fill="#6b7280">10</text>
+        <line x1="34" y1="117" x2="40" y2="117" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="30" y="121" text-anchor="end" font-size="10" fill="#6b7280">5</text>
+        <!-- X ticks -->
+        <line x1="81" y1="160" x2="81" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="81" y="176" text-anchor="middle" font-size="10" fill="#6b7280">5</text>
+        <line x1="121" y1="160" x2="121" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="121" y="176" text-anchor="middle" font-size="10" fill="#6b7280">10</text>
+        <line x1="162" y1="160" x2="162" y2="166" stroke="#9ca3af" stroke-width="1.5"/>
+        <text x="162" y="176" text-anchor="middle" font-size="10" fill="#6b7280">15</text>
+        <!-- Market demand line through (105,73) and (162,117) -->
+        <line x1="75" y1="50" x2="170" y2="123" stroke="#5B1A18" stroke-width="3"/>
+        <text x="170" y="135" font-size="12" font-weight="800" fill="#5B1A18" font-style="italic">D<tspan font-size="8" baseline-shift="sub">M</tspan></text>
+        <!-- Points -->
+        <circle cx="105" cy="73" r="4.5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
+        <circle cx="162" cy="117" r="4.5" fill="#5B1A18" stroke="white" stroke-width="1.5"/>
+        <!-- Dashed guides -->
+        <line x1="40" y1="73" x2="105" y2="73" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="105" y1="73" x2="105" y2="160" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="40" y1="117" x2="162" y2="117" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="162" y1="117" x2="162" y2="160" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- Summation annotations -->
+        <text x="105" y="65" text-anchor="middle" font-size="9" fill="#5B1A18" font-weight="700">3+5=8</text>
+        <text x="152" y="112" text-anchor="end" font-size="9" fill="#5B1A18" font-weight="700">6+9=15</text>
+      </svg>
+      <div class="panel-caption">At each price, add the quantities: 3+5&thinsp;=&thinsp;8 and 6+9&thinsp;=&thinsp;15.</div>
+    </div>
+  </div>
+  <div class="diagram-caption">All three panels use the same scale. At every price, market quantity demanded equals the sum of all individual quantities. The market demand curve (D<sub>M</sub>) lies to the right of each individual curve.</div>
+</div>
+
+<!-- WE 3 in Section 5 -->
+<div class="example-box">
+  <div class="ex-header">Worked Example 3</div>
+  <div class="ex-title">From Individual to Market Demand: Baseball Caps</div>
+  <p>Suppose there are exactly three buyers in the local market for baseball caps: Maya, Sam, and Jordan. Their individual demand schedules are shown below.</p>
+  <table class="data-table" style="font-size:14px;margin:12px 0;">
+    <thead>
+      <tr>
+        <th>Price ($)</th>
+        <th>Maya&rsquo;s Qd</th>
+        <th>Sam&rsquo;s Qd</th>
+        <th>Jordan&rsquo;s Qd</th>
+        <th>Market Qd</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>15</td><td>2</td><td>1</td><td>2</td><td><strong>?</strong></td></tr>
+      <tr><td>10</td><td>4</td><td>3</td><td>5</td><td><strong>?</strong></td></tr>
+      <tr><td>6</td><td>7</td><td>6</td><td>8</td><td><strong>?</strong></td></tr>
+    </tbody>
+  </table>
+  <p><strong>(a)</strong> Complete the Market Qd column.</p>
+  <p><strong>(b)</strong> As price falls from $15 to $10, what happens to market quantity demanded? What law does this illustrate?</p>
+  <p><strong>(c)</strong> Sam wins an unexpected scholarship. Baseball caps are a normal good for Sam. Describe what happens to the <em>market</em> demand curve and explain why.</p>
+  <div class="solution">
+    <p><strong>(a)</strong> Market Qd = sum of all individual quantities at each price.</p>
+    <ul style="padding-left:20px;margin:6px 0;">
+      <li>At P = $15: 2 + 1 + 2 = <strong>5</strong></li>
+      <li>At P = $10: 4 + 3 + 5 = <strong>12</strong></li>
+      <li>At P = $6: 7 + 6 + 8 = <strong>21</strong></li>
+    </ul>
+    <p><strong>(b)</strong> Market Qd rises from 5 to 12 as price falls from $15 to $10. This illustrates the <strong>Law of Demand</strong>: as price falls, quantity demanded rises. The relationship holds for both individual buyers and the market as a whole.</p>
+    <p><strong>(c)</strong> Sam&rsquo;s increased income raises <em>his</em> demand for baseball caps at every price (because they are a normal good for him). Since market demand is the horizontal sum of all individual demands, Sam&rsquo;s higher demand shifts the <strong>market demand curve rightward</strong> &mdash; a <em>change in demand</em> caused by a non-price factor (income). At every price level, more caps are now demanded in total than before.</p>
+  </div>
+</div>
+
+<!-- KEY TERMS -->
+<hr>
+<h2 class="section-heading">Key Terms</h2>
+<div class="glossary-grid">
+  <dl class="gloss-item"><dt>Quantity Demanded</dt><dd>The amount of a good a household would buy at the current market price, in a given time period, if it could buy all it wanted.</dd></dl>
+  <dl class="gloss-item"><dt>Demand</dt><dd>The entire relationship between price and quantity demanded, summarised in a demand schedule or demand curve.</dd></dl>
+  <dl class="gloss-item"><dt>Law of Demand</dt><dd>As the price of a good rises, quantity demanded falls, all else equal. Demand curves slope downward.</dd></dl>
+  <dl class="gloss-item"><dt>Ceteris Paribus</dt><dd>Latin for &ldquo;all else equal&rdquo; &mdash; the assumption that only one variable changes at a time when tracing the demand curve.</dd></dl>
+  <dl class="gloss-item"><dt>Normal Good</dt><dd>A good for which demand increases when income rises. Most goods are normal (steak, vacations, new cars).</dd></dl>
+  <dl class="gloss-item"><dt>Inferior Good</dt><dd>A good for which demand decreases when income rises. Consumers switch away from it as they become wealthier.</dd></dl>
+  <dl class="gloss-item"><dt>Substitutes</dt><dd>Goods that can replace each other. A price rise for one shifts demand for the other rightward (e.g., Coke &amp; Pepsi, coffee &amp; tea).</dd></dl>
+  <dl class="gloss-item"><dt>Complements</dt><dd>Goods consumed together. A price rise for one shifts demand for the other leftward (e.g., hot dogs &amp; charcoal).</dd></dl>
+  <dl class="gloss-item"><dt>Change in Quantity Demanded</dt><dd>A movement <em>along</em> the existing demand curve, caused only by a change in the good&rsquo;s own price.</dd></dl>
+  <dl class="gloss-item"><dt>Change in Demand</dt><dd>A <em>shift</em> of the entire demand curve, caused by a change in a non-price determinant.</dd></dl>
+  <dl class="gloss-item"><dt>Market Demand</dt><dd>The horizontal summation of all individual demand curves; total quantity demanded by all buyers at each price.</dd></dl>
+  <dl class="gloss-item"><dt>Giffen Good</dt><dd>A highly inferior good (subsistence staple) for which quantity demanded can rise as price rises, producing an upward-sloping demand curve for a range of low prices.</dd></dl>
+  <dl class="gloss-item"><dt>Veblen Good</dt><dd>A luxury/prestige good for which quantity demanded can rise as price rises (higher price signals status), producing an upward-sloping demand curve for a range of high prices.</dd></dl>
+  <dl class="gloss-item"><dt>Horizontal Summation</dt><dd>The method of deriving market demand by adding individual quantities demanded at each price level.</dd></dl>
+</div>
+
+<div class="doc-footer">
+  <span>ECON 2006 &middot; Principles of Economics (Macro) &middot; Virginia Tech &middot; Summer II 2026</span>
+  <span>Topic 2 (Part A) &middot; Chapters 3 &amp; 4</span>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>
