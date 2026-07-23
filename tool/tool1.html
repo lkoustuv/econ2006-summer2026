@@ -129,6 +129,11 @@ button.act:disabled{ opacity:.4; cursor:default; }
         <input type="range" id="sG" min="0" max="300" step="10" value="0">
       </div>
       <div class="slider-row">
+        <label><span class="name">Taxes, T</span><span class="readout" id="rTx">0</span></label>
+        <input type="range" id="sTx" min="0" max="300" step="10" value="0">
+        <div class="hint">Lump-sum tax &mdash; consumption runs off disposable income, Y&minus;T</div>
+      </div>
+      <div class="slider-row">
         <label><span class="name">Exports, X</span><span class="readout" id="rX">0</span></label>
         <input type="range" id="sX" min="0" max="300" step="10" value="0">
       </div>
@@ -140,6 +145,7 @@ button.act:disabled{ opacity:.4; cursor:default; }
 
       <div class="readouts">
         <div class="line"><span class="k">MPS</span><span class="v" id="rMPS">0.40</span></div>
+        <div class="line"><span class="k">C<sub>p</sub> = (a&minus;bT) + bY</span><span class="v" id="rCPeq">150 + 0.60Y</span></div>
         <div class="line"><span class="k">PAE</span><span class="v" id="rPAEeq">250 + 0.60Y</span></div>
         <div class="line"><span class="k">Equilibrium output, Y*</span><span class="v big" id="rYstar">625</span></div>
       </div>
@@ -153,7 +159,7 @@ button.act:disabled{ opacity:.4; cursor:default; }
       </div>
 
       <div class="baseline-note" id="baselineNote">
-        Baseline frozen at <span id="blSummary"></span>. Every slider stays live &mdash; move <strong>a</strong>, <strong>Ī</strong>, G or X and watch the curve shift the same way; the multiplier panel below only lights up while MPC stays unchanged.
+        Baseline frozen at <span id="blSummary"></span>. Every slider stays live &mdash; move <strong>a</strong>, <strong>Ī</strong>, G, T, or X and watch the curve shift; a rise in T shifts it the opposite way from the others. The multiplier panel below only lights up while MPC stays unchanged.
       </div>
     </section>
 
@@ -198,9 +204,9 @@ button.act:disabled{ opacity:.4; cursor:default; }
       <span class="formula" id="multFormula">multiplier = 1 / (1 &minus; MPC)</span>
     </div>
 
-    <div id="multEmpty" class="mult-empty">Freeze a baseline, then move a, Ī, G, or X — the rounds of re-spending will build up here. (a and Ī move Y* by exactly the same amount for the same size change — that's the point.)</div>
+    <div id="multEmpty" class="mult-empty">Freeze a baseline, then move a, Ī, G, T, or X — the rounds of re-spending will build up here. (a and Ī move Y* by exactly the same amount for the same size change; a tax cut of the same size moves it by less, since it only works through consumption.)</div>
 
-    <div id="multCaveat" class="mult-caveat">MPC also changed since you froze the baseline, so this isn't a clean autonomous-spending shock anymore — the geometric series needs one fixed MPC to make sense. Freeze again to set a new baseline at the current MPC, then move a, Ī, G, or X only.</div>
+    <div id="multCaveat" class="mult-caveat">MPC also changed since you froze the baseline, so this isn't a clean autonomous-spending shock anymore — the geometric series needs one fixed MPC to make sense. Freeze again to set a new baseline at the current MPC, then move a, Ī, G, T, or X only.</div>
 
     <div id="multBody" style="display:none">
       <div class="bars" id="bars"></div>
@@ -222,13 +228,15 @@ button.act:disabled{ opacity:.4; cursor:default; }
 <script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var sA=$('sA'), sB=$('sB'), sI=$('sI'), sG=$('sG'), sX=$('sX'), sIM=$('sIM');
-  var rA=$('rA'), rB=$('rB'), rI=$('rI'), rG=$('rG'), rX=$('rX'), rIM=$('rIM');
-  var state = { a:150, b:0.60, I:100, G:0, X:0, IM:0, baseline:null };
+  var sA=$('sA'), sB=$('sB'), sI=$('sI'), sG=$('sG'), sTx=$('sTx'), sX=$('sX'), sIM=$('sIM');
+  var rA=$('rA'), rB=$('rB'), rI=$('rI'), rG=$('rG'), rTx=$('rTx'), rX=$('rX'), rIM=$('rIM');
+  var state = { a:150, b:0.60, I:100, G:0, Tx:0, X:0, IM:0, baseline:null };
   var NS = 'http://www.w3.org/2000/svg';
 
-  function autonomous(a,I,G,X,IM){ return a+I+G+X-IM; }
-  function Yof(a,b,I,G,X,IM){ return autonomous(a,I,G,X,IM)/(1-b); }
+  // Consumption runs off disposable income: Cp = a + b(Y-Tx) = (a - b*Tx) + bY.
+  // So the tax term enters the PAE intercept scaled by b, unlike G/X/IM which add in directly.
+  function intercept(a,b,I,G,X,IM,Tx){ return (a - b*Tx) + I + G + X - IM; }
+  function Yof(a,b,I,G,X,IM,Tx){ return intercept(a,b,I,G,X,IM,Tx)/(1-b); }
 
   function niceAxis(targetMax){
     targetMax = Math.max(targetMax, 100);
@@ -259,9 +267,9 @@ button.act:disabled{ opacity:.4; cursor:default; }
   }
 
   function drawGraph(){
-    var a=state.a, b=state.b, I=state.I, G=state.G, X=state.X, IM=state.IM;
-    var Ycur = Yof(a,b,I,G,X,IM);
-    var Ybase = state.baseline ? Yof(state.baseline.a, state.baseline.b, state.baseline.I, state.baseline.G, state.baseline.X, state.baseline.IM) : null;
+    var a=state.a, b=state.b, I=state.I, G=state.G, X=state.X, IM=state.IM, Tx=state.Tx;
+    var Ycur = Yof(a,b,I,G,X,IM,Tx);
+    var Ybase = state.baseline ? Yof(state.baseline.a, state.baseline.b, state.baseline.I, state.baseline.G, state.baseline.X, state.baseline.IM, state.baseline.Tx) : null;
 
     // Once a baseline is frozen, size the axis to the worst case reachable with the CURRENT
     // MPC across the full range of a/Ī/G/X/IM — so the grid stays put while any of those move,
@@ -310,8 +318,8 @@ button.act:disabled{ opacity:.4; cursor:default; }
     $('line45').setAttribute('x2', px(axisMax,axisMax)); $('line45').setAttribute('y2', py(axisMax,axisMax));
     $('label45').setAttribute('x', px(axisMax,axisMax)-8); $('label45').setAttribute('y', py(axisMax,axisMax)+18);
 
-    // current PAE line: PAE = (a+I+G+X-IM) + bY
-    var intC = autonomous(a,I,G,X,IM);
+    // current PAE line: PAE = ((a-bT)+I+G+X-IM) + bY
+    var intC = intercept(a,b,I,G,X,IM,Tx);
     $('lineCurrent').setAttribute('x1', px(0,axisMax)); $('lineCurrent').setAttribute('y1', py(intC,axisMax));
     $('lineCurrent').setAttribute('x2', px(axisMax,axisMax)); $('lineCurrent').setAttribute('y2', py(intC + b*axisMax,axisMax));
 
@@ -325,7 +333,7 @@ button.act:disabled{ opacity:.4; cursor:default; }
     // baseline
     if(state.baseline){
       var bl = state.baseline;
-      var intB = autonomous(bl.a, bl.I, bl.G, bl.X, bl.IM);
+      var intB = intercept(bl.a, bl.b, bl.I, bl.G, bl.X, bl.IM, bl.Tx);
       $('lineBaseline').style.display='';
       $('lineBaseline').setAttribute('x1', px(0,axisMax)); $('lineBaseline').setAttribute('y1', py(intB,axisMax));
       $('lineBaseline').setAttribute('x2', px(axisMax,axisMax)); $('lineBaseline').setAttribute('y2', py(intB + bl.b*axisMax,axisMax));
@@ -348,18 +356,20 @@ button.act:disabled{ opacity:.4; cursor:default; }
   }
 
   function updateReadouts(){
-    var a=state.a,b=state.b,I=state.I,G=state.G,X=state.X,IM=state.IM;
+    var a=state.a,b=state.b,I=state.I,G=state.G,X=state.X,IM=state.IM,Tx=state.Tx;
     rA.textContent=fmt(a); rB.textContent=b.toFixed(2); rI.textContent=fmt(I);
-    rG.textContent=fmt(G); rX.textContent=fmt(X); rIM.textContent=fmt(IM);
+    rG.textContent=fmt(G); rTx.textContent=fmt(Tx); rX.textContent=fmt(X); rIM.textContent=fmt(IM);
     $('rMPS').textContent=(1-b).toFixed(2);
-    $('rPAEeq').textContent = fmt(autonomous(a,I,G,X,IM))+' + '+b.toFixed(2)+'Y';
-    $('rYstar').textContent = fmt(Yof(a,b,I,G,X,IM));
+    $('rCPeq').textContent = fmt(a - b*Tx)+' + '+b.toFixed(2)+'Y';
+    $('rPAEeq').textContent = fmt(intercept(a,b,I,G,X,IM,Tx))+' + '+b.toFixed(2)+'Y';
+    $('rYstar').textContent = fmt(Yof(a,b,I,G,X,IM,Tx));
     $('multFormula').textContent = 'multiplier = 1 / (1 − '+b.toFixed(2)+') = '+fmt(1/(1-b));
   }
 
   function blSummaryText(bl){
     var s = 'a='+fmt(bl.a)+', b='+bl.b.toFixed(2)+', Ī='+fmt(bl.I);
     if(bl.G) s += ', G='+fmt(bl.G);
+    if(bl.Tx) s += ', T='+fmt(bl.Tx);
     if(bl.X) s += ', X='+fmt(bl.X);
     if(bl.IM) s += ', IM='+fmt(bl.IM);
     return s;
@@ -417,7 +427,7 @@ button.act:disabled{ opacity:.4; cursor:default; }
     $('targetVal').textContent = fmtMoney(target);
     var pct = target!==0 ? Math.min(100, Math.abs(total/target)*100) : 0;
     $('progFill').style.width = pct+'%';
-    $('multSummary').innerHTML = 'As rounds continue toward infinity, the total approaches <strong>'+fmtMoney(target)+'</strong> &nbsp;(&Delta;(a+Ī+G+X&minus;IM) &times; 1/(1&minus;MPC) = '+fmtMoney(currentDelta)+' &times; '+fmt(1/(1-currentB))+')';
+    $('multSummary').innerHTML = 'As rounds continue toward infinity, the total approaches <strong>'+fmtMoney(target)+'</strong> &nbsp;(&Delta;(a&minus;bT+Ī+G+X&minus;IM) &times; 1/(1&minus;MPC) = '+fmtMoney(currentDelta)+' &times; '+fmt(1/(1-currentB))+')';
   }
 
   function stopPlay(){ if(playTimer){ clearInterval(playTimer); playTimer=null; } }
@@ -433,8 +443,11 @@ button.act:disabled{ opacity:.4; cursor:default; }
       return;
     }
     var bl = state.baseline;
-    var deltaAuto = autonomous(state.a,state.I,state.G,state.X,state.IM) - autonomous(bl.a,bl.I,bl.G,bl.X,bl.IM);
     var mpcChanged = Math.abs(state.b - bl.b) > 0.001;
+    // Use the shared (unchanged) MPC for both snapshots when computing the shock — if MPC
+    // changed we bail out to the caveat before this matters.
+    var deltaAuto = intercept(state.a,state.b,state.I,state.G,state.X,state.IM,state.Tx)
+                   - intercept(bl.a,bl.b,bl.I,bl.G,bl.X,bl.IM,bl.Tx);
 
     if(mpcChanged){
       $('multCaveat').style.display='';
@@ -442,7 +455,7 @@ button.act:disabled{ opacity:.4; cursor:default; }
     }
     if(Math.abs(deltaAuto) < 0.001){
       $('multEmpty').style.display='';
-      $('multEmpty').textContent = 'Baseline is frozen — now move a, Ī, G, or X to create a shock and watch the rounds build up.';
+      $('multEmpty').textContent = 'Baseline is frozen — now move a, Ī, G, T, or X to create a shock and watch the rounds build up.';
       return;
     }
     $('multBody').style.display='';
@@ -457,6 +470,7 @@ button.act:disabled{ opacity:.4; cursor:default; }
     state.b = parseFloat(sB.value);
     state.I = parseFloat(sI.value);
     state.G = parseFloat(sG.value);
+    state.Tx = parseFloat(sTx.value);
     state.X = parseFloat(sX.value);
     state.IM = parseFloat(sIM.value);
   }
@@ -468,11 +482,11 @@ button.act:disabled{ opacity:.4; cursor:default; }
     updateMultPanel();
   }
 
-  [sA,sB,sI,sG,sX,sIM].forEach(function(s){ s.addEventListener('input', updateAll); });
+  [sA,sB,sI,sG,sTx,sX,sIM].forEach(function(s){ s.addEventListener('input', updateAll); });
 
   $('btnFreeze').addEventListener('click', function(){
     readSliders();
-    state.baseline = { a:state.a, b:state.b, I:state.I, G:state.G, X:state.X, IM:state.IM };
+    state.baseline = { a:state.a, b:state.b, I:state.I, G:state.G, Tx:state.Tx, X:state.X, IM:state.IM };
     updateBaselineUI();
     updateAll();
   });
@@ -483,7 +497,7 @@ button.act:disabled{ opacity:.4; cursor:default; }
   });
   $('btnReset').addEventListener('click', function(){
     state.baseline = null;
-    sA.value=150; sB.value=0.60; sI.value=100; sG.value=0; sX.value=0; sIM.value=0;
+    sA.value=150; sB.value=0.60; sI.value=100; sG.value=0; sTx.value=0; sX.value=0; sIM.value=0;
     updateBaselineUI();
     updateAll();
   });
