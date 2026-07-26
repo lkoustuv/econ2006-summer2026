@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive: Money, the Interest Rate &amp; the Transmission to Output &middot; ECON 2006</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#fbfcfe; --panel:#ffffff; --panel2:#eef0f6;
+  --ink:#1f2742; --ink-mut:#565d72; --ink-faint:#969cae; --rule:#e3e6ef;
+  --blue:#304ffd; --indigo:#2e42b7; --green:#3cac3b; --teal:#00362c;
+  --gold:#827718; --orange:#ea4f46; --red:#d50101; --red-dk:#b71d1c; --pink:#973f98;
+  --gold-fill:#ffc905; --mint:#a7ffeb; --lavender:#b388ff;
+}
+*{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Source Serif 4',Georgia,serif; -webkit-font-smoothing:antialiased; }
+.wrap{ max-width:1320px; margin:0 auto; padding:28px 32px 50px; }
+
+header{ text-align:center; margin-bottom:22px; }
+.kicker{ font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:.22em; text-transform:uppercase; color:var(--blue); margin-bottom:8px; }
+h1{ font-family:'Caveat',cursive; font-weight:700; font-size:42px; color:var(--ink); line-height:1; }
+.sub{ font-size:16px; color:var(--ink-mut); font-style:italic; margin-top:6px; }
+
+.top-grid{ display:grid; grid-template-columns:320px 1fr; gap:22px; align-items:start; }
+@media (max-width:1080px){ .top-grid{ grid-template-columns:1fr; } }
+
+.panel{ background:var(--panel); border:1px solid var(--rule); border-radius:14px; padding:20px 22px; }
+.panel h2{ font-size:15px; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); margin:0 0 14px; }
+
+.slider-row{ margin-bottom:18px; }
+.slider-row label{ display:flex; justify-content:space-between; font-size:15px; margin-bottom:6px; }
+.slider-row label .name{ font-weight:600; }
+.slider-row label .readout{ font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--blue); font-weight:600; }
+input[type=range]{ width:100%; accent-color:var(--blue); }
+.hint{ font-size:12.5px; color:var(--ink-faint); margin-top:3px; }
+
+.readouts{ margin-top:16px; border-top:1px dashed var(--rule); padding-top:14px; }
+.readouts .line{ display:flex; justify-content:space-between; font-size:14px; margin:6px 0; gap:10px; }
+.readouts .line .k{ color:var(--ink-mut); flex:0 0 auto; }
+.readouts .line .v{ font-family:'JetBrains Mono',monospace; font-weight:600; text-align:right; }
+.readouts .line .v.big{ font-size:18px; color:var(--blue); }
+.readouts .line .v.small{ font-size:12.5px; }
+
+.btnrow{ display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+button.act{ font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:.03em; border:1px solid var(--rule); background:var(--panel2); color:var(--ink); padding:8px 12px; border-radius:8px; cursor:pointer; }
+button.act:hover{ background:#e4e8f2; }
+button.act.primary{ background:var(--blue); color:#fff; border-color:var(--blue); }
+button.act.primary:hover{ background:var(--indigo); }
+
+.baseline-note{ font-size:13px; background:color-mix(in srgb, var(--pink) 10%, white); border-left:4px solid var(--pink); border-radius:0 8px 8px 0; padding:8px 12px; margin-top:14px; color:var(--ink); display:none; }
+.baseline-note.show{ display:block; }
+
+/* ---- graph layout: row1 (A,B) then bridge then row2 (C) ---- */
+.graph-row1{ display:flex; align-items:center; gap:10px; }
+.graph-row2{ display:flex; justify-content:center; margin-top:6px; }
+.gpanel{ flex:1; min-width:0; text-align:center; }
+.gpanel.wide{ flex:0 0 auto; max-width:560px; width:100%; }
+.gpanel svg{ width:100%; height:auto; }
+.gpanel.small svg{ max-width:340px; }
+.gpanel.wide svg{ max-width:560px; }
+.gpanel .cap{ font-size:13px; color:var(--ink-mut); margin-top:6px; line-height:1.4; }
+.tri-arrow{ flex:0 0 auto; font-size:26px; color:var(--ink-faint); padding:0 2px; }
+
+.bridge{ margin:20px 0 4px; }
+.bridge-row{ display:flex; align-items:stretch; justify-content:center; gap:8px; flex-wrap:wrap; }
+.bridge-card{ background:var(--panel2); border-radius:10px; padding:10px 16px; text-align:center; min-width:170px; flex:1; max-width:260px; }
+.bridge-card b{ display:block; font-size:11.5px; color:var(--ink-mut); margin-bottom:5px; font-family:'JetBrains Mono',monospace; letter-spacing:.04em; text-transform:uppercase; font-weight:600; }
+.bridge-card .v{ font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:600; line-height:1.4; }
+.bridge-arrow{ align-self:center; font-size:20px; color:var(--ink-faint); flex:0 0 auto; }
+.bridge-down{ text-align:center; font-size:30px; color:var(--ink-faint); margin:6px 0 0; line-height:1; }
+.bridge-caption{ text-align:center; font-size:12.5px; color:var(--ink-mut); margin-top:0; }
+
+.legend{ display:flex; justify-content:center; gap:16px; font-size:12.5px; margin-top:16px; flex-wrap:wrap; }
+.legend span{ display:inline-flex; align-items:center; gap:6px; }
+.legend i{ width:16px; height:0; border-top:3px solid; display:inline-block; }
+.legend i.dash{ border-top-style:dashed; }
+.legend i.dot{ width:9px; height:9px; border-radius:50%; border:none; }
+
+.chain-panel{ margin-top:22px; }
+.chain{ display:flex; align-items:stretch; gap:6px; margin-top:6px; flex-wrap:nowrap; }
+@media (max-width:1080px){ .chain{ flex-wrap:wrap; } }
+.chain-card{ flex:1; min-width:150px; background:var(--panel2); border-radius:10px; padding:12px 10px; text-align:center; }
+.chain-card b{ display:block; font-size:12.5px; margin-bottom:6px; }
+.chain-card .sub{ font-size:11.5px; color:var(--ink-mut); }
+.chain-card .val{ font-family:'JetBrains Mono',monospace; font-size:15px; font-weight:600; color:var(--blue); line-height:1.5; }
+.chain-arrow{ flex:0 0 auto; align-self:center; font-size:22px; color:var(--ink-faint); }
+.chain-note{ font-size:13px; color:var(--ink-mut); text-align:center; margin-top:12px; }
+
+#printBtn{ position:fixed; bottom:16px; right:18px; border:1px solid var(--rule); background:#fff; color:var(--ink-mut); height:34px; padding:0 14px; border-radius:8px; cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:12.5px; }
+#printBtn:hover{ background:var(--panel2); color:var(--ink); }
+
+.toast{ position:fixed; top:22px; left:50%; transform:translateX(-50%) translateY(-14px); background:var(--ink); color:#fff; padding:11px 20px; border-radius:9px; font-family:'JetBrains Mono',monospace; font-size:13px; text-align:center; max-width:520px; opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; z-index:50; box-shadow:0 8px 24px rgba(0,0,0,.18); }
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+@keyframes flashPulse{ 0%{ box-shadow:0 0 0 0 rgba(48,79,253,.45); } 100%{ box-shadow:0 0 0 10px rgba(48,79,253,0); } }
+button.act.flash{ animation:flashPulse .5s ease-out; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="kicker">ECON 2006 &middot; Module 3</div>
+    <h1>Money, the Interest Rate &amp; the Transmission to Output</h1>
+    <p class="sub">Shift money supply or money demand &nbsp;&middot;&nbsp; watch r* move, investment slide along its curve, PAE shift, and Y* land somewhere new</p>
+  </header>
+
+  <div class="top-grid">
+
+    <!-- ===== CONTROLS ===== -->
+    <section class="panel controls">
+      <h2>Shift the money market</h2>
+
+      <div class="slider-row">
+        <label><span class="name">Money supply, M<sub>s</sub> (Fed policy)</span><span class="readout" id="rMs">100</span></label>
+        <input type="range" id="sMs" min="20" max="220" step="5" value="100">
+        <div class="hint">Right = expansionary (Fed buys securities, cuts reserve ratio/discount rate) &middot; left = contractionary</div>
+      </div>
+
+      <div class="slider-row">
+        <label><span class="name">Shift money demand, M<sub>d</sub> (income / price level)</span><span class="readout" id="rShift">0</span></label>
+        <input type="range" id="sShift" min="-80" max="80" step="5" value="0">
+        <div class="hint">0 = no shift from the starting income/price level. Right shifts M<sub>d</sub> right (more money needed at every r); left shifts it left.</div>
+      </div>
+
+      <div class="readouts">
+        <div class="line"><span class="k">M<sub>d</sub>(r) demand function</span><span class="v small" id="rMdEq">220 − 8r</span></div>
+        <div class="line"><span class="k">M<sub>s</sub> (fixed by the Fed)</span><span class="v small" id="rMsEq">100</span></div>
+        <div class="line"><span class="k">Equilibrium rate, r*</span><span class="v big" id="rRstar">15.0%</span></div>
+        <div class="line"><span class="k">I<sub>p</sub>(r) investment function</span><span class="v small" id="rInvEq">30 − r</span></div>
+        <div class="line"><span class="k">Planned investment, I<sub>p</sub></span><span class="v" id="rIstar">15.0</span></div>
+        <div class="line"><span class="k">PAE = 60 + I<sub>p</sub> + 0.75Y</span><span class="v small" id="rPAEeq">75.0 + 0.75Y</span></div>
+        <div class="line"><span class="k">Equilibrium output, Y*</span><span class="v big" id="rYstar">300</span></div>
+      </div>
+
+      <div class="btnrow">
+        <button class="act primary" id="btnFreeze">Set current as baseline</button>
+      </div>
+      <div class="btnrow">
+        <button class="act" id="btnReset">Reset demo</button>
+      </div>
+
+      <div class="baseline-note" id="baselineNote">
+        Baseline (subscript 0): <span id="blSummary"></span>. Move either slider to create a new state (subscript 1) &mdash; every panel below shows old &rarr; new side by side.
+      </div>
+    </section>
+
+    <!-- ===== LINKED GRAPHS ===== -->
+    <section class="panel graph-panel">
+      <h2 style="text-align:left">The money market &rarr; investment &rarr; output</h2>
+
+      <div class="graph-row1">
+        <!-- Panel A: Money market -->
+        <div class="gpanel small">
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <line id="A_axX" stroke="#1f2742" stroke-width="2"/>
+            <line id="A_axY" stroke="#1f2742" stroke-width="2"/>
+            <text x="286" y="256" font-family="JetBrains Mono, monospace" font-size="12" fill="#565d72" text-anchor="end">M</text>
+            <text x="20" y="26" font-family="JetBrains Mono, monospace" font-size="12" fill="#565d72">r</text>
+
+            <line id="A_mdBase" stroke="#973f98" stroke-width="2.4" stroke-dasharray="6 4"/>
+            <line id="A_msBase" stroke="#973f98" stroke-width="2.4" stroke-dasharray="6 4"/>
+            <circle id="A_eqBase" r="5" fill="#973f98"/>
+            <text id="A_eqBaseLabel" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#973f98" text-anchor="middle"></text>
+
+            <line id="A_md" stroke="#00362c" stroke-width="3"/>
+            <line id="A_ms" stroke="#304ffd" stroke-width="3"/>
+            <circle id="A_eq" r="6" fill="#ea4f46"/>
+            <text id="A_eqLabel" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#ea4f46" text-anchor="middle"></text>
+            <text id="A_mdLabel" font-family="Caveat, cursive" font-size="19" fill="#00362c">M<tspan font-size="0.6em" dy="4">d</tspan></text>
+            <text id="A_msLabel" font-family="Caveat, cursive" font-size="19" fill="#304ffd">M<tspan font-size="0.6em" dy="4">s</tspan></text>
+          </svg>
+          <div class="cap">Money market &mdash; M<sub>d</sub>(r) meets M<sub>s</sub> at r*</div>
+        </div>
+
+        <div class="tri-arrow">&rarr;</div>
+
+        <!-- Panel B: Investment demand -->
+        <div class="gpanel small">
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <line id="B_axX" stroke="#1f2742" stroke-width="2"/>
+            <line id="B_axY" stroke="#1f2742" stroke-width="2"/>
+            <text x="286" y="256" font-family="JetBrains Mono, monospace" font-size="12" fill="#565d72" text-anchor="end">I</text>
+            <text x="20" y="26" font-family="JetBrains Mono, monospace" font-size="12" fill="#565d72">r</text>
+
+            <line id="B_curve" stroke="#3cac3b" stroke-width="3"/>
+            <text id="B_curveLabel" font-family="Caveat, cursive" font-size="19" fill="#3cac3b">I<tspan font-size="0.6em" dy="4">p</tspan></text>
+
+            <circle id="B_eqBase" r="5" fill="#973f98"/>
+            <text id="B_eqBaseLabel" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#973f98" text-anchor="middle"></text>
+            <circle id="B_eq" r="6" fill="#ea4f46"/>
+            <text id="B_eqLabel" font-family="JetBrains Mono, monospace" font-size="12.5" fill="#ea4f46" text-anchor="middle"></text>
+          </svg>
+          <div class="cap">Planned investment, I<sub>p</sub>, rises when the interest rate, r, falls &mdash; and falls when r rises</div>
+        </div>
+      </div>
+
+      <!-- ===== BRIDGE: the arithmetic linking panels 1&2 to panel 3 ===== -->
+      <div class="bridge">
+        <div class="bridge-row">
+          <div class="bridge-card">
+            <b>&Delta;r* (from money market)</b>
+            <div class="v" id="eqDr">r&#8320;*=15.0% &rarr; r&#8321;*=15.0%<br>&Delta;=0.0 pts</div>
+          </div>
+          <div class="bridge-arrow">&rarr;</div>
+          <div class="bridge-card">
+            <b>&Delta;I<sub>p</sub> = &minus;&Delta;r*</b>
+            <div class="v" id="eqDI">I&#8320;=15.0 &rarr; I&#8321;=15.0<br>&Delta;=0.0</div>
+          </div>
+          <div class="bridge-arrow">&rarr;</div>
+          <div class="bridge-card">
+            <b>PAE shifts by &Delta;I<sub>p</sub></b>
+            <div class="v" id="eqPAEshift">75.0+0.75Y &rarr; 75.0+0.75Y</div>
+          </div>
+        </div>
+        <div class="bridge-down">&darr;</div>
+        <div class="bridge-caption" id="bridgeCaption">The PAE line above shifts by exactly &Delta;I<sub>p</sub> &mdash; below, that shift moves the economy along the 45&deg; line to a new Y*.</div>
+      </div>
+
+      <!-- Panel C: aggregate expenditure & equilibrium output -->
+      <div class="graph-row2">
+        <div class="gpanel wide">
+          <svg viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg">
+            <line id="C_axX" stroke="#1f2742" stroke-width="2"/>
+            <line id="C_axY" stroke="#1f2742" stroke-width="2"/>
+            <text x="400" y="330" font-family="JetBrains Mono, monospace" font-size="13" fill="#565d72" text-anchor="end">Real GDP, Y</text>
+            <text x="24" y="30" font-family="JetBrains Mono, monospace" font-size="13" fill="#565d72">PAE</text>
+
+            <line id="C_45" stroke="#304ffd" stroke-width="2.4"/>
+            <text id="C_45Label" font-family="Source Serif 4, serif" font-size="13" fill="#304ffd" text-anchor="end">45&deg;</text>
+
+            <line id="C_paeBase" stroke="#973f98" stroke-width="2.6" stroke-dasharray="7 5"/>
+            <text id="C_paeBaseLabel" font-family="Caveat, cursive" font-size="17" fill="#973f98">PAE&#8320;</text>
+            <circle id="C_eqBase" r="5.5" fill="#973f98"/>
+            <text id="C_eqBaseLabel" font-family="JetBrains Mono, monospace" font-size="13" fill="#973f98" text-anchor="middle"></text>
+
+            <line id="C_pae" stroke="#00362c" stroke-width="3"/>
+            <text id="C_paeLabel" font-family="Caveat, cursive" font-size="17" fill="#00362c">PAE&#8321;</text>
+            <circle id="C_eq" r="6.5" fill="#ea4f46"/>
+            <text id="C_eqLabel" font-family="JetBrains Mono, monospace" font-size="13" fill="#ea4f46" text-anchor="middle"></text>
+          </svg>
+          <div class="cap" id="capC">Aggregate expenditure &amp; output &mdash; ΔY* = ΔI<sub>p</sub> &times; 1/(1&minus;0.75) = 0.0 &times; 4 = 0.0 &nbsp;(Y&#8320;*=300 &rarr; Y&#8321;*=300)</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span><i style="border-color:#304ffd"></i> M<sub>s</sub> / 45&deg; line</span>
+        <span><i style="border-color:#00362c"></i> M<sub>d</sub> / PAE&#8321; (current)</span>
+        <span><i style="border-color:#3cac3b"></i> investment curve (fixed)</span>
+        <span><i class="dash" style="border-color:#973f98"></i> PAE&#8320; / baseline</span>
+        <span><i class="dot" style="background:#ea4f46"></i> current equilibrium</span>
+        <span><i class="dot" style="background:#973f98"></i> baseline equilibrium</span>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== TRANSMISSION CHAIN, LIVE ===== -->
+  <section class="panel chain-panel">
+    <h2>The transmission chain, old &rarr; new</h2>
+    <div class="chain">
+      <div class="chain-card">
+        <b>Money supply &amp; demand shift</b>
+        <div class="sub" id="policyLabel">M<sub>s</sub>: 100&rarr;100 &middot; M<sub>d</sub> shift: 0&rarr;0</div>
+      </div>
+      <div class="chain-arrow">&rarr;</div>
+      <div class="chain-card">
+        <b>Equilibrium rate</b>
+        <div class="val" id="valR">15.0% &rarr; 15.0%</div>
+      </div>
+      <div class="chain-arrow">&rarr;</div>
+      <div class="chain-card">
+        <b>Planned investment</b>
+        <div class="val" id="valI">15.0 &rarr; 15.0</div>
+      </div>
+      <div class="chain-arrow">&rarr;</div>
+      <div class="chain-card">
+        <b>Aggregate expenditure</b>
+        <div class="sub" id="paeLabel">PAE&#8320;=75.0+.75Y &rarr; PAE&#8321;=75.0+.75Y</div>
+      </div>
+      <div class="chain-arrow">&rarr;</div>
+      <div class="chain-card">
+        <b>Equilibrium output</b>
+        <div class="val" id="valY">300 &rarr; 300</div>
+      </div>
+    </div>
+    <p class="chain-note">A single chain links the money market, the investment decision, and the level of real output &mdash; move a slider, then click "Set current as baseline" to lock in a fresh old&rarr;new comparison.</p>
+  </section>
+
+</div>
+
+<button id="printBtn" onclick="window.print()">&#9112; Print / PDF</button>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  // ---- model constants ----
+  var D0=220, d1=8, d2=1;      // Md(r,shift) = D0 - d1*r + d2*shift ; Ms is set directly by the slider
+  var I0=30, bInv=1;           // I(r) = I0 - bInv*r   (fixed investment-demand curve)
+  var A0=60, mpc=0.75;         // PAE(Y) = (A0+I) + mpc*Y ; Y* = (A0+I)/(1-mpc)
+  var R_FLOOR=0.5, R_CEIL=29.5; // keep the model well-behaved (I, Y stay positive) across the wider slider ranges
+
+  function rStarRaw(Ms, shift){ return (D0 + d2*shift - Ms) / d1; }
+  function clampR(r){ return Math.max(R_FLOOR, Math.min(R_CEIL, r)); }
+  function IStar(r){ return I0 - bInv*r; }
+  function Ystar(I){ return (A0 + I) / (1 - mpc); }
+
+  function compute(Ms, shift){
+    var raw = rStarRaw(Ms, shift);
+    var r = clampR(raw);
+    var I = IStar(r);
+    var Y = Ystar(I);
+    return { Ms:Ms, shift:shift, r:r, rawR:raw, I:I, Y:Y };
+  }
+
+  var sMs=$('sMs'), sShift=$('sShift'), rMs=$('rMs'), rShift=$('rShift');
+  var state = { Ms:100, shift:0, baseline:{ Ms:100, shift:0 } };
+
+  function fmt(n, d){
+    d = (d===undefined) ? 1 : d;
+    var m = Math.pow(10,d);
+    var r = Math.round(n*m)/m;
+    return (d===0) ? r.toFixed(0) : ((r%1===0) ? r.toFixed(0) : r.toFixed(d));
+  }
+  function pct(n){ return fmt(n,1)+'%'; }
+
+  // ---- plotting geometry ----
+  // Panels A & B share one square scale; Panel C is larger and drawn separately.
+  var L1=48, T1=16, SIDE1=220;
+  var L2=56, T2=16, SIDE2=290;
+  function px(v, axisMax, L, SIDE, axisMin){ axisMin = axisMin||0; return L + (v-axisMin)*(SIDE/(axisMax-axisMin)); }
+  function py(v, axisMax, T, SIDE, axisMin){ axisMin = axisMin||0; return T+SIDE - (v-axisMin)*(SIDE/(axisMax-axisMin)); }
+  function setLine(id, x1,y1,x2,y2){ var e=$(id); e.setAttribute('x1',x1); e.setAttribute('y1',y1); e.setAttribute('x2',x2); e.setAttribute('y2',y2); }
+  function setPt(id, cx,cy){ var e=$(id); e.setAttribute('cx',cx); e.setAttribute('cy',cy); }
+  function setTxt(id, x,y,text){ var e=$(id); e.setAttribute('x',x); e.setAttribute('y',y); if(text!==undefined) e.textContent=text; }
+  function setPos(id, x, y){ var e=$(id); e.setAttribute('x',x); e.setAttribute('y',y); }
+
+  var AXIS_M=320, AXIS_R=32, AXIS_I=32;
+  var R_INV_MAX = I0/bInv; // r at which the fixed investment curve hits I=0 — its true endpoint, independent of axis buffer
+
+  function drawAxes(){
+    setLine('A_axX', L1, T1+SIDE1, L1+SIDE1, T1+SIDE1);
+    setLine('A_axY', L1, T1+SIDE1, L1, T1);
+    setLine('B_axX', L1, T1+SIDE1, L1+SIDE1, T1+SIDE1);
+    setLine('B_axY', L1, T1+SIDE1, L1, T1);
+    // Panel C's axis window is dynamic (zoomed to whatever's on screen), so it's drawn inside drawPanelC instead.
+  }
+
+  // Panel C auto-zooms its Y/PAE window around whatever is currently on screen, so a shift of
+  // any size — big or small — always occupies a clearly visible chunk of the diagram, instead
+  // of getting lost against a fixed axis sized for the full slider range.
+  function yWindow(cur, base, diverged){
+    if(!diverged){
+      var half = 70;
+      return { min: Math.max(0, cur.Y-half), max: cur.Y+half };
+    }
+    var lo = Math.min(base.Y, cur.Y), hi = Math.max(base.Y, cur.Y);
+    var span = hi - lo;
+    var pad = Math.max(30, span*0.6);
+    return { min: Math.max(0, lo-pad), max: hi+pad };
+  }
+
+  // fixed investment curve endpoints (never move — only the point on it moves)
+  var invX0 = px(I0, AXIS_I, L1, SIDE1), invY0 = py(0, AXIS_R, T1, SIDE1);
+  var invX1 = px(0, AXIS_I, L1, SIDE1),  invY1 = py(R_INV_MAX, AXIS_R, T1, SIDE1);
+
+  function showEls(ids, show){
+    ids.forEach(function(id){ $(id).style.display = show ? '' : 'none'; });
+  }
+
+  // Md(r) hits M=0 at r = (D0+d2*shift)/d1 — stop the line there instead of running it
+  // past the r-axis to a negative (economically meaningless) money value.
+  function mdEndpoint(shift){
+    var rZero = (D0 + d2*shift) / d1;
+    var rEnd = Math.min(AXIS_R, rZero);
+    var mEnd = D0 - d1*rEnd + d2*shift;
+    return { r: rEnd, m: mEnd };
+  }
+
+  function drawPanelA(cur, base, diverged){
+    var m0 = D0 + d2*cur.shift;
+    var mdEnd = mdEndpoint(cur.shift);
+    setLine('A_md', px(m0,AXIS_M,L1,SIDE1), py(0,AXIS_R,T1,SIDE1), px(mdEnd.m,AXIS_M,L1,SIDE1), py(mdEnd.r,AXIS_R,T1,SIDE1));
+    setLine('A_ms', px(cur.Ms,AXIS_M,L1,SIDE1), py(0,AXIS_R,T1,SIDE1), px(cur.Ms,AXIS_M,L1,SIDE1), py(AXIS_R,AXIS_R,T1,SIDE1));
+    var ex=px(cur.Ms,AXIS_M,L1,SIDE1), ey=py(cur.r,AXIS_R,T1,SIDE1);
+    setPt('A_eq', ex, ey);
+    setTxt('A_eqLabel', ex, ey-12, diverged ? 'r₁*='+pct(cur.r) : 'r*='+pct(cur.r));
+    setPos('A_mdLabel', px(mdEnd.m,AXIS_M,L1,SIDE1)+6, py(mdEnd.r,AXIS_R,T1,SIDE1)-4);
+    setPos('A_msLabel', px(cur.Ms,AXIS_M,L1,SIDE1)+6, T1+14);
+
+    showEls(['A_mdBase','A_msBase','A_eqBase','A_eqBaseLabel'], diverged);
+    if(diverged){
+      var bm0 = D0 + d2*base.shift;
+      var mdEndBase = mdEndpoint(base.shift);
+      setLine('A_mdBase', px(bm0,AXIS_M,L1,SIDE1), py(0,AXIS_R,T1,SIDE1), px(mdEndBase.m,AXIS_M,L1,SIDE1), py(mdEndBase.r,AXIS_R,T1,SIDE1));
+      setLine('A_msBase', px(base.Ms,AXIS_M,L1,SIDE1), py(0,AXIS_R,T1,SIDE1), px(base.Ms,AXIS_M,L1,SIDE1), py(AXIS_R,AXIS_R,T1,SIDE1));
+      var bx=px(base.Ms,AXIS_M,L1,SIDE1), by=py(base.r,AXIS_R,T1,SIDE1);
+      setPt('A_eqBase', bx, by);
+      setTxt('A_eqBaseLabel', bx, by+16, 'r₀*='+pct(base.r));
+    }
+  }
+
+  function drawPanelB(cur, base, diverged){
+    setLine('B_curve', invX0, invY0, invX1, invY1);
+    setPos('B_curveLabel', invX1+6, invY1+2);
+    var ex=px(cur.I,AXIS_I,L1,SIDE1), ey=py(cur.r,AXIS_R,T1,SIDE1);
+    setPt('B_eq', ex, ey);
+    setTxt('B_eqLabel', ex, ey-12, diverged ? 'I₁='+fmt(cur.I,1) : 'I='+fmt(cur.I,1));
+
+    showEls(['B_eqBase','B_eqBaseLabel'], diverged);
+    if(diverged){
+      var bx=px(base.I,AXIS_I,L1,SIDE1), by=py(base.r,AXIS_R,T1,SIDE1);
+      setPt('B_eqBase', bx, by);
+      setTxt('B_eqBaseLabel', bx, by+16, 'I₀='+fmt(base.I,1));
+    }
+  }
+
+  function drawPanelC(cur, base, diverged){
+    var win = yWindow(cur, base, diverged);
+    var wmin = win.min, wmax = win.max;
+    function pxC(v){ return px(v, wmax, L2, SIDE2, wmin); }
+    function pyC(v){ return py(v, wmax, T2, SIDE2, wmin); }
+    function frac(v){ return (v-wmin)/(wmax-wmin); }
+
+    setLine('C_axX', pxC(wmin), pyC(wmin), pxC(wmax), pyC(wmin));
+    setLine('C_axY', pxC(wmin), pyC(wmin), pxC(wmin), pyC(wmax));
+
+    setLine('C_45', pxC(wmin), pyC(wmin), pxC(wmax), pyC(wmax));
+    setPos('C_45Label', pxC(wmax)-4, pyC(wmax)+18);
+
+    var intercept = A0 + cur.I;
+    setLine('C_pae', pxC(wmin), pyC(intercept+mpc*wmin), pxC(wmax), pyC(intercept+mpc*wmax));
+    setPos('C_paeLabel', pxC(wmax)-58, pyC(intercept+mpc*wmax)-8);
+    $('C_paeLabel').textContent = diverged ? 'PAE₁' : 'PAE';
+    var ex=pxC(cur.Y), ey=pyC(cur.Y);
+    setPt('C_eq', ex, ey);
+    setTxt('C_eqLabel', ex + (frac(cur.Y)>0.68 ? -40:40), ey-12, diverged ? 'Y₁*='+fmt(cur.Y,0) : 'Y*='+fmt(cur.Y,0));
+
+    showEls(['C_paeBase','C_paeBaseLabel','C_eqBase','C_eqBaseLabel'], diverged);
+    if(diverged){
+      var bIntercept = A0 + base.I;
+      setLine('C_paeBase', pxC(wmin), pyC(bIntercept+mpc*wmin), pxC(wmax), pyC(bIntercept+mpc*wmax));
+      setPos('C_paeBaseLabel', pxC(wmax)-58, pyC(bIntercept+mpc*wmax)+16);
+      var bx=pxC(base.Y), by=pyC(base.Y);
+      setPt('C_eqBase', bx, by);
+      setTxt('C_eqBaseLabel', bx + (frac(base.Y)>0.68 ? -40:40), by+18, 'Y₀*='+fmt(base.Y,0));
+    }
+  }
+
+  function invEqText(){ return fmt(I0,0)+' − '+(bInv===1 ? '' : fmt(bInv,1))+'r'; }
+
+  function updateReadouts(cur){
+    rMs.textContent = fmt(cur.Ms,0);
+    rShift.textContent = fmt(cur.shift,0);
+    $('rMdEq').textContent = fmt(D0+cur.shift,0)+' − 8r';
+    $('rMsEq').textContent = fmt(cur.Ms,0);
+    $('rRstar').textContent = pct(cur.r) + (cur.rawR<R_FLOOR||cur.rawR>R_CEIL ? ' (floor/ceiling hit)' : '');
+    $('rInvEq').textContent = invEqText();
+    $('rIstar').textContent = fmt(cur.I,1);
+    $('rPAEeq').textContent = fmt(A0+cur.I,1)+' + 0.75Y';
+    $('rYstar').textContent = fmt(cur.Y,0);
+  }
+
+  function updateBridgeAndChain(cur, base, diverged){
+    if(!diverged){
+      $('eqDr').innerHTML = 'r* = '+pct(cur.r)+'<br>(move a slider to create a change)';
+      $('eqDI').innerHTML = 'I<sub>p</sub> = '+fmt(cur.I,1)+'<br>(no change yet)';
+      $('eqPAEshift').innerHTML = fmt(A0+cur.I,1)+'+0.75Y &nbsp;(unchanged)';
+      $('capC').innerHTML = 'Aggregate expenditure &amp; output &mdash; Y* = '+fmt(cur.Y,0)+'. Move a slider above to shift the PAE line and see &Delta;Y*.';
+      $('policyLabel').innerHTML = 'M<sub>s</sub> = '+fmt(cur.Ms,0)+' &middot; M<sub>d</sub> shift = '+fmt(cur.shift,0);
+      $('valR').innerHTML = pct(cur.r);
+      $('valI').innerHTML = fmt(cur.I,1);
+      $('paeLabel').innerHTML = 'PAE = '+fmt(A0+cur.I,1)+'+.75Y';
+      $('valY').innerHTML = fmt(cur.Y,0);
+      return;
+    }
+
+    var dR = cur.r - base.r;
+    var dI = cur.I - base.I;
+    var dY = cur.Y - base.Y;
+
+    $('eqDr').innerHTML = 'r₀*='+pct(base.r)+' → r₁*='+pct(cur.r)+'<br>Δ='+(dR>=0?'+':'')+fmt(dR,1)+' pts';
+    $('eqDI').innerHTML = 'I₀='+fmt(base.I,1)+' → I₁='+fmt(cur.I,1)+'<br>Δ='+(dI>=0?'+':'')+fmt(dI,1);
+    $('eqPAEshift').innerHTML = fmt(A0+base.I,1)+'+0.75Y → '+fmt(A0+cur.I,1)+'+0.75Y';
+
+    $('capC').innerHTML = 'Aggregate expenditure &amp; output &mdash; ΔY* = ΔI<sub>p</sub> &times; 1/(1&minus;0.75) = '+fmt(dI,1)+' &times; 4 = '+(dY>=0?'+':'')+fmt(dY,0)+' &nbsp;(Y₀*='+fmt(base.Y,0)+' → Y₁*='+fmt(cur.Y,0)+')';
+
+    $('policyLabel').innerHTML = 'M<sub>s</sub>: '+fmt(base.Ms,0)+'→'+fmt(cur.Ms,0)+' &middot; M<sub>d</sub> shift: '+fmt(base.shift,0)+'→'+fmt(cur.shift,0);
+    $('valR').innerHTML = pct(base.r)+' → '+pct(cur.r);
+    $('valI').innerHTML = fmt(base.I,1)+' → '+fmt(cur.I,1);
+    $('paeLabel').innerHTML = 'PAE₀='+fmt(A0+base.I,1)+'+.75Y → PAE₁='+fmt(A0+cur.I,1)+'+.75Y';
+    $('valY').innerHTML = fmt(base.Y,0)+' → '+fmt(cur.Y,0);
+  }
+
+  function updateBaselineUI(diverged){
+    var bl = state.baseline;
+    $('blSummary').innerHTML = 'M<sub>s</sub> = '+fmt(bl.Ms,0)+', M<sub>d</sub> shift = '+fmt(bl.shift,0);
+    $('baselineNote').classList.toggle('show', !!diverged);
+  }
+
+  function updateAll(){
+    state.Ms = parseFloat(sMs.value);
+    state.shift = parseFloat(sShift.value);
+    var cur = compute(state.Ms, state.shift);
+    var base = compute(state.baseline.Ms, state.baseline.shift);
+    var diverged = (cur.Ms !== state.baseline.Ms) || (cur.shift !== state.baseline.shift);
+
+    drawPanelA(cur, base, diverged);
+    drawPanelB(cur, base, diverged);
+    drawPanelC(cur, base, diverged);
+    updateReadouts(cur);
+    updateBridgeAndChain(cur, base, diverged);
+    updateBaselineUI(diverged);
+  }
+
+  drawAxes();
+
+  var toastTimer = null;
+  function showToast(msg){
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+  function flashButton(btn){
+    btn.classList.remove('flash');
+    void btn.offsetWidth; // restart the animation even on repeat clicks
+    btn.classList.add('flash');
+  }
+
+  [sMs, sShift].forEach(function(s){ s.addEventListener('input', updateAll); });
+
+  $('btnFreeze').addEventListener('click', function(){
+    state.baseline = { Ms: parseFloat(sMs.value), shift: parseFloat(sShift.value) };
+    updateAll();
+    flashButton(this);
+  });
+  $('btnReset').addEventListener('click', function(){
+    var alreadyAtDefault = (parseFloat(sMs.value)===100 && parseFloat(sShift.value)===0 && state.baseline.Ms===100 && state.baseline.shift===0);
+    sMs.value = 100; sShift.value = 0;
+    state.baseline = { Ms:100, shift:0 };
+    updateAll();
+    flashButton(this);
+    showToast(alreadyAtDefault
+      ? '✓ Already at the default demo state (Mₛ=100, Md shift=0).'
+      : '✓ Demo reset — sliders and baseline both back to Mₛ=100, Md shift=0.');
+  });
+
+  updateAll();
+})();
+</script>
+</body>
+</html>
