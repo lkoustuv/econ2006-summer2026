@@ -472,7 +472,7 @@ button.act.flash{ animation:flashPulse .5s ease-out; }
 
     setPt('A_eq', cur.Ms, cur.r, scA);
     setTxt('A_eqLabel', cur.Ms, cur.r, scA, 4, -12, (diverged?'r₁*=':'r*=')+fmt(cur.r,1));
-    var mdEnd = clipSeg(m0,0, mAtTop,AXIS_R, AXIS_M, AXIS_R);
+    var mdEnd = clipSeg(m0,0, mAtTop,AXIS_R, 0,AXIS_M, 0,AXIS_R);
     if(mdEnd){ $('A_mdLabel').setAttribute('x', scA.px(mdEnd.x1)+6); $('A_mdLabel').setAttribute('y', scA.py(mdEnd.y1)-2); }
     $('A_msLabel').setAttribute('x', scA.px(cur.Ms)+6); $('A_msLabel').setAttribute('y', scA.T+14);
 
@@ -490,7 +490,7 @@ button.act.flash{ animation:flashPulse .5s ease-out; }
   // ---- Panel B: investment ----
   function drawPanelB(cur, diverged){
     setLineClipped('B_curve', scB, I0,0, I0-bInv*AXIS_R,AXIS_R);
-    var curveEnd = clipSeg(I0,0, I0-bInv*AXIS_R,AXIS_R, AXIS_I, AXIS_R);
+    var curveEnd = clipSeg(I0,0, I0-bInv*AXIS_R,AXIS_R, 0,AXIS_I, 0,AXIS_R);
     if(curveEnd){ $('B_curveLabel').setAttribute('x', scB.px(curveEnd.x1)+6); $('B_curveLabel').setAttribute('y', scB.py(curveEnd.y1)+2); }
 
     setPt('B_eq', cur.I, cur.r, scB);
